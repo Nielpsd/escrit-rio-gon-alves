@@ -118,11 +118,12 @@ function ServicosPage() {
         <div className="relative mx-auto max-w-4xl px-6 pt-20 pb-20 lg:pt-28 lg:pb-24 text-center">
           <Eyebrow className="mx-auto justify-center">Serviços</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
-            Tudo o que envolve INSS, conduzido por <em className="hl">quem o conhece por dentro</em>.
+            Se é benefício do INSS, a gente <em className="hl">conduz</em>.
           </h1>
           <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Atuação dedicada exclusivamente ao direito previdenciário. Cada serviço aqui é
-            conduzido com a mesma escuta atenta, fundamentação técnica e linguagem clara.
+            Atendemos todos os tipos de benefício previdenciário e assistencial — quem
+            quer se aposentar da melhor forma, quem está afastado por saúde, quem perdeu
+            a capacidade de trabalho ou recebeu indeferimento injusto.
           </p>
         </div>
       </section>
@@ -169,11 +170,11 @@ function ServicosPage() {
         <div className="on-navy mt-16 rounded-2xl bg-[var(--navy)] p-10 lg:p-14 text-center text-white">
           <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
           <h2 className="mt-4 font-display text-3xl md:text-4xl font-semibold leading-tight text-white">
-            Não tem certeza de qual se aplica ao seu caso? <em className="hl">A gente ajuda você a entender.</em>
+            Não sabe qual benefício é o <em className="hl">seu caso</em>?
           </h2>
           <p className="mt-4 text-white/65 max-w-xl mx-auto">
-            Conte sua situação no WhatsApp. Ouvimos com atenção e indicamos, com clareza, os
-            caminhos técnicos cabíveis — sem pressão, sem juridiquês.
+            Conte sua situação no WhatsApp. Sem compromisso, com conversa direta para
+            entender o que se aplica ao seu caso.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <WaveButton variant="wpp" href={SITE.whatsapp} target="_blank" rel="noopener">
