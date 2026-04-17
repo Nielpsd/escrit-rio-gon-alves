@@ -54,9 +54,12 @@ export function Footer() {
               {[
                 { to: "/sobre", label: "Sobre o Escritório" },
                 { to: "/equipe", label: "Nossa Equipe" },
+                { to: "/servicos", label: "Serviços" },
                 { to: "/casos-resolvidos", label: "Casos Resolvidos" },
                 { to: "/blog", label: "Blog / Artigos" },
+                { to: "/contato", label: "Contato" },
                 { to: "/politica-de-privacidade", label: "Política de Privacidade" },
+                { to: "/termos-de-uso", label: "Termos de Uso" },
               ].map((l) => (
                 <li key={l.to}>
                   <Link
