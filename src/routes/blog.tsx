@@ -1,10 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowRight, Clock, MessageCircle, User } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
 import { SITE } from "@/lib/site";
+import { CATEGORIAS, POSTS, MAIS_LIDOS, type Categoria } from "@/lib/posts";
 
 export const Route = createFileRoute("/blog")({
   head: () => ({
@@ -25,109 +26,6 @@ export const Route = createFileRoute("/blog")({
   }),
   component: BlogPage,
 });
-
-const CATEGORIAS = [
-  "Todos",
-  "Aposentadoria",
-  "Auxílio-Doença",
-  "BPC/LOAS",
-  "Trabalhador Rural",
-  "Pensão por Morte",
-  "Revisão de Benefícios",
-  "Salário-Maternidade",
-  "Benefícios",
-  "Pensão",
-] as const;
-
-type Categoria = (typeof CATEGORIAS)[number];
-
-const POSTS: {
-  tag: Categoria;
-  title: string;
-  excerpt: string;
-  date: string;
-  author: string;
-  readTime: string;
-}[] = [
-  {
-    tag: "Aposentadoria",
-    title: "Quanto paga o INSS para a maioria dos brasileiros? Entenda.",
-    excerpt:
-      "O valor médio dos benefícios pode te surpreender. Veja como funciona o cálculo e o que você pode fazer para receber mais.",
-    date: "14/01/2025",
-    author: "Dr. Renan Gonçalves",
-    readTime: "5 min",
-  },
-  {
-    tag: "Benefícios",
-    title: "Lula veta projeto que equipara diabetes tipo 1 a deficiência",
-    excerpt:
-      "O que muda na prática para portadores de diabetes que buscavam direitos previdenciários equiparados.",
-    date: "14/01/2025",
-    author: "Equipe Gonçalves",
-    readTime: "4 min",
-  },
-  {
-    tag: "Pensão",
-    title: "Lula vetou pensão para mães de crianças com anencefalia. Entenda!",
-    excerpt:
-      "Decisão impacta diretamente famílias que aguardavam a sanção da lei. Saiba o que ainda é possível buscar.",
-    date: "13/01/2025",
-    author: "Equipe Gonçalves",
-    readTime: "6 min",
-  },
-  {
-    tag: "Trabalhador Rural",
-    title: "Trabalhador rural sem carteira tem direito à aposentadoria?",
-    excerpt:
-      "Mesmo sem registro formal, é possível comprovar a atividade rural e garantir o benefício. Veja como.",
-    date: "10/01/2025",
-    author: "Dr. Renan Gonçalves",
-    readTime: "7 min",
-  },
-  {
-    tag: "Auxílio-Doença",
-    title: "O INSS negou seu auxílio-doença? Veja o que fazer agora",
-    excerpt:
-      "Negativa não é o fim do caminho. Entenda os próximos passos administrativos e judiciais para garantir seu direito.",
-    date: "08/01/2025",
-    author: "Dra. Mariana Gonçalves",
-    readTime: "5 min",
-  },
-  {
-    tag: "Revisão de Benefícios",
-    title: "Revisão da vida toda: ainda dá tempo de pedir?",
-    excerpt:
-      "Após decisões recentes do STF, muitos aposentados ainda têm direito à revisão. Confira se é o seu caso.",
-    date: "05/01/2025",
-    author: "Dr. Renan Gonçalves",
-    readTime: "8 min",
-  },
-  {
-    tag: "BPC/LOAS",
-    title: "BPC/LOAS: quem tem direito ao benefício de R$ 1.412 do governo?",
-    excerpt:
-      "Idosos e pessoas com deficiência em situação de vulnerabilidade podem receber o BPC. Veja os requisitos atualizados.",
-    date: "03/01/2025",
-    author: "Equipe Gonçalves",
-    readTime: "6 min",
-  },
-  {
-    tag: "Salário-Maternidade",
-    title: "Salário-maternidade: desempregada também tem direito?",
-    excerpt:
-      "Mesmo sem vínculo ativo, é possível receber o benefício durante o período de graça. Entenda as regras.",
-    date: "30/12/2024",
-    author: "Dra. Mariana Gonçalves",
-    readTime: "5 min",
-  },
-];
-
-const MAIS_LIDOS = [
-  "Quanto paga o INSS para a maioria dos brasileiros?",
-  "Trabalhador rural sem carteira tem direito à aposentadoria?",
-  "O INSS negou. O que fazer agora?",
-];
 
 function BlogPage() {
   const [filtro, setFiltro] = useState<Categoria>("Todos");
@@ -178,15 +76,17 @@ function BlogPage() {
           })}
         </div>
 
-        <div className="mt-10 grid gap-10 lg:grid-cols-[1.6fr_1fr]">
+        <div className="mt-10 grid gap-10 lg:grid-cols-[1.6fr_1fr] items-start">
           {/* Lista de artigos */}
-          <div className="grid gap-6">
+          <div className="grid gap-6 content-start">
             {posts.map((p) => (
-              <article
-                key={p.title}
+              <Link
+                key={p.slug}
+                to="/blog/$slug"
+                params={{ slug: p.slug }}
                 className="group grid gap-5 overflow-hidden rounded-2xl border border-[var(--border)] bg-white transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)] sm:grid-cols-[200px_1fr]"
               >
-                <div className="relative aspect-video sm:aspect-auto bg-gradient-to-br from-[var(--navy-mid)] to-[var(--navy)] grid place-items-center">
+                <div className="relative aspect-video sm:aspect-auto sm:min-h-[180px] bg-gradient-to-br from-[var(--navy-mid)] to-[var(--navy)] grid place-items-center">
                   <span className="font-display text-5xl font-bold text-white/10">G</span>
                 </div>
                 <div className="flex flex-col justify-center p-6 sm:pl-0 sm:pr-7 sm:py-7">
@@ -211,7 +111,7 @@ function BlogPage() {
                     </span>
                   </div>
                 </div>
-              </article>
+              </Link>
             ))}
 
             {posts.length === 0 && (
