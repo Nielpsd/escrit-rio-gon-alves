@@ -27,7 +27,9 @@ export function Footer() {
               Escritório especializado em direito previdenciário, com atendimento presencial em
               Rondônia e online para todo o Brasil.
             </p>
-            <p className="text-xs text-white/35 mt-4">CNPJ: {SITE.cnpj}</p>
+            <p className="text-xs text-white/35 mt-4">
+              {SITE.oab} · CNPJ: {SITE.cnpj}
+            </p>
           </div>
 
           {/* Serviços */}
@@ -55,7 +57,7 @@ export function Footer() {
                 { to: "/sobre", label: "Sobre o Escritório" },
                 { to: "/equipe", label: "Nossa Equipe" },
                 { to: "/servicos", label: "Serviços" },
-                { to: "/casos-resolvidos", label: "Casos Resolvidos" },
+                { to: "/areas-de-atuacao", label: "Áreas de atuação" },
                 { to: "/blog", label: "Blog / Artigos" },
                 { to: "/contato", label: "Contato" },
                 { to: "/politica-de-privacidade", label: "Política de Privacidade" },
@@ -111,13 +113,23 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-t border-white/10 pt-6 text-xs text-white/35">
-          <p>
-            © 2026 {SITE.legal} · Todos os direitos reservados
+        <div className="mt-12 border-t border-white/10 pt-6 space-y-3">
+          <p className="text-[11px] text-white/40 leading-relaxed max-w-3xl">
+            Site meramente informativo, em estrita observância ao Provimento nº 205/2021 da OAB.
+            Não constitui captação de clientela, oferta de serviços nem promessa de resultados.
+            Os conteúdos publicados não substituem consulta jurídica individual.
           </p>
-          <Link to="/politica-de-privacidade" className="hover:text-[var(--gold-light)]">
-            Política de Privacidade
-          </Link>
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-xs text-white/35">
+            <p>© 2026 {SITE.legal} · Todos os direitos reservados</p>
+            <div className="flex gap-4">
+              <Link to="/politica-de-privacidade" className="hover:text-[var(--gold-light)]">
+                Política de Privacidade
+              </Link>
+              <Link to="/termos-de-uso" className="hover:text-[var(--gold-light)]">
+                Termos de Uso
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

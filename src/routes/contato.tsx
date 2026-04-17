@@ -77,8 +77,8 @@ function ContatoPage() {
             Vamos conversar sobre o seu <em className="hl">caso</em>.
           </h1>
           <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            A primeira conversa é gratuita. Conte sua situação e descobriremos juntos qual é o
-            melhor caminho.
+            Conte sua situação para nossa equipe. Conteúdo informativo, em conformidade com o
+            Provimento nº 205/2021 da OAB.
           </p>
         </div>
       </section>
