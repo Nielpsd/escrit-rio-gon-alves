@@ -42,19 +42,55 @@ const buildWppLink = (service: string) => {
   return `https://api.whatsapp.com/send?phone=${WPP_PHONE}&text=${encodeURIComponent(msg)}`;
 };
 
-const SERVICES = [
-  "Planejamento de Aposentadoria",
-  "Aposentadoria por Invalidez",
-  "Auxílio-Doença (Auxílio por Incapacidade)",
-  "Salário-Maternidade",
-  "Aposentadoria por Idade",
-  "Aposentadoria do Professor",
-  "Pensão por Morte",
-  "BPC/LOAS",
-  "Aposentadoria por Tempo de Contribuição",
-  "Aposentadoria Especial (Insalubridade)",
-  "Auxílio-Reclusão",
-  "Revisão de Benefícios",
+const SERVICES: { title: string; desc: string }[] = [
+  {
+    title: "Planejamento de Aposentadoria",
+    desc: "Descubra a melhor regra e o momento certo para se aposentar com o maior valor possível.",
+  },
+  {
+    title: "Aposentadoria por Invalidez",
+    desc: "Para quem não pode mais trabalhar de forma permanente por doença ou acidente.",
+  },
+  {
+    title: "Auxílio-Doença",
+    desc: "Benefício temporário para quem está incapacitado de trabalhar por motivo de saúde.",
+  },
+  {
+    title: "Salário-Maternidade",
+    desc: "Garanta o pagamento integral durante o afastamento por nascimento ou adoção.",
+  },
+  {
+    title: "Aposentadoria por Idade",
+    desc: "Para quem atingiu a idade mínima e tem o tempo de contribuição exigido.",
+  },
+  {
+    title: "Aposentadoria do Professor",
+    desc: "Regras específicas e tempo reduzido para professores da educação básica.",
+  },
+  {
+    title: "Pensão por Morte",
+    desc: "Direito de cônjuges, filhos e dependentes após o falecimento do segurado.",
+  },
+  {
+    title: "BPC/LOAS",
+    desc: "Benefício assistencial para idosos e pessoas com deficiência em situação de vulnerabilidade.",
+  },
+  {
+    title: "Aposentadoria por Tempo de Contribuição",
+    desc: "Para quem tem longa carreira formal — a estratégia certa muda o valor final.",
+  },
+  {
+    title: "Aposentadoria Especial",
+    desc: "Quem trabalhou exposto a agentes nocivos pode se aposentar mais cedo.",
+  },
+  {
+    title: "Auxílio-Reclusão",
+    desc: "Benefício para os dependentes de segurado de baixa renda recolhido à prisão.",
+  },
+  {
+    title: "Revisão de Benefícios",
+    desc: "Recebe pouco? Podemos revisar seu cálculo e aumentar o valor mensal — com retroativos.",
+  },
 ];
 
 const STEPS = [
