@@ -194,14 +194,15 @@ function AreasPage() {
         <div className="mx-auto max-w-4xl px-6 text-center">
           <Eyebrow className="mx-auto justify-center">Tirar dúvidas</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight">
-            Identificou-se com algum <em className="hl">perfil</em>?
+            Sua história se parece com <em className="hl">alguma dessas</em>?
           </h2>
           <p className="mt-5 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Fale com nossa equipe para entender melhor sobre os trâmites do seu caso.
+            Conte para nossa equipe. Ouvimos com atenção e explicamos, com clareza, quais
+            caminhos a legislação prevê para o seu caso.
           </p>
           <div className="mt-8 flex justify-center">
             <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-              <MessageCircle size={18} /> Falar com a equipe <ArrowRight size={16} />
+              <MessageCircle size={18} /> Conversar sobre o meu caso <ArrowRight size={16} />
             </WaveButton>
           </div>
         </div>
