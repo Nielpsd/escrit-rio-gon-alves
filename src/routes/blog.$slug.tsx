@@ -92,7 +92,7 @@ function PostPage() {
       <section className="mx-auto max-w-3xl px-6 py-16 lg:py-20">
         <p className="font-display text-xl text-[var(--navy)] leading-relaxed">{post.excerpt}</p>
         <div className="mt-8 space-y-5 text-base text-[var(--text)] leading-relaxed">
-          {post.content.map((par, i) => (
+          {post.content.map((par: string, i: number) => (
             <p key={i}>{par}</p>
           ))}
         </div>
