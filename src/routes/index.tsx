@@ -207,12 +207,12 @@ function Hero() {
         <div>
           <Eyebrow>Direito Previdenciário</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white max-w-2xl">
-            Atuação técnica em <em className="hl">direito previdenciário</em>.
+            Quem dedicou anos ao trabalho merece ser <em className="hl">ouvido com atenção</em>.
           </h1>
           <p className="mt-6 max-w-xl text-base text-white/65 leading-relaxed">
-            Escritório dedicado ao estudo e à condução de demandas previdenciárias. Atendimento
-            presencial em Rondônia e online para todo o Brasil, com equipe especializada
-            exclusivamente nessa área.
+            Escritório dedicado exclusivamente ao direito previdenciário. Cada história de vida
+            tem detalhes que fazem diferença — e merece análise técnica feita por quem conhece
+            o INSS por dentro.
           </p>
 
           <div className="mt-8 inline-flex items-center gap-3 rounded-md border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-4 py-3 text-sm text-[var(--gold-light)]">
@@ -269,24 +269,24 @@ function Hero() {
 function Authority() {
   const cards = [
     {
-      title: "Experiência no INSS",
+      title: "Quem viveu o INSS por dentro",
       body:
-        "O fundador atuou como gerente do INSS antes de ingressar exclusivamente na advocacia previdenciária.",
+        "O fundador atuou como gerente do INSS antes da advocacia. Conhece os critérios reais de análise dos pedidos.",
     },
     {
-      title: "Atividade docente",
+      title: "Ensina o que pratica",
       body:
-        "Dr. Renan também leciona direito previdenciário, contribuindo para a formação de outros profissionais da área.",
+        "Dr. Renan também leciona direito previdenciário, formando outros advogados — e mantendo o estudo da legislação em dia.",
     },
     {
-      title: "Atuação especializada",
+      title: "Só previdenciário, todos os dias",
       body:
-        "O escritório atua exclusivamente em demandas previdenciárias, sem dispersão para outras áreas do direito.",
+        "O escritório atua exclusivamente em demandas previdenciárias. Nenhuma outra área compete pela atenção da equipe.",
     },
     {
-      title: "Atendimento humanizado",
+      title: "Cada caso é uma pessoa",
       body:
-        "Cada caso é conduzido com atenção individual, respeito ao cliente e comunicação clara em todas as etapas.",
+        "Atendimento conduzido com escuta, respeito e comunicação clara — do primeiro contato à conclusão do processo.",
     },
   ];
 
@@ -295,11 +295,12 @@ function Authority() {
       <div className="max-w-3xl">
         <Eyebrow>Sobre o escritório</Eyebrow>
         <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-          Conhecimento técnico e <em className="hl">dedicação</em> ao direito previdenciário.
+          Por que tantas pessoas confiam o caso a <em className="hl">quem viveu o INSS por dentro</em>.
         </h2>
         <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-          Equipe formada exclusivamente para atuação em benefícios previdenciários, com
-          experiência prática nas regras aplicadas pelo INSS.
+          O fundador atuou como gerente do INSS antes de se dedicar à advocacia.
+          Hoje, essa vivência guia cada análise — entendemos os critérios usados nas decisões
+          e preparamos cada pedido com a fundamentação que o caso pede.
         </p>
       </div>
 
@@ -327,11 +328,12 @@ function Services() {
         <div className="max-w-3xl">
           <Eyebrow>Áreas de atuação</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            Demandas <em className="hl">previdenciárias</em> que atendemos.
+            Você sabe exatamente <em className="hl">qual é o seu direito</em>?
           </h2>
           <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-            Atendemos os principais tipos de benefício previsto na legislação previdenciária e
-            assistencial brasileira.
+            Cada benefício tem suas regras, prazos e provas exigidas. Atuamos em todas as
+            modalidades previstas na legislação previdenciária e assistencial brasileira —
+            do planejamento da aposentadoria à revisão de quem já recebe.
           </p>
         </div>
 
@@ -365,7 +367,7 @@ function Services() {
 
         <div className="mt-10 flex flex-col items-start gap-5 rounded-2xl bg-[var(--navy)] p-8 lg:flex-row lg:items-center lg:justify-between">
           <p className="font-display text-xl text-white max-w-xl leading-snug">
-            Tem dúvida sobre qual área se aplica ao seu caso? Fale com a nossa equipe.
+            Não sabe por onde começar? Conte sua situação para nossa equipe — explicamos com clareza o que se aplica ao seu caso.
           </p>
           <WaveButton variant="gold" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
             Falar no WhatsApp <ArrowRight size={16} />
@@ -383,10 +385,11 @@ function HowItWorks() {
         <div className="lg:sticky lg:top-28 lg:self-start">
           <Eyebrow>Como atuamos</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            Etapas do <em className="hl">atendimento</em>.
+            Você acompanha <em className="hl">cada etapa</em> do seu processo.
           </h2>
           <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-            Conheça o fluxo geral pelo qual passa um caso conduzido pelo escritório.
+            Nada de processo sumindo. Você sabe sempre em que fase está, o que vem depois e
+            por quê. Veja como conduzimos um caso do primeiro contato até a decisão final.
           </p>
           <div className="mt-8">
             <WaveButton variant="primary" href={SITE.whatsapp} target="_blank" rel="noopener">
@@ -425,10 +428,10 @@ function Team() {
         <div>
           <Eyebrow>Equipe</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            Equipe dedicada exclusivamente ao <em className="hl">previdenciário</em>.
+            Aqui ninguém atende <em className="hl">de tudo um pouco</em>.
           </h2>
           <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-            Escritório formado por profissionais que se dedicam exclusivamente ao direito
+            Cada pessoa da nossa equipe é dedicada exclusivamente ao direito
             previdenciário, sem atuação em outras áreas do direito.
           </p>
 
@@ -493,11 +496,11 @@ function Testimonials() {
       <div className="max-w-3xl">
         <Eyebrow>Depoimentos</Eyebrow>
         <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-          O que dizem clientes sobre o nosso <em className="hl">atendimento</em>.
+          Histórias de quem foi <em className="hl">acolhido</em> aqui.
         </h2>
         <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-          Manifestações espontâneas publicadas no Google Meu Negócio, reproduzidas com a
-          finalidade exclusivamente informativa.
+          Manifestações espontâneas publicadas no Google Meu Negócio, reproduzidas com
+          finalidade exclusivamente informativa. Cada caso é único.
         </p>
       </div>
 
@@ -546,8 +549,12 @@ function FAQSection() {
         <div className="text-center max-w-2xl mx-auto">
           <Eyebrow className="mx-auto justify-center">Dúvidas frequentes</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            Esclarecimentos <em className="hl">técnicos</em>.
+            As perguntas que <em className="hl">mais ouvimos</em>.
           </h2>
+          <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
+            Reunimos as dúvidas mais comuns de quem chega até nós. Se a sua não está aqui,
+            estamos a uma mensagem de distância.
+          </p>
         </div>
 
         <div className="mt-12 rounded-2xl bg-white border border-[var(--border)] px-2 sm:px-6">
@@ -668,11 +675,11 @@ function FinalCTA() {
       <div className="relative mx-auto max-w-5xl px-6 py-24 lg:py-32 text-center">
         <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
         <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.1] text-white max-w-3xl mx-auto">
-          Tem dúvidas sobre direitos <em className="hl">previdenciários</em>?
+          O primeiro passo é <em className="hl">conversar</em>.
         </h2>
         <p className="mt-6 max-w-2xl mx-auto text-base text-white/65 leading-relaxed">
-          Nossa equipe está disponível para orientação técnica em todas as etapas, do
-          esclarecimento inicial à condução do processo.
+          Conte sua situação para nossa equipe. Ouvimos com atenção, explicamos com clareza
+          e, se for o caso, indicamos os caminhos técnicos cabíveis. Sem pressa, sem juridiquês.
         </p>
 
         <div className="mt-10 flex flex-wrap justify-center gap-4">

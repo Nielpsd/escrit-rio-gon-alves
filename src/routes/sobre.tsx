@@ -27,24 +27,24 @@ export const Route = createFileRoute("/sobre")({
 
 const VALORES = [
   {
-    title: "Humanização",
+    title: "Cada processo é uma pessoa",
     body:
-      "Cada processo representa uma pessoa. Conduzimos os atendimentos com escuta, respeito e atenção individual.",
+      "Por trás de todo número de protocolo existe uma vida, uma família e uma história. Conduzimos cada atendimento com escuta, respeito e tempo.",
   },
   {
-    title: "Excelência técnica",
+    title: "Estudo permanente",
     body:
-      "Atualização permanente em legislação, jurisprudência e teses previdenciárias. Dr. Renan também atua como docente na área.",
+      "Legislação, jurisprudência e teses previdenciárias mudam o tempo todo. Dr. Renan também leciona na área — manter-se atualizado é parte do trabalho.",
   },
   {
-    title: "Transparência",
+    title: "Você sempre sabe onde está",
     body:
-      "Informação clara sobre andamento, prazos e expectativas em cada fase do processo.",
+      "Comunicação clara em cada etapa. Sem processo desaparecido, sem surpresas, sem juridiquês para te confundir.",
   },
   {
-    title: "Especialização",
+    title: "Só previdenciário",
     body:
-      "Atuação exclusiva em direito previdenciário, sem dispersão para outras áreas do direito.",
+      "Não atendemos outras áreas. Toda a atenção, tempo e estudo da equipe estão concentrados em uma única especialidade.",
   },
 ];
 
@@ -72,12 +72,12 @@ function SobrePage() {
           <div>
             <Eyebrow>Sobre o escritório</Eyebrow>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white max-w-2xl">
-              Um escritório nascido <em className="hl">do INSS</em>.
+              O escritório que <em className="hl">nasceu de dentro do INSS</em>.
             </h1>
             <p className="mt-6 max-w-xl text-base text-white/65 leading-relaxed">
-              O Dr. Renan Gonçalves chegou ao direito previdenciário pela prática — como gerente
-              do INSS, onde acompanhou de perto a aplicação das regras e a análise dos pedidos.
-              Essa vivência fundamenta a atuação técnica do escritório.
+              Antes de advogar, Dr. Renan analisou pedidos como gerente do INSS. Viu de perto
+              por que tantos benefícios eram negados — e decidiu estar do outro lado, ajudando
+              a apresentá-los do jeito certo.
             </p>
             <div className="mt-8">
               <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
@@ -114,18 +114,19 @@ function SobrePage() {
           </div>
           <div className="space-y-5 text-base text-[var(--text-muted)] leading-relaxed">
             <p>
-              Após anos atuando como gerente do INSS, Dr. Renan observou que muitas indeferimentos
-              decorriam de questões procedimentais — documentação inadequada, pedidos mal
-              formulados, falta de fundamentação técnica.
+              Como gerente do INSS, Dr. Renan acompanhou centenas de análises de pedidos.
+              Percebeu que muitas negativas não eram pelo direito não existir — eram por
+              detalhes procedimentais: documento faltando, pedido formulado fora da regra
+              correta, fundamentação técnica ausente.
             </p>
             <p>
-              O Escritório Gonçalves foi fundado a partir dessa constatação: oferecer atuação
-              técnica especializada em demandas previdenciárias, com a perspectiva de quem
-              conhece o procedimento administrativo do INSS por dentro.
+              O Escritório Gonçalves nasceu dessa constatação. Se conhecemos o que o INSS
+              olha, conseguimos preparar o pedido do jeito que ele precisa ser visto.
             </p>
             <p>
-              Hoje, com equipe dedicada exclusivamente ao previdenciário, o escritório atende
-              clientes em Rondônia presencialmente e em todo o Brasil de forma online.
+              Hoje, com equipe dedicada exclusivamente ao previdenciário, atendemos clientes
+              em Rondônia presencialmente e em todo o Brasil de forma online — com a mesma
+              atenção, perto ou longe.
             </p>
           </div>
         </div>
@@ -184,10 +185,11 @@ function SobrePage() {
         <div className="mx-auto max-w-4xl px-6 text-center">
           <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight">
-            Quer conhecer melhor o nosso <em className="hl">escritório</em>?
+            Vamos <em className="hl">nos conhecer</em>?
           </h2>
           <p className="mt-5 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Fale com a nossa equipe pelo WhatsApp para esclarecer dúvidas iniciais.
+            Conte sua situação no WhatsApp. A primeira conversa é só uma conversa — para você
+            entender quem somos e nós entendermos como podemos ajudar.
           </p>
           <div className="mt-8 flex justify-center">
             <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">

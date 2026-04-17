@@ -40,21 +40,21 @@ const SERVICOS = [
     icon: ShieldCheck,
     titulo: "Planejamento de Aposentadoria",
     descricao:
-      "Análise completa do seu histórico para definir a melhor regra e o melhor momento para se aposentar — pagando o menor custo possível.",
+      "Antes de protocolar, entenda seu cenário. Estudo técnico do histórico contributivo, simulações nas regras de transição e indicação do momento mais adequado para o pedido.",
     pontos: [
       "Simulações nas regras de transição",
       "Identificação de períodos não computados",
-      "Estratégia para aumentar o valor",
+      "Análise técnica do tempo de contribuição",
     ],
   },
   {
     icon: HeartPulse,
     titulo: "Auxílio-Doença e Aposentadoria por Invalidez",
     descricao:
-      "Quando a saúde impede o trabalho, você tem direito ao benefício. Atuamos do pedido administrativo à ação judicial em caso de negativa.",
+      "Quando a saúde impede o trabalho, a lei prevê amparo. Conduzimos o pedido administrativo, a preparação para a perícia e, se houver negativa, a discussão na esfera judicial.",
     pontos: [
       "Pedido administrativo e recursos",
-      "Ação judicial em caso de negativa",
+      "Preparação técnica para a perícia médica",
       "Conversão para invalidez quando cabível",
     ],
   },
@@ -62,29 +62,29 @@ const SERVICOS = [
     icon: HandCoins,
     titulo: "BPC / LOAS",
     descricao:
-      "Benefício assistencial para idosos e pessoas com deficiência em situação de vulnerabilidade. Não exige contribuição prévia.",
+      "Benefício assistencial destinado a idosos a partir de 65 anos e pessoas com deficiência em situação de vulnerabilidade. Independe de contribuição prévia ao INSS.",
     pontos: [
-      "Análise de renda familiar",
-      "Auxílio na inscrição/atualização do CadÚnico",
-      "Recurso em caso de negativa",
+      "Análise da renda familiar per capita",
+      "Orientação sobre CadÚnico",
+      "Recurso administrativo em caso de negativa",
     ],
   },
   {
     icon: Users,
     titulo: "Pensão por Morte",
     descricao:
-      "Apoio à família no reconhecimento do direito de cônjuges, companheiros e dependentes legalmente previstos.",
+      "Em um momento difícil, a família precisa de orientação clara. Atuamos no reconhecimento do direito de cônjuges, companheiros e demais dependentes legalmente previstos.",
     pontos: [
       "Reconhecimento de união estável",
       "Pensão para filhos menores e inválidos",
-      "Ações de revisão e atrasados",
+      "Discussão judicial quando cabível",
     ],
   },
   {
     icon: RefreshCw,
     titulo: "Revisão de Benefícios",
     descricao:
-      "Recebeu menos do que deveria? Identificamos erros de cálculo do INSS e buscamos a revisão com pagamento dos valores atrasados.",
+      "Aposentadoria com valor abaixo do esperado? O cálculo do INSS pode ter desconsiderado contribuições, períodos especiais ou regras mais vantajosas. Análise técnica identifica as teses cabíveis.",
     pontos: [
       "Revisão da vida toda",
       "Revisão do teto e do buraco negro",
@@ -95,7 +95,7 @@ const SERVICOS = [
     icon: Tractor,
     titulo: "Trabalhador Rural e Segurado Especial",
     descricao:
-      "Aposentadoria do trabalhador do campo, mesmo sem carteira assinada. Reunimos provas e testemunhos para garantir o seu direito.",
+      "Quem dedicou a vida ao campo tem regras próprias previstas em lei — mesmo sem carteira assinada. Reunimos provas materiais e testemunhais para fundamentar o pedido.",
     pontos: [
       "Comprovação de atividade rural",
       "Aposentadoria por idade rural",
@@ -118,11 +118,11 @@ function ServicosPage() {
         <div className="relative mx-auto max-w-4xl px-6 pt-20 pb-20 lg:pt-28 lg:pb-24 text-center">
           <Eyebrow className="mx-auto justify-center">Serviços</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
-            Tudo o que envolve INSS, em um só <em className="hl">lugar</em>.
+            Tudo o que envolve INSS, conduzido por <em className="hl">quem o conhece por dentro</em>.
           </h1>
           <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Atuação 100% especializada em direito previdenciário. Sem juridiquês, sem promessas
-            vazias — só estratégia jurídica de quem conhece o INSS por dentro.
+            Atuação dedicada exclusivamente ao direito previdenciário. Cada serviço aqui é
+            conduzido com a mesma escuta atenta, fundamentação técnica e linguagem clara.
           </p>
         </div>
       </section>
@@ -169,11 +169,11 @@ function ServicosPage() {
         <div className="on-navy mt-16 rounded-2xl bg-[var(--navy)] p-10 lg:p-14 text-center text-white">
           <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
           <h2 className="mt-4 font-display text-3xl md:text-4xl font-semibold leading-tight text-white">
-            Tem dúvidas sobre qual área se aplica ao seu caso? <em className="hl">Fale com a equipe.</em>
+            Não tem certeza de qual se aplica ao seu caso? <em className="hl">A gente ajuda você a entender.</em>
           </h2>
           <p className="mt-4 text-white/65 max-w-xl mx-auto">
-            Conte sua situação no WhatsApp e nossa equipe orientará tecnicamente sobre os trâmites
-            cabíveis.
+            Conte sua situação no WhatsApp. Ouvimos com atenção e indicamos, com clareza, os
+            caminhos técnicos cabíveis — sem pressão, sem juridiquês.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <WaveButton variant="wpp" href={SITE.whatsapp} target="_blank" rel="noopener">

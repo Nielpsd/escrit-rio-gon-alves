@@ -63,16 +63,16 @@ const TIPOS = [
 
 const ALERTAS = [
   {
-    title: "Pedidos mal formulados podem dificultar o processo",
-    desc: "Decisões administrativas mal fundamentadas ou indeferimentos por falta de documentação podem demandar mais tempo até serem revistos.",
+    title: "Um pedido mal feito pode atrasar anos do seu direito",
+    desc: "Documentação incompleta ou pedido formulado fora da regra correta gera indeferimento — e cada recurso ou ação leva tempo.",
   },
   {
-    title: "A regra escolhida define o valor",
-    desc: "A regra de aposentadoria aplicável tem impacto direto no cálculo do benefício. Análise técnica permite identificar a opção mais adequada.",
+    title: "A regra escolhida define o valor que você vai receber",
+    desc: "A diferença entre uma regra de transição e outra pode representar centenas de reais por mês. A análise técnica permite escolher a mais vantajosa.",
   },
   {
-    title: "Cada caso depende de análise individual",
-    desc: "Identificar o direito a determinado benefício exige análise do histórico contributivo, da idade, da atividade exercida e da documentação disponível.",
+    title: "Sua história é única — sua análise também precisa ser",
+    desc: "Não existe receita pronta. Histórico contributivo, idade, atividade exercida e documentos disponíveis precisam ser olhados em conjunto.",
   },
 ];
 
@@ -120,15 +120,16 @@ function QueroMeAposentarPage() {
         <div className="relative mx-auto max-w-4xl px-6 pt-20 pb-24 lg:pt-28 lg:pb-32 text-center">
           <Eyebrow className="mx-auto justify-center">Aposentadoria</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
-            Entenda as regras da <em className="hl">aposentadoria</em>.
+            Você contribuiu a vida toda. Sabe quando pode <em className="hl">se aposentar</em>?
           </h1>
           <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Conteúdo informativo sobre os principais tipos de aposentadoria previstos na
-            legislação previdenciária brasileira.
+            Cada regra da Reforma da Previdência muda o valor e a data do seu benefício.
+            Entenda, com linguagem clara, quais caminhos a legislação prevê para a sua história
+            de trabalho.
           </p>
           <div className="mt-8 flex justify-center">
             <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-              <MessageCircle size={18} /> Falar com a equipe <ArrowRight size={16} />
+              <MessageCircle size={18} /> Conversar sobre o meu caso <ArrowRight size={16} />
             </WaveButton>
           </div>
           <p className="mt-5 text-xs text-white/45">
@@ -143,8 +144,12 @@ function QueroMeAposentarPage() {
           <div className="max-w-3xl">
             <Eyebrow>Perfis comuns</Eyebrow>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-              Algumas <em className="hl">situações</em> que costumamos atender
+              Você se <em className="hl">identifica</em> com alguma dessas situações?
             </h2>
+            <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
+              Estas são histórias de vida que costumamos atender. Marcar uma delas não significa
+              ter direito automático — significa ter um caminho a investigar.
+            </p>
           </div>
           <ul className="mt-12 grid gap-4 md:grid-cols-2">
             {SITUACOES.map((s) => (
@@ -160,8 +165,8 @@ function QueroMeAposentarPage() {
             ))}
           </ul>
           <p className="mt-8 max-w-3xl text-base text-[var(--text-muted)] leading-relaxed">
-            A identificação do direito a determinado benefício depende da análise individual do
-            histórico contributivo e da documentação disponível.
+            Identificar o direito a determinado benefício depende da análise individual do
+            histórico contributivo, da idade, da atividade exercida e da documentação disponível.
           </p>
         </div>
       </section>
@@ -195,11 +200,11 @@ function QueroMeAposentarPage() {
           <div className="max-w-3xl">
             <Eyebrow>Pontos de atenção</Eyebrow>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-              Aspectos <em className="hl">técnicos</em> relevantes
+              O que <em className="hl">ninguém te conta</em> antes de pedir
             </h2>
             <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-              O aplicativo Meu INSS facilita o protocolo de pedidos. A análise técnica prévia
-              pode contribuir para a adequada apresentação da documentação.
+              Sim, dá para protocolar pelo Meu INSS sozinho. Mas pequenos detalhes técnicos podem
+              custar caro — em tempo, em valor do benefício e em retrabalho.
             </p>
           </div>
           <div className="mt-12 grid gap-5 md:grid-cols-3">
@@ -318,14 +323,15 @@ function QueroMeAposentarPage() {
         <div className="mx-auto max-w-4xl px-6 text-center">
           <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight">
-            Tem dúvidas sobre <em className="hl">aposentadoria</em>?
+            Não enfrente o INSS <em className="hl">sozinho</em>.
           </h2>
           <p className="mt-5 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Fale com a nossa equipe pelo WhatsApp para esclarecimentos iniciais sobre o tema.
+            Conte sua história para nossa equipe. Vamos te explicar, com linguagem clara,
+            quais caminhos a legislação prevê para o seu caso.
           </p>
           <div className="mt-8 flex justify-center">
             <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-              <MessageCircle size={18} /> Falar com a equipe <ArrowRight size={16} />
+              <MessageCircle size={18} /> Conversar sobre o meu caso <ArrowRight size={16} />
             </WaveButton>
           </div>
           <p className="mt-5 inline-flex items-center gap-2 text-xs text-white/55">
