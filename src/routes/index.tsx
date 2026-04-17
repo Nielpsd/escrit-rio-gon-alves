@@ -95,24 +95,24 @@ const SERVICES: { title: string; desc: string }[] = [
 
 const STEPS = [
   {
-    title: "Conversa inicial",
-    desc: "Você nos conta sua situação pelo WhatsApp. Nossa equipe ouve seu caso e identifica as primeiras informações relevantes.",
+    title: "Conversa inicial pelo WhatsApp",
+    desc: "Você nos conta sua situação. Nossa equipe ouve o caso e identifica os pontos relevantes para a análise técnica.",
   },
   {
-    title: "Organização documental",
-    desc: "Orientamos sobre os documentos necessários e analisamos o material que fortalece o seu pedido.",
+    title: "Montagem do processo do jeito certo",
+    desc: "Orientamos sobre os documentos que fortalecem o pedido e descartamos os que podem atrapalhar. Um processo bem montado no início evita anos de espera depois.",
   },
   {
-    title: "Condução do processo",
-    desc: "Cuidamos do protocolo, do acompanhamento, das respostas ao INSS, dos recursos e das ações judiciais quando cabíveis.",
+    title: "A gente conduz, você acompanha",
+    desc: "Cuidamos do protocolo, do acompanhamento, das respostas ao INSS, dos recursos e das ações judiciais quando cabíveis. Você não precisa lidar com isso sozinho.",
   },
   {
     title: "Preparação para perícia ou audiência",
-    desc: "Antes de qualquer perícia médica ou audiência, você recebe orientações técnicas sobre o procedimento.",
+    desc: "Antes de qualquer perícia médica ou audiência, você recebe orientação completa do que vai acontecer e como se posicionar. Nada de surpresas.",
   },
   {
-    title: "Atuação na esfera judicial",
-    desc: "Quando o pedido administrativo é negado, conduzimos a discussão no Judiciário com fundamentação técnica.",
+    title: "Na Justiça, se for o caso",
+    desc: "Se o pedido administrativo é negado, conduzimos a discussão no Judiciário com fundamentação técnica. Negativa administrativa não encerra o caminho.",
   },
 ];
 
@@ -207,17 +207,17 @@ function Hero() {
         <div>
           <Eyebrow>Direito Previdenciário</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white max-w-2xl">
-            Quem dedicou anos ao trabalho merece ser <em className="hl">ouvido com atenção</em>.
+            O INSS negou? <em className="hl">Negativa não é o fim</em>.
           </h1>
           <p className="mt-6 max-w-xl text-base text-white/65 leading-relaxed">
-            Escritório dedicado exclusivamente ao direito previdenciário. Cada história de vida
-            tem detalhes que fazem diferença — e merece análise técnica feita por quem conhece
-            o INSS por dentro.
+            Dr. Renan Gonçalves já foi gerente do INSS. Conhece as regras por dentro — e hoje
+            lidera uma equipe especializada exclusivamente em direito previdenciário.
+            Atendimento presencial em Rondônia e online para todo o Brasil.
           </p>
 
           <div className="mt-8 inline-flex items-center gap-3 rounded-md border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-4 py-3 text-sm text-[var(--gold-light)]">
             <Check size={16} />
-            Conteúdo informativo · Provimento nº 205/2021 da OAB
+            Conversa inicial sem compromisso · pelo WhatsApp
           </div>
 
           <div className="mt-8 flex flex-wrap gap-4">
@@ -225,7 +225,7 @@ function Hero() {
               <MessageCircle size={18} /> Falar com a equipe
             </WaveButton>
             <WaveButton variant="outline-light" size="lg" href="#servicos">
-              Áreas de atuação <ArrowRight size={16} />
+              Ver áreas de atuação <ArrowRight size={16} />
             </WaveButton>
           </div>
 
@@ -269,24 +269,24 @@ function Hero() {
 function Authority() {
   const cards = [
     {
-      title: "Quem viveu o INSS por dentro",
+      title: "Ex-gerente do INSS",
       body:
-        "O fundador atuou como gerente do INSS antes da advocacia. Conhece os critérios reais de análise dos pedidos.",
+        "Conhecemos o sistema por dentro. Sabemos os critérios de análise e como cada documento é avaliado.",
     },
     {
-      title: "Ensina o que pratica",
+      title: "Quem ensina os outros",
       body:
-        "Dr. Renan também leciona direito previdenciário, formando outros advogados — e mantendo o estudo da legislação em dia.",
+        "Dr. Renan é professor de direito previdenciário. Você é atendido por quem forma especialistas na área.",
     },
     {
       title: "Só previdenciário, todos os dias",
       body:
-        "O escritório atua exclusivamente em demandas previdenciárias. Nenhuma outra área compete pela atenção da equipe.",
+        "O escritório atua exclusivamente em benefícios do INSS. Toda a atenção e o estudo da equipe estão concentrados em uma única especialidade.",
     },
     {
-      title: "Cada caso é uma pessoa",
+      title: "Atendimento humano",
       body:
-        "Atendimento conduzido com escuta, respeito e comunicação clara — do primeiro contato à conclusão do processo.",
+        "Cada caso é uma pessoa. Conduzimos cada atendimento com escuta, respeito e comunicação clara em todas as etapas.",
     },
   ];
 
@@ -295,12 +295,12 @@ function Authority() {
       <div className="max-w-3xl">
         <Eyebrow>Sobre o escritório</Eyebrow>
         <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-          Por que tantas pessoas confiam o caso a <em className="hl">quem viveu o INSS por dentro</em>.
+          Quem já trabalhou no INSS sabe <em className="hl">como o sistema decide</em>.
         </h2>
         <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-          O fundador atuou como gerente do INSS antes de se dedicar à advocacia.
-          Hoje, essa vivência guia cada análise — entendemos os critérios usados nas decisões
-          e preparamos cada pedido com a fundamentação que o caso pede.
+          Dr. Renan Gonçalves passou anos dentro do INSS como gerente. Conhece os critérios
+          que aprovam e os detalhes que reprovam. Hoje lidera uma equipe que transforma esse
+          conhecimento em fundamentação técnica para cada caso.
         </p>
       </div>
 
@@ -328,12 +328,12 @@ function Services() {
         <div className="max-w-3xl">
           <Eyebrow>Áreas de atuação</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            Você sabe exatamente <em className="hl">qual é o seu direito</em>?
+            Se é benefício do INSS, a gente <em className="hl">conduz</em>.
           </h2>
           <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-            Cada benefício tem suas regras, prazos e provas exigidas. Atuamos em todas as
-            modalidades previstas na legislação previdenciária e assistencial brasileira —
-            do planejamento da aposentadoria à revisão de quem já recebe.
+            Atuamos em todos os tipos de benefício previdenciário e assistencial. Quem quer
+            se aposentar, quem está afastado por saúde, quem perdeu um familiar segurado
+            ou recebeu indeferimento — cada situação tem caminho técnico próprio.
           </p>
         </div>
 
@@ -367,7 +367,7 @@ function Services() {
 
         <div className="mt-10 flex flex-col items-start gap-5 rounded-2xl bg-[var(--navy)] p-8 lg:flex-row lg:items-center lg:justify-between">
           <p className="font-display text-xl text-white max-w-xl leading-snug">
-            Não sabe por onde começar? Conte sua situação para nossa equipe — explicamos com clareza o que se aplica ao seu caso.
+            Não sabe qual benefício se aplica ao seu caso? Conte sua situação para nossa equipe.
           </p>
           <WaveButton variant="gold" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
             Falar no WhatsApp <ArrowRight size={16} />
@@ -385,11 +385,11 @@ function HowItWorks() {
         <div className="lg:sticky lg:top-28 lg:self-start">
           <Eyebrow>Como atuamos</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            Você acompanha <em className="hl">cada etapa</em> do seu processo.
+            Simples para você. <em className="hl">Completo para o INSS</em>.
           </h2>
           <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-            Nada de processo sumindo. Você sabe sempre em que fase está, o que vem depois e
-            por quê. Veja como conduzimos um caso do primeiro contato até a decisão final.
+            Você não precisa entender de leis nem enfrentar filas. A gente conduz cada
+            etapa — no INSS ou na Justiça — e te mantém informado o tempo todo.
           </p>
           <div className="mt-8">
             <WaveButton variant="primary" href={SITE.whatsapp} target="_blank" rel="noopener">
@@ -428,10 +428,12 @@ function Team() {
         <div>
           <Eyebrow>Equipe</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            Aqui ninguém atende <em className="hl">de tudo um pouco</em>.
+            Uma equipe inteira focada em <em className="hl">previdenciário</em>.
           </h2>
           <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-            Cada pessoa da nossa equipe é dedicada exclusivamente ao direito
+            Mais de 10 profissionais dedicados exclusivamente a benefícios previdenciários.
+            Não somos um escritório generalista — cada pessoa da equipe se aprofunda
+            todos os dias na mesma área.
             previdenciário, sem atuação em outras áreas do direito.
           </p>
 
