@@ -269,24 +269,24 @@ function Hero() {
 function Authority() {
   const cards = [
     {
-      title: "Experiência no INSS",
+      title: "Quem viveu o INSS por dentro",
       body:
-        "O fundador atuou como gerente do INSS antes de ingressar exclusivamente na advocacia previdenciária.",
+        "O fundador atuou como gerente do INSS antes da advocacia. Conhece os critérios reais de análise dos pedidos.",
     },
     {
-      title: "Atividade docente",
+      title: "Ensina o que pratica",
       body:
-        "Dr. Renan também leciona direito previdenciário, contribuindo para a formação de outros profissionais da área.",
+        "Dr. Renan também leciona direito previdenciário, formando outros advogados — e mantendo o estudo da legislação em dia.",
     },
     {
-      title: "Atuação especializada",
+      title: "Só previdenciário, todos os dias",
       body:
-        "O escritório atua exclusivamente em demandas previdenciárias, sem dispersão para outras áreas do direito.",
+        "O escritório atua exclusivamente em demandas previdenciárias. Nenhuma outra área compete pela atenção da equipe.",
     },
     {
-      title: "Atendimento humanizado",
+      title: "Cada caso é uma pessoa",
       body:
-        "Cada caso é conduzido com atenção individual, respeito ao cliente e comunicação clara em todas as etapas.",
+        "Atendimento conduzido com escuta, respeito e comunicação clara — do primeiro contato à conclusão do processo.",
     },
   ];
 
