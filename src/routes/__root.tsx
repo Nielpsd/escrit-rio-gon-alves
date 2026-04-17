@@ -29,20 +29,30 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Escritório Gonçalves — Direito Previdenciário" },
+      {
+        name: "description",
+        content:
+          "O INSS negou? Ainda dá tempo. Escritório liderado por ex-gerente do INSS. Avaliação gratuita. Atendimento em RO e online para todo o Brasil.",
+      },
+      { name: "author", content: "Escritório Gonçalves" },
+      { property: "og:title", content: "Escritório Gonçalves — Direito Previdenciário" },
+      {
+        property: "og:description",
+        content:
+          "Especialistas em aposentadoria e benefícios do INSS. Você só paga quando o benefício for aprovado.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap",
       },
+      { rel: "stylesheet", href: appCss },
     ],
   }),
   shellComponent: RootShell,
