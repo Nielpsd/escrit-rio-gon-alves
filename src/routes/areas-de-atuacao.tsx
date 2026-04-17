@@ -6,7 +6,7 @@ import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
 import { SITE } from "@/lib/site";
 
-export const Route = createFileRoute("/casos-resolvidos")({
+export const Route = createFileRoute("/areas-de-atuacao")({
   head: () => ({
     meta: [
       { title: "Casos resolvidos — Escritório Gonçalves" },
