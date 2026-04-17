@@ -52,12 +52,12 @@ function EquipePage() {
         <div className="relative mx-auto max-w-4xl px-6 pt-20 pb-20 lg:pt-28 lg:pb-24 text-center">
           <Eyebrow className="mx-auto justify-center">Nossa equipe</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
-            Conheça quem vai cuidar do <em className="hl">seu caso</em>.
+            Pessoas reais cuidando de <em className="hl">histórias reais</em>.
           </h1>
           <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Mais de 10 profissionais dedicados exclusivamente ao direito previdenciário. Aqui,
-            ninguém cuida de vários assuntos ao mesmo tempo — cada pessoa da equipe é especialista
-            no que faz.
+            Mais de dez profissionais dedicados, todos os dias, exclusivamente ao direito
+            previdenciário. Aqui ninguém atende várias áreas ao mesmo tempo — cada pessoa
+            tem foco no que faz.
           </p>
         </div>
       </section>
@@ -90,14 +90,14 @@ function EquipePage() {
             </p>
             <div className="mt-5 space-y-4 text-base text-[var(--text-muted)] leading-relaxed">
               <p>
-                Antes de fundar o escritório, Dr. Renan atuou como gerente do INSS — cargo que lhe
-                deu acesso direto às regras e critérios que determinam a aprovação ou negativa de
-                benefícios. Também é professor de direito previdenciário, formando advogados
-                especializados na área.
+                Antes de fundar o escritório, Dr. Renan atuou como gerente do INSS — onde
+                acompanhou de perto os critérios técnicos que determinam a aprovação ou
+                negativa de cada pedido. Hoje também é professor de direito previdenciário,
+                formando outros advogados da área.
               </p>
               <p>
-                Hoje lidera a equipe do Escritório Gonçalves com o mesmo rigor técnico e
-                compromisso humano que sempre marcaram sua carreira.
+                Lidera a equipe do Escritório Gonçalves com a mesma seriedade técnica e
+                escuta atenta que sempre marcaram sua trajetória.
               </p>
             </div>
             <div className="mt-7 flex flex-wrap gap-3">
@@ -128,8 +128,12 @@ function EquipePage() {
           <div className="max-w-3xl">
             <Eyebrow>Time completo</Eyebrow>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-              Especialistas <em className="hl">dedicados</em> ao seu caso
+              Quem está <em className="hl">do seu lado</em> no dia a dia
             </h2>
+            <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
+              Os nomes que você vai conhecer ao longo do processo. Cada pessoa com função
+              definida, todas dedicadas exclusivamente ao previdenciário.
+            </p>
           </div>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
             {EQUIPE.map((m) => (
@@ -158,11 +162,14 @@ function EquipePage() {
         <div className="mx-auto max-w-4xl px-6 text-center">
           <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight">
-            Nossa equipe está <em className="hl">pronta</em> para o seu caso.
+            Pronto para <em className="hl">conversar com a gente</em>?
           </h2>
+          <p className="mt-5 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
+            Conte sua história. Ouvimos com calma e respondemos com clareza.
+          </p>
           <div className="mt-8 flex justify-center">
             <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-              <MessageCircle size={18} /> Falar com um especialista <ArrowRight size={16} />
+              <MessageCircle size={18} /> Falar com a equipe <ArrowRight size={16} />
             </WaveButton>
           </div>
         </div>

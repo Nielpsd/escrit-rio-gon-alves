@@ -111,11 +111,11 @@ function AreasPage() {
           <div className="max-w-3xl">
             <Eyebrow>Áreas de atuação</Eyebrow>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
-              Atuação <em className="hl">100% previdenciária</em>.
+              Você se reconhece em <em className="hl">alguma destas histórias</em>?
             </h1>
             <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl">
-              Conheça os perfis e situações que atendemos. Cada caso é único e analisado
-              individualmente por nossa equipe.
+              Reunimos os perfis e situações que mais chegam até nós. Talvez a sua história
+              esteja entre eles — e talvez, por trás dela, exista um direito a investigar.
             </p>
           </div>
         </div>
@@ -129,8 +129,8 @@ function AreasPage() {
           </h2>
           <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
             Conteúdo meramente informativo, em conformidade com o Provimento nº 205/2021 da OAB.
-            As descrições abaixo se referem a categorias gerais de demanda — cada caso real
-            depende de análise individual e documentação específica.
+            As descrições abaixo são categorias gerais de demanda — cada caso real depende
+            de análise individual e da documentação disponível.
           </p>
         </div>
 

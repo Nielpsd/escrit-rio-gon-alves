@@ -21,13 +21,13 @@ export const Route = createFileRoute("/contato")({
       {
         name: "description",
         content:
-          "Fale com o Escritório Gonçalves. Atendimento presencial em Jaru e Alta Floresta D'Oeste (RO) e online para todo o Brasil. Avaliação gratuita.",
+          "Fale com o Escritório Gonçalves. Atendimento presencial em Jaru e Alta Floresta D'Oeste (RO) e online para todo o Brasil.",
       },
       { property: "og:title", content: "Contato — Escritório Gonçalves" },
       {
         property: "og:description",
         content:
-          "Tire suas dúvidas sobre aposentadoria e benefícios do INSS. Avaliação gratuita pelo WhatsApp.",
+          "Tire suas dúvidas sobre aposentadoria e benefícios do INSS. Conteúdo informativo, em conformidade com o Provimento nº 205/2021 da OAB.",
       },
     ],
   }),
@@ -74,11 +74,14 @@ function ContatoPage() {
         <div className="relative mx-auto max-w-4xl px-6 pt-20 pb-20 lg:pt-28 lg:pb-24 text-center">
           <Eyebrow className="mx-auto justify-center">Contato</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
-            Vamos conversar sobre o seu <em className="hl">caso</em>.
+            A primeira conversa começa com <em className="hl">sua história</em>.
           </h1>
           <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Conte sua situação para nossa equipe. Conteúdo informativo, em conformidade com o
-            Provimento nº 205/2021 da OAB.
+            Conte para nós o que está acontecendo. Lemos cada mensagem com atenção e
+            respondemos com a clareza que você precisa para decidir o próximo passo.
+          </p>
+          <p className="mt-4 text-xs text-white/45">
+            Conteúdo informativo · Provimento nº 205/2021 da OAB
           </p>
         </div>
       </section>
@@ -90,10 +93,10 @@ function ContatoPage() {
           <div className="rounded-2xl border border-[var(--border)] bg-white p-8 lg:p-10">
             <Eyebrow>Envie sua mensagem</Eyebrow>
             <h2 className="mt-3 font-display text-2xl font-semibold text-[var(--navy)] leading-snug">
-              Conte rapidamente o que aconteceu
+              Conte, sem pressa, o que você está vivendo
             </h2>
             <p className="mt-2 text-sm text-[var(--text-muted)]">
-              Ao enviar, abrimos o WhatsApp com a sua mensagem pré-preenchida.
+              Ao enviar, abrimos o WhatsApp com a sua mensagem pronta. Você revisa antes de mandar.
             </p>
 
             <form onSubmit={handleSubmit} className="mt-8 grid gap-5">
@@ -173,7 +176,7 @@ function ContatoPage() {
             <div className="on-navy rounded-2xl bg-[var(--navy)] p-8 text-white">
               <Eyebrow>Atendimento direto</Eyebrow>
               <p className="mt-3 font-display text-xl leading-snug text-white">
-                Prefere falar agora? Estamos no WhatsApp.
+                Prefere falar agora mesmo? Nossa equipe está no WhatsApp, pronta para ouvir.
               </p>
               <div className="mt-5">
                 <WaveButton variant="wpp" href={SITE.whatsapp} target="_blank" rel="noopener">
