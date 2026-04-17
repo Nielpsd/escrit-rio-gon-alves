@@ -12,13 +12,13 @@ export const Route = createFileRoute("/sobre")({
       {
         name: "description",
         content:
-          "Um escritório que nasceu de dentro do INSS. Conheça a história, missão e diferenciais do Escritório Gonçalves.",
+          "Conheça o Escritório Gonçalves: atuação técnica e exclusiva em direito previdenciário, liderada por profissional com experiência prévia no INSS.",
       },
       { property: "og:title", content: "Sobre — Escritório Gonçalves" },
       {
         property: "og:description",
         content:
-          "Liderado pelo Dr. Renan Gonçalves, ex-gerente do INSS. Conheça nossa história e o que nos move.",
+          "História, missão e princípios do Escritório Gonçalves, dedicado integralmente ao direito previdenciário.",
       },
     ],
   }),
@@ -29,32 +29,32 @@ const VALORES = [
   {
     title: "Humanização",
     body:
-      "Sabemos que por trás de cada processo existe uma pessoa que está sofrendo, que precisa de resposta, e que muitas vezes já foi negligenciada pelo sistema. Tratamos cada cliente com atenção e respeito.",
+      "Cada processo representa uma pessoa. Conduzimos os atendimentos com escuta, respeito e atenção individual.",
   },
   {
     title: "Excelência técnica",
     body:
-      "Dr. Renan também é professor de advogados. O nível de conhecimento que exigimos da equipe é o mesmo que ensinamos para outros profissionais da área.",
+      "Atualização permanente em legislação, jurisprudência e teses previdenciárias. Dr. Renan também atua como docente na área.",
   },
   {
     title: "Transparência",
     body:
-      "Você sempre sabe o que está acontecendo no seu processo. Nenhuma surpresa, nenhum abandono no meio do caminho.",
+      "Informação clara sobre andamento, prazos e expectativas em cada fase do processo.",
   },
   {
-    title: "Resultado",
+    title: "Especialização",
     body:
-      'Não trabalhamos para "tentar". Trabalhamos para ganhar. E nossa taxa de aprovação comprova isso.',
+      "Atuação exclusiva em direito previdenciário, sem dispersão para outras áreas do direito.",
   },
 ];
 
 const DIFERENCIAIS = [
-  "Único escritório liderado por um ex-gerente do INSS na região",
+  "Liderança com experiência prévia como gerente do INSS",
   "Atendimento presencial em Rondônia (Jaru e Alta Floresta D'Oeste)",
   "Atendimento online para qualquer estado do Brasil",
-  "Você só paga quando o benefício for aprovado",
-  "Mais de 143 avaliações positivas no Google",
-  "Equipe exclusivamente focada em direito previdenciário",
+  "Equipe dedicada exclusivamente ao direito previdenciário",
+  "Atividade docente do fundador na área previdenciária",
+  "Comunicação clara e acompanhamento próximo do processo",
 ];
 
 function SobrePage() {
@@ -72,12 +72,12 @@ function SobrePage() {
           <div>
             <Eyebrow>Sobre o escritório</Eyebrow>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white max-w-2xl">
-              Um escritório que nasceu de dentro do <em className="hl">INSS</em>.
+              Um escritório nascido <em className="hl">do INSS</em>.
             </h1>
             <p className="mt-6 max-w-xl text-base text-white/65 leading-relaxed">
-              O Dr. Renan Gonçalves não chegou ao direito previdenciário pelos livros. Chegou pela
-              prática — como gerente do INSS, onde aprendeu de perto como o sistema funciona, quais
-              pedidos são aprovados e por que tantos são negados injustamente.
+              O Dr. Renan Gonçalves chegou ao direito previdenciário pela prática — como gerente
+              do INSS, onde acompanhou de perto a aplicação das regras e a análise dos pedidos.
+              Essa vivência fundamenta a atuação técnica do escritório.
             </p>
             <div className="mt-8">
               <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
@@ -86,7 +86,6 @@ function SobrePage() {
             </div>
           </div>
 
-          {/* Placeholder foto Dr. Renan */}
           <div className="relative">
             <div className="aspect-[4/5] rounded-2xl border border-white/10 bg-gradient-to-br from-[var(--navy-mid)] to-[var(--navy)] grid place-items-center">
               <div className="text-center">
@@ -94,7 +93,7 @@ function SobrePage() {
                   R
                 </div>
                 <p className="mt-4 font-display text-lg text-white">Dr. Renan Gonçalves</p>
-                <p className="text-xs text-white/45">Ex-gerente do INSS</p>
+                <p className="text-xs text-white/45">{SITE.oab}</p>
               </div>
             </div>
             <div className="absolute -bottom-5 -left-5 rounded-xl bg-[var(--gold)] px-5 py-3 text-sm font-medium text-white shadow-lg">
@@ -115,19 +114,18 @@ function SobrePage() {
           </div>
           <div className="space-y-5 text-base text-[var(--text-muted)] leading-relaxed">
             <p>
-              Depois de anos dentro do INSS, Dr. Renan percebeu que a maioria das negativas não era
-              falta de direito — era falta de preparo. Documentos errados, estratégias equivocadas,
-              processos mal conduzidos. Pessoas que tinham todo o direito de receber, mas saíam de
-              mãos vazias.
+              Após anos atuando como gerente do INSS, Dr. Renan observou que muitas indeferimentos
+              decorriam de questões procedimentais — documentação inadequada, pedidos mal
+              formulados, falta de fundamentação técnica.
             </p>
             <p>
-              Foi por isso que fundou o Escritório Gonçalves: para estar do lado de quem precisa,
-              com o mesmo conhecimento que antes estava só do lado do sistema.
+              O Escritório Gonçalves foi fundado a partir dessa constatação: oferecer atuação
+              técnica especializada em demandas previdenciárias, com a perspectiva de quem
+              conhece o procedimento administrativo do INSS por dentro.
             </p>
             <p>
-              Hoje, com uma equipe de mais de 10 especialistas e clientes em todo o Brasil, o
-              escritório mantém o mesmo compromisso do primeiro dia — tratar cada caso como único e
-              não descansar enquanto o cliente não receber o que é seu.
+              Hoje, com equipe dedicada exclusivamente ao previdenciário, o escritório atende
+              clientes em Rondônia presencialmente e em todo o Brasil de forma online.
             </p>
           </div>
         </div>
@@ -139,7 +137,7 @@ function SobrePage() {
           <div className="max-w-3xl">
             <Eyebrow>Missão e valores</Eyebrow>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-              O que nos <em className="hl">move</em>
+              O que nos <em className="hl">orienta</em>
             </h2>
           </div>
           <div className="mt-12 grid gap-5 md:grid-cols-2">
@@ -161,9 +159,9 @@ function SobrePage() {
       {/* DIFERENCIAIS */}
       <section className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
         <div className="max-w-3xl">
-          <Eyebrow>Diferenciais</Eyebrow>
+          <Eyebrow>Características</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            Por que somos <em className="hl">diferentes</em>
+            Nossa <em className="hl">forma de trabalho</em>
           </h2>
         </div>
         <ul className="mt-12 grid gap-4 md:grid-cols-2">
@@ -184,16 +182,16 @@ function SobrePage() {
       {/* CTA FINAL */}
       <section className="on-navy bg-[var(--navy)] py-20 lg:py-28 text-white">
         <div className="mx-auto max-w-4xl px-6 text-center">
-          <Eyebrow className="mx-auto justify-center">Avaliação gratuita</Eyebrow>
+          <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight">
-            Quer saber se tem direito? A avaliação é <em className="hl">gratuita</em>.
+            Quer conhecer melhor o nosso <em className="hl">escritório</em>?
           </h2>
           <p className="mt-5 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Conte sua situação para a nossa equipe. Sem compromisso, sem custo, sem burocracia.
+            Fale com a nossa equipe pelo WhatsApp para esclarecer dúvidas iniciais.
           </p>
           <div className="mt-8 flex justify-center">
             <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-              <MessageCircle size={18} /> Falar pelo WhatsApp agora <ArrowRight size={16} />
+              <MessageCircle size={18} /> Falar com a equipe <ArrowRight size={16} />
             </WaveButton>
           </div>
         </div>

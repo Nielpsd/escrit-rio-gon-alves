@@ -16,20 +16,20 @@ import { SITE } from "@/lib/site";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Escritório Gonçalves — Aposentadoria e benefícios do INSS" },
+      { title: "Escritório Gonçalves — Direito Previdenciário" },
       {
         name: "description",
         content:
-          "O INSS negou? Você ainda pode receber o que é seu. Liderado por ex-gerente do INSS. Avaliação gratuita. Atendimento em todo o Brasil.",
+          "Escritório de advocacia dedicado ao direito previdenciário. Atendimento presencial em Rondônia e online em todo o Brasil.",
       },
       {
         property: "og:title",
-        content: "Escritório Gonçalves — Aposentadoria e benefícios do INSS",
+        content: "Escritório Gonçalves — Direito Previdenciário",
       },
       {
         property: "og:description",
         content:
-          "Especialistas em direito previdenciário. Você só paga quando o benefício for aprovado.",
+          "Atuação técnica em aposentadorias, auxílios, BPC/LOAS, pensões e revisões previdenciárias.",
       },
     ],
   }),
@@ -38,135 +38,135 @@ export const Route = createFileRoute("/")({
 
 const WPP_PHONE = "5569992621298";
 const buildWppLink = (service: string) => {
-  const msg = `Olá, Renan! Tenho interesse em saber mais sobre *${service}*. Pode me ajudar?`;
+  const msg = `Olá! Gostaria de tirar dúvidas sobre *${service}*.`;
   return `https://api.whatsapp.com/send?phone=${WPP_PHONE}&text=${encodeURIComponent(msg)}`;
 };
 
 const SERVICES: { title: string; desc: string }[] = [
   {
     title: "Planejamento de Aposentadoria",
-    desc: "Descubra a melhor regra e o momento certo para se aposentar com o maior valor possível.",
+    desc: "Análise técnica das regras aplicáveis ao seu histórico contributivo.",
   },
   {
     title: "Aposentadoria por Invalidez",
-    desc: "Para quem não pode mais trabalhar de forma permanente por doença ou acidente.",
+    desc: "Benefício destinado a quem está permanentemente incapacitado para o trabalho.",
   },
   {
     title: "Auxílio-Doença",
-    desc: "Benefício temporário para quem está incapacitado de trabalhar por motivo de saúde.",
+    desc: "Benefício temporário em razão de incapacidade para o trabalho.",
   },
   {
     title: "Salário-Maternidade",
-    desc: "Garanta o pagamento integral durante o afastamento por nascimento ou adoção.",
+    desc: "Benefício devido durante o afastamento por nascimento ou adoção.",
   },
   {
     title: "Aposentadoria por Idade",
-    desc: "Para quem atingiu a idade mínima e tem o tempo de contribuição exigido.",
+    desc: "Benefício para quem atingiu a idade mínima e o tempo de contribuição exigido.",
   },
   {
     title: "Aposentadoria do Professor",
-    desc: "Regras específicas e tempo reduzido para professores da educação básica.",
+    desc: "Regras específicas previstas em lei para professores da educação básica.",
   },
   {
     title: "Pensão por Morte",
-    desc: "Direito de cônjuges, filhos e dependentes após o falecimento do segurado.",
+    desc: "Benefício destinado a cônjuges, filhos e demais dependentes legalmente reconhecidos.",
   },
   {
     title: "BPC/LOAS",
-    desc: "Benefício assistencial para idosos e pessoas com deficiência em situação de vulnerabilidade.",
+    desc: "Benefício assistencial para idosos e pessoas com deficiência conforme critérios legais.",
   },
   {
     title: "Aposentadoria por Tempo de Contribuição",
-    desc: "Para quem tem longa carreira formal — a estratégia certa muda o valor final.",
+    desc: "Análise das regras de transição aplicáveis ao caso concreto.",
   },
   {
     title: "Aposentadoria Especial",
-    desc: "Quem trabalhou exposto a agentes nocivos pode se aposentar mais cedo.",
+    desc: "Benefício destinado a quem exerceu atividade exposta a agentes nocivos.",
   },
   {
     title: "Auxílio-Reclusão",
-    desc: "Benefício para os dependentes de segurado de baixa renda recolhido à prisão.",
+    desc: "Benefício destinado aos dependentes de segurado de baixa renda recolhido à prisão.",
   },
   {
     title: "Revisão de Benefícios",
-    desc: "Recebe pouco? Podemos revisar seu cálculo e aumentar o valor mensal — com retroativos.",
+    desc: "Análise técnica do cálculo do benefício e das teses revisionais cabíveis.",
   },
 ];
 
 const STEPS = [
   {
-    title: "Análise gratuita do seu caso",
-    desc: "Você nos conta sua situação pelo WhatsApp. Avaliamos a viabilidade, identificamos os pontos que podem travar o processo e traçamos a melhor estratégia antes de qualquer compromisso.",
+    title: "Conversa inicial",
+    desc: "Você nos conta sua situação pelo WhatsApp. Nossa equipe ouve seu caso e identifica as primeiras informações relevantes.",
   },
   {
-    title: "Montamos o processo do jeito certo",
-    desc: "Separamos os documentos que fortalecem seu pedido e descartamos os que podem atrapalhar. Um processo bem montado no início evita anos de espera depois.",
+    title: "Organização documental",
+    desc: "Orientamos sobre os documentos necessários e analisamos o material que fortalece o seu pedido.",
   },
   {
-    title: "A gente assume o processo, você descansa",
-    desc: "Cuidamos de tudo: protocolo, acompanhamento, respostas ao INSS, recursos e ações judiciais quando necessário. Você não precisa lidar com nada disso sozinho.",
+    title: "Condução do processo",
+    desc: "Cuidamos do protocolo, do acompanhamento, das respostas ao INSS, dos recursos e das ações judiciais quando cabíveis.",
   },
   {
-    title: "Preparamos você para perícia ou audiência",
-    desc: "Antes de qualquer perícia médica ou audiência, você recebe orientação completa do que vai acontecer, o que dizer e como se posicionar. Nada de surpresas.",
+    title: "Preparação para perícia ou audiência",
+    desc: "Antes de qualquer perícia médica ou audiência, você recebe orientações técnicas sobre o procedimento.",
   },
   {
-    title: "Na Justiça se precisar",
-    desc: "Se o INSS negar, levamos para o Judiciário. Negativa não é o fim — para nós, é só o começo de outra estratégia.",
+    title: "Atuação na esfera judicial",
+    desc: "Quando o pedido administrativo é negado, conduzimos a discussão no Judiciário com fundamentação técnica.",
   },
 ];
 
 const TESTIMONIALS = [
   {
-    text: "Minha aposentadoria deu certo. Só agradecer ao Dr. Renan e à equipe.",
+    text: "Atendimento atencioso do início ao fim. Equipe sempre disponível para esclarecer dúvidas.",
     name: "Eleni Rocha",
   },
   {
-    text: "Meu filho é autista e a questão foi resolvida bem rápido, sem trabalho nenhum pra mim. Amei a atenção de toda a equipe.",
+    text: "Equipe muito atenciosa e cuidadosa. Acompanhamento próximo durante todo o processo.",
     name: "Carolina Assunção",
   },
   {
-    text: "Dr. Renan, excelente profissional. Equipe muito atenciosa. Nota 10.",
+    text: "Dr. Renan, excelente profissional. Equipe muito atenciosa.",
     name: "Vera Lucia Lemes",
   },
   {
-    text: "Nunca deixaram de me manter informada. Dois anos de processo e em nenhum momento desistiram de mim.",
+    text: "Nunca deixaram de me manter informada. Comunicação clara e constante durante todo o tempo.",
     name: "Leuciane Silva",
   },
   {
-    text: "Fui muito bem atendida, solucionaram nossa situação. Excelentes advogados.",
+    text: "Fui muito bem atendida. Excelentes advogados, sempre disponíveis para esclarecimentos.",
     name: "Érika Vieira",
   },
   {
-    text: "Gostei muito do atendimento. Foi muito bom, graças a Deus deu tudo certo!",
+    text: "Atendimento humano e respeitoso em todas as etapas.",
     name: "Ilma Fernandes",
   },
 ];
 
 const FAQ = [
   {
-    q: "O INSS já negou meu pedido. Ainda tem jeito?",
-    a: "Sim. Negativa não é sentença definitiva. Podemos recorrer administrativamente ou entrar com ação judicial. Em muitos casos, o benefício é aprovado na segunda tentativa com a estratégia certa.",
+    q: "O INSS já negou meu pedido. O que fazer?",
+    a: "A negativa administrativa não encerra a discussão. É possível recorrer administrativamente ou buscar a tutela do direito na esfera judicial. Cada caso depende da análise individual da fundamentação da negativa.",
   },
   {
-    q: "Quanto custa contratar o escritório?",
-    a: "Na maioria dos casos, você não paga nada no início. Nossos honorários são cobrados apenas quando o benefício é aprovado e você já está recebendo. Fale conosco e entenda as condições do seu caso.",
+    q: "Como funciona a contratação dos serviços?",
+    a: "A contratação se formaliza por meio de procuração e contrato de honorários. Em conformidade com o Provimento nº 205/2021 da OAB, condições financeiras são tratadas individualmente, jamais por meio de divulgação pública.",
   },
   {
-    q: "Vale a pena tentar sozinho primeiro?",
-    a: "Não recomendamos. Erros no pedido inicial — documentos errados, respostas inadequadas no app — podem dificultar ou até inviabilizar a aprovação futura. Fazer com advogado desde o início é mais rápido e mais barato no final.",
+    q: "É possível protocolar o pedido sozinho pelo aplicativo Meu INSS?",
+    a: "Sim, o aplicativo permite protocolar pedidos. Cabe a cada pessoa avaliar se possui informações técnicas suficientes para conduzir o processo, considerando que a forma como o pedido é apresentado pode influenciar sua análise.",
   },
   {
-    q: "Moro em outro estado. Consigo ser atendido?",
-    a: "Sim. Atendemos com a mesma qualidade para qualquer cidade do Brasil, de forma 100% online, pelo WhatsApp ou videochamada.",
+    q: "Moro em outro estado. É possível ser atendido?",
+    a: "Sim. Realizamos atendimento online para qualquer cidade do Brasil, por WhatsApp ou videochamada, sem prejuízo da qualidade técnica.",
   },
   {
-    q: "Qual benefício tenho direito?",
-    a: "Depende da sua situação específica. Por isso a avaliação inicial é gratuita — entendemos seu caso e indicamos qual benefício faz sentido para você, e qual a melhor forma de conseguir.",
+    q: "Como saber qual benefício se aplica ao meu caso?",
+    a: "A definição do benefício cabível depende da análise do histórico contributivo, da idade, da atividade exercida e da documentação disponível. Por isso é necessária análise individualizada.",
   },
   {
-    q: "Trabalhei na roça mas nunca paguei INSS. Tenho direito a aposentadoria?",
-    a: "Possivelmente sim. O trabalhador rural tem regras diferentes e pode se aposentar mesmo sem contribuições formais. Precisamos analisar seu caso para confirmar, mas é um dos benefícios que mais aprovamos.",
+    q: "Trabalhei na atividade rural sem registro formal. Tenho direito a algum benefício?",
+    a: "A legislação prevê regras específicas para o segurado especial. A comprovação da atividade rural pode ser feita por documentos materiais e, em alguns casos, prova testemunhal, conforme o caso concreto.",
   },
 ];
 
@@ -175,7 +175,7 @@ const POSTS = [
     tag: "Aposentadoria",
     title: "Quanto paga o INSS para a maioria dos brasileiros? Entenda.",
     excerpt:
-      "O valor médio dos benefícios pode te surpreender. Veja como funciona o cálculo e o que você pode fazer para receber mais.",
+      "O valor médio dos benefícios pode te surpreender. Veja como funciona o cálculo previdenciário.",
     date: "14/01/2025",
   },
   {
@@ -189,7 +189,7 @@ const POSTS = [
     tag: "Pensão",
     title: "Lula vetou pensão para mães de crianças com anencefalia. Entenda!",
     excerpt:
-      "Decisão impacta diretamente famílias que aguardavam a sanção da lei. Saiba o que ainda é possível buscar.",
+      "Decisão impacta diretamente famílias que aguardavam a sanção da lei.",
     date: "13/01/2025",
   },
 ];
@@ -207,25 +207,25 @@ function Hero() {
         <div>
           <Eyebrow>Direito Previdenciário</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white max-w-2xl">
-            O INSS negou? Você ainda pode <em className="hl">receber</em> o que é seu de direito.
+            Atuação técnica em <em className="hl">direito previdenciário</em>.
           </h1>
           <p className="mt-6 max-w-xl text-base text-white/65 leading-relaxed">
-            O Dr. Renan Gonçalves já foi gerente do INSS. Ele conhece as regras por dentro — e
-            agora usa esse conhecimento para defender você. Com equipe especializada e
-            atendimento em todo o Brasil, cuidamos do seu processo do início ao fim.
+            Escritório dedicado ao estudo e à condução de demandas previdenciárias. Atendimento
+            presencial em Rondônia e online para todo o Brasil, com equipe especializada
+            exclusivamente nessa área.
           </p>
 
           <div className="mt-8 inline-flex items-center gap-3 rounded-md border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-4 py-3 text-sm text-[var(--gold-light)]">
             <Check size={16} />
-            Avaliação gratuita. Você só paga quando o benefício for aprovado.
+            Conteúdo informativo · Provimento nº 205/2021 da OAB
           </div>
 
           <div className="mt-8 flex flex-wrap gap-4">
             <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-              <MessageCircle size={18} /> Falar com especialista
+              <MessageCircle size={18} /> Falar com a equipe
             </WaveButton>
             <WaveButton variant="outline-light" size="lg" href="#servicos">
-              Ver serviços <ArrowRight size={16} />
+              Áreas de atuação <ArrowRight size={16} />
             </WaveButton>
           </div>
 
@@ -234,18 +234,17 @@ function Hero() {
           </p>
         </div>
 
-        {/* Card de prova lateral */}
+        {/* Card lateral */}
         <div className="relative">
           <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-8 backdrop-blur">
             <div className="flex items-center gap-1 mb-4">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star key={i} size={16} className="fill-[var(--gold)] text-[var(--gold)]" />
               ))}
-              <span className="ml-2 text-xs text-white/55">143+ avaliações no Google</span>
+              <span className="ml-2 text-xs text-white/55">Avaliações no Google</span>
             </div>
             <p className="font-display text-xl italic leading-snug text-white">
-              "Nunca deixaram de me manter informada. Dois anos de processo e em nenhum momento
-              desistiram de mim."
+              "Comunicação clara e constante. A equipe sempre manteve atenção ao processo."
             </p>
             <div className="mt-6 flex items-center gap-3">
               <div className="grid h-10 w-10 place-items-center rounded-full bg-[var(--navy-mid)] font-display font-semibold text-[var(--gold-light)]">
@@ -259,7 +258,7 @@ function Hero() {
           </div>
 
           <div className="absolute -bottom-5 -left-5 rounded-xl bg-[var(--gold)] px-5 py-3 text-sm font-medium text-white shadow-lg">
-            Ex-gerente do INSS
+            Ex-servidor do INSS
           </div>
         </div>
       </div>
@@ -270,38 +269,37 @@ function Hero() {
 function Authority() {
   const cards = [
     {
-      title: "Ex-gerente do INSS",
+      title: "Experiência no INSS",
       body:
-        "Conhecemos o sistema por dentro. Sabemos o que o INSS exige e como preparar seu processo para ser aprovado.",
+        "O fundador atuou como gerente do INSS antes de ingressar exclusivamente na advocacia previdenciária.",
     },
     {
-      title: "Professor de advogados",
+      title: "Atividade docente",
       body:
-        "Dr. Renan forma especialistas previdenciários. Você é atendido por quem ensina os outros a atuar na área.",
+        "Dr. Renan também leciona direito previdenciário, contribuindo para a formação de outros profissionais da área.",
     },
     {
-      title: "Você só paga no sucesso",
+      title: "Atuação especializada",
       body:
-        "Na maioria dos casos, não há custo inicial. O honorário só é cobrado quando o benefício está aprovado e você já recebendo.",
+        "O escritório atua exclusivamente em demandas previdenciárias, sem dispersão para outras áreas do direito.",
     },
     {
-      title: "Milhares de casos resolvidos",
+      title: "Atendimento humanizado",
       body:
-        "Clientes em todo o Brasil. Alta taxa de aprovação, inclusive em casos negados anteriormente.",
+        "Cada caso é conduzido com atenção individual, respeito ao cliente e comunicação clara em todas as etapas.",
     },
   ];
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
       <div className="max-w-3xl">
-        <Eyebrow>Autoridade</Eyebrow>
+        <Eyebrow>Sobre o escritório</Eyebrow>
         <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-          Quem já trabalhou no INSS sabe exatamente como <em className="hl">ganhar</em>.
+          Conhecimento técnico e <em className="hl">dedicação</em> ao direito previdenciário.
         </h2>
         <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-          O Dr. Renan Gonçalves passou anos dentro do INSS como gerente. Conhece os critérios que
-          aprovam e os erros que reprovam. Hoje lidera uma equipe comprometida em transformar esse
-          conhecimento na sua maior vantagem.
+          Equipe formada exclusivamente para atuação em benefícios previdenciários, com
+          experiência prática nas regras aplicadas pelo INSS.
         </p>
       </div>
 
@@ -327,14 +325,13 @@ function Services() {
     <section id="servicos" className="bg-[var(--surface)] py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-3xl">
-          <Eyebrow>Serviços</Eyebrow>
+          <Eyebrow>Áreas de atuação</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            Se é benefício do INSS, a gente <em className="hl">resolve</em>.
+            Demandas <em className="hl">previdenciárias</em> que atendemos.
           </h2>
           <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-            Atendemos todos os tipos de benefício previdenciário. Seja para quem quer se aposentar
-            da melhor forma, quem está doente, quem perdeu a capacidade de trabalhar ou quem foi
-            injustamente negado.
+            Atendemos os principais tipos de benefício previsto na legislação previdenciária e
+            assistencial brasileira.
           </p>
         </div>
 
@@ -345,7 +342,7 @@ function Services() {
               href={buildWppLink(s.title)}
               target="_blank"
               rel="noopener"
-              aria-label={`Falar no WhatsApp sobre ${s.title}`}
+              aria-label={`Tirar dúvidas no WhatsApp sobre ${s.title}`}
               className="group relative flex flex-col gap-3 rounded-xl border border-[var(--border)] bg-white p-6 transition-all hover:-translate-y-0.5 hover:border-[var(--navy)] hover:shadow-[var(--shadow-md)]"
             >
               <div className="flex items-center justify-between gap-3">
@@ -368,11 +365,10 @@ function Services() {
 
         <div className="mt-10 flex flex-col items-start gap-5 rounded-2xl bg-[var(--navy)] p-8 lg:flex-row lg:items-center lg:justify-between">
           <p className="font-display text-xl text-white max-w-xl leading-snug">
-            Não sabe qual benefício é o seu caso? Fale com a gente. A avaliação é gratuita e sem
-            compromisso.
+            Tem dúvida sobre qual área se aplica ao seu caso? Fale com a nossa equipe.
           </p>
           <WaveButton variant="gold" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-            Quero saber meu direito <ArrowRight size={16} />
+            Falar no WhatsApp <ArrowRight size={16} />
           </WaveButton>
         </div>
       </div>
@@ -385,17 +381,16 @@ function HowItWorks() {
     <section className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
       <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
         <div className="lg:sticky lg:top-28 lg:self-start">
-          <Eyebrow>Como funciona</Eyebrow>
+          <Eyebrow>Como atuamos</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            Simples para você. <em className="hl">Completo</em> para o INSS.
+            Etapas do <em className="hl">atendimento</em>.
           </h2>
           <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-            Você não precisa entender de leis nem enfrentar filas. A gente faz tudo — no INSS ou
-            na Justiça.
+            Conheça o fluxo geral pelo qual passa um caso conduzido pelo escritório.
           </p>
           <div className="mt-8">
             <WaveButton variant="primary" href={SITE.whatsapp} target="_blank" rel="noopener">
-              Começar agora <ArrowRight size={16} />
+              Falar com a equipe <ArrowRight size={16} />
             </WaveButton>
           </div>
         </div>
@@ -430,12 +425,11 @@ function Team() {
         <div>
           <Eyebrow>Equipe</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            Uma equipe inteira focada no <em className="hl">seu</em> caso.
+            Equipe dedicada exclusivamente ao <em className="hl">previdenciário</em>.
           </h2>
           <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-            Somos mais de 10 especialistas dedicados exclusivamente a benefícios previdenciários.
-            Não somos um escritório generalista — cada pessoa da equipe conhece profundamente o
-            direito previdenciário.
+            Escritório formado por profissionais que se dedicam exclusivamente ao direito
+            previdenciário, sem atuação em outras áreas do direito.
           </p>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -452,14 +446,14 @@ function Team() {
                 Atendimento online
               </div>
               <p className="text-sm text-[var(--text-muted)]">
-                Para qualquer cidade do Brasil. Mesmo resultado, sem sair de casa.
+                Para qualquer cidade do Brasil, com a mesma atenção técnica.
               </p>
             </div>
           </div>
 
           <div className="mt-8">
             <WaveButton variant="primary" href={SITE.whatsapp} target="_blank" rel="noopener">
-              Falar com um especialista <ArrowRight size={16} />
+              Falar com a equipe <ArrowRight size={16} />
             </WaveButton>
           </div>
         </div>
@@ -499,10 +493,11 @@ function Testimonials() {
       <div className="max-w-3xl">
         <Eyebrow>Depoimentos</Eyebrow>
         <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-          Quem confiou no Escritório Gonçalves já recebe o que é <em className="hl">seu</em>.
+          O que dizem clientes sobre o nosso <em className="hl">atendimento</em>.
         </h2>
         <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-          Mais de 143 avaliações no Google. Veja o que dizem alguns dos nossos clientes:
+          Manifestações espontâneas publicadas no Google Meu Negócio, reproduzidas com a
+          finalidade exclusivamente informativa.
         </p>
       </div>
 
@@ -534,12 +529,10 @@ function Testimonials() {
         ))}
       </div>
 
-      <div className="mt-10 flex items-center gap-2 text-xs text-[var(--text-muted)]">
-        <span className="inline-flex items-center gap-2 rounded-full bg-[var(--gold-pale)] px-3 py-1 font-medium text-[var(--gold-deep)]">
-          <Star size={12} className="fill-[var(--gold)] text-[var(--gold)]" /> 143 avaliações
-        </span>
-        <span>· Google Meu Negócio</span>
-      </div>
+      <p className="mt-10 text-xs text-[var(--text-muted)]">
+        Depoimentos espontâneos. Resultados em casos previdenciários dependem da análise
+        individual de cada situação.
+      </p>
     </section>
   );
 }
@@ -553,7 +546,7 @@ function FAQSection() {
         <div className="text-center max-w-2xl mx-auto">
           <Eyebrow className="mx-auto justify-center">Dúvidas frequentes</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            Respostas <em className="hl">diretas</em> para quem não tem tempo a perder.
+            Esclarecimentos <em className="hl">técnicos</em>.
           </h2>
         </div>
 
@@ -616,11 +609,11 @@ function BlogPreview() {
         <div className="max-w-2xl">
           <Eyebrow>Blog</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            Entenda seus direitos antes de <em className="hl">precisar</em> deles.
+            Conteúdo educativo sobre <em className="hl">previdência</em>.
           </h2>
           <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-            Publicamos conteúdo simples, direto e confiável sobre benefícios do INSS. Sem
-            juridiquês. Para você saber o que é seu por direito.
+            Marketing de conteúdo jurídico, em conformidade com o Provimento nº 205/2021 da OAB:
+            informação técnica em linguagem acessível, sem oferta de serviços.
           </p>
         </div>
         <WaveButton variant="ghost" href="/blog">
@@ -657,7 +650,7 @@ function BlogPreview() {
       </div>
 
       <p className="mt-8 text-sm text-[var(--text-muted)]">
-        Novos artigos toda semana · gratuito e sem cadastro
+        Conteúdo informativo · publicação periódica
       </p>
     </section>
   );
@@ -673,19 +666,18 @@ function FinalCTA() {
         G
       </div>
       <div className="relative mx-auto max-w-5xl px-6 py-24 lg:py-32 text-center">
-        <Eyebrow className="mx-auto justify-center">Última chamada</Eyebrow>
+        <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
         <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.1] text-white max-w-3xl mx-auto">
-          Você trabalhou a vida inteira. Não deixe o que é seu ficar na <em className="hl">mão</em>{" "}
-          do INSS.
+          Tem dúvidas sobre direitos <em className="hl">previdenciários</em>?
         </h2>
         <p className="mt-6 max-w-2xl mx-auto text-base text-white/65 leading-relaxed">
-          Nossa equipe está pronta para ouvir seu caso agora, sem compromisso. A avaliação é
-          gratuita e a conversa é sigilosa.
+          Nossa equipe está disponível para orientação técnica em todas as etapas, do
+          esclarecimento inicial à condução do processo.
         </p>
 
         <div className="mt-10 flex flex-wrap justify-center gap-4">
           <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-            <MessageCircle size={18} /> Falar com especialista
+            <MessageCircle size={18} /> Falar com a equipe
           </WaveButton>
           <WaveButton variant="outline-light" size="lg" href={`tel:+5569992621298`}>
             {SITE.phone}

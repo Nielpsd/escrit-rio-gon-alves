@@ -8,17 +8,17 @@ import { SITE } from "@/lib/site";
 export const Route = createFileRoute("/quero-me-aposentar")({
   head: () => ({
     meta: [
-      { title: "Quero me aposentar — Escritório Gonçalves" },
+      { title: "Aposentadoria — Escritório Gonçalves" },
       {
         name: "description",
         content:
-          "Você pode estar mais perto da aposentadoria do que imagina. Avaliação gratuita, sem compromisso. Atendimento em todo o Brasil.",
+          "Informações sobre os principais tipos de aposentadoria previstos na legislação brasileira e sobre a atuação do escritório nessa área.",
       },
-      { property: "og:title", content: "Quero me aposentar — Escritório Gonçalves" },
+      { property: "og:title", content: "Aposentadoria — Escritório Gonçalves" },
       {
         property: "og:description",
         content:
-          "Verifique seu direito à aposentadoria com quem já trabalhou dentro do INSS. Avaliação gratuita pelo WhatsApp.",
+          "Conteúdo informativo sobre aposentadoria previdenciária e atuação especializada do Escritório Gonçalves.",
       },
     ],
   }),
@@ -28,80 +28,80 @@ export const Route = createFileRoute("/quero-me-aposentar")({
 const SITUACOES = [
   "Tenho mais de 60 anos e contribuí para o INSS",
   "Trabalhei muitos anos com carteira assinada",
-  "Trabalhei na roça ou em atividade rural",
-  "Sou professor e quero me aposentar mais cedo",
-  "Trabalhei em condições insalubres ou de risco",
-  "Já tentei me aposentar e fui negado",
+  "Trabalhei na atividade rural",
+  "Sou professor da educação básica",
+  "Trabalhei exposto a agentes nocivos à saúde",
+  "Já protocolei pedido e recebi indeferimento",
 ];
 
 const TIPOS = [
   {
     title: "Aposentadoria por Idade",
-    desc: "Para quem tem 65 anos (homem) ou 62 anos (mulher) e pelo menos 15 anos de contribuição. Trabalhador rural se aposenta mais cedo: 60 anos (homem) e 55 anos (mulher).",
+    desc: "Para quem atingiu a idade mínima legal e o tempo mínimo de contribuição. Trabalhador rural possui regras específicas, com idade reduzida.",
   },
   {
     title: "Aposentadoria por Tempo de Contribuição",
-    desc: "Para quem tem longa carreira no mercado formal. A estratégia certa faz toda a diferença no valor final do benefício.",
+    desc: "Aplicável conforme as regras de transição estabelecidas pela Reforma da Previdência (EC 103/2019).",
   },
   {
     title: "Aposentadoria por Invalidez",
-    desc: "Para quem não pode mais trabalhar de forma permanente por conta de doença ou acidente. Não exige idade mínima.",
+    desc: "Destinada a quem está permanentemente incapacitado para o trabalho, conforme avaliação médico-pericial.",
   },
   {
-    title: "Aposentadoria Especial (Insalubridade)",
-    desc: "Para quem trabalhou exposto a agentes nocivos à saúde — ruído, poeira, produtos químicos, entre outros. Permite se aposentar mais cedo.",
+    title: "Aposentadoria Especial",
+    desc: "Para quem exerceu atividade exposta a agentes nocivos à saúde, mediante comprovação técnica das condições de trabalho.",
   },
   {
     title: "Aposentadoria do Professor",
-    desc: "Benefício específico para professores da educação básica. Condições e tempo diferenciados.",
+    desc: "Regras específicas previstas em lei para professores que comprovem o tempo de exercício efetivo em sala de aula.",
   },
   {
     title: "Aposentadoria Rural",
-    desc: "Para trabalhadores do campo. Pode ser aprovada mesmo sem contribuições formais, com documentação adequada.",
+    desc: "Destinada ao segurado especial, mediante comprovação da atividade rural pelo período exigido em lei.",
   },
 ];
 
 const ALERTAS = [
   {
-    title: "Um erro hoje pode atrasar em anos",
-    desc: "Uma negativa mal fundamentada dificulta o processo futuro, mesmo com advogado.",
+    title: "Pedidos mal formulados podem dificultar o processo",
+    desc: "Decisões administrativas mal fundamentadas ou indeferimentos por falta de documentação podem demandar mais tempo até serem revistos.",
   },
   {
-    title: "O valor faz diferença",
-    desc: "A regra de aposentadoria que você escolhe define o valor que vai receber pelo resto da vida. Planejar certo vale muito.",
+    title: "A regra escolhida define o valor",
+    desc: "A regra de aposentadoria aplicável tem impacto direto no cálculo do benefício. Análise técnica permite identificar a opção mais adequada.",
   },
   {
-    title: "Você pode ter direito agora e não saber",
-    desc: "Muita gente espera anos achando que ainda não pode. A avaliação gratuita resolve essa dúvida em minutos.",
+    title: "Cada caso depende de análise individual",
+    desc: "Identificar o direito a determinado benefício exige análise do histórico contributivo, da idade, da atividade exercida e da documentação disponível.",
   },
 ];
 
 const PASSOS = [
   {
-    title: "Fale com a gente pelo WhatsApp",
-    desc: "Conta sua situação em poucos minutos. Nossa equipe já entende o que precisa saber.",
+    title: "Conversa inicial pelo WhatsApp",
+    desc: "Você apresenta sua situação e a equipe identifica as primeiras informações relevantes para a análise.",
   },
   {
-    title: "Receba a análise do seu caso",
-    desc: "Avaliamos qual tipo de aposentadoria é o seu caso, o que você já tem e o que ainda falta.",
+    title: "Estudo previdenciário",
+    desc: "Avaliação técnica do histórico contributivo, com indicação das regras aplicáveis ao caso.",
   },
   {
-    title: "A gente cuida de tudo",
-    desc: "Se decidir seguir, montamos o processo, acompanhamos cada etapa e te preparamos para perícia ou audiência se necessário.",
+    title: "Condução do processo",
+    desc: "Caso opte pela contratação, conduzimos o pedido administrativo, eventuais recursos e ações judiciais cabíveis.",
   },
 ];
 
 const DEPOIMENTOS = [
   {
-    text: "Minha aposentadoria deu certo. Só agradecer ao Dr. Renan e à equipe.",
+    text: "Atendimento atencioso do início ao fim, com explicações claras sobre cada etapa.",
     name: "Eleni Rocha",
   },
   {
-    text: "Nunca deixaram de me manter informada. Dois anos de processo e em nenhum momento desistiram de mim.",
+    text: "Comunicação clara e constante. Equipe sempre disponível para tirar dúvidas.",
     name: "Leuciane Silva",
   },
   {
-    text: "Fui muito bem atendida, solucionaram nossa situação. Excelentes advogados.",
+    text: "Excelente atendimento. Equipe técnica e respeitosa.",
     name: "Érika Vieira",
   },
 ];
@@ -120,20 +120,19 @@ function QueroMeAposentarPage() {
         <div className="relative mx-auto max-w-4xl px-6 pt-20 pb-24 lg:pt-28 lg:pb-32 text-center">
           <Eyebrow className="mx-auto justify-center">Aposentadoria</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
-            Você pode estar mais perto da aposentadoria do que <em className="hl">imagina</em>.
+            Entenda as regras da <em className="hl">aposentadoria</em>.
           </h1>
           <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Muita gente adia a aposentadoria por achar que ainda não tem direito — quando na
-            verdade já poderia estar recebendo. Deixa a gente verificar o seu caso agora, de graça.
+            Conteúdo informativo sobre os principais tipos de aposentadoria previstos na
+            legislação previdenciária brasileira.
           </p>
           <div className="mt-8 flex justify-center">
             <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-              <MessageCircle size={18} /> Verificar meu direito pelo WhatsApp{" "}
-              <ArrowRight size={16} />
+              <MessageCircle size={18} /> Falar com a equipe <ArrowRight size={16} />
             </WaveButton>
           </div>
           <p className="mt-5 text-xs text-white/45">
-            Avaliação gratuita · sem compromisso · resultado em minutos
+            Conteúdo meramente informativo · Provimento nº 205/2021 da OAB
           </p>
         </div>
       </section>
@@ -142,9 +141,9 @@ function QueroMeAposentarPage() {
       <section className="bg-[var(--surface)] py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6">
           <div className="max-w-3xl">
-            <Eyebrow>Identificação</Eyebrow>
+            <Eyebrow>Perfis comuns</Eyebrow>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-              Você se encaixa em alguma dessas <em className="hl">situações</em>?
+              Algumas <em className="hl">situações</em> que costumamos atender
             </h2>
           </div>
           <ul className="mt-12 grid gap-4 md:grid-cols-2">
@@ -161,8 +160,8 @@ function QueroMeAposentarPage() {
             ))}
           </ul>
           <p className="mt-8 max-w-3xl text-base text-[var(--text-muted)] leading-relaxed">
-            Se você marcou pelo menos um item, provavelmente já tem direito ou está muito perto de
-            ter. Nossa equipe analisa seu caso e te diz exatamente o que falta.
+            A identificação do direito a determinado benefício depende da análise individual do
+            histórico contributivo e da documentação disponível.
           </p>
         </div>
       </section>
@@ -172,7 +171,7 @@ function QueroMeAposentarPage() {
         <div className="max-w-3xl">
           <Eyebrow>Tipos de aposentadoria</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            Existe mais de um jeito de se aposentar. <em className="hl">Qual é o seu</em>?
+            Modalidades previstas na <em className="hl">legislação</em>
           </h2>
         </div>
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -190,19 +189,17 @@ function QueroMeAposentarPage() {
         </div>
       </section>
 
-      {/* POR QUE NÃO TENTAR SOZINHO */}
+      {/* ALERTAS TÉCNICOS */}
       <section className="bg-[var(--surface)] py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6">
           <div className="max-w-3xl">
-            <Eyebrow>Atenção</Eyebrow>
+            <Eyebrow>Pontos de atenção</Eyebrow>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-              Parece simples pelo app. Mas os erros têm <em className="hl">custo alto</em>.
+              Aspectos <em className="hl">técnicos</em> relevantes
             </h2>
             <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-              O Meu INSS foi criado para facilitar o pedido — não para garantir a aprovação.
-              Responder perguntas de forma incorreta, enviar documentos desnecessários ou deixar
-              de apresentar provas que o INSS exige pode resultar em uma negativa que leva anos
-              para ser revertida.
+              O aplicativo Meu INSS facilita o protocolo de pedidos. A análise técnica prévia
+              pode contribuir para a adequada apresentação da documentação.
             </p>
           </div>
           <div className="mt-12 grid gap-5 md:grid-cols-3">
@@ -225,13 +222,10 @@ function QueroMeAposentarPage() {
       <section className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
           <div className="lg:sticky lg:top-28 lg:self-start">
-            <Eyebrow>Como funciona</Eyebrow>
+            <Eyebrow>Como atuamos</Eyebrow>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-              Três passos. <em className="hl">Zero burocracia</em> para você.
+              Etapas do <em className="hl">atendimento</em>.
             </h2>
-            <div className="mt-6 inline-flex items-center gap-2 rounded-md border border-[var(--gold)]/30 bg-[var(--gold)]/10 px-3 py-2 text-xs text-[var(--navy)]">
-              <Check size={14} /> Você só paga quando o benefício for aprovado.
-            </div>
           </div>
           <ol className="relative">
             {PASSOS.map((p, i) => (
@@ -265,21 +259,22 @@ function QueroMeAposentarPage() {
                     R
                   </div>
                   <p className="mt-4 font-display text-lg text-white">Dr. Renan Gonçalves</p>
+                  <p className="text-xs text-white/45">{SITE.oab}</p>
                 </div>
               </div>
               <div className="absolute -bottom-5 -left-5 rounded-xl bg-[var(--gold)] px-5 py-3 text-sm font-medium text-white shadow-lg">
-                Ex-gerente do INSS · Professor
+                Ex-servidor do INSS · Docente
               </div>
             </div>
             <div>
-              <Eyebrow>Autoridade</Eyebrow>
+              <Eyebrow>Sobre o fundador</Eyebrow>
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-                Você vai ser atendido por quem já trabalhou <em className="hl">dentro do INSS</em>.
+                Atuação técnica em <em className="hl">previdenciário</em>.
               </h2>
               <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-                Dr. Renan Gonçalves foi gerente do INSS antes de se tornar advogado. Conhece os
-                critérios de aprovação por dentro — e hoje usa esse conhecimento para garantir os
-                direitos dos seus clientes.
+                Dr. Renan Gonçalves atuou como gerente do INSS antes de se dedicar exclusivamente à
+                advocacia previdenciária. Também leciona na área, contribuindo para a formação de
+                outros profissionais.
               </p>
             </div>
           </div>
@@ -291,7 +286,7 @@ function QueroMeAposentarPage() {
         <div className="max-w-3xl">
           <Eyebrow>Depoimentos</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            Quem já se aposentou com a <em className="hl">gente</em>
+            O que dizem os <em className="hl">clientes</em>
           </h2>
         </div>
         <div className="mt-12 grid gap-5 md:grid-cols-3">
@@ -312,23 +307,25 @@ function QueroMeAposentarPage() {
             </figure>
           ))}
         </div>
+        <p className="mt-6 text-xs text-[var(--text-light)]">
+          Manifestações espontâneas. Resultados em casos previdenciários dependem da análise
+          individual.
+        </p>
       </section>
 
       {/* CTA FINAL */}
       <section className="on-navy bg-[var(--navy)] py-20 lg:py-28 text-white">
         <div className="mx-auto max-w-4xl px-6 text-center">
-          <Eyebrow className="mx-auto justify-center">Avaliação gratuita</Eyebrow>
+          <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight">
-            Não espere mais. Você pode <em className="hl">já ter</em> esse direito.
+            Tem dúvidas sobre <em className="hl">aposentadoria</em>?
           </h2>
           <p className="mt-5 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            A avaliação é gratuita, leva poucos minutos e pode mudar sua vida. Fale com a nossa
-            equipe agora.
+            Fale com a nossa equipe pelo WhatsApp para esclarecimentos iniciais sobre o tema.
           </p>
           <div className="mt-8 flex justify-center">
             <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-              <MessageCircle size={18} /> Quero verificar meu direito à aposentadoria{" "}
-              <ArrowRight size={16} />
+              <MessageCircle size={18} /> Falar com a equipe <ArrowRight size={16} />
             </WaveButton>
           </div>
           <p className="mt-5 inline-flex items-center gap-2 text-xs text-white/55">
