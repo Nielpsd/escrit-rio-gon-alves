@@ -27,34 +27,34 @@ export const Route = createFileRoute("/sobre")({
 
 const VALORES = [
   {
-    title: "Cada processo é uma pessoa",
+    title: "Humanização",
     body:
-      "Por trás de todo número de protocolo existe uma vida, uma família e uma história. Conduzimos cada atendimento com escuta, respeito e tempo.",
+      "Sabemos que por trás de cada processo existe uma pessoa que precisa de resposta — e que muitas vezes já se sentiu invisível diante do sistema. Tratamos cada cliente com atenção e respeito.",
   },
   {
-    title: "Estudo permanente",
+    title: "Excelência técnica",
     body:
-      "Legislação, jurisprudência e teses previdenciárias mudam o tempo todo. Dr. Renan também leciona na área — manter-se atualizado é parte do trabalho.",
+      "Dr. Renan também é professor de advogados. O nível de conhecimento que exigimos da equipe é o mesmo que ensinamos para outros profissionais da área.",
   },
   {
-    title: "Você sempre sabe onde está",
+    title: "Transparência",
     body:
-      "Comunicação clara em cada etapa. Sem processo desaparecido, sem surpresas, sem juridiquês para te confundir.",
+      "Você sempre sabe o que está acontecendo no seu processo. Nenhuma surpresa, nenhum abandono no meio do caminho.",
   },
   {
-    title: "Só previdenciário",
+    title: "Especialização",
     body:
-      "Não atendemos outras áreas. Toda a atenção, tempo e estudo da equipe estão concentrados em uma única especialidade.",
+      "Atuação exclusiva em direito previdenciário. Toda a atenção, tempo e estudo da equipe estão concentrados em uma única área.",
   },
 ];
 
 const DIFERENCIAIS = [
-  "Liderança com experiência prévia como gerente do INSS",
+  "Liderança com atuação prévia como gerente do INSS",
   "Atendimento presencial em Rondônia (Jaru e Alta Floresta D'Oeste)",
   "Atendimento online para qualquer estado do Brasil",
   "Equipe dedicada exclusivamente ao direito previdenciário",
+  "Mais de 143 avaliações no Google Meu Negócio",
   "Atividade docente do fundador na área previdenciária",
-  "Comunicação clara e acompanhamento próximo do processo",
 ];
 
 function SobrePage() {
@@ -72,12 +72,12 @@ function SobrePage() {
           <div>
             <Eyebrow>Sobre o escritório</Eyebrow>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white max-w-2xl">
-              O escritório que <em className="hl">nasceu de dentro do INSS</em>.
+              Um escritório que <em className="hl">nasceu de dentro do INSS</em>.
             </h1>
             <p className="mt-6 max-w-xl text-base text-white/65 leading-relaxed">
-              Antes de advogar, Dr. Renan analisou pedidos como gerente do INSS. Viu de perto
-              por que tantos benefícios eram negados — e decidiu estar do outro lado, ajudando
-              a apresentá-los do jeito certo.
+              Dr. Renan Gonçalves não chegou ao direito previdenciário pelos livros. Chegou
+              pela prática — como gerente do INSS, onde aprendeu de perto como o sistema
+              funciona, quais pedidos são aprovados e por que tantos são negados.
             </p>
             <div className="mt-8">
               <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
@@ -114,19 +114,19 @@ function SobrePage() {
           </div>
           <div className="space-y-5 text-base text-[var(--text-muted)] leading-relaxed">
             <p>
-              Como gerente do INSS, Dr. Renan acompanhou centenas de análises de pedidos.
-              Percebeu que muitas negativas não eram pelo direito não existir — eram por
-              detalhes procedimentais: documento faltando, pedido formulado fora da regra
-              correta, fundamentação técnica ausente.
+              Depois de anos dentro do INSS, Dr. Renan percebeu que a maioria das negativas
+              não era falta de direito — era falta de preparo. Documentos errados, estratégias
+              equivocadas, processos mal conduzidos. Pessoas que tinham o direito reconhecido
+              em lei, mas saíam de mãos vazias.
             </p>
             <p>
-              O Escritório Gonçalves nasceu dessa constatação. Se conhecemos o que o INSS
-              olha, conseguimos preparar o pedido do jeito que ele precisa ser visto.
+              Foi por isso que fundou o Escritório Gonçalves: para estar do lado de quem
+              precisa, com o mesmo conhecimento técnico que antes estava só do lado do sistema.
             </p>
             <p>
-              Hoje, com equipe dedicada exclusivamente ao previdenciário, atendemos clientes
-              em Rondônia presencialmente e em todo o Brasil de forma online — com a mesma
-              atenção, perto ou longe.
+              Hoje, com uma equipe de mais de 10 profissionais e clientes em todo o Brasil,
+              o escritório mantém o mesmo compromisso do primeiro dia — tratar cada caso
+              como único, com escuta e fundamentação técnica.
             </p>
           </div>
         </div>
@@ -185,15 +185,15 @@ function SobrePage() {
         <div className="mx-auto max-w-4xl px-6 text-center">
           <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight">
-            Vamos <em className="hl">nos conhecer</em>?
+            Quer entender se o seu caso tem <em className="hl">caminho</em>?
           </h2>
           <p className="mt-5 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Conte sua situação no WhatsApp. A primeira conversa é só uma conversa — para você
-            entender quem somos e nós entendermos como podemos ajudar.
+            Conte sua situação para a nossa equipe. Sem compromisso, com conversa direta
+            pelo WhatsApp.
           </p>
           <div className="mt-8 flex justify-center">
             <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-              <MessageCircle size={18} /> Falar com a equipe <ArrowRight size={16} />
+              <MessageCircle size={18} /> Falar pelo WhatsApp <ArrowRight size={16} />
             </WaveButton>
           </div>
         </div>
