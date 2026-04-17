@@ -16,20 +16,20 @@ import { SITE } from "@/lib/site";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Escritório Gonçalves — Direito Previdenciário" },
+      { title: "Escritório Gonçalves — Advocacia Previdenciária | Jaru e Alta Floresta D'Oeste (RO)" },
       {
         name: "description",
         content:
-          "Escritório de advocacia dedicado ao direito previdenciário. Atendimento presencial em Rondônia e online em todo o Brasil.",
+          "Escritório de advocacia dedicado ao direito previdenciário. Conteúdo informativo sobre aposentadorias, auxílios, BPC/LOAS, pensões e revisões. Atendimento presencial em Rondônia e online em todo o Brasil.",
       },
       {
         property: "og:title",
-        content: "Escritório Gonçalves — Direito Previdenciário",
+        content: "Escritório Gonçalves — Advocacia Previdenciária",
       },
       {
         property: "og:description",
         content:
-          "Atuação técnica em aposentadorias, auxílios, BPC/LOAS, pensões e revisões previdenciárias.",
+          "Conteúdo informativo sobre direito previdenciário. Site em conformidade com o Provimento nº 205/2021 da OAB.",
       },
     ],
   }),
@@ -207,17 +207,17 @@ function Hero() {
         <div>
           <Eyebrow>Direito Previdenciário</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white max-w-2xl">
-            O INSS negou? <em className="hl">Negativa não é o fim</em>.
+            Direito previdenciário com <em className="hl">quem conhece o sistema por dentro</em>.
           </h1>
           <p className="mt-6 max-w-xl text-base text-white/65 leading-relaxed">
-            Dr. Renan Gonçalves já foi gerente do INSS. Conhece as regras por dentro — e hoje
-            lidera uma equipe especializada exclusivamente em direito previdenciário.
-            Atendimento presencial em Rondônia e online para todo o Brasil.
+            Dr. Renan Gonçalves atuou como gerente do INSS antes de fundar o escritório. Hoje
+            lidera uma equipe dedicada exclusivamente ao direito previdenciário, com atendimento
+            presencial em Rondônia e online para todo o Brasil.
           </p>
 
           <div className="mt-8 inline-flex items-center gap-3 rounded-md border border-[var(--gold)]/40 bg-[var(--gold)]/10 px-4 py-3 text-sm text-[var(--gold-light)]">
             <Check size={16} />
-            Conversa inicial sem compromisso · pelo WhatsApp
+            Conteúdo informativo · Atendimento mediante contato prévio
           </div>
 
           <div className="mt-8 flex flex-wrap gap-4">
@@ -432,9 +432,8 @@ function Team() {
           </h2>
           <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
             Mais de 10 profissionais dedicados exclusivamente a benefícios previdenciários.
-            Não somos um escritório generalista — cada pessoa da equipe se aprofunda
-            todos os dias na mesma área.
-            previdenciário, sem atuação em outras áreas do direito.
+            Não somos um escritório generalista — cada pessoa da equipe se aprofunda,
+            todos os dias, na mesma área do direito.
           </p>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -677,11 +676,11 @@ function FinalCTA() {
       <div className="relative mx-auto max-w-5xl px-6 py-24 lg:py-32 text-center">
         <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
         <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.1] text-white max-w-3xl mx-auto">
-          Você trabalhou a vida inteira. <em className="hl">Não enfrente o INSS sozinho</em>.
+          Tem dúvidas sobre o seu caso? <em className="hl">Converse com a nossa equipe</em>.
         </h2>
         <p className="mt-6 max-w-2xl mx-auto text-base text-white/65 leading-relaxed">
-          Nossa equipe está pronta para ouvir seu caso. Conte sua situação para entender,
-          com clareza, quais caminhos a legislação prevê para você.
+          Atendimento mediante contato prévio. A análise individual de cada situação é o que
+          permite indicar, com base na legislação, os caminhos cabíveis.
         </p>
 
         <div className="mt-10 flex flex-wrap justify-center gap-4">

@@ -8,17 +8,17 @@ import { SITE } from "@/lib/site";
 export const Route = createFileRoute("/equipe")({
   head: () => ({
     meta: [
-      { title: "Equipe — Escritório Gonçalves" },
+      { title: "Equipe — Escritório Gonçalves Advocacia Previdenciária" },
       {
         name: "description",
         content:
-          "Mais de 10 profissionais dedicados exclusivamente ao direito previdenciário. Conheça quem vai cuidar do seu caso.",
+          "Conheça a equipe do Escritório Gonçalves: profissionais dedicados ao direito previdenciário, sob coordenação do Dr. Renan Gonçalves.",
       },
       { property: "og:title", content: "Equipe — Escritório Gonçalves" },
       {
         property: "og:description",
         content:
-          "Especialistas em direito previdenciário liderados pelo Dr. Renan Gonçalves, ex-gerente do INSS.",
+          "Conteúdo institucional sobre a equipe do escritório. Em conformidade com o Provimento nº 205/2021 da OAB.",
       },
     ],
   }),

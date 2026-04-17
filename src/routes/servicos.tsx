@@ -18,17 +18,17 @@ import { SITE } from "@/lib/site";
 export const Route = createFileRoute("/servicos")({
   head: () => ({
     meta: [
-      { title: "Serviços — Escritório Gonçalves" },
+      { title: "Áreas de atuação — Escritório Gonçalves Advocacia Previdenciária" },
       {
         name: "description",
         content:
-          "Aposentadoria, Auxílio-Doença, BPC/LOAS, Pensão por Morte, Revisão de Benefícios e mais. Atuação especializada em direito previdenciário.",
+          "Conteúdo informativo sobre as áreas do direito previdenciário em que o escritório atua: aposentadorias, auxílios, BPC/LOAS, pensão por morte e revisão de benefícios.",
       },
-      { property: "og:title", content: "Serviços — Escritório Gonçalves" },
+      { property: "og:title", content: "Áreas de atuação — Escritório Gonçalves" },
       {
         property: "og:description",
         content:
-          "Tudo o que envolve INSS e benefícios previdenciários, conduzido por quem conhece o sistema por dentro.",
+          "Conteúdo informativo sobre direito previdenciário, em conformidade com o Provimento nº 205/2021 da OAB.",
       },
     ],
   }),
@@ -118,12 +118,12 @@ function ServicosPage() {
         <div className="relative mx-auto max-w-4xl px-6 pt-20 pb-20 lg:pt-28 lg:pb-24 text-center">
           <Eyebrow className="mx-auto justify-center">Serviços</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
-            Se é benefício do INSS, a gente <em className="hl">conduz</em>.
+            Áreas de atuação em <em className="hl">direito previdenciário</em>.
           </h1>
           <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Atendemos todos os tipos de benefício previdenciário e assistencial — quem
-            quer se aposentar da melhor forma, quem está afastado por saúde, quem perdeu
-            a capacidade de trabalho ou recebeu indeferimento injusto.
+            Atuação em benefícios previdenciários e assistenciais — aposentadorias,
+            auxílios, BPC/LOAS, pensões, revisões e demais demandas relativas ao INSS.
+            Conteúdo meramente informativo sobre cada área.
           </p>
         </div>
       </section>

@@ -27,8 +27,13 @@ export function Footer() {
               Escritório especializado em direito previdenciário, com atendimento presencial em
               Rondônia e online para todo o Brasil.
             </p>
-            <p className="text-xs text-white/35 mt-4">
-              {SITE.oab} · CNPJ: {SITE.cnpj}
+            <p className="text-xs text-white/45 mt-4 leading-relaxed">
+              <span className="block text-white/60 font-medium">{SITE.lawyerName}</span>
+              Advogado responsável · {SITE.oab}
+            </p>
+            <p className="text-xs text-white/35 mt-2">
+              {SITE.legal}<br />
+              CNPJ: {SITE.cnpj}
             </p>
           </div>
 
@@ -114,10 +119,13 @@ export function Footer() {
         </div>
 
         <div className="mt-12 border-t border-white/10 pt-6 space-y-3">
-          <p className="text-[11px] text-white/40 leading-relaxed max-w-3xl">
-            Site meramente informativo, em estrita observância ao Provimento nº 205/2021 da OAB.
-            Não constitui captação de clientela, oferta de serviços nem promessa de resultados.
-            Os conteúdos publicados não substituem consulta jurídica individual.
+          <p className="text-[11px] text-white/45 leading-relaxed max-w-3xl">
+            <strong className="text-white/60">Aviso legal:</strong> este site tem caráter
+            exclusivamente informativo, em estrita observância ao Código de Ética e Disciplina
+            da OAB e ao Provimento nº 205/2021 do Conselho Federal da OAB. Seu conteúdo não
+            constitui captação de clientela, oferta de serviços, mercantilização da advocacia
+            nem promessa de resultados. As informações publicadas não substituem consulta
+            jurídica individual e não geram, por si só, vínculo profissional.
           </p>
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-xs text-white/35">
             <p>© 2026 {SITE.legal} · Todos os direitos reservados</p>
