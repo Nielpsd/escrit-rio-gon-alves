@@ -72,7 +72,7 @@ function EquipePage() {
                   R
                 </div>
                 <p className="mt-4 font-display text-xl text-white">Dr. Renan Gonçalves</p>
-                <p className="text-xs text-white/45">Foto em breve</p>
+                <p className="text-xs text-white/45">{SITE.oab}</p>
               </div>
             </div>
             <div className="absolute -bottom-5 -left-5 rounded-xl bg-[var(--gold)] px-5 py-3 text-sm font-medium text-white shadow-lg">
@@ -86,7 +86,7 @@ function EquipePage() {
               Dr. Renan <em className="hl">Gonçalves</em>
             </h2>
             <p className="mt-2 text-sm font-medium text-[var(--text-muted)]">
-              Advogado · Fundador · Ex-gerente do INSS
+              Advogado · Fundador · {SITE.oab} · Ex-servidor do INSS
             </p>
             <div className="mt-5 space-y-4 text-base text-[var(--text-muted)] leading-relaxed">
               <p>

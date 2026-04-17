@@ -73,7 +73,7 @@ const SERVICOS = [
     icon: Users,
     titulo: "Pensão por Morte",
     descricao:
-      "Apoio à família no momento mais difícil. Garantimos o reconhecimento do direito de cônjuges, companheiros e dependentes.",
+      "Apoio à família no reconhecimento do direito de cônjuges, companheiros e dependentes legalmente previstos.",
     pontos: [
       "Reconhecimento de união estável",
       "Pensão para filhos menores e inválidos",
@@ -167,13 +167,13 @@ function ServicosPage() {
 
         {/* CTA */}
         <div className="on-navy mt-16 rounded-2xl bg-[var(--navy)] p-10 lg:p-14 text-center text-white">
-          <Eyebrow className="mx-auto justify-center">Avaliação gratuita</Eyebrow>
+          <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
           <h2 className="mt-4 font-display text-3xl md:text-4xl font-semibold leading-tight text-white">
-            Não sabe qual benefício é o seu? <em className="hl">A gente descobre.</em>
+            Tem dúvidas sobre qual área se aplica ao seu caso? <em className="hl">Fale com a equipe.</em>
           </h2>
           <p className="mt-4 text-white/65 max-w-xl mx-auto">
-            Conte sua situação no WhatsApp e nossa equipe identifica gratuitamente o caminho mais
-            vantajoso para você.
+            Conte sua situação no WhatsApp e nossa equipe orientará tecnicamente sobre os trâmites
+            cabíveis.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <WaveButton variant="wpp" href={SITE.whatsapp} target="_blank" rel="noopener">

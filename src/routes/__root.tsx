@@ -47,14 +47,14 @@ export const Route = createRootRoute({
       {
         name: "description",
         content:
-          "O INSS negou? Ainda dá tempo. Escritório liderado por ex-gerente do INSS. Avaliação gratuita. Atendimento em RO e online para todo o Brasil.",
+          "Escritório de advocacia dedicado ao direito previdenciário. Atendimento presencial em Rondônia e online em todo o Brasil.",
       },
       { name: "author", content: "Escritório Gonçalves" },
       { property: "og:title", content: "Escritório Gonçalves — Direito Previdenciário" },
       {
         property: "og:description",
         content:
-          "Especialistas em aposentadoria e benefícios do INSS. Você só paga quando o benefício for aprovado.",
+          "Atuação técnica em aposentadorias, auxílios, BPC/LOAS, pensões e revisões previdenciárias.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
