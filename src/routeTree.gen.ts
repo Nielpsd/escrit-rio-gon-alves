@@ -9,8 +9,44 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as QueroMeAposentarRouteImport } from './routes/quero-me-aposentar'
+import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
+import { Route as EquipeRouteImport } from './routes/equipe'
+import { Route as CasosResolvidosRouteImport } from './routes/casos-resolvidos'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QueroMeAposentarRoute = QueroMeAposentarRouteImport.update({
+  id: '/quero-me-aposentar',
+  path: '/quero-me-aposentar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliticaDePrivacidadeRoute = PoliticaDePrivacidadeRouteImport.update({
+  id: '/politica-de-privacidade',
+  path: '/politica-de-privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EquipeRoute = EquipeRouteImport.update({
+  id: '/equipe',
+  path: '/equipe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CasosResolvidosRoute = CasosResolvidosRouteImport.update({
+  id: '/casos-resolvidos',
+  path: '/casos-resolvidos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +55,116 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
+  '/casos-resolvidos': typeof CasosResolvidosRoute
+  '/equipe': typeof EquipeRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/quero-me-aposentar': typeof QueroMeAposentarRoute
+  '/sobre': typeof SobreRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
+  '/casos-resolvidos': typeof CasosResolvidosRoute
+  '/equipe': typeof EquipeRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/quero-me-aposentar': typeof QueroMeAposentarRoute
+  '/sobre': typeof SobreRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
+  '/casos-resolvidos': typeof CasosResolvidosRoute
+  '/equipe': typeof EquipeRoute
+  '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
+  '/quero-me-aposentar': typeof QueroMeAposentarRoute
+  '/sobre': typeof SobreRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/blog'
+    | '/casos-resolvidos'
+    | '/equipe'
+    | '/politica-de-privacidade'
+    | '/quero-me-aposentar'
+    | '/sobre'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/blog'
+    | '/casos-resolvidos'
+    | '/equipe'
+    | '/politica-de-privacidade'
+    | '/quero-me-aposentar'
+    | '/sobre'
+  id:
+    | '__root__'
+    | '/'
+    | '/blog'
+    | '/casos-resolvidos'
+    | '/equipe'
+    | '/politica-de-privacidade'
+    | '/quero-me-aposentar'
+    | '/sobre'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlogRoute: typeof BlogRoute
+  CasosResolvidosRoute: typeof CasosResolvidosRoute
+  EquipeRoute: typeof EquipeRoute
+  PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
+  QueroMeAposentarRoute: typeof QueroMeAposentarRoute
+  SobreRoute: typeof SobreRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quero-me-aposentar': {
+      id: '/quero-me-aposentar'
+      path: '/quero-me-aposentar'
+      fullPath: '/quero-me-aposentar'
+      preLoaderRoute: typeof QueroMeAposentarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/politica-de-privacidade': {
+      id: '/politica-de-privacidade'
+      path: '/politica-de-privacidade'
+      fullPath: '/politica-de-privacidade'
+      preLoaderRoute: typeof PoliticaDePrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipe': {
+      id: '/equipe'
+      path: '/equipe'
+      fullPath: '/equipe'
+      preLoaderRoute: typeof EquipeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/casos-resolvidos': {
+      id: '/casos-resolvidos'
+      path: '/casos-resolvidos'
+      fullPath: '/casos-resolvidos'
+      preLoaderRoute: typeof CasosResolvidosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,7 +177,22 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlogRoute: BlogRoute,
+  CasosResolvidosRoute: CasosResolvidosRoute,
+  EquipeRoute: EquipeRoute,
+  PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
+  QueroMeAposentarRoute: QueroMeAposentarRoute,
+  SobreRoute: SobreRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
