@@ -28,10 +28,10 @@ export const Route = createFileRoute("/quero-me-aposentar")({
 const SITUACOES = [
   "Tenho mais de 60 anos e contribuí para o INSS",
   "Trabalhei muitos anos com carteira assinada",
-  "Trabalhei na atividade rural",
-  "Sou professor da educação básica",
-  "Trabalhei exposto a agentes nocivos à saúde",
-  "Já protocolei pedido e recebi indeferimento",
+  "Trabalhei na roça ou em atividade rural",
+  "Sou professor e quero me aposentar mais cedo",
+  "Trabalhei em condições insalubres ou de risco",
+  "Já tentei me aposentar e fui negado",
 ];
 
 const TIPOS = [
@@ -63,31 +63,31 @@ const TIPOS = [
 
 const ALERTAS = [
   {
-    title: "Um pedido mal feito pode atrasar anos do seu direito",
-    desc: "Documentação incompleta ou pedido formulado fora da regra correta gera indeferimento — e cada recurso ou ação leva tempo.",
+    title: "Um erro hoje pode atrasar em anos",
+    desc: "Uma negativa mal fundamentada dificulta o processo futuro, mesmo com advogado. O cuidado no início vale tempo lá na frente.",
   },
   {
-    title: "A regra escolhida define o valor que você vai receber",
-    desc: "A diferença entre uma regra de transição e outra pode representar centenas de reais por mês. A análise técnica permite escolher a mais vantajosa.",
+    title: "A regra escolhida define o valor",
+    desc: "A regra de aposentadoria que se aplica ao seu caso define o valor que você vai receber pelo resto da vida. Planejar com antecedência faz diferença.",
   },
   {
-    title: "Sua história é única — sua análise também precisa ser",
-    desc: "Não existe receita pronta. Histórico contributivo, idade, atividade exercida e documentos disponíveis precisam ser olhados em conjunto.",
+    title: "Você pode ter direito agora e não saber",
+    desc: "Muita gente espera anos achando que ainda não pode. A análise técnica do histórico contributivo esclarece a dúvida com base em lei.",
   },
 ];
 
 const PASSOS = [
   {
-    title: "Conversa inicial pelo WhatsApp",
-    desc: "Você apresenta sua situação e a equipe identifica as primeiras informações relevantes para a análise.",
+    title: "Fale com a gente pelo WhatsApp",
+    desc: "Você conta sua situação em poucos minutos. Nossa equipe já entende o que precisa saber para começar a análise.",
   },
   {
-    title: "Estudo previdenciário",
-    desc: "Avaliação técnica do histórico contributivo, com indicação das regras aplicáveis ao caso.",
+    title: "Receba a análise técnica do seu caso",
+    desc: "Avaliamos qual modalidade de aposentadoria se aplica, o que você já tem e o que ainda falta para fundamentar o pedido.",
   },
   {
-    title: "Condução do processo",
-    desc: "Caso opte pela contratação, conduzimos o pedido administrativo, eventuais recursos e ações judiciais cabíveis.",
+    title: "A gente conduz, se for o caso",
+    desc: "Se decidir seguir, montamos o processo, acompanhamos cada etapa e te preparamos para perícia ou audiência, quando necessário.",
   },
 ];
 
@@ -120,20 +120,20 @@ function QueroMeAposentarPage() {
         <div className="relative mx-auto max-w-4xl px-6 pt-20 pb-24 lg:pt-28 lg:pb-32 text-center">
           <Eyebrow className="mx-auto justify-center">Aposentadoria</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
-            Você contribuiu a vida toda. Sabe quando pode <em className="hl">se aposentar</em>?
+            Você pode estar mais perto da aposentadoria <em className="hl">do que imagina</em>.
           </h1>
           <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Cada regra da Reforma da Previdência muda o valor e a data do seu benefício.
-            Entenda, com linguagem clara, quais caminhos a legislação prevê para a sua história
-            de trabalho.
+            Muita gente adia a aposentadoria por achar que ainda não tem direito —
+            quando, na verdade, já se encaixa em alguma das regras de transição.
+            Conte sua situação para nossa equipe verificar o seu caso.
           </p>
           <div className="mt-8 flex justify-center">
             <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-              <MessageCircle size={18} /> Conversar sobre o meu caso <ArrowRight size={16} />
+              <MessageCircle size={18} /> Verificar meu caso pelo WhatsApp <ArrowRight size={16} />
             </WaveButton>
           </div>
           <p className="mt-5 text-xs text-white/45">
-            Conteúdo meramente informativo · Provimento nº 205/2021 da OAB
+            Conversa inicial sem compromisso · Conteúdo informativo · Provimento nº 205/2021 da OAB
           </p>
         </div>
       </section>
@@ -144,11 +144,12 @@ function QueroMeAposentarPage() {
           <div className="max-w-3xl">
             <Eyebrow>Perfis comuns</Eyebrow>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-              Você se <em className="hl">identifica</em> com alguma dessas situações?
+              Você se encaixa em alguma <em className="hl">dessas situações</em>?
             </h2>
             <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-              Estas são histórias de vida que costumamos atender. Marcar uma delas não significa
-              ter direito automático — significa ter um caminho a investigar.
+              Se você marcou pelo menos um item, talvez já se encaixe em alguma regra
+              prevista em lei. Nossa equipe analisa o seu caso e indica, com clareza,
+              o que se aplica.
             </p>
           </div>
           <ul className="mt-12 grid gap-4 md:grid-cols-2">
@@ -176,8 +177,12 @@ function QueroMeAposentarPage() {
         <div className="max-w-3xl">
           <Eyebrow>Tipos de aposentadoria</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            Modalidades previstas na <em className="hl">legislação</em>
+            Existe mais de um jeito de se aposentar. <em className="hl">Qual é o seu</em>?
           </h2>
+          <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
+            Conheça as principais modalidades previstas na legislação previdenciária brasileira.
+            Cada uma tem regras, requisitos e impactos diferentes no valor do benefício.
+          </p>
         </div>
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {TIPOS.map((t) => (
@@ -200,11 +205,13 @@ function QueroMeAposentarPage() {
           <div className="max-w-3xl">
             <Eyebrow>Pontos de atenção</Eyebrow>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-              O que <em className="hl">ninguém te conta</em> antes de pedir
+              Parece simples pelo app. Mas <em className="hl">os erros têm custo alto</em>.
             </h2>
             <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-              Sim, dá para protocolar pelo Meu INSS sozinho. Mas pequenos detalhes técnicos podem
-              custar caro — em tempo, em valor do benefício e em retrabalho.
+              O Meu INSS foi criado para facilitar o pedido — não para garantir aprovação.
+              Responder perguntas de forma incorreta, enviar documentos desnecessários ou
+              deixar de apresentar provas exigidas pode resultar em uma negativa que
+              demora anos para ser revertida.
             </p>
           </div>
           <div className="mt-12 grid gap-5 md:grid-cols-3">
@@ -323,15 +330,15 @@ function QueroMeAposentarPage() {
         <div className="mx-auto max-w-4xl px-6 text-center">
           <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight">
-            Não enfrente o INSS <em className="hl">sozinho</em>.
+            Não espere mais. Você pode <em className="hl">já ter esse direito</em>.
           </h2>
           <p className="mt-5 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Conte sua história para nossa equipe. Vamos te explicar, com linguagem clara,
-            quais caminhos a legislação prevê para o seu caso.
+            Conte sua situação para nossa equipe pelo WhatsApp. Conversa direta, sem
+            compromisso, com a clareza que você precisa para decidir o próximo passo.
           </p>
           <div className="mt-8 flex justify-center">
             <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-              <MessageCircle size={18} /> Conversar sobre o meu caso <ArrowRight size={16} />
+              <MessageCircle size={18} /> Verificar meu caso pelo WhatsApp <ArrowRight size={16} />
             </WaveButton>
           </div>
           <p className="mt-5 inline-flex items-center gap-2 text-xs text-white/55">

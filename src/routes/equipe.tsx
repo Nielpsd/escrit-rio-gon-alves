@@ -52,11 +52,11 @@ function EquipePage() {
         <div className="relative mx-auto max-w-4xl px-6 pt-20 pb-20 lg:pt-28 lg:pb-24 text-center">
           <Eyebrow className="mx-auto justify-center">Nossa equipe</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
-            Pessoas reais cuidando de <em className="hl">histórias reais</em>.
+            Conheça quem vai cuidar do <em className="hl">seu caso</em>.
           </h1>
           <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Mais de dez profissionais dedicados, todos os dias, exclusivamente ao direito
-            previdenciário. Aqui ninguém atende várias áreas ao mesmo tempo — cada pessoa
+            Mais de 10 profissionais dedicados exclusivamente ao direito previdenciário.
+            Aqui ninguém cuida de vários assuntos ao mesmo tempo — cada pessoa da equipe
             tem foco no que faz.
           </p>
         </div>
@@ -128,11 +128,11 @@ function EquipePage() {
           <div className="max-w-3xl">
             <Eyebrow>Time completo</Eyebrow>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-              Quem está <em className="hl">do seu lado</em> no dia a dia
+              A equipe que vai estar <em className="hl">do seu lado</em>
             </h2>
             <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-              Os nomes que você vai conhecer ao longo do processo. Cada pessoa com função
-              definida, todas dedicadas exclusivamente ao previdenciário.
+              Os nomes e rostos que você vai encontrar ao longo do processo. Cada pessoa
+              com função definida, todas dedicadas exclusivamente ao previdenciário.
             </p>
           </div>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
@@ -162,10 +162,10 @@ function EquipePage() {
         <div className="mx-auto max-w-4xl px-6 text-center">
           <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight">
-            Pronto para <em className="hl">conversar com a gente</em>?
+            Nossa equipe está <em className="hl">pronta para o seu caso</em>.
           </h2>
           <p className="mt-5 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Conte sua história. Ouvimos com calma e respondemos com clareza.
+            Conte sua situação pelo WhatsApp. Nossa equipe ouve com atenção e responde com clareza.
           </p>
           <div className="mt-8 flex justify-center">
             <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">

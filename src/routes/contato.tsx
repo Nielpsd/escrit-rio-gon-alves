@@ -74,14 +74,14 @@ function ContatoPage() {
         <div className="relative mx-auto max-w-4xl px-6 pt-20 pb-20 lg:pt-28 lg:pb-24 text-center">
           <Eyebrow className="mx-auto justify-center">Contato</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
-            A primeira conversa começa com <em className="hl">sua história</em>.
+            Vamos conversar sobre o <em className="hl">seu caso</em>.
           </h1>
           <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Conte para nós o que está acontecendo. Lemos cada mensagem com atenção e
-            respondemos com a clareza que você precisa para decidir o próximo passo.
+            Conte sua situação para a nossa equipe. Lemos cada mensagem com atenção e
+            respondemos com clareza — sem compromisso, sem juridiquês.
           </p>
           <p className="mt-4 text-xs text-white/45">
-            Conteúdo informativo · Provimento nº 205/2021 da OAB
+            Conversa inicial pelo WhatsApp · Conteúdo informativo · Provimento nº 205/2021 da OAB
           </p>
         </div>
       </section>
