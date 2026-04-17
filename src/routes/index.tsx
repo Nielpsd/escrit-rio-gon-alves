@@ -338,27 +338,33 @@ function Services() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s) => (
             <a
-              key={s}
-              href={buildWppLink(s)}
+              key={s.title}
+              href={buildWppLink(s.title)}
               target="_blank"
               rel="noopener"
-              aria-label={`Falar no WhatsApp sobre ${s}`}
-              className="group flex items-center gap-3 rounded-xl border border-[var(--border)] bg-white px-5 py-4 transition-all hover:-translate-y-0.5 hover:border-[var(--navy)] hover:shadow-[var(--shadow-sm)]"
+              aria-label={`Falar no WhatsApp sobre ${s.title}`}
+              className="group relative flex flex-col gap-3 rounded-xl border border-[var(--border)] bg-white p-6 transition-all hover:-translate-y-0.5 hover:border-[var(--navy)] hover:shadow-[var(--shadow-md)]"
             >
-              <span className="grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-[var(--navy-light)] transition-colors group-hover:bg-[#22c55e]/15">
-                <Check size={14} className="text-[var(--navy)] group-hover:text-[#16a34a]" />
-              </span>
-              <span className="flex-1 text-sm text-[var(--text)]">{s}</span>
-              <ArrowRight
-                size={16}
-                className="flex-shrink-0 text-[var(--text-light)] opacity-0 -translate-x-1 transition-all group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-[var(--navy)]"
-              />
+              <div className="flex items-center justify-between gap-3">
+                <span className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-full bg-[var(--navy-light)] transition-colors group-hover:bg-[#22c55e]/15">
+                  <Check size={16} className="text-[var(--navy)] group-hover:text-[#16a34a]" />
+                </span>
+                <ArrowRight
+                  size={16}
+                  className="flex-shrink-0 text-[var(--text-light)] opacity-0 -translate-x-1 transition-all group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-[var(--navy)]"
+                />
+              </div>
+              <h3 className="font-display text-lg font-semibold leading-snug text-[var(--navy)] group-hover:text-[var(--gold)] transition-colors">
+                {s.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-[var(--text-muted)]">{s.desc}</p>
             </a>
           ))}
         </div>
+
 
         <div className="mt-10 flex flex-col items-start gap-5 rounded-2xl bg-[var(--navy)] p-8 lg:flex-row lg:items-center lg:justify-between">
           <p className="font-display text-xl text-white max-w-xl leading-snug">
