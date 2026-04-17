@@ -111,11 +111,12 @@ function AreasPage() {
           <div className="max-w-3xl">
             <Eyebrow>Áreas de atuação</Eyebrow>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
-              Você se reconhece em <em className="hl">alguma destas histórias</em>?
+              Perfis e demandas <em className="hl">atendidos pelo escritório</em>.
             </h1>
             <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl">
-              Reunimos os perfis e situações que mais chegam até nós. Talvez a sua história
-              esteja entre eles — e talvez, por trás dela, exista um direito a investigar.
+              Reunimos categorias gerais de demandas previdenciárias com finalidade
+              meramente informativa. Cada situação real depende de análise individual da
+              documentação e do histórico contributivo.
             </p>
           </div>
         </div>

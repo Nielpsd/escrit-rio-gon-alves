@@ -120,16 +120,16 @@ function QueroMeAposentarPage() {
         <div className="relative mx-auto max-w-4xl px-6 pt-20 pb-24 lg:pt-28 lg:pb-32 text-center">
           <Eyebrow className="mx-auto justify-center">Aposentadoria</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
-            Você pode estar mais perto da aposentadoria <em className="hl">do que imagina</em>.
+            Aposentadoria: <em className="hl">entenda as regras antes de decidir</em>.
           </h1>
           <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Muita gente adia a aposentadoria por achar que ainda não tem direito —
-            quando, na verdade, já se encaixa em alguma das regras de transição.
-            Conte sua situação para nossa equipe verificar o seu caso.
+            Conteúdo informativo sobre as principais modalidades de aposentadoria
+            previstas na legislação previdenciária brasileira e sobre a atuação técnica
+            do escritório nessa área.
           </p>
           <div className="mt-8 flex justify-center">
             <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-              <MessageCircle size={18} /> Verificar meu caso pelo WhatsApp <ArrowRight size={16} />
+              <MessageCircle size={18} /> Tirar dúvidas pelo WhatsApp <ArrowRight size={16} />
             </WaveButton>
           </div>
           <p className="mt-5 text-xs text-white/45">
@@ -330,15 +330,16 @@ function QueroMeAposentarPage() {
         <div className="mx-auto max-w-4xl px-6 text-center">
           <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight">
-            Não espere mais. Você pode <em className="hl">já ter esse direito</em>.
+            Tem dúvidas sobre o seu caso? <em className="hl">Converse com a equipe</em>.
           </h2>
           <p className="mt-5 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Conte sua situação para nossa equipe pelo WhatsApp. Conversa direta, sem
-            compromisso, com a clareza que você precisa para decidir o próximo passo.
+            A análise individual do histórico contributivo é o que permite indicar, com base
+            na lei, qual modalidade se aplica ao seu caso e quais documentos podem ser
+            necessários.
           </p>
           <div className="mt-8 flex justify-center">
             <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-              <MessageCircle size={18} /> Verificar meu caso pelo WhatsApp <ArrowRight size={16} />
+              <MessageCircle size={18} /> Tirar dúvidas pelo WhatsApp <ArrowRight size={16} />
             </WaveButton>
           </div>
           <p className="mt-5 inline-flex items-center gap-2 text-xs text-white/55">
