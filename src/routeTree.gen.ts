@@ -16,6 +16,7 @@ import { Route as EquipeRouteImport } from './routes/equipe'
 import { Route as CasosResolvidosRouteImport } from './routes/casos-resolvidos'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 
 const SobreRoute = SobreRouteImport.update({
   id: '/sobre',
@@ -52,34 +53,42 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/casos-resolvidos': typeof CasosResolvidosRoute
   '/equipe': typeof EquipeRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/quero-me-aposentar': typeof QueroMeAposentarRoute
   '/sobre': typeof SobreRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/casos-resolvidos': typeof CasosResolvidosRoute
   '/equipe': typeof EquipeRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/quero-me-aposentar': typeof QueroMeAposentarRoute
   '/sobre': typeof SobreRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/casos-resolvidos': typeof CasosResolvidosRoute
   '/equipe': typeof EquipeRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/quero-me-aposentar': typeof QueroMeAposentarRoute
   '/sobre': typeof SobreRoute
+  '/blog/$slug': typeof BlogSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +100,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/quero-me-aposentar'
     | '/sobre'
+    | '/blog/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/quero-me-aposentar'
     | '/sobre'
+    | '/blog/$slug'
   id:
     | '__root__'
     | '/'
@@ -109,11 +120,12 @@ export interface FileRouteTypes {
     | '/politica-de-privacidade'
     | '/quero-me-aposentar'
     | '/sobre'
+    | '/blog/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  BlogRoute: typeof BlogRoute
+  BlogRoute: typeof BlogRouteWithChildren
   CasosResolvidosRoute: typeof CasosResolvidosRoute
   EquipeRoute: typeof EquipeRoute
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
@@ -172,12 +184,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
   }
 }
 
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  BlogRoute: BlogRoute,
+  BlogRoute: BlogRouteWithChildren,
   CasosResolvidosRoute: CasosResolvidosRoute,
   EquipeRoute: EquipeRoute,
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
