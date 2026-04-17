@@ -18,17 +18,17 @@ import { SITE } from "@/lib/site";
 export const Route = createFileRoute("/servicos")({
   head: () => ({
     meta: [
-      { title: "Serviços — Escritório Gonçalves" },
+      { title: "Áreas de atuação — Escritório Gonçalves Advocacia Previdenciária" },
       {
         name: "description",
         content:
-          "Aposentadoria, Auxílio-Doença, BPC/LOAS, Pensão por Morte, Revisão de Benefícios e mais. Atuação especializada em direito previdenciário.",
+          "Conteúdo informativo sobre as áreas do direito previdenciário em que o escritório atua: aposentadorias, auxílios, BPC/LOAS, pensão por morte e revisão de benefícios.",
       },
-      { property: "og:title", content: "Serviços — Escritório Gonçalves" },
+      { property: "og:title", content: "Áreas de atuação — Escritório Gonçalves" },
       {
         property: "og:description",
         content:
-          "Tudo o que envolve INSS e benefícios previdenciários, conduzido por quem conhece o sistema por dentro.",
+          "Conteúdo informativo sobre direito previdenciário, em conformidade com o Provimento nº 205/2021 da OAB.",
       },
     ],
   }),

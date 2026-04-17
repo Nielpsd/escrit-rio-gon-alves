@@ -16,20 +16,20 @@ import { SITE } from "@/lib/site";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Escritório Gonçalves — Direito Previdenciário" },
+      { title: "Escritório Gonçalves — Advocacia Previdenciária | Jaru e Alta Floresta D'Oeste (RO)" },
       {
         name: "description",
         content:
-          "Escritório de advocacia dedicado ao direito previdenciário. Atendimento presencial em Rondônia e online em todo o Brasil.",
+          "Escritório de advocacia dedicado ao direito previdenciário. Conteúdo informativo sobre aposentadorias, auxílios, BPC/LOAS, pensões e revisões. Atendimento presencial em Rondônia e online em todo o Brasil.",
       },
       {
         property: "og:title",
-        content: "Escritório Gonçalves — Direito Previdenciário",
+        content: "Escritório Gonçalves — Advocacia Previdenciária",
       },
       {
         property: "og:description",
         content:
-          "Atuação técnica em aposentadorias, auxílios, BPC/LOAS, pensões e revisões previdenciárias.",
+          "Conteúdo informativo sobre direito previdenciário. Site em conformidade com o Provimento nº 205/2021 da OAB.",
       },
     ],
   }),
