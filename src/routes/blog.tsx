@@ -76,6 +76,51 @@ const POSTS: {
     author: "Equipe Gonçalves",
     readTime: "6 min",
   },
+  {
+    tag: "Trabalhador Rural",
+    title: "Trabalhador rural sem carteira tem direito à aposentadoria?",
+    excerpt:
+      "Mesmo sem registro formal, é possível comprovar a atividade rural e garantir o benefício. Veja como.",
+    date: "10/01/2025",
+    author: "Dr. Renan Gonçalves",
+    readTime: "7 min",
+  },
+  {
+    tag: "Auxílio-Doença",
+    title: "O INSS negou seu auxílio-doença? Veja o que fazer agora",
+    excerpt:
+      "Negativa não é o fim do caminho. Entenda os próximos passos administrativos e judiciais para garantir seu direito.",
+    date: "08/01/2025",
+    author: "Dra. Mariana Gonçalves",
+    readTime: "5 min",
+  },
+  {
+    tag: "Revisão de Benefícios",
+    title: "Revisão da vida toda: ainda dá tempo de pedir?",
+    excerpt:
+      "Após decisões recentes do STF, muitos aposentados ainda têm direito à revisão. Confira se é o seu caso.",
+    date: "05/01/2025",
+    author: "Dr. Renan Gonçalves",
+    readTime: "8 min",
+  },
+  {
+    tag: "BPC/LOAS",
+    title: "BPC/LOAS: quem tem direito ao benefício de R$ 1.412 do governo?",
+    excerpt:
+      "Idosos e pessoas com deficiência em situação de vulnerabilidade podem receber o BPC. Veja os requisitos atualizados.",
+    date: "03/01/2025",
+    author: "Equipe Gonçalves",
+    readTime: "6 min",
+  },
+  {
+    tag: "Salário-Maternidade",
+    title: "Salário-maternidade: desempregada também tem direito?",
+    excerpt:
+      "Mesmo sem vínculo ativo, é possível receber o benefício durante o período de graça. Entenda as regras.",
+    date: "30/12/2024",
+    author: "Dra. Mariana Gonçalves",
+    readTime: "5 min",
+  },
 ];
 
 const MAIS_LIDOS = [
