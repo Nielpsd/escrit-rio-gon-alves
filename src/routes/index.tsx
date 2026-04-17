@@ -36,6 +36,12 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
+const WPP_PHONE = "5569992621298";
+const buildWppLink = (service: string) => {
+  const msg = `Olá, Renan! Tenho interesse em saber mais sobre *${service}*. Pode me ajudar?`;
+  return `https://api.whatsapp.com/send?phone=${WPP_PHONE}&text=${encodeURIComponent(msg)}`;
+};
+
 const SERVICES = [
   "Planejamento de Aposentadoria",
   "Aposentadoria por Invalidez",
