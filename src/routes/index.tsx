@@ -118,43 +118,43 @@ const STEPS = [
 
 const TESTIMONIALS = [
   {
-    text: "Atendimento atencioso do início ao fim. Equipe sempre disponível para esclarecer dúvidas.",
+    text: "Minha aposentadoria deu certo. Só agradecer ao Dr. Renan e à equipe.",
     name: "Eleni Rocha",
   },
   {
-    text: "Equipe muito atenciosa e cuidadosa. Acompanhamento próximo durante todo o processo.",
+    text: "A questão do meu filho foi resolvida bem rápido, sem trabalho nenhum pra mim. Amei a atenção de toda a equipe.",
     name: "Carolina Assunção",
   },
   {
-    text: "Dr. Renan, excelente profissional. Equipe muito atenciosa.",
+    text: "Dr. Renan, excelente profissional. Equipe muito atenciosa. Nota 10.",
     name: "Vera Lucia Lemes",
   },
   {
-    text: "Nunca deixaram de me manter informada. Comunicação clara e constante durante todo o tempo.",
+    text: "Nunca deixaram de me manter informada. Dois anos de processo e em nenhum momento desistiram de mim.",
     name: "Leuciane Silva",
   },
   {
-    text: "Fui muito bem atendida. Excelentes advogados, sempre disponíveis para esclarecimentos.",
+    text: "Fui muito bem atendida, solucionaram nossa situação. Excelentes advogados.",
     name: "Érika Vieira",
   },
   {
-    text: "Atendimento humano e respeitoso em todas as etapas.",
+    text: "Gostei muito do atendimento. Foi muito bom, graças a Deus deu tudo certo!",
     name: "Ilma Fernandes",
   },
 ];
 
 const FAQ = [
   {
-    q: "O INSS já negou meu pedido. O que fazer?",
-    a: "A negativa administrativa não encerra a discussão. É possível recorrer administrativamente ou buscar a tutela do direito na esfera judicial. Cada caso depende da análise individual da fundamentação da negativa.",
+    q: "O INSS já negou meu pedido. Ainda tem caminho?",
+    a: "Sim. A negativa administrativa não encerra a discussão — é possível recorrer administrativamente ou buscar a tutela do direito na esfera judicial. Cada caso depende da análise individual da fundamentação da negativa e da documentação disponível.",
   },
   {
     q: "Como funciona a contratação dos serviços?",
-    a: "A contratação se formaliza por meio de procuração e contrato de honorários. Em conformidade com o Provimento nº 205/2021 da OAB, condições financeiras são tratadas individualmente, jamais por meio de divulgação pública.",
+    a: "A contratação se formaliza por meio de procuração e contrato escrito de honorários. Em conformidade com o Provimento nº 205/2021 da OAB, condições financeiras são tratadas individualmente — fale com a equipe para entender as condições do seu caso.",
   },
   {
-    q: "É possível protocolar o pedido sozinho pelo aplicativo Meu INSS?",
-    a: "Sim, o aplicativo permite protocolar pedidos. Cabe a cada pessoa avaliar se possui informações técnicas suficientes para conduzir o processo, considerando que a forma como o pedido é apresentado pode influenciar sua análise.",
+    q: "Vale a pena tentar sozinho pelo Meu INSS primeiro?",
+    a: "O aplicativo facilita o protocolo, mas detalhes técnicos no preenchimento ou na documentação podem resultar em indeferimento. Uma negativa mal fundamentada pode dificultar pedidos futuros. A análise prévia identifica o melhor caminho para o caso.",
   },
   {
     q: "Moro em outro estado. É possível ser atendido?",
@@ -162,11 +162,11 @@ const FAQ = [
   },
   {
     q: "Como saber qual benefício se aplica ao meu caso?",
-    a: "A definição do benefício cabível depende da análise do histórico contributivo, da idade, da atividade exercida e da documentação disponível. Por isso é necessária análise individualizada.",
+    a: "Depende da sua situação específica: histórico contributivo, idade, atividade exercida e documentação disponível. Por isso a análise é sempre individualizada — fale com a equipe para entender o que se aplica ao seu caso.",
   },
   {
-    q: "Trabalhei na atividade rural sem registro formal. Tenho direito a algum benefício?",
-    a: "A legislação prevê regras específicas para o segurado especial. A comprovação da atividade rural pode ser feita por documentos materiais e, em alguns casos, prova testemunhal, conforme o caso concreto.",
+    q: "Trabalhei na roça sem registro formal. Tenho direito a aposentadoria?",
+    a: "Possivelmente sim. A legislação prevê regras específicas para o segurado especial, com comprovação por documentos materiais e, em alguns casos, prova testemunhal. Cada caso depende da análise da documentação disponível.",
   },
 ];
 
@@ -498,11 +498,11 @@ function Testimonials() {
       <div className="max-w-3xl">
         <Eyebrow>Depoimentos</Eyebrow>
         <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-          Histórias de quem foi <em className="hl">acolhido</em> aqui.
+          O que dizem <em className="hl">quem foi atendido</em> aqui.
         </h2>
         <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
           Manifestações espontâneas publicadas no Google Meu Negócio, reproduzidas com
-          finalidade exclusivamente informativa. Cada caso é único.
+          finalidade exclusivamente informativa. Cada caso depende da análise individual.
         </p>
       </div>
 
@@ -551,11 +551,11 @@ function FAQSection() {
         <div className="text-center max-w-2xl mx-auto">
           <Eyebrow className="mx-auto justify-center">Dúvidas frequentes</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            As perguntas que <em className="hl">mais ouvimos</em>.
+            Respostas diretas para <em className="hl">quem não tem tempo a perder</em>.
           </h2>
           <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-            Reunimos as dúvidas mais comuns de quem chega até nós. Se a sua não está aqui,
-            estamos a uma mensagem de distância.
+            Reunimos as dúvidas que mais ouvimos. Se a sua não está aqui, fale com a equipe
+            pelo WhatsApp.
           </p>
         </div>
 
@@ -618,11 +618,11 @@ function BlogPreview() {
         <div className="max-w-2xl">
           <Eyebrow>Blog</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            Conteúdo educativo sobre <em className="hl">previdência</em>.
+            Entenda seus direitos <em className="hl">antes de precisar deles</em>.
           </h2>
           <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-            Marketing de conteúdo jurídico, em conformidade com o Provimento nº 205/2021 da OAB:
-            informação técnica em linguagem acessível, sem oferta de serviços.
+            Conteúdo simples, direto e técnico sobre benefícios do INSS. Sem juridiquês,
+            em conformidade com o Provimento nº 205/2021 da OAB.
           </p>
         </div>
         <WaveButton variant="ghost" href="/blog">
@@ -677,11 +677,11 @@ function FinalCTA() {
       <div className="relative mx-auto max-w-5xl px-6 py-24 lg:py-32 text-center">
         <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
         <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.1] text-white max-w-3xl mx-auto">
-          O primeiro passo é <em className="hl">conversar</em>.
+          Você trabalhou a vida inteira. <em className="hl">Não enfrente o INSS sozinho</em>.
         </h2>
         <p className="mt-6 max-w-2xl mx-auto text-base text-white/65 leading-relaxed">
-          Conte sua situação para nossa equipe. Ouvimos com atenção, explicamos com clareza
-          e, se for o caso, indicamos os caminhos técnicos cabíveis. Sem pressa, sem juridiquês.
+          Nossa equipe está pronta para ouvir seu caso. Conte sua situação para entender,
+          com clareza, quais caminhos a legislação prevê para você.
         </p>
 
         <div className="mt-10 flex flex-wrap justify-center gap-4">
