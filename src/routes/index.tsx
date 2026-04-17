@@ -42,19 +42,55 @@ const buildWppLink = (service: string) => {
   return `https://api.whatsapp.com/send?phone=${WPP_PHONE}&text=${encodeURIComponent(msg)}`;
 };
 
-const SERVICES = [
-  "Planejamento de Aposentadoria",
-  "Aposentadoria por Invalidez",
-  "Auxílio-Doença (Auxílio por Incapacidade)",
-  "Salário-Maternidade",
-  "Aposentadoria por Idade",
-  "Aposentadoria do Professor",
-  "Pensão por Morte",
-  "BPC/LOAS",
-  "Aposentadoria por Tempo de Contribuição",
-  "Aposentadoria Especial (Insalubridade)",
-  "Auxílio-Reclusão",
-  "Revisão de Benefícios",
+const SERVICES: { title: string; desc: string }[] = [
+  {
+    title: "Planejamento de Aposentadoria",
+    desc: "Descubra a melhor regra e o momento certo para se aposentar com o maior valor possível.",
+  },
+  {
+    title: "Aposentadoria por Invalidez",
+    desc: "Para quem não pode mais trabalhar de forma permanente por doença ou acidente.",
+  },
+  {
+    title: "Auxílio-Doença",
+    desc: "Benefício temporário para quem está incapacitado de trabalhar por motivo de saúde.",
+  },
+  {
+    title: "Salário-Maternidade",
+    desc: "Garanta o pagamento integral durante o afastamento por nascimento ou adoção.",
+  },
+  {
+    title: "Aposentadoria por Idade",
+    desc: "Para quem atingiu a idade mínima e tem o tempo de contribuição exigido.",
+  },
+  {
+    title: "Aposentadoria do Professor",
+    desc: "Regras específicas e tempo reduzido para professores da educação básica.",
+  },
+  {
+    title: "Pensão por Morte",
+    desc: "Direito de cônjuges, filhos e dependentes após o falecimento do segurado.",
+  },
+  {
+    title: "BPC/LOAS",
+    desc: "Benefício assistencial para idosos e pessoas com deficiência em situação de vulnerabilidade.",
+  },
+  {
+    title: "Aposentadoria por Tempo de Contribuição",
+    desc: "Para quem tem longa carreira formal — a estratégia certa muda o valor final.",
+  },
+  {
+    title: "Aposentadoria Especial",
+    desc: "Quem trabalhou exposto a agentes nocivos pode se aposentar mais cedo.",
+  },
+  {
+    title: "Auxílio-Reclusão",
+    desc: "Benefício para os dependentes de segurado de baixa renda recolhido à prisão.",
+  },
+  {
+    title: "Revisão de Benefícios",
+    desc: "Recebe pouco? Podemos revisar seu cálculo e aumentar o valor mensal — com retroativos.",
+  },
 ];
 
 const STEPS = [
@@ -302,27 +338,33 @@ function Services() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s) => (
             <a
-              key={s}
-              href={buildWppLink(s)}
+              key={s.title}
+              href={buildWppLink(s.title)}
               target="_blank"
               rel="noopener"
-              aria-label={`Falar no WhatsApp sobre ${s}`}
-              className="group flex items-center gap-3 rounded-xl border border-[var(--border)] bg-white px-5 py-4 transition-all hover:-translate-y-0.5 hover:border-[var(--navy)] hover:shadow-[var(--shadow-sm)]"
+              aria-label={`Falar no WhatsApp sobre ${s.title}`}
+              className="group relative flex flex-col gap-3 rounded-xl border border-[var(--border)] bg-white p-6 transition-all hover:-translate-y-0.5 hover:border-[var(--navy)] hover:shadow-[var(--shadow-md)]"
             >
-              <span className="grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-[var(--navy-light)] transition-colors group-hover:bg-[#22c55e]/15">
-                <Check size={14} className="text-[var(--navy)] group-hover:text-[#16a34a]" />
-              </span>
-              <span className="flex-1 text-sm text-[var(--text)]">{s}</span>
-              <ArrowRight
-                size={16}
-                className="flex-shrink-0 text-[var(--text-light)] opacity-0 -translate-x-1 transition-all group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-[var(--navy)]"
-              />
+              <div className="flex items-center justify-between gap-3">
+                <span className="grid h-9 w-9 flex-shrink-0 place-items-center rounded-full bg-[var(--navy-light)] transition-colors group-hover:bg-[#22c55e]/15">
+                  <Check size={16} className="text-[var(--navy)] group-hover:text-[#16a34a]" />
+                </span>
+                <ArrowRight
+                  size={16}
+                  className="flex-shrink-0 text-[var(--text-light)] opacity-0 -translate-x-1 transition-all group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-[var(--navy)]"
+                />
+              </div>
+              <h3 className="font-display text-lg font-semibold leading-snug text-[var(--navy)] group-hover:text-[var(--gold)] transition-colors">
+                {s.title}
+              </h3>
+              <p className="text-sm leading-relaxed text-[var(--text-muted)]">{s.desc}</p>
             </a>
           ))}
         </div>
+
 
         <div className="mt-10 flex flex-col items-start gap-5 rounded-2xl bg-[var(--navy)] p-8 lg:flex-row lg:items-center lg:justify-between">
           <p className="font-display text-xl text-white max-w-xl leading-snug">
