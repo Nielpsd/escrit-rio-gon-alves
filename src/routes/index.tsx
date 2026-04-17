@@ -36,6 +36,12 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
+const WPP_PHONE = "5569992621298";
+const buildWppLink = (service: string) => {
+  const msg = `Olá, Renan! Tenho interesse em saber mais sobre *${service}*. Pode me ajudar?`;
+  return `https://api.whatsapp.com/send?phone=${WPP_PHONE}&text=${encodeURIComponent(msg)}`;
+};
+
 const SERVICES = [
   "Planejamento de Aposentadoria",
   "Aposentadoria por Invalidez",
@@ -298,15 +304,23 @@ function Services() {
 
         <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s) => (
-            <div
+            <a
               key={s}
-              className="flex items-center gap-3 rounded-xl border border-[var(--border)] bg-white px-5 py-4 transition-colors hover:border-[var(--navy)]"
+              href={buildWppLink(s)}
+              target="_blank"
+              rel="noopener"
+              aria-label={`Falar no WhatsApp sobre ${s}`}
+              className="group flex items-center gap-3 rounded-xl border border-[var(--border)] bg-white px-5 py-4 transition-all hover:-translate-y-0.5 hover:border-[var(--navy)] hover:shadow-[var(--shadow-sm)]"
             >
-              <span className="grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-[var(--navy-light)]">
-                <Check size={14} className="text-[var(--navy)]" />
+              <span className="grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-[var(--navy-light)] transition-colors group-hover:bg-[#22c55e]/15">
+                <Check size={14} className="text-[var(--navy)] group-hover:text-[#16a34a]" />
               </span>
-              <span className="text-sm text-[var(--text)]">{s}</span>
-            </div>
+              <span className="flex-1 text-sm text-[var(--text)]">{s}</span>
+              <ArrowRight
+                size={16}
+                className="flex-shrink-0 text-[var(--text-light)] opacity-0 -translate-x-1 transition-all group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-[var(--navy)]"
+              />
+            </a>
           ))}
         </div>
 
