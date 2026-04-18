@@ -52,7 +52,8 @@ function EquipePage() {
         <div className="relative mx-auto max-w-4xl px-6 pt-20 pb-20 lg:pt-28 lg:pb-24 text-center">
           <Eyebrow className="mx-auto justify-center">Nossa equipe</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
-            Conheça quem vai cuidar do <em className="hl">seu caso</em>.
+            Conheça quem vai <br />
+            <em className="hl">cuidar do seu caso</em>.
           </h1>
           <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
             Mais de 10 profissionais dedicados exclusivamente ao direito previdenciário.
