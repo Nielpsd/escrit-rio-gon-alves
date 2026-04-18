@@ -408,23 +408,23 @@ em.hl {
 /* Scroll reveal — controlado por useScrollReveal */
 .reveal-init {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(32px);
   transition:
-    opacity 0.7s var(--ease),
-    transform 0.7s var(--ease);
+    opacity 0.9s var(--ease),
+    transform 0.9s var(--ease);
   will-change: opacity, transform;
 }
 .reveal-init.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
-.reveal-left.reveal-init  { transform: translateX(-24px); }
-.reveal-right.reveal-init { transform: translateX(24px); }
+.reveal-left.reveal-init  { transform: translateX(-32px); }
+.reveal-right.reveal-init { transform: translateX(32px); }
 .reveal-left.reveal-init.is-visible,
 .reveal-right.reveal-init.is-visible {
   transform: translateX(0);
 }
-.reveal-scale.reveal-init { transform: scale(0.96); }
+.reveal-scale.reveal-init { transform: scale(0.94); }
 .reveal-scale.reveal-init.is-visible { transform: scale(1); }
 
 /* Stagger via delays incrementais aplicados por nth-child */

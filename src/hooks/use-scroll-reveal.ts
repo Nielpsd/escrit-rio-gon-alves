@@ -3,38 +3,48 @@ import * as React from "react";
 /**
  * useScrollReveal — observa elementos com [data-reveal] (ou seletor padrão)
  * e adiciona a classe `is-visible` quando entram na viewport.
- * Funciona em todas as páginas sem precisar editar cada uma.
+ *
+ * O estado inicial (opacity 0, translate) é aplicado via CSS no seletor
+ * `.reveal-init`. Usamos useLayoutEffect para adicionar a classe ANTES do
+ * paint, evitando flash sem animação. Em seguida, o IntersectionObserver
+ * dispara `is-visible` num próximo frame para garantir que a transição rode.
  */
 export function useScrollReveal(
   selector = "[data-reveal], .reveal, .card-interactive, section h2, section h3, section > p, section > div > p",
 ) {
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (typeof window === "undefined") return;
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const init = (el: HTMLElement) => {
+      if (!el.classList.contains("reveal-init") && !el.classList.contains("is-visible")) {
+        el.classList.add("reveal-init");
+      }
+    };
 
     const elements = Array.from(document.querySelectorAll<HTMLElement>(selector));
 
     if (prefersReduced) {
-      elements.forEach((el) => el.classList.add("is-visible"));
+      elements.forEach((el) => el.classList.add("reveal-init", "is-visible"));
       return;
     }
 
-    elements.forEach((el) => {
-      if (!el.classList.contains("reveal-init")) {
-        el.classList.add("reveal-init");
-      }
-    });
+    elements.forEach(init);
 
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
+            // pequeno delay garante que o paint inicial (opacity 0) aconteça
+            // antes de disparar a transição para opacity 1
+            requestAnimationFrame(() => {
+              entry.target.classList.add("is-visible");
+            });
             io.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
     );
 
     elements.forEach((el) => io.observe(el));
@@ -43,8 +53,8 @@ export function useScrollReveal(
     const mo = new MutationObserver(() => {
       const fresh = Array.from(document.querySelectorAll<HTMLElement>(selector));
       fresh.forEach((el) => {
-        if (!el.classList.contains("reveal-init")) {
-          el.classList.add("reveal-init");
+        if (!el.classList.contains("reveal-init") && !el.classList.contains("is-visible")) {
+          init(el);
           io.observe(el);
         }
       });
