@@ -94,7 +94,7 @@ const RAW: Omit<Post, "slug">[] = [
     title: "O INSS negou seu auxílio-doença? Veja o que fazer agora",
     excerpt:
       "Negativa não é o fim do caminho. Entenda os próximos passos administrativos e judiciais para garantir seu direito.",
-    date: "08/01/2025",
+    date: "06/02/2026",
     author: "Dra. Mariana Gonçalves",
     readTime: "5 min",
     content: [
