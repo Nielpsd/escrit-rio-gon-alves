@@ -107,7 +107,7 @@ const RAW: Omit<Post, "slug">[] = [
     title: "Revisão da vida toda: ainda dá tempo de pedir?",
     excerpt:
       "Após decisões recentes do STF, muitos aposentados ainda têm direito à revisão. Confira se é o seu caso.",
-    date: "05/01/2025",
+    date: "19/01/2026",
     author: "Dr. Renan Gonçalves",
     readTime: "8 min",
     content: [
