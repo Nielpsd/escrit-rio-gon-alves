@@ -332,8 +332,11 @@ em.hl {
 /* Ajustes mobile — reduz padding/fonte para evitar botões desproporcionais */
 @media (max-width: 640px) {
   .btn-inner { padding: 12px 22px; font-size: 0.8125rem; }
-  .btn-lg .btn-inner { padding: 14px 24px; font-size: 0.875rem; }
-  .btn-sm .btn-inner { padding: 9px 16px; font-size: 0.7rem; }
+  .btn-lg .btn-inner { padding: 14px 28px; font-size: 0.875rem; }
+  .btn-sm .btn-inner { padding: 9px 18px; font-size: 0.7rem; }
+  /* botões em formato pill precisam de mais respiro horizontal */
+  .btn-wpp .btn-inner { padding-left: 26px; padding-right: 26px; }
+  .btn-wpp.btn-lg .btn-inner { padding-left: 32px; padding-right: 32px; }
 }
 
 /* WHATSAPP */
