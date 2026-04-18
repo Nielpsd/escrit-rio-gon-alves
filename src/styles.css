@@ -370,3 +370,128 @@ em.hl {
   border-radius: 2px;
   flex-shrink: 0;
 }
+
+/* =====================================================
+   ANIMAÇÕES — keyframes e utilitários
+   ===================================================== */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-in-up { animation: fade-in-up 0.6s var(--ease) both; }
+.animate-fade-in    { animation: fade-in 0.6s var(--ease) both; }
+.animate-float      { animation: float-soft 4s ease-in-out infinite; }
+
+/* Scroll reveal — controlado por useScrollReveal */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+  will-change: opacity, transform;
+}
+.reveal-init.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left.reveal-init  { transform: translateX(-24px); }
+.reveal-right.reveal-init { transform: translateX(24px); }
+.reveal-left.reveal-init.is-visible,
+.reveal-right.reveal-init.is-visible {
+  transform: translateX(0);
+}
+.reveal-scale.reveal-init { transform: scale(0.96); }
+.reveal-scale.reveal-init.is-visible { transform: scale(1); }
+
+/* Stagger via delays incrementais aplicados por nth-child */
+.reveal-stagger > .reveal-init:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger > .reveal-init:nth-child(2) { transition-delay: 0.12s; }
+.reveal-stagger > .reveal-init:nth-child(3) { transition-delay: 0.19s; }
+.reveal-stagger > .reveal-init:nth-child(4) { transition-delay: 0.26s; }
+.reveal-stagger > .reveal-init:nth-child(5) { transition-delay: 0.33s; }
+.reveal-stagger > .reveal-init:nth-child(6) { transition-delay: 0.40s; }
+.reveal-stagger > .reveal-init:nth-child(7) { transition-delay: 0.47s; }
+.reveal-stagger > .reveal-init:nth-child(8) { transition-delay: 0.54s; }
+
+/* Hover utilities — consistentes com o design system */
+.hover-lift {
+  transition:
+    transform 0.35s var(--ease),
+    box-shadow 0.35s var(--ease);
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.hover-gold {
+  transition: color 0.25s var(--ease);
+}
+.hover-gold:hover { color: var(--gold); }
+
+.hover-underline {
+  position: relative;
+  display: inline-block;
+}
+.hover-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1.5px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s var(--ease);
+}
+.hover-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.card-interactive {
+  transition:
+    transform 0.4s var(--ease),
+    box-shadow 0.4s var(--ease),
+    border-color 0.4s var(--ease);
+}
+.card-interactive:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 48px rgba(13, 35, 64, 0.12);
+  border-color: var(--gold);
+}
+
+/* Imagem com zoom suave no hover do container .group */
+.img-zoom {
+  transition: transform 0.7s var(--ease);
+}
+.group:hover .img-zoom {
+  transform: scale(1.05);
+}
+
+/* Respeita preferência de reduzir movimento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
