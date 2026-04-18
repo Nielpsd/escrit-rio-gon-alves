@@ -68,7 +68,7 @@ const RAW: Omit<Post, "slug">[] = [
     title: "Lula vetou pensão para mães de crianças com anencefalia. Entenda!",
     excerpt:
       "Decisão impacta diretamente famílias que aguardavam a sanção da lei. Saiba o que ainda é possível buscar.",
-    date: "13/01/2025",
+    date: "11/03/2026",
     author: "Equipe Gonçalves",
     readTime: "6 min",
     content: [
