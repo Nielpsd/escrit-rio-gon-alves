@@ -5,7 +5,7 @@ import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
 import { SITE } from "@/lib/site";
-import { CATEGORIAS, POSTS, MAIS_LIDOS, type Categoria } from "@/lib/posts";
+import { CATEGORIAS, POSTS, MAIS_RECENTES, type Categoria } from "@/lib/posts";
 
 export const Route = createFileRoute("/blog")({
   head: () => ({
