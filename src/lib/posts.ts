@@ -145,11 +145,14 @@ const RAW: Omit<Post, "slug">[] = [
 
 export const POSTS: Post[] = RAW.map((p) => ({ ...p, slug: slugify(p.title) }));
 
-export const MAIS_LIDOS = [
-  "Quanto paga o INSS para a maioria dos brasileiros?",
-  "Trabalhador rural sem carteira tem direito à aposentadoria?",
-  "O INSS negou. O que fazer agora?",
-];
+function parseDate(d: string) {
+  const [dd, mm, yyyy] = d.split("/").map(Number);
+  return new Date(yyyy, mm - 1, dd).getTime();
+}
+
+export const MAIS_RECENTES: Post[] = [...POSTS]
+  .sort((a, b) => parseDate(b.date) - parseDate(a.date))
+  .slice(0, 3);
 
 export function getPostBySlug(slug: string) {
   return POSTS.find((p) => p.slug === slug);
