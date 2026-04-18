@@ -41,7 +41,7 @@ const RAW: Omit<Post, "slug">[] = [
     title: "Quanto paga o INSS para a maioria dos brasileiros? Entenda.",
     excerpt:
       "O valor médio dos benefícios pode te surpreender. Veja como funciona o cálculo e o que você pode fazer para receber mais.",
-    date: "14/01/2025",
+    date: "08/04/2026",
     author: "Dr. Renan Gonçalves",
     readTime: "5 min",
     content: [
