@@ -5,9 +5,27 @@ import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
 import { SITE } from "@/lib/site";
-import { CATEGORIAS, POSTS, MAIS_RECENTES, type Categoria } from "@/lib/posts";
+import { CATEGORIAS, POSTS as POSTS_FALLBACK, MAIS_RECENTES, type Categoria } from "@/lib/posts";
+import { supabase, supabaseConfigured } from "@/lib/supabase";
+import type { Database } from "@/lib/database.types";
+
+type PostRow = Database["public"]["Tables"]["posts"]["Row"];
 
 export const Route = createFileRoute("/blog")({
+  loader: async () => {
+    if (!supabaseConfigured) return { posts: POSTS_FALLBACK, recentes: MAIS_RECENTES };
+
+    const { data } = await supabase
+      .from("posts")
+      .select("*")
+      .eq("published", true)
+      .order("published_at", { ascending: false });
+
+    if (!data || data.length === 0) return { posts: POSTS_FALLBACK, recentes: MAIS_RECENTES };
+
+    const posts = data.map(mapRow);
+    return { posts, recentes: posts.slice(0, 3) };
+  },
   head: () => ({
     meta: [
       { title: "Blog — Escritório Gonçalves" },
@@ -27,13 +45,26 @@ export const Route = createFileRoute("/blog")({
   component: BlogPage,
 });
 
+function mapRow(row: PostRow) {
+  return {
+    slug: row.slug,
+    tag: row.tag as Categoria,
+    title: row.title,
+    excerpt: row.excerpt,
+    date: new Date(row.published_at).toLocaleDateString("pt-BR"),
+    author: row.author,
+    readTime: row.read_time,
+    content: row.content.split("\n\n"),
+  };
+}
+
 function BlogPage() {
+  const { posts, recentes } = Route.useLoaderData();
   const [filtro, setFiltro] = useState<Categoria>("Todos");
-  const posts = filtro === "Todos" ? POSTS : POSTS.filter((p) => p.tag === filtro);
+  const filtered = filtro === "Todos" ? posts : posts.filter((p) => p.tag === filtro);
 
   return (
     <Layout>
-      {/* HEADER */}
       <section className="on-navy relative overflow-hidden bg-[var(--navy)] text-white">
         <div
           className="absolute right-[-60px] top-[-80px] font-display text-[420px] leading-none font-bold text-white/[0.04] select-none pointer-events-none"
@@ -53,9 +84,7 @@ function BlogPage() {
         </div>
       </section>
 
-      {/* FILTROS + LAYOUT */}
       <section className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
-        {/* Filtros */}
         <div className="flex flex-wrap gap-2">
           {CATEGORIAS.map((cat) => {
             const active = filtro === cat;
@@ -77,9 +106,8 @@ function BlogPage() {
         </div>
 
         <div className="mt-10 grid gap-10 lg:grid-cols-[1.6fr_1fr] items-start">
-          {/* Lista de artigos */}
           <div className="grid gap-6 content-start">
-            {posts.map((p) => (
+            {filtered.map((p) => (
               <Link
                 key={p.slug}
                 to="/blog/$slug"
@@ -96,9 +124,7 @@ function BlogPage() {
                   <h2 className="mt-3 font-display text-xl font-semibold text-[var(--navy)] leading-snug group-hover:text-[var(--gold)] transition-colors">
                     {p.title}
                   </h2>
-                  <p className="mt-2 text-sm text-[var(--text-muted)] leading-relaxed">
-                    {p.excerpt}
-                  </p>
+                  <p className="mt-2 text-sm text-[var(--text-muted)] leading-relaxed">{p.excerpt}</p>
                   <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-[var(--text-light)]">
                     <span className="inline-flex items-center gap-1">
                       <User size={12} /> {p.author}
@@ -114,34 +140,26 @@ function BlogPage() {
               </Link>
             ))}
 
-            {posts.length === 0 && (
+            {filtered.length === 0 && (
               <p className="text-center text-sm text-[var(--text-muted)] py-12">
                 Nenhum artigo nesta categoria ainda.
               </p>
             )}
           </div>
 
-          {/* Sidebar */}
           <aside className="space-y-6 lg:sticky lg:top-28 lg:self-start">
-            {/* CTA WhatsApp */}
             <div className="on-navy rounded-2xl bg-[var(--navy)] p-6 text-white">
               <Eyebrow>Direto com a equipe</Eyebrow>
               <p className="mt-3 font-display text-lg leading-snug text-white">
                 Tem uma dúvida que nenhum artigo respondeu?
               </p>
               <div className="mt-5">
-                <WaveButton
-                  variant="wpp"
-                  href={SITE.whatsapp}
-                  target="_blank"
-                  rel="noopener"
-                >
+                <WaveButton variant="wpp" href={SITE.whatsapp} target="_blank" rel="noopener">
                   <MessageCircle size={16} /> Falar com especialista <ArrowRight size={14} />
                 </WaveButton>
               </div>
             </div>
 
-            {/* Categorias */}
             <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
               <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-[var(--text-light)]">
                 Categorias
@@ -160,13 +178,12 @@ function BlogPage() {
               </ul>
             </div>
 
-            {/* Mais recentes */}
             <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
               <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-[var(--text-light)]">
                 Mais recentes
               </h3>
               <ul className="mt-4 space-y-3">
-                {MAIS_RECENTES.map((p, i) => (
+                {recentes.map((p, i) => (
                   <li key={p.slug} className="flex gap-3">
                     <span className="font-display text-lg font-semibold text-[var(--gold)]">
                       {String(i + 1).padStart(2, "0")}

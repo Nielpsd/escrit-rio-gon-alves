@@ -498,6 +498,22 @@ em.hl {
   transform: scale(1.05);
 }
 
+/* Admin input utility */
+.input {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: white;
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.input:focus {
+  border-color: var(--navy);
+}
+
 /* Respeita preferência de reduzir movimento */
 @media (prefers-reduced-motion: reduce) {
   *,

@@ -13,6 +13,7 @@ import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
 import { SITE } from "@/lib/site";
+import { supabase, supabaseConfigured } from "@/lib/supabase";
 
 export const Route = createFileRoute("/contato")({
   head: () => ({
@@ -50,11 +51,18 @@ const UNIDADES = [
 function ContatoPage() {
   const [enviado, setEnviado] = useState(false);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const nome = String(form.get("nome") ?? "");
+    const telefone = String(form.get("telefone") ?? "");
+    const assunto = String(form.get("assunto") ?? "");
     const mensagem = String(form.get("mensagem") ?? "");
+
+    if (supabaseConfigured) {
+      await supabase.from("messages").insert({ nome, telefone, assunto, mensagem });
+    }
+
     const texto = `Olá! Meu nome é ${nome}. ${mensagem}`;
     const url = `https://api.whatsapp.com/send?phone=5569992621298&text=${encodeURIComponent(texto)}`;
     window.open(url, "_blank", "noopener");

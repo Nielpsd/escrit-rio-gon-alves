@@ -4,13 +4,58 @@ import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
 import { SITE } from "@/lib/site";
-import { getPostBySlug, POSTS } from "@/lib/posts";
+import { getPostBySlug, POSTS as POSTS_FALLBACK, type Categoria } from "@/lib/posts";
+import { supabase, supabaseConfigured } from "@/lib/supabase";
+import type { Database } from "@/lib/database.types";
+
+type PostRow = Database["public"]["Tables"]["posts"]["Row"];
+
+function mapRow(row: PostRow) {
+  return {
+    slug: row.slug,
+    tag: row.tag as Categoria,
+    title: row.title,
+    excerpt: row.excerpt,
+    date: new Date(row.published_at).toLocaleDateString("pt-BR"),
+    author: row.author,
+    readTime: row.read_time,
+    content: row.content.split("\n\n"),
+  };
+}
 
 export const Route = createFileRoute("/blog/$slug")({
-  loader: ({ params }) => {
-    const post = getPostBySlug(params.slug);
-    if (!post) throw notFound();
-    return { post };
+  loader: async ({ params }) => {
+    if (!supabaseConfigured) {
+      const post = getPostBySlug(params.slug);
+      if (!post) throw notFound();
+      const related = POSTS_FALLBACK.filter(
+        (p) => p.slug !== post.slug && p.tag === post.tag,
+      ).slice(0, 3);
+      return { post, related };
+    }
+
+    const { data } = await supabase
+      .from("posts")
+      .select("*")
+      .eq("slug", params.slug)
+      .eq("published", true)
+      .maybeSingle();
+
+    if (!data) throw notFound();
+
+    const post = mapRow(data);
+
+    const { data: relatedData } = await supabase
+      .from("posts")
+      .select("*")
+      .eq("tag", data.tag)
+      .eq("published", true)
+      .neq("slug", params.slug)
+      .limit(3);
+
+    const related = (relatedData ?? []).map(mapRow);
+
+    return { post, related };
   },
   head: ({ loaderData }) => {
     const post = loaderData?.post;
@@ -48,12 +93,10 @@ export const Route = createFileRoute("/blog/$slug")({
 });
 
 function PostPage() {
-  const { post } = Route.useLoaderData();
-  const relacionados = POSTS.filter((p) => p.slug !== post.slug && p.tag === post.tag).slice(0, 3);
+  const { post, related } = Route.useLoaderData();
 
   return (
     <Layout>
-      {/* HEADER */}
       <section className="on-navy relative overflow-hidden bg-[var(--navy)] text-white">
         <div
           className="absolute right-[-60px] top-[-80px] font-display text-[420px] leading-none font-bold text-white/[0.04] select-none pointer-events-none"
@@ -88,7 +131,6 @@ function PostPage() {
         </div>
       </section>
 
-      {/* CONTEÚDO */}
       <section className="mx-auto max-w-3xl px-6 py-16 lg:py-20">
         <p className="font-display text-xl text-[var(--navy)] leading-relaxed">{post.excerpt}</p>
         <div className="mt-8 space-y-5 text-base text-[var(--text)] leading-relaxed">
@@ -97,7 +139,6 @@ function PostPage() {
           ))}
         </div>
 
-        {/* CTA */}
         <div className="on-navy mt-12 rounded-2xl bg-[var(--navy)] p-8 text-white">
           <Eyebrow>Precisa de ajuda no seu caso?</Eyebrow>
           <p className="mt-3 font-display text-xl leading-snug text-white">
@@ -111,15 +152,14 @@ function PostPage() {
         </div>
       </section>
 
-      {/* RELACIONADOS */}
-      {relacionados.length > 0 && (
+      {related.length > 0 && (
         <section className="border-t border-[var(--border)] bg-[var(--navy-light)]/30">
           <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
             <h2 className="font-display text-2xl font-semibold text-[var(--navy)]">
               Continue lendo
             </h2>
             <div className="mt-8 grid gap-6 md:grid-cols-3">
-              {relacionados.map((p) => (
+              {related.map((p) => (
                 <Link
                   key={p.slug}
                   to="/blog/$slug"
@@ -132,9 +172,7 @@ function PostPage() {
                   <h3 className="mt-3 font-display text-base font-semibold text-[var(--navy)] leading-snug group-hover:text-[var(--gold)] transition-colors">
                     {p.title}
                   </h3>
-                  <p className="mt-2 text-sm text-[var(--text-muted)] line-clamp-3">
-                    {p.excerpt}
-                  </p>
+                  <p className="mt-2 text-sm text-[var(--text-muted)] line-clamp-3">{p.excerpt}</p>
                 </Link>
               ))}
             </div>
