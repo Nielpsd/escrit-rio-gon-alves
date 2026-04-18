@@ -206,7 +206,8 @@ function QueroMeAposentarPage() {
           <div className="max-w-3xl">
             <Eyebrow>Pontos de atenção</Eyebrow>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-              Parece simples pelo app. Mas <em className="hl">os erros têm custo alto</em>.
+              Parece simples pelo app. <br />
+              Mas <em className="hl">os erros têm custo alto</em>.
             </h2>
             <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
               O Meu INSS foi criado para facilitar o pedido — não para garantir aprovação.
