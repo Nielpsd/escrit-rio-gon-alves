@@ -208,10 +208,10 @@ em.hl {
 .btn-l2 {
   position: absolute;
   left: 50%;
-  top: -80px;
-  transform: translateX(-50%) scale(0);
-  width: 320px;
-  height: 320px;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: max(320px, 140%);
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   transition-property: transform;
   transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -220,8 +220,8 @@ em.hl {
 }
 .btn-l1 { z-index: 1; transition-duration: 700ms; }
 .btn-l2 { z-index: 2; transition-duration: 500ms; }
-.btn:hover .btn-l1 { transform: translateX(-50%) scale(1); transition-duration: 500ms; }
-.btn:hover .btn-l2 { transform: translateX(-50%) scale(1); transition-duration: 700ms; }
+.btn:hover .btn-l1 { transform: translate(-50%, -50%) scale(1); transition-duration: 500ms; }
+.btn:hover .btn-l2 { transform: translate(-50%, -50%) scale(1); transition-duration: 700ms; }
 
 .btn-inner {
   position: relative;
