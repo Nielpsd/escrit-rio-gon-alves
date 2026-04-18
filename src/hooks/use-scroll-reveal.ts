@@ -5,7 +5,9 @@ import * as React from "react";
  * e adiciona a classe `is-visible` quando entram na viewport.
  * Funciona em todas as páginas sem precisar editar cada uma.
  */
-export function useScrollReveal(selector = "[data-reveal], section > h1, section > h2, section > h3, .reveal") {
+export function useScrollReveal(
+  selector = "[data-reveal], .reveal, .card-interactive, section h2, section h3, section > p, section > div > p",
+) {
   React.useEffect(() => {
     if (typeof window === "undefined") return;
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
