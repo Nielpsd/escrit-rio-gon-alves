@@ -160,20 +160,24 @@ function BlogPage() {
               </ul>
             </div>
 
-            {/* Mais lidos */}
+            {/* Mais recentes */}
             <div className="rounded-2xl border border-[var(--border)] bg-white p-6">
               <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-[var(--text-light)]">
-                Mais lidos
+                Mais recentes
               </h3>
               <ul className="mt-4 space-y-3">
-                {MAIS_LIDOS.map((t, i) => (
-                  <li key={t} className="flex gap-3">
+                {MAIS_RECENTES.map((p, i) => (
+                  <li key={p.slug} className="flex gap-3">
                     <span className="font-display text-lg font-semibold text-[var(--gold)]">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <p className="text-sm text-[var(--text)] leading-snug hover:text-[var(--navy)] transition-colors cursor-pointer">
-                      {t}
-                    </p>
+                    <Link
+                      to="/blog/$slug"
+                      params={{ slug: p.slug }}
+                      className="text-sm text-[var(--text)] leading-snug hover:text-[var(--navy)] transition-colors"
+                    >
+                      {p.title}
+                    </Link>
                   </li>
                 ))}
               </ul>
