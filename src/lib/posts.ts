@@ -55,7 +55,7 @@ const RAW: Omit<Post, "slug">[] = [
     title: "Lula veta projeto que equipara diabetes tipo 1 a deficiência",
     excerpt:
       "O que muda na prática para portadores de diabetes que buscavam direitos previdenciários equiparados.",
-    date: "14/01/2025",
+    date: "27/03/2026",
     author: "Equipe Gonçalves",
     readTime: "4 min",
     content: [
