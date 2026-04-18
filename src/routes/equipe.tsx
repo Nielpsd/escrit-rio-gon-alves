@@ -158,13 +158,13 @@ function EquipePage() {
       </section>
 
       {/* CTA FINAL */}
-      <section className="on-navy bg-[var(--navy)] py-20 lg:py-28 text-white">
-        <div className="mx-auto max-w-4xl px-6 text-center">
+      <section className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
+        <div className="on-navy rounded-2xl bg-[var(--navy)] p-10 lg:p-14 text-center text-white">
           <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight">
+          <h2 className="mt-4 font-display text-3xl md:text-4xl font-semibold text-white leading-tight">
             Nossa equipe está <em className="hl">pronta para o seu caso</em>.
           </h2>
-          <p className="mt-5 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
+          <p className="mt-4 text-white/65 max-w-xl mx-auto">
             Conte sua situação pelo WhatsApp. Nossa equipe ouve com atenção e responde com clareza.
           </p>
           <div className="mt-8 flex justify-center">
