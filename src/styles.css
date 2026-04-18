@@ -53,15 +53,15 @@
 }
 
 :root {
-  /* Paleta principal */
-  --navy: #0d2340;
-  --navy-mid: #1a3a5c;
-  --navy-light: #eef3f9;
-  --gold: #d4950f;
-  --gold-sat: #f0a800;
-  --gold-deep: #a87010;
-  --gold-light: #f2b824;
-  --gold-pale: #fef6dc;
+  /* Paleta principal — azul mais saturado e dourado mais vibrante */
+  --navy: #0a2452;
+  --navy-mid: #1a3f7a;
+  --navy-light: #e8eff9;
+  --gold: #e0a013;
+  --gold-sat: #ffb400;
+  --gold-deep: #b07a0e;
+  --gold-light: #ffc338;
+  --gold-pale: #fef3d4;
   --white: #fafaf8;
   --surface: #f4f2ec;
   --border: #e0dbd0;
@@ -94,18 +94,18 @@
   --card-foreground: #1c1c1a;
   --popover: #ffffff;
   --popover-foreground: #1c1c1a;
-  --primary: #0d2340;
+  --primary: #0a2452;
   --primary-foreground: #fafaf8;
   --secondary: #f4f2ec;
-  --secondary-foreground: #0d2340;
+  --secondary-foreground: #0a2452;
   --muted: #f4f2ec;
   --muted-foreground: #6b6860;
-  --accent: #fef6dc;
-  --accent-foreground: #0d2340;
+  --accent: #fef3d4;
+  --accent-foreground: #0a2452;
   --destructive: #c53030;
   --destructive-foreground: #fafaf8;
   --input: #e0dbd0;
-  --ring: #d4950f;
+  --ring: #e0a013;
 }
 
 @layer base {
