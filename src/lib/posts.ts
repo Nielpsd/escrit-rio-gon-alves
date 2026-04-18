@@ -41,7 +41,7 @@ const RAW: Omit<Post, "slug">[] = [
     title: "Quanto paga o INSS para a maioria dos brasileiros? Entenda.",
     excerpt:
       "O valor médio dos benefícios pode te surpreender. Veja como funciona o cálculo e o que você pode fazer para receber mais.",
-    date: "14/01/2025",
+    date: "08/04/2026",
     author: "Dr. Renan Gonçalves",
     readTime: "5 min",
     content: [
@@ -55,7 +55,7 @@ const RAW: Omit<Post, "slug">[] = [
     title: "Lula veta projeto que equipara diabetes tipo 1 a deficiência",
     excerpt:
       "O que muda na prática para portadores de diabetes que buscavam direitos previdenciários equiparados.",
-    date: "14/01/2025",
+    date: "27/03/2026",
     author: "Equipe Gonçalves",
     readTime: "4 min",
     content: [
@@ -68,7 +68,7 @@ const RAW: Omit<Post, "slug">[] = [
     title: "Lula vetou pensão para mães de crianças com anencefalia. Entenda!",
     excerpt:
       "Decisão impacta diretamente famílias que aguardavam a sanção da lei. Saiba o que ainda é possível buscar.",
-    date: "13/01/2025",
+    date: "11/03/2026",
     author: "Equipe Gonçalves",
     readTime: "6 min",
     content: [
@@ -81,7 +81,7 @@ const RAW: Omit<Post, "slug">[] = [
     title: "Trabalhador rural sem carteira tem direito à aposentadoria?",
     excerpt:
       "Mesmo sem registro formal, é possível comprovar a atividade rural e garantir o benefício. Veja como.",
-    date: "10/01/2025",
+    date: "22/02/2026",
     author: "Dr. Renan Gonçalves",
     readTime: "7 min",
     content: [
@@ -94,7 +94,7 @@ const RAW: Omit<Post, "slug">[] = [
     title: "O INSS negou seu auxílio-doença? Veja o que fazer agora",
     excerpt:
       "Negativa não é o fim do caminho. Entenda os próximos passos administrativos e judiciais para garantir seu direito.",
-    date: "08/01/2025",
+    date: "06/02/2026",
     author: "Dra. Mariana Gonçalves",
     readTime: "5 min",
     content: [
@@ -107,7 +107,7 @@ const RAW: Omit<Post, "slug">[] = [
     title: "Revisão da vida toda: ainda dá tempo de pedir?",
     excerpt:
       "Após decisões recentes do STF, muitos aposentados ainda têm direito à revisão. Confira se é o seu caso.",
-    date: "05/01/2025",
+    date: "19/01/2026",
     author: "Dr. Renan Gonçalves",
     readTime: "8 min",
     content: [
@@ -120,7 +120,7 @@ const RAW: Omit<Post, "slug">[] = [
     title: "BPC/LOAS: quem tem direito ao benefício de R$ 1.412 do governo?",
     excerpt:
       "Idosos e pessoas com deficiência em situação de vulnerabilidade podem receber o BPC. Veja os requisitos atualizados.",
-    date: "03/01/2025",
+    date: "28/12/2025",
     author: "Equipe Gonçalves",
     readTime: "6 min",
     content: [
@@ -133,7 +133,7 @@ const RAW: Omit<Post, "slug">[] = [
     title: "Salário-maternidade: desempregada também tem direito?",
     excerpt:
       "Mesmo sem vínculo ativo, é possível receber o benefício durante o período de graça. Entenda as regras.",
-    date: "30/12/2024",
+    date: "09/12/2025",
     author: "Dra. Mariana Gonçalves",
     readTime: "5 min",
     content: [
@@ -145,11 +145,14 @@ const RAW: Omit<Post, "slug">[] = [
 
 export const POSTS: Post[] = RAW.map((p) => ({ ...p, slug: slugify(p.title) }));
 
-export const MAIS_LIDOS = [
-  "Quanto paga o INSS para a maioria dos brasileiros?",
-  "Trabalhador rural sem carteira tem direito à aposentadoria?",
-  "O INSS negou. O que fazer agora?",
-];
+function parseDate(d: string) {
+  const [dd, mm, yyyy] = d.split("/").map(Number);
+  return new Date(yyyy, mm - 1, dd).getTime();
+}
+
+export const MAIS_RECENTES: Post[] = [...POSTS]
+  .sort((a, b) => parseDate(b.date) - parseDate(a.date))
+  .slice(0, 3);
 
 export function getPostBySlug(slug: string) {
   return POSTS.find((p) => p.slug === slug);
