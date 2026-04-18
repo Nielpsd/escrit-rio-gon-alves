@@ -94,18 +94,18 @@
   --card-foreground: #1c1c1a;
   --popover: #ffffff;
   --popover-foreground: #1c1c1a;
-  --primary: #0d2340;
+  --primary: #0a2452;
   --primary-foreground: #fafaf8;
   --secondary: #f4f2ec;
-  --secondary-foreground: #0d2340;
+  --secondary-foreground: #0a2452;
   --muted: #f4f2ec;
   --muted-foreground: #6b6860;
-  --accent: #fef6dc;
-  --accent-foreground: #0d2340;
+  --accent: #fef3d4;
+  --accent-foreground: #0a2452;
   --destructive: #c53030;
   --destructive-foreground: #fafaf8;
   --input: #e0dbd0;
-  --ring: #d4950f;
+  --ring: #e0a013;
 }
 
 @layer base {
