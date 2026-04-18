@@ -1,5 +1,6 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts, useRouterState } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
+import { WhatsAppFab } from "@/components/site/WhatsAppFab";
 
 import appCss from "../styles.css?url";
 
