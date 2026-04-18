@@ -81,7 +81,7 @@ const RAW: Omit<Post, "slug">[] = [
     title: "Trabalhador rural sem carteira tem direito à aposentadoria?",
     excerpt:
       "Mesmo sem registro formal, é possível comprovar a atividade rural e garantir o benefício. Veja como.",
-    date: "10/01/2025",
+    date: "22/02/2026",
     author: "Dr. Renan Gonçalves",
     readTime: "7 min",
     content: [
