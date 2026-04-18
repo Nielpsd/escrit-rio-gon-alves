@@ -335,8 +335,8 @@ em.hl {
   .btn-lg .btn-inner { padding: 14px 28px; font-size: 0.875rem; }
   .btn-sm .btn-inner { padding: 9px 18px; font-size: 0.7rem; }
   /* botões em formato pill precisam de mais respiro horizontal */
-  .btn-wpp .btn-inner { padding-left: 26px; padding-right: 26px; }
-  .btn-wpp.btn-lg .btn-inner { padding-left: 32px; padding-right: 32px; }
+  .btn-wpp .btn-inner { padding-left: 30px; padding-right: 30px; }
+  .btn-wpp.btn-lg .btn-inner { padding-left: 36px; padding-right: 36px; }
 }
 
 /* WHATSAPP */
