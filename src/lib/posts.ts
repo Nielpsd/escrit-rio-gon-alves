@@ -120,7 +120,7 @@ const RAW: Omit<Post, "slug">[] = [
     title: "BPC/LOAS: quem tem direito ao benefício de R$ 1.412 do governo?",
     excerpt:
       "Idosos e pessoas com deficiência em situação de vulnerabilidade podem receber o BPC. Veja os requisitos atualizados.",
-    date: "03/01/2025",
+    date: "28/12/2025",
     author: "Equipe Gonçalves",
     readTime: "6 min",
     content: [
