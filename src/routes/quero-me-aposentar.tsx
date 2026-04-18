@@ -144,7 +144,8 @@ function QueroMeAposentarPage() {
           <div className="max-w-3xl">
             <Eyebrow>Perfis comuns</Eyebrow>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-              Você se encaixa em alguma <em className="hl">dessas situações</em>?
+              Você se encaixa em alguma <br />
+              <em className="hl">dessas situações</em>?
             </h2>
             <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
               Se você marcou pelo menos um item, talvez já se encaixe em alguma regra
