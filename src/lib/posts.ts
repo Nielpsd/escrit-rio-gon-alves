@@ -133,7 +133,7 @@ const RAW: Omit<Post, "slug">[] = [
     title: "Salário-maternidade: desempregada também tem direito?",
     excerpt:
       "Mesmo sem vínculo ativo, é possível receber o benefício durante o período de graça. Entenda as regras.",
-    date: "30/12/2024",
+    date: "09/12/2025",
     author: "Dra. Mariana Gonçalves",
     readTime: "5 min",
     content: [
