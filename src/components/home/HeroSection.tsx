@@ -20,10 +20,9 @@ export function HeroSection() {
             com quem conhece o<br />
             <em className="hl">sistema por dentro</em>.
           </h1>
-          <p className="mt-6 max-w-sm text-base text-white/65 leading-relaxed">
-            Dr. Renan Gonçalves atuou<br />
-            como gerente do INSS antes<br />
-            de fundar o escritório — hoje lidera<br />
+          <p className="mt-6 max-w-md text-base text-white/65 leading-relaxed">
+            Dr. Renan Gonçalves atuou como gerente do INSS antes
+            de fundar o escritório — hoje lidera
             uma equipe 100% previdenciária.
           </p>
 
