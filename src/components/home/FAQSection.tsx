@@ -46,7 +46,7 @@ function AccordionItem({ question, answer, isOpen, onClick }: AccordionItemProps
         onClick={onClick}
         className="w-full text-left px-6 py-5 flex justify-between items-center gap-4"
       >
-        <span className={"font-display text-[15px] transition-colors " + (isOpen ? "font-semibold text-[var(--navy)]" : "text-[var(--text)]")}>
+        <span className={"font-display text-base transition-colors " + (isOpen ? "font-semibold text-[var(--navy)]" : "text-[var(--text)]")}>
           {question}
         </span>
         <div className="flex-shrink-0">
@@ -67,7 +67,7 @@ function AccordionItem({ question, answer, isOpen, onClick }: AccordionItemProps
             className="overflow-hidden"
           >
             <div className="px-6 pb-6">
-              <p className="text-sm text-[var(--text-muted)] leading-relaxed max-w-2xl">
+              <p className="text-base text-[var(--text-muted)] leading-relaxed max-w-2xl">
                 {answer}
               </p>
             </div>
