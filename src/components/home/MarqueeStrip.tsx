@@ -12,7 +12,7 @@ const ITEMS = [
 ];
 
 const SEPARATOR = (
-  <span className="mx-6 text-[var(--gold-deep)] select-none" aria-hidden>
+  <span className="mx-10 text-[var(--gold-deep)] select-none" aria-hidden>
     ✦
   </span>
 );
@@ -34,7 +34,7 @@ export function MarqueeStrip() {
   return (
     <div className="relative overflow-hidden bg-[var(--gold)] py-3.5">
       <div
-        className="flex w-max animate-[marquee_30s_linear_infinite]"
+        className="flex w-max animate-[marquee_45s_linear_infinite]"
         style={{ willChange: "transform" }}
       >
         <Track />
