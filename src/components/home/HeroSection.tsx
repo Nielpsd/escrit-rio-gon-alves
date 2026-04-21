@@ -19,7 +19,7 @@ export function HeroSection() {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-7xl px-6 pt-20 pb-24 lg:pt-28 lg:pb-32 flex items-center">
+      <div className="relative mx-auto max-w-7xl px-6 pt-[420px] pb-24 md:pt-20 lg:pt-28 lg:pb-32 flex items-center">
         <div className="max-w-3xl">
           <Eyebrow>Direito Previdenciário</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
