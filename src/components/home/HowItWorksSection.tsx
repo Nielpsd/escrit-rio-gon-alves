@@ -2,8 +2,6 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { Eyebrow } from "@/components/site/Eyebrow";
-import { WaveButton } from "@/components/site/WaveButton";
-import { SITE } from "@/lib/site";
 
 interface Step {
   id: number;
@@ -154,9 +152,6 @@ export function HowItWorksSection() {
                 />
               </AnimatePresence>
             </div>
-            <WaveButton variant="primary" href={SITE.whatsapp} target="_blank" rel="noopener">
-              Falar com a equipe <ArrowRight size={16} />
-            </WaveButton>
           </div>
 
           {/* Accordion de passos */}
