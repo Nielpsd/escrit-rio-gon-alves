@@ -1,65 +1,157 @@
-import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Scale, BookOpen, FileText, Users } from "lucide-react";
 import { Eyebrow } from "@/components/site/Eyebrow";
-import { WaveButton } from "@/components/site/WaveButton";
-import { SITE } from "@/lib/site";
 
-const MEMBERS = [
-  "Renan", "Letícia", "Wesley", "Lucimeiry", "Camila",
-  "Milena", "Aline", "Bruna", "Maria", "Marília", "Nathália",
+interface Member {
+  id: number;
+  name: string;
+  role: string;
+  label: string;
+  quote: string;
+  badge: React.ReactNode;
+  photo: string | null;
+}
+
+const MEMBERS: Member[] = [
+  {
+    id: 1,
+    name: "Dr. Renan Gonçalves",
+    role: "Advogado · OAB/RO",
+    label: "Sócio fundador",
+    quote:
+      "Passei anos dentro do INSS como gerente. Sei exatamente como cada processo é analisado — e uso esse conhecimento a favor dos nossos clientes todos os dias.",
+    badge: <Scale className="h-5 w-5 text-[var(--navy)]" />,
+    photo: "/about-renan.webp",
+  },
+  {
+    id: 2,
+    name: "Letícia Gonçalves",
+    role: "Advogada · OAB/RO",
+    label: "Direito previdenciário",
+    quote:
+      "Cada benefício negado tem uma história por trás. Meu trabalho é entender essa história e construir o argumento técnico certo para revertê-la.",
+    badge: <BookOpen className="h-5 w-5 text-[var(--navy)]" />,
+    photo: null,
+  },
+  {
+    id: 3,
+    name: "Wesley Oliveira",
+    role: "Advogado · OAB/RO",
+    label: "Litígios no INSS",
+    quote:
+      "Especializado em recursos administrativos e ações judiciais previdenciárias. Se o INSS negou, ainda há caminho — e eu conheço cada um deles.",
+    badge: <FileText className="h-5 w-5 text-[var(--navy)]" />,
+    photo: null,
+  },
+  {
+    id: 4,
+    name: "Equipe de Apoio",
+    role: "8 profissionais dedicados",
+    label: "Suporte & atendimento",
+    quote:
+      "Paralegais, assistentes e atendentes que cuidam de cada detalhe do processo — desde a documentação inicial até o acompanhamento pós-concessão.",
+    badge: <Users className="h-5 w-5 text-[var(--navy)]" />,
+    photo: null,
+  },
 ];
 
-export function TeamSection() {
+function PhotoPlaceholder({ name }: { name: string }) {
   return (
-    <section className="bg-[var(--surface)] py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 grid gap-12 lg:grid-cols-2 lg:items-center">
-        <div>
+    <div className="flex h-full w-full items-end justify-center bg-gradient-to-b from-[var(--navy-light,#1a3a6e)] to-[var(--navy)] pb-6">
+      <span className="font-display text-7xl font-bold text-white/20 select-none">{name[0]}</span>
+    </div>
+  );
+}
+
+export function TeamSection() {
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+
+  return (
+    <section className="bg-[var(--surface)] py-24 lg:py-32 px-6 md:px-16">
+      <div className="mx-auto max-w-7xl">
+        <header className="mb-16 text-center">
           <Eyebrow>Equipe</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            Uma equipe inteira focada em <em className="hl">previdenciário</em>.
+            Uma equipe inteira focada em{" "}
+            <em className="hl">previdenciário</em>.
           </h2>
-          <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-            Mais de 10 profissionais dedicados exclusivamente a benefícios previdenciários.
-            Não somos um escritório generalista — cada pessoa da equipe se aprofunda,
-            todos os dias, na mesma área do direito.
-          </p>
+        </header>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-xl bg-white border border-[var(--border)] p-5">
-              <div className="text-xs font-semibold uppercase tracking-wider text-[var(--gold)] mb-2">
-                Atendimento presencial
-              </div>
-              <p className="text-sm text-[var(--text-muted)]">
-                Escritórios físicos em Jaru e Alta Floresta D'Oeste (RO).
-              </p>
-            </div>
-            <div className="rounded-xl bg-white border border-[var(--border)] p-5">
-              <div className="text-xs font-semibold uppercase tracking-wider text-[var(--gold)] mb-2">
-                Atendimento online
-              </div>
-              <p className="text-sm text-[var(--text-muted)]">
-                Para qualquer cidade do Brasil, com a mesma atenção técnica.
-              </p>
-            </div>
-          </div>
+        <div className="flex flex-col items-center gap-4 lg:flex-row lg:justify-center">
+          {MEMBERS.map((member, index) => {
+            const isActive = activeIndex === index;
 
-          <div className="mt-8">
-            <WaveButton variant="primary" href={SITE.whatsapp} target="_blank" rel="noopener">
-              Falar com a equipe <ArrowRight size={16} />
-            </WaveButton>
-          </div>
-        </div>
+            return (
+              <motion.div
+                key={member.id}
+                layout
+                onMouseEnter={() => setActiveIndex(index)}
+                className="flex flex-col gap-3"
+                initial={false}
+                animate={{ width: isActive ? "520px" : "220px" }}
+                transition={{ type: "spring", stiffness: 120, damping: 24, mass: 1, restDelta: 0.001 }}
+                style={{ minWidth: 0 }}
+              >
+                <motion.div
+                  layout
+                  animate={{ backgroundColor: isActive ? "var(--navy)" : "#E8EDF5" }}
+                  className="relative h-[420px] w-full overflow-hidden rounded-3xl p-3"
+                >
+                  <div className="flex h-full w-full flex-col md:flex-row">
+                    {/* Foto / placeholder */}
+                    <motion.div
+                      layout
+                      className="relative h-full w-full flex-shrink-0 overflow-hidden rounded-2xl md:w-[196px]"
+                    >
+                      {member.photo ? (
+                        <img
+                          src={member.photo}
+                          alt={member.name}
+                          className="h-full w-full object-cover object-top"
+                        />
+                      ) : (
+                        <PhotoPlaceholder name={member.name} />
+                      )}
 
-        <div className="grid grid-cols-3 gap-3">
-          {MEMBERS.map((n, i) => (
-            <div
-              key={n}
-              className={`aspect-square rounded-xl border border-[var(--border)] bg-[var(--navy)] grid place-items-center font-display text-2xl text-[var(--gold-light)] ${
-                i === 0 ? "col-span-2 row-span-2 text-5xl" : ""
-              }`}
-            >
-              {n[0]}
-            </div>
-          ))}
+                      {/* Badge */}
+                      <div className="absolute bottom-4 left-4 flex h-10 w-10 items-center justify-center rounded-[10px] bg-white shadow-sm">
+                        {member.badge}
+                      </div>
+                    </motion.div>
+
+                    {/* Conteúdo expandido */}
+                    <div className="flex-1 overflow-hidden">
+                      <AnimatePresence>
+                        {isActive && (
+                          <motion.div
+                            key={"content-" + member.id}
+                            initial={{ opacity: 0, x: 40 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            exit={{ opacity: 0, x: 40 }}
+                            transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+                            className="flex h-full flex-col p-6 text-white"
+                          >
+                            <p className="mb-6 text-base font-normal leading-relaxed opacity-80 line-clamp-6">
+                              "{member.quote}"
+                            </p>
+                            <div className="mt-auto">
+                              <h4 className="text-base font-semibold whitespace-nowrap">{member.name}</h4>
+                              <p className="text-sm text-[var(--gold-light)] whitespace-nowrap">{member.role}</p>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </div>
+                </motion.div>
+
+                <motion.div layout className="px-1 text-center">
+                  <h3 className="text-sm font-medium text-[var(--navy)]">{member.label}</h3>
+                </motion.div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
