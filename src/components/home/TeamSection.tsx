@@ -115,7 +115,7 @@ export function TeamSection() {
                     </motion.div>
 
                     <div className="flex-1 overflow-hidden">
-                      <AnimatePresence>
+                      <AnimatePresence initial={false}>
                         {isActive && (
                           <motion.div
                             key={"content-" + member.id}
