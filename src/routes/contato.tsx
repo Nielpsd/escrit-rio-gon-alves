@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   Clock,
@@ -73,13 +74,8 @@ function ContatoPage() {
     <Layout>
       {/* HEADER */}
       <section className="on-navy relative overflow-hidden bg-[var(--navy)] text-white">
-        <div
-          className="absolute right-[-60px] top-[-80px] font-display text-[420px] leading-none font-bold text-white/[0.04] select-none pointer-events-none"
-          aria-hidden
-        >
-          G
-        </div>
         <div className="relative mx-auto max-w-4xl px-6 pt-20 pb-20 lg:pt-28 lg:pb-24 text-center">
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
           <Eyebrow className="mx-auto justify-center">Contato</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
             Vamos conversar sobre o <em className="hl">seu caso</em>.
@@ -91,6 +87,7 @@ function ContatoPage() {
           <p className="mt-4 text-xs text-white/45">
             Conversa inicial pelo WhatsApp · Conteúdo informativo · Provimento nº 205/2021 da OAB
           </p>
+          </motion.div>
         </div>
       </section>
 

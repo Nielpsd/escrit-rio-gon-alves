@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { motion } from "framer-motion";
 import { ArrowRight, Check, MessageCircle } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
@@ -62,14 +63,8 @@ function SobrePage() {
     <Layout>
       {/* HERO */}
       <section className="on-navy relative overflow-hidden bg-[var(--navy)] text-white">
-        <div
-          className="absolute right-[-60px] top-[-80px] font-display text-[420px] leading-none font-bold text-white/[0.04] select-none pointer-events-none"
-          aria-hidden
-        >
-          G
-        </div>
         <div className="relative mx-auto max-w-7xl px-6 pt-20 pb-24 lg:pt-28 lg:pb-32 grid gap-16 lg:grid-cols-[1.2fr_1fr] items-center">
-          <div>
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
             <Eyebrow>Sobre o escritório</Eyebrow>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white max-w-2xl">
               Um escritório que <em className="hl">nasceu de dentro do INSS</em>.
@@ -84,35 +79,34 @@ function SobrePage() {
                 <MessageCircle size={18} /> Falar com a equipe
               </WaveButton>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="relative">
-            <div className="aspect-[4/5] rounded-2xl border border-white/10 bg-gradient-to-br from-[var(--navy-mid)] to-[var(--navy)] grid place-items-center">
-              <div className="text-center">
-                <div className="mx-auto grid h-24 w-24 place-items-center rounded-full bg-[var(--gold)]/15 font-display text-4xl font-semibold text-[var(--gold-light)]">
-                  R
-                </div>
-                <p className="mt-4 font-display text-lg text-white">Dr. Renan Gonçalves</p>
-                <p className="text-xs text-white/45">{SITE.oab}</p>
-              </div>
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.55, delay: 0.15 }}
+          >
+            <div className="aspect-[4/5] rounded-2xl overflow-hidden">
+              <img src="/about-renan.webp" alt="Dr. Renan Gonçalves" className="w-full h-full object-cover object-top" />
             </div>
-            <div className="absolute -bottom-5 -left-5 rounded-xl bg-[var(--gold)] px-5 py-3 text-sm font-medium text-white shadow-lg">
+            <div className="absolute -bottom-5 -left-5 rounded-xl bg-[var(--gold)] px-5 py-3 text-sm font-medium text-[var(--navy)] font-semibold shadow-lg">
               Fundador & Advogado
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* HISTÓRIA */}
       <section className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
-          <div className="lg:sticky lg:top-28 lg:self-start">
+          <motion.div className="lg:sticky lg:top-28 lg:self-start" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <Eyebrow>Nossa história</Eyebrow>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
               Como tudo <em className="hl">começou</em>
             </h2>
-          </div>
-          <div className="space-y-5 text-base text-[var(--text-muted)] leading-relaxed">
+          </motion.div>
+          <motion.div className="space-y-5 text-base text-[var(--text-muted)] leading-relaxed" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}>
             <p>
               Depois de anos dentro do INSS, Dr. Renan percebeu que a maioria das negativas
               não era falta de direito — era falta de preparo. Documentos errados, estratégias
@@ -128,7 +122,7 @@ function SobrePage() {
               o escritório mantém o mesmo compromisso do primeiro dia — tratar cada caso
               como único, com escuta e fundamentação técnica.
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 

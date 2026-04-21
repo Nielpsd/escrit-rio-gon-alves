@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { ArrowRight, Clock, MessageCircle, User } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
@@ -66,13 +67,8 @@ function BlogPage() {
   return (
     <Layout>
       <section className="on-navy relative overflow-hidden bg-[var(--navy)] text-white">
-        <div
-          className="absolute right-[-60px] top-[-80px] font-display text-[420px] leading-none font-bold text-white/[0.04] select-none pointer-events-none"
-          aria-hidden
-        >
-          G
-        </div>
         <div className="relative mx-auto max-w-4xl px-6 pt-20 pb-20 lg:pt-28 lg:pb-24 text-center">
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
           <Eyebrow className="mx-auto justify-center">Blog</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
             Seus direitos previdenciários, explicados com <em className="hl">clareza</em>.
@@ -81,6 +77,7 @@ function BlogPage() {
             Aqui você encontra tudo sobre aposentadoria, benefícios e INSS — em linguagem simples,
             produzido por quem conhece o sistema por dentro. Sem juridiquês, sem enrolação.
           </p>
+          </motion.div>
         </div>
       </section>
 

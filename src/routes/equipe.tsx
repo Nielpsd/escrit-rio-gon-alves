@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { motion } from "framer-motion";
 import { ArrowRight, Instagram, MessageCircle, Youtube } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
@@ -43,13 +44,8 @@ function EquipePage() {
     <Layout>
       {/* HEADER */}
       <section className="on-navy relative overflow-hidden bg-[var(--navy)] text-white">
-        <div
-          className="absolute right-[-60px] top-[-80px] font-display text-[420px] leading-none font-bold text-white/[0.04] select-none pointer-events-none"
-          aria-hidden
-        >
-          G
-        </div>
         <div className="relative mx-auto max-w-4xl px-6 pt-20 pb-20 lg:pt-28 lg:pb-24 text-center">
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
           <Eyebrow className="mx-auto justify-center">Nossa equipe</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
             Conheça quem vai <br />
@@ -60,26 +56,21 @@ function EquipePage() {
             Aqui ninguém cuida de vários assuntos ao mesmo tempo — cada pessoa da equipe
             tem foco no que faz.
           </p>
+          </motion.div>
         </div>
       </section>
 
       {/* DR. RENAN — DESTAQUE */}
       <section className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] items-center">
-          <div className="relative">
-            <div className="aspect-[4/5] rounded-2xl border border-[var(--border)] bg-gradient-to-br from-[var(--navy-mid)] to-[var(--navy)] grid place-items-center">
-              <div className="text-center">
-                <div className="mx-auto grid h-28 w-28 place-items-center rounded-full bg-[var(--gold)]/15 font-display text-5xl font-semibold text-[var(--gold-light)]">
-                  R
-                </div>
-                <p className="mt-4 font-display text-xl text-white">Dr. Renan Gonçalves</p>
-                <p className="text-xs text-white/45">{SITE.oab}</p>
-              </div>
+          <motion.div className="relative" initial={{ opacity: 0, scale: 0.96 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.55 }}>
+            <div className="aspect-[4/5] rounded-2xl overflow-hidden">
+              <img src="/about-renan.webp" alt="Dr. Renan Gonçalves" className="w-full h-full object-cover object-top" />
             </div>
-            <div className="absolute -bottom-5 -left-5 rounded-xl bg-[var(--gold)] px-5 py-3 text-sm font-medium text-white shadow-lg">
+            <div className="absolute -bottom-5 -left-5 rounded-xl bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--navy)] shadow-lg">
               Ex-gerente do INSS
             </div>
-          </div>
+          </motion.div>
 
           <div>
             <Eyebrow>Fundador</Eyebrow>

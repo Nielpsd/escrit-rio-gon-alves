@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   CheckCircle2,
@@ -109,33 +110,33 @@ function ServicosPage() {
     <Layout>
       {/* HEADER */}
       <section className="on-navy relative overflow-hidden bg-[var(--navy)] text-white">
-        <div
-          className="absolute right-[-60px] top-[-80px] font-display text-[420px] leading-none font-bold text-white/[0.04] select-none pointer-events-none"
-          aria-hidden
-        >
-          G
-        </div>
         <div className="relative mx-auto max-w-4xl px-6 pt-20 pb-20 lg:pt-28 lg:pb-24 text-center">
-          <Eyebrow className="mx-auto justify-center">Serviços</Eyebrow>
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
-            Áreas de atuação em <em className="hl">direito previdenciário</em>.
-          </h1>
-          <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Atuação em benefícios previdenciários e assistenciais — aposentadorias,
-            auxílios, BPC/LOAS, pensões, revisões e demais demandas relativas ao INSS.
-            Conteúdo meramente informativo sobre cada área.
-          </p>
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
+            <Eyebrow className="mx-auto justify-center">Serviços</Eyebrow>
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
+              Áreas de atuação em <em className="hl">direito previdenciário</em>.
+            </h1>
+            <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
+              Atuação em benefícios previdenciários e assistenciais — aposentadorias,
+              auxílios, BPC/LOAS, pensões, revisões e demais demandas relativas ao INSS.
+              Conteúdo meramente informativo sobre cada área.
+            </p>
+          </motion.div>
         </div>
       </section>
 
       {/* GRID DE SERVIÇOS */}
       <section className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
         <div className="grid gap-6 md:grid-cols-2">
-          {SERVICOS.map((s) => {
+          {SERVICOS.map((s, i) => {
             const Icon = s.icon;
             return (
-              <article
+              <motion.article
                 key={s.titulo}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
                 className="group rounded-2xl border border-[var(--border)] bg-white p-8 transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)]"
               >
                 <div className="grid h-12 w-12 place-items-center rounded-xl bg-[var(--navy-light)] text-[var(--navy)] group-hover:bg-[var(--navy)] group-hover:text-[var(--gold-light)] transition-colors">
@@ -161,7 +162,7 @@ function ServicosPage() {
                     </li>
                   ))}
                 </ul>
-              </article>
+              </motion.article>
             );
           })}
         </div>
