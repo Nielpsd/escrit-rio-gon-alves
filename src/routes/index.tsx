@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout } from "@/components/site/Layout";
 import { HeroSection } from "@/components/home/HeroSection";
+import { MarqueeStrip } from "@/components/home/MarqueeStrip";
 import { AuthoritySection } from "@/components/home/AuthoritySection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { HowItWorksSection } from "@/components/home/HowItWorksSection";
@@ -40,6 +41,7 @@ function Home() {
   return (
     <Layout>
       <HeroSection />
+      <MarqueeStrip />
       <AuthoritySection />
       <ServicesSection />
       <HowItWorksSection />
