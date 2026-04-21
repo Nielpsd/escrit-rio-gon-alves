@@ -97,7 +97,7 @@ export function TeamSection() {
                 <motion.div
                   layout
                   animate={{ backgroundColor: isActive ? "var(--navy)" : "#E8EDF5" }}
-                  className="relative h-[420px] w-full overflow-hidden rounded-3xl p-3"
+                  className="relative h-[320px] w-full overflow-hidden rounded-3xl p-3"
                 >
                   <div className="flex h-full w-full flex-col md:flex-row">
                     <motion.div
