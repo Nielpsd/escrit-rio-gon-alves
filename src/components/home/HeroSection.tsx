@@ -6,9 +6,16 @@ import { SITE } from "@/lib/site";
 export function HeroSection() {
   return (
     <section className="on-navy relative overflow-hidden bg-[var(--navy)] text-white">
+      {/* Desktop background */}
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 hidden md:block bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/hero-bg.webp')" }}
+        aria-hidden
+      />
+      {/* Mobile background — centralizada, ancorada ao topo */}
+      <div
+        className="absolute inset-0 block md:hidden bg-cover bg-top bg-no-repeat"
+        style={{ backgroundImage: "url('/hero-bg-mobile.webp')" }}
         aria-hidden
       />
 
