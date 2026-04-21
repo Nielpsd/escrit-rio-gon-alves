@@ -13,14 +13,14 @@ export function HeroSection() {
       />
 
       <div className="relative mx-auto max-w-7xl px-6 pt-20 pb-24 lg:pt-28 lg:pb-32 flex items-center">
-        <div className="max-w-lg">
+        <div className="max-w-3xl">
           <Eyebrow>Direito Previdenciário</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
             Direito Previdenciário<br />
             com quem conhece o<br />
             <em className="hl">sistema por dentro</em>.
           </h1>
-          <p className="mt-6 max-w-xs text-base text-white/65 leading-relaxed">
+          <p className="mt-6 max-w-sm text-base text-white/65 leading-relaxed">
             Dr. Renan Gonçalves atuou<br />
             como gerente do INSS antes<br />
             de fundar o escritório — hoje lidera<br />
