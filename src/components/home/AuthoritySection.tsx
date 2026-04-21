@@ -14,14 +14,14 @@ export function AuthoritySection() {
   return (
     <section
       id="sobre"
-      className="w-full py-24 lg:py-32 px-6 md:px-16 overflow-hidden bg-[var(--navy)]"
+      className="w-full py-24 lg:py-32 px-6 md:px-16 overflow-hidden bg-white"
     >
       <div className="max-w-7xl mx-auto flex flex-col items-center">
 
         {/* Headline */}
         <motion.h2
           {...fade(0)}
-          className="max-w-3xl text-center font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.1] text-white"
+          className="max-w-3xl text-center font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.1] text-[var(--navy)]"
         >
           Quem já trabalhou no INSS sabe{" "}
           <em className="hl">como o sistema decide</em>.
@@ -30,7 +30,7 @@ export function AuthoritySection() {
         {/* Sub */}
         <motion.p
           {...fade(0.1)}
-          className="mt-5 max-w-xl text-center text-base text-white/60 leading-relaxed"
+          className="mt-5 max-w-xl text-center text-base text-[var(--text-muted)] leading-relaxed"
         >
           Dr. Renan Gonçalves passou anos dentro do INSS como gerente. Hoje lidera
           uma equipe exclusivamente previdenciária — e transforma esse conhecimento
@@ -75,12 +75,12 @@ export function AuthoritySection() {
             </motion.div>
             <motion.div
               {...fade(0.5)}
-              className="bg-white/[0.06] border border-white/10 rounded-2xl p-7 flex-grow"
+              className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-7 flex-grow"
             >
-              <h3 className="font-display text-lg font-semibold text-white mb-3 flex items-center gap-2">
+              <h3 className="font-display text-lg font-semibold text-[var(--navy)] mb-3 flex items-center gap-2">
                 <span className="text-[var(--gold)] text-xs">●</span> Ex-gerente do INSS
               </h3>
-              <p className="text-sm text-white/60 leading-relaxed">
+              <p className="text-sm text-[var(--text-muted)] leading-relaxed">
                 Conhecemos o sistema por dentro. Sabemos os critérios de análise e como
                 cada documento é avaliado na concessão de benefícios.
               </p>
@@ -91,22 +91,22 @@ export function AuthoritySection() {
           <div className="flex flex-col gap-5 order-3">
             <motion.div
               {...fade(0.6)}
-              className="bg-white/[0.06] border border-white/10 rounded-2xl p-7 flex-grow"
+              className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-7 flex-grow"
             >
-              <h3 className="font-display text-lg font-semibold text-white mb-3 flex items-center gap-2">
+              <h3 className="font-display text-lg font-semibold text-[var(--navy)] mb-3 flex items-center gap-2">
                 <span className="text-[var(--gold)] text-xs">●</span> Só previdenciário
               </h3>
-              <p className="text-sm text-white/60 leading-relaxed">
+              <p className="text-sm text-[var(--text-muted)] leading-relaxed">
                 O escritório atua exclusivamente em benefícios do INSS. Toda a atenção
                 e o estudo da equipe estão concentrados em uma única especialidade.
               </p>
             </motion.div>
             <motion.div
               {...fade(0.7)}
-              className="bg-white/[0.06] border border-white/10 rounded-2xl px-7 py-6 flex justify-between items-center"
+              className="bg-[var(--surface)] border border-[var(--border)] rounded-2xl px-7 py-6 flex justify-between items-center"
             >
               <span className="font-display text-3xl font-bold text-[var(--gold)]">100%</span>
-              <span className="text-sm text-white/60 text-right leading-snug">
+              <span className="text-sm text-[var(--text-muted)] text-right leading-snug">
                 foco em<br />previdenciário
               </span>
             </motion.div>
