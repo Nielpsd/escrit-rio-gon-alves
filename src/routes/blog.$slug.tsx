@@ -1,5 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, Clock, MessageCircle, User } from "lucide-react";
+import { motion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
@@ -67,6 +68,7 @@ export const Route = createFileRoute("/blog/$slug")({
         { name: "description", content: post.excerpt },
         { property: "og:title", content: post.title },
         { property: "og:description", content: post.excerpt },
+        ...(post.image ? [{ property: "og:image", content: post.image }] : []),
       ],
     };
   },
@@ -98,14 +100,20 @@ function PostPage() {
 
   return (
     <Layout>
+      {/* HERO */}
       <section className="on-navy relative overflow-hidden bg-[var(--navy)] text-white">
-        <div
-          className="absolute right-[-60px] top-[-80px] font-display text-[420px] leading-none font-bold text-white/[0.04] select-none pointer-events-none"
-          aria-hidden
+        {post.image && (
+          <div className="absolute inset-0">
+            <img src={post.image} alt="" className="h-full w-full object-cover opacity-20" aria-hidden />
+            <div className="absolute inset-0 bg-gradient-to-b from-[var(--navy)]/60 via-[var(--navy)]/80 to-[var(--navy)]" />
+          </div>
+        )}
+        <motion.div
+          className="relative mx-auto max-w-3xl px-6 pt-20 pb-16 lg:pt-28 lg:pb-20"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
         >
-          G
-        </div>
-        <div className="relative mx-auto max-w-3xl px-6 pt-20 pb-16 lg:pt-28 lg:pb-20">
           <Link
             to="/blog"
             className="inline-flex items-center gap-2 text-xs text-white/60 hover:text-white transition-colors"
@@ -119,8 +127,11 @@ function PostPage() {
             {post.title}
           </h1>
           <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-white/60">
-            <span className="inline-flex items-center gap-1">
-              <User size={12} /> {post.author}
+            <span className="inline-flex items-center gap-1.5">
+              <span className="grid h-6 w-6 place-items-center rounded-full bg-[var(--gold)]/20 font-display text-xs font-semibold text-[var(--gold-light)]">
+                {post.author[0]}
+              </span>
+              {post.author}
             </span>
             <span>·</span>
             <span>{post.date}</span>
@@ -129,18 +140,50 @@ function PostPage() {
               <Clock size={12} /> {post.readTime}
             </span>
           </div>
-        </div>
+        </motion.div>
       </section>
 
+      {/* IMAGEM DE CAPA */}
+      {post.image && (
+        <div className="mx-auto max-w-4xl px-6">
+          <div className="-mt-8 overflow-hidden rounded-2xl shadow-[var(--shadow-lg)]">
+            <img
+              src={post.image}
+              alt={post.title}
+              className="aspect-[16/7] w-full object-cover"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* CONTEÚDO */}
       <section className="mx-auto max-w-3xl px-6 py-16 lg:py-20">
-        <p className="font-display text-xl text-[var(--navy)] leading-relaxed">{post.excerpt}</p>
-        <div className="mt-8 space-y-5 text-base text-[var(--text)] leading-relaxed">
+        <p className="font-display text-xl text-[var(--navy)] leading-relaxed border-l-4 border-[var(--gold)] pl-5">
+          {post.excerpt}
+        </p>
+        <div className="mt-10 space-y-6 text-base text-[var(--text)] leading-relaxed">
           {post.content.map((par: string, i: number) => (
-            <p key={i}>{par}</p>
+            <motion.p
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+            >
+              {par}
+            </motion.p>
           ))}
         </div>
 
-        <div className="on-navy relative overflow-hidden mt-12 rounded-2xl bg-[var(--navy)] p-8 text-white">
+        {/* DIVIDER */}
+        <div className="my-12 flex items-center gap-4">
+          <div className="h-px flex-1 bg-[var(--border)]" />
+          <span className="font-display text-sm text-[var(--text-light)]">{SITE.name}</span>
+          <div className="h-px flex-1 bg-[var(--border)]" />
+        </div>
+
+        {/* CTA */}
+        <div className="on-navy relative overflow-hidden rounded-2xl bg-[var(--navy)] p-8 text-white">
           <div className="absolute -right-20 -top-20 font-display text-[420px] leading-none font-bold text-white/[0.03] select-none pointer-events-none" aria-hidden>G</div>
           <div className="relative">
             <Eyebrow>Precisa de ajuda no seu caso?</Eyebrow>
@@ -156,28 +199,52 @@ function PostPage() {
         </div>
       </section>
 
+      {/* ARTIGOS RELACIONADOS */}
       {related.length > 0 && (
-        <section className="border-t border-[var(--border)] bg-[var(--navy-light)]/30">
+        <section className="border-t border-[var(--border)] bg-[var(--surface)]">
           <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
             <h2 className="font-display text-2xl font-semibold text-[var(--navy)]">
               Continue lendo
             </h2>
-            <div className="mt-8 grid gap-6 md:grid-cols-3">
-              {related.map((p) => (
-                <Link
+            <div className="mt-8 grid gap-5 md:grid-cols-3">
+              {related.map((p, i) => (
+                <motion.div
                   key={p.slug}
-                  to="/blog/$slug"
-                  params={{ slug: p.slug }}
-                  className="group rounded-2xl border border-[var(--border)] bg-white p-6 transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)]"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.08 }}
                 >
-                  <span className="rounded-full bg-[var(--navy-light)] px-2.5 py-1 text-[10px] font-medium text-[var(--navy)]">
-                    {p.tag}
-                  </span>
-                  <h3 className="mt-3 font-display text-base font-semibold text-[var(--navy)] leading-snug group-hover:text-[var(--gold)] transition-colors">
-                    {p.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-[var(--text-muted)] line-clamp-3">{p.excerpt}</p>
-                </Link>
+                  <Link
+                    to="/blog/$slug"
+                    params={{ slug: p.slug }}
+                    className="group flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-white transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)]"
+                  >
+                    {p.image ? (
+                      <div className="aspect-[16/9] overflow-hidden">
+                        <img
+                          src={p.image}
+                          alt={p.title}
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                    ) : (
+                      <div className="aspect-[16/9] bg-gradient-to-br from-[var(--navy-mid)] to-[var(--navy)]" />
+                    )}
+                    <div className="flex flex-col p-5">
+                      <span className="self-start rounded-full bg-[var(--navy-light)] px-2.5 py-1 text-[10px] font-medium text-[var(--navy)]">
+                        {p.tag}
+                      </span>
+                      <h3 className="mt-3 font-display text-base font-semibold text-[var(--navy)] leading-snug group-hover:text-[var(--gold)] transition-colors">
+                        {p.title}
+                      </h3>
+                      <p className="mt-2 text-sm text-[var(--text-muted)] line-clamp-2">{p.excerpt}</p>
+                      <div className="mt-4 flex items-center gap-1 text-xs font-medium text-[var(--gold)]">
+                        Ler artigo <ArrowRight size={12} />
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </div>
