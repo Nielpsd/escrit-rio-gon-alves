@@ -7,7 +7,7 @@ import CharacterCount from "@tiptap/extension-character-count";
 import {
   Bold, Italic, Underline as UnderlineIcon, Strikethrough,
   Heading2, Heading3, List, ListOrdered, Quote, Minus,
-  Link as LinkIcon, LinkOff, Undo, Redo, Code, RemoveFormatting,
+  Link as LinkIcon, Unlink, Undo, Redo, Code, RemoveFormatting,
 } from "lucide-react";
 
 interface Props {
@@ -147,7 +147,7 @@ export function RichTextEditor({ value, onChange }: Props) {
             <LinkIcon size={14} />
           </ToolBtn>
           <ToolBtn label="Remover link" disabled={!editor.isActive("link")} onClick={() => editor.chain().focus().unsetLink().run()}>
-            <LinkOff size={14} />
+            <Unlink size={14} />
           </ToolBtn>
         </ToolGroup>
 
