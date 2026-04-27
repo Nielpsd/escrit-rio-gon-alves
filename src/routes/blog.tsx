@@ -145,15 +145,18 @@ function BlogPage() {
           </div>
 
           <aside className="space-y-6 lg:sticky lg:top-28 lg:self-start">
-            <div className="on-navy rounded-2xl bg-[var(--navy)] p-6 text-white">
-              <Eyebrow>Direto com a equipe</Eyebrow>
-              <p className="mt-3 font-display text-lg leading-snug text-white">
-                Tem uma dúvida que nenhum artigo respondeu?
-              </p>
-              <div className="mt-5">
-                <WaveButton variant="wpp" href={SITE.whatsapp} target="_blank" rel="noopener">
-                  <MessageCircle size={16} /> Falar com especialista <ArrowRight size={14} />
-                </WaveButton>
+            <div className="on-navy relative overflow-hidden rounded-2xl bg-[var(--navy)] p-6 text-white">
+              <div className="absolute -right-20 -top-20 font-display text-[420px] leading-none font-bold text-white/[0.03] select-none pointer-events-none" aria-hidden>G</div>
+              <div className="relative">
+                <Eyebrow>Direto com a equipe</Eyebrow>
+                <p className="mt-3 font-display text-lg leading-snug text-white">
+                  Tem uma dúvida que nenhum artigo respondeu?
+                </p>
+                <div className="mt-5">
+                  <WaveButton variant="wpp" href={SITE.whatsapp} target="_blank" rel="noopener">
+                    <MessageCircle size={16} /> Falar com especialista <ArrowRight size={14} />
+                  </WaveButton>
+                </div>
               </div>
             </div>
 

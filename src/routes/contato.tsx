@@ -178,15 +178,18 @@ function ContatoPage() {
 
           {/* Sidebar de contato */}
           <aside className="space-y-6">
-            <div className="on-navy rounded-2xl bg-[var(--navy)] p-8 text-white">
-              <Eyebrow>Atendimento direto</Eyebrow>
-              <p className="mt-3 font-display text-xl leading-snug text-white">
-                Prefere falar agora mesmo? Nossa equipe está no WhatsApp, pronta para ouvir.
-              </p>
-              <div className="mt-5">
-                <WaveButton variant="wpp" href={SITE.whatsapp} target="_blank" rel="noopener">
-                  <MessageCircle size={16} /> Abrir WhatsApp <ArrowRight size={14} />
-                </WaveButton>
+            <div className="on-navy relative overflow-hidden rounded-2xl bg-[var(--navy)] p-8 text-white">
+              <div className="absolute -right-20 -top-20 font-display text-[420px] leading-none font-bold text-white/[0.03] select-none pointer-events-none" aria-hidden>G</div>
+              <div className="relative">
+                <Eyebrow>Atendimento direto</Eyebrow>
+                <p className="mt-3 font-display text-xl leading-snug text-white">
+                  Prefere falar agora mesmo? Nossa equipe está no WhatsApp, pronta para ouvir.
+                </p>
+                <div className="mt-5">
+                  <WaveButton variant="wpp" href={SITE.whatsapp} target="_blank" rel="noopener">
+                    <MessageCircle size={16} /> Abrir WhatsApp <ArrowRight size={14} />
+                  </WaveButton>
+                </div>
               </div>
             </div>
 

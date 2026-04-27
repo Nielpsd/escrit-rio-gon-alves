@@ -350,24 +350,27 @@ function QueroMeAposentarPage() {
 
       {/* CTA FINAL */}
       <section className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
-        <div className="on-navy rounded-2xl bg-[var(--navy)] p-10 lg:p-14 text-center text-white">
-          <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
-          <h2 className="mt-4 font-display text-3xl md:text-4xl font-semibold text-white leading-tight">
-            Tem dúvidas sobre o seu caso? <em className="hl">Converse com a equipe</em>.
-          </h2>
-          <p className="mt-4 text-white/65 max-w-xl mx-auto">
-            A análise individual do histórico contributivo é o que permite indicar, com base
-            na lei, qual modalidade se aplica ao seu caso e quais documentos podem ser
-            necessários.
-          </p>
-          <div className="mt-8 flex justify-center">
-            <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-              <MessageCircle size={18} /> Tirar dúvidas pelo WhatsApp <ArrowRight size={16} />
-            </WaveButton>
+        <div className="on-navy relative overflow-hidden rounded-2xl bg-[var(--navy)] p-10 lg:p-14 text-center text-white">
+          <div className="absolute -right-20 -top-20 font-display text-[420px] leading-none font-bold text-white/[0.03] select-none pointer-events-none" aria-hidden>G</div>
+          <div className="relative">
+            <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
+            <h2 className="mt-4 font-display text-3xl md:text-4xl font-semibold text-white leading-tight">
+              Tem dúvidas sobre o seu caso? <em className="hl">Converse com a equipe</em>.
+            </h2>
+            <p className="mt-4 text-white/65 max-w-xl mx-auto">
+              A análise individual do histórico contributivo é o que permite indicar, com base
+              na lei, qual modalidade se aplica ao seu caso e quais documentos podem ser
+              necessários.
+            </p>
+            <div className="mt-8 flex justify-center">
+              <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
+                <MessageCircle size={18} /> Tirar dúvidas pelo WhatsApp <ArrowRight size={16} />
+              </WaveButton>
+            </div>
+            <p className="mt-5 inline-flex items-center gap-2 text-xs text-white/55">
+              <Phone size={12} /> {SITE.phone} · Atendimento online para todo o Brasil
+            </p>
           </div>
-          <p className="mt-5 inline-flex items-center gap-2 text-xs text-white/55">
-            <Phone size={12} /> {SITE.phone} · Atendimento online para todo o Brasil
-          </p>
         </div>
       </section>
     </Layout>

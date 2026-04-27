@@ -139,15 +139,18 @@ function PostPage() {
           ))}
         </div>
 
-        <div className="on-navy mt-12 rounded-2xl bg-[var(--navy)] p-8 text-white">
-          <Eyebrow>Precisa de ajuda no seu caso?</Eyebrow>
-          <p className="mt-3 font-display text-xl leading-snug text-white">
-            Cada situação é única. Fale com um especialista do Escritório Gonçalves.
-          </p>
-          <div className="mt-6">
-            <WaveButton variant="wpp" href={SITE.whatsapp} target="_blank" rel="noopener">
-              <MessageCircle size={16} /> Falar no WhatsApp <ArrowRight size={14} />
-            </WaveButton>
+        <div className="on-navy relative overflow-hidden mt-12 rounded-2xl bg-[var(--navy)] p-8 text-white">
+          <div className="absolute -right-20 -top-20 font-display text-[420px] leading-none font-bold text-white/[0.03] select-none pointer-events-none" aria-hidden>G</div>
+          <div className="relative">
+            <Eyebrow>Precisa de ajuda no seu caso?</Eyebrow>
+            <p className="mt-3 font-display text-xl leading-snug text-white">
+              Cada situação é única. Fale com um especialista do Escritório Gonçalves.
+            </p>
+            <div className="mt-6">
+              <WaveButton variant="wpp" href={SITE.whatsapp} target="_blank" rel="noopener">
+                <MessageCircle size={16} /> Falar no WhatsApp <ArrowRight size={14} />
+              </WaveButton>
+            </div>
           </div>
         </div>
       </section>

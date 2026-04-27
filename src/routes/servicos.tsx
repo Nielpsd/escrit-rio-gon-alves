@@ -168,25 +168,28 @@ function ServicosPage() {
         </div>
 
         {/* CTA */}
-        <div className="on-navy mt-16 rounded-2xl bg-[var(--navy)] p-10 lg:p-14 text-center text-white">
-          <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
-          <h2 className="mt-4 font-display text-3xl md:text-4xl font-semibold leading-tight text-white">
-            Não sabe qual benefício é o <em className="hl">seu caso</em>?
-          </h2>
-          <p className="mt-4 text-white/65 max-w-xl mx-auto">
-            Conte sua situação no WhatsApp. Sem compromisso, com conversa direta para
-            entender o que se aplica ao seu caso.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <WaveButton variant="wpp" href={SITE.whatsapp} target="_blank" rel="noopener">
-              <MessageCircle size={16} /> Falar no WhatsApp <ArrowRight size={14} />
-            </WaveButton>
-            <Link
-              to="/contato"
-              className="text-sm text-white/70 underline-offset-4 hover:text-white hover:underline"
-            >
-              ou envie uma mensagem pelo formulário
-            </Link>
+        <div className="on-navy relative overflow-hidden mt-16 rounded-2xl bg-[var(--navy)] p-10 lg:p-14 text-center text-white">
+          <div className="absolute -right-20 -top-20 font-display text-[420px] leading-none font-bold text-white/[0.03] select-none pointer-events-none" aria-hidden>G</div>
+          <div className="relative">
+            <Eyebrow className="mx-auto justify-center">Atendimento</Eyebrow>
+            <h2 className="mt-4 font-display text-3xl md:text-4xl font-semibold leading-tight text-white">
+              Não sabe qual benefício é o <em className="hl">seu caso</em>?
+            </h2>
+            <p className="mt-4 text-white/65 max-w-xl mx-auto">
+              Conte sua situação no WhatsApp. Sem compromisso, com conversa direta para
+              entender o que se aplica ao seu caso.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <WaveButton variant="wpp" href={SITE.whatsapp} target="_blank" rel="noopener">
+                <MessageCircle size={16} /> Falar no WhatsApp <ArrowRight size={14} />
+              </WaveButton>
+              <Link
+                to="/contato"
+                className="text-sm text-white/70 underline-offset-4 hover:text-white hover:underline"
+              >
+                ou envie uma mensagem pelo formulário
+              </Link>
+            </div>
           </div>
         </div>
       </section>
