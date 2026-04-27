@@ -13,6 +13,7 @@ export interface Database {
           tag: string;
           author: string;
           read_time: string;
+          image: string;
           published: boolean;
           published_at: string;
           created_at: string;
@@ -26,6 +27,7 @@ export interface Database {
           tag?: string;
           author?: string;
           read_time?: string;
+          image?: string;
           published?: boolean;
           published_at?: string;
           created_at?: string;
@@ -39,6 +41,7 @@ export interface Database {
           tag?: string;
           author?: string;
           read_time?: string;
+          image?: string;
           published?: boolean;
           published_at?: string;
           created_at?: string;

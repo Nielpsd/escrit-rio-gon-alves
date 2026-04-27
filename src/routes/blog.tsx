@@ -55,6 +55,7 @@ function mapRow(row: PostRow) {
     date: new Date(row.published_at).toLocaleDateString("pt-BR"),
     author: row.author,
     readTime: row.read_time,
+    image: row.image ?? "",
     content: row.content.split("\n\n"),
   };
 }
