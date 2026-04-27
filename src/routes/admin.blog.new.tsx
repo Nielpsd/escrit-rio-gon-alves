@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
-import { useState } from "react";
-import { ArrowLeft, Save } from "lucide-react";
+import { useRef, useState } from "react";
+import { ArrowLeft, Save, Upload, X } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { CATEGORIAS } from "@/lib/posts";
 
@@ -12,7 +12,7 @@ function slugify(s: string) {
   return s
     .toLowerCase()
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[̀-ͯ]/g, "")
     .replace(/[^a-z0-9\s-]/g, "")
     .trim()
     .replace(/\s+/g, "-")
@@ -135,16 +135,11 @@ export function PostForm({
         </Field>
       </div>
 
-      <Field label="URL da imagem de capa">
-        <input
+      <Field label="Imagem de capa">
+        <ImageUpload
           value={form.image as string}
-          onChange={(e) => set("image", e.target.value)}
-          className="input"
-          placeholder="https://images.unsplash.com/..."
+          onChange={(url) => set("image", url)}
         />
-        {form.image && (
-          <img src={form.image as string} alt="preview" className="mt-2 h-32 w-full rounded-lg object-cover" />
-        )}
       </Field>
 
       <Field label="Resumo">
@@ -170,7 +165,106 @@ export function PostForm({
   );
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function ImageUpload({ value, onChange }: { value: string; onChange: (url: string) => void }) {
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState("");
+  const [dragging, setDragging] = useState(false);
+
+  async function uploadFile(file: File) {
+    if (!file.type.startsWith("image/")) {
+      setError("Apenas imagens são aceitas.");
+      return;
+    }
+    setUploading(true);
+    setError("");
+    const ext = file.name.split(".").pop();
+    const path = `${Date.now()}.${ext}`;
+    const { data, error: upErr } = await supabase.storage
+      .from("post-images")
+      .upload(path, file, { upsert: true });
+    if (upErr || !data) {
+      setError("Erro ao fazer upload. Verifique se o bucket 'post-images' existe e é público.");
+      setUploading(false);
+      return;
+    }
+    const { data: { publicUrl } } = supabase.storage.from("post-images").getPublicUrl(data.path);
+    onChange(publicUrl);
+    setUploading(false);
+  }
+
+  function handleFiles(files: FileList | null) {
+    if (files && files[0]) uploadFile(files[0]);
+  }
+
+  function handlePaste(e: React.ClipboardEvent) {
+    const file = Array.from(e.clipboardData.items)
+      .find((i) => i.type.startsWith("image/"))
+      ?.getAsFile();
+    if (file) uploadFile(file);
+  }
+
+  function handleDrop(e: React.DragEvent) {
+    e.preventDefault();
+    setDragging(false);
+    handleFiles(e.dataTransfer.files);
+  }
+
+  if (value) {
+    return (
+      <div className="relative">
+        <img src={value} alt="capa" className="h-48 w-full rounded-xl object-cover border border-[var(--border)]" />
+        <button
+          type="button"
+          onClick={() => onChange("")}
+          className="absolute right-2 top-2 rounded-full bg-black/60 p-1 text-white hover:bg-black/80 transition-colors"
+        >
+          <X size={14} />
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      onPaste={handlePaste}
+      onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
+      onDragLeave={() => setDragging(false)}
+      onDrop={handleDrop}
+      onClick={() => fileRef.current?.click()}
+      className={[
+        "relative flex h-40 cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed transition-colors",
+        dragging
+          ? "border-[var(--navy)] bg-[var(--navy-light)]"
+          : "border-[var(--border)] bg-[var(--surface)] hover:border-[var(--navy)] hover:bg-[var(--navy-light)]",
+      ].join(" ")}
+    >
+      <input
+        ref={fileRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={(e) => handleFiles(e.target.files)}
+      />
+      {uploading ? (
+        <p className="text-sm text-[var(--text-muted)]">Enviando...</p>
+      ) : (
+        <>
+          <Upload size={24} className="text-[var(--text-light)]" />
+          <p className="text-sm font-medium text-[var(--text-muted)]">
+            Clique, arraste ou cole uma imagem
+          </p>
+          <p className="text-xs text-[var(--text-light)]">PNG, JPG, WEBP</p>
+        </>
+      )}
+      {error && (
+        <p className="absolute bottom-2 text-xs text-red-500">{error}</p>
+      )}
+    </div>
+  );
+}
+
+export function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="space-y-1.5">
       <label className="text-xs font-medium text-[var(--text)]">{label}</label>
