@@ -12,6 +12,10 @@
       "dest": "/assets/$1"
     },
     {
+      "src": "/(.+\\.(?:webp|jpg|jpeg|png|gif|svg|ico|woff2?|ttf|otf|eot|mp4|pdf|txt|xml|json))",
+      "dest": "/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/api/server.js"
     }
