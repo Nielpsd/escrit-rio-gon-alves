@@ -151,6 +151,7 @@ function PostPage() {
               src={post.image}
               alt={post.title}
               className="aspect-[16/7] w-full object-cover"
+              onError={(e) => { (e.currentTarget.parentElement as HTMLElement).style.display = "none"; }}
             />
           </div>
         </div>
