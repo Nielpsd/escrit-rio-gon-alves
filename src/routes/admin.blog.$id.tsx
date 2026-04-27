@@ -13,6 +13,12 @@ export const Route = createFileRoute("/admin/blog/$id")({
   component: AdminEditPost,
 });
 
+function toHtml(content: string): string {
+  if (!content) return "";
+  if (content.trimStart().startsWith("<")) return content;
+  return content.split("\n\n").filter(Boolean).map((p) => `<p>${p}</p>`).join("");
+}
+
 function AdminEditPost() {
   const { post } = Route.useLoaderData();
   const navigate = useNavigate();
@@ -20,7 +26,7 @@ function AdminEditPost() {
   const [form, setForm] = useState({
     title: post.title,
     excerpt: post.excerpt,
-    content: post.content,
+    content: toHtml(post.content),
     tag: post.tag,
     author: post.author,
     read_time: post.read_time,
