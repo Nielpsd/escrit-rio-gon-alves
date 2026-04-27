@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { ArrowLeft, Save, Upload, X } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { CATEGORIAS } from "@/lib/posts";
+import { RichTextEditor } from "@/components/admin/RichTextEditor";
 
 export const Route = createFileRoute("/admin/blog/new")({
   component: AdminNewPost,
@@ -152,13 +153,10 @@ export function PostForm({
         />
       </Field>
 
-      <Field label="Conteúdo (parágrafos separados por linha em branco)">
-        <textarea
+      <Field label="Conteúdo">
+        <RichTextEditor
           value={form.content as string}
-          onChange={(e) => set("content", e.target.value)}
-          rows={12}
-          className="input resize-y font-mono text-xs"
-          placeholder="Escreva aqui o conteúdo do artigo..."
+          onChange={(html) => set("content", html)}
         />
       </Field>
     </div>

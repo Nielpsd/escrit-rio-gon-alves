@@ -161,19 +161,10 @@ function PostPage() {
         <p className="font-display text-xl text-[var(--navy)] leading-relaxed border-l-4 border-[var(--gold)] pl-5">
           {post.excerpt}
         </p>
-        <div className="mt-10 space-y-6 text-base text-[var(--text)] leading-relaxed">
-          {post.content.map((par: string, i: number) => (
-            <motion.p
-              key={i}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-            >
-              {par}
-            </motion.p>
-          ))}
-        </div>
+        <div
+          className="article-body mt-10"
+          dangerouslySetInnerHTML={{ __html: Array.isArray(post.content) ? post.content.join("</p><p>") : post.content }}
+        />
 
         {/* DIVIDER */}
         <div className="my-12 flex items-center gap-4">
