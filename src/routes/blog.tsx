@@ -111,8 +111,12 @@ function BlogPage() {
                 params={{ slug: p.slug }}
                 className="group grid gap-5 overflow-hidden rounded-2xl border border-[var(--border)] bg-white transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)] sm:grid-cols-[200px_1fr]"
               >
-                <div className="relative aspect-video sm:aspect-auto sm:min-h-[180px] bg-gradient-to-br from-[var(--navy-mid)] to-[var(--navy)] grid place-items-center">
-                  <span className="font-display text-5xl font-bold text-white/10">G</span>
+                <div className="relative aspect-video sm:aspect-auto sm:min-h-[180px] overflow-hidden bg-gradient-to-br from-[var(--navy-mid)] to-[var(--navy)]">
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
                 </div>
                 <div className="flex flex-col justify-center p-6 sm:pl-0 sm:pr-7 sm:py-7">
                   <span className="self-start rounded-full bg-[var(--navy-light)] px-2.5 py-1 text-[10px] font-medium text-[var(--navy)]">

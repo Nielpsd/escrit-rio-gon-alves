@@ -58,11 +58,13 @@ export function BlogPreviewSection() {
             >
               {/* Thumbnail */}
               <div className="relative aspect-[380/270] overflow-hidden rounded-[14px] mb-4 bg-gradient-to-br from-[var(--navy)] to-[#1a3a6e]">
-                <div className="absolute inset-0 font-display text-[140px] leading-none text-white/10 grid place-items-center select-none" aria-hidden>
-                  G
-                </div>
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
                 {/* Hover overlay */}
-                <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
                   <div className="bg-[var(--gold)] text-[var(--navy)] px-6 py-2.5 rounded-full font-bold text-sm shadow-xl translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                     Ler artigo
                   </div>

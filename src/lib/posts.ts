@@ -21,6 +21,7 @@ export type Post = {
   date: string;
   author: string;
   readTime: string;
+  image: string;
   content: string[];
 };
 
@@ -44,6 +45,7 @@ const RAW: Omit<Post, "slug">[] = [
     date: "08/04/2026",
     author: "Dr. Renan Gonçalves",
     readTime: "5 min",
+    image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80&auto=format&fit=crop",
     content: [
       "A maioria dos aposentados brasileiros recebe valores próximos ao salário mínimo, mesmo após décadas de contribuição. Isso acontece por causa da forma como o INSS calcula a média dos seus salários e aplica o fator previdenciário.",
       "Neste artigo, explicamos passo a passo como o cálculo é feito, quais regras de transição podem ser mais vantajosas para o seu caso e o que você pode fazer hoje para garantir um benefício maior no futuro.",
@@ -58,6 +60,7 @@ const RAW: Omit<Post, "slug">[] = [
     date: "27/03/2026",
     author: "Equipe Gonçalves",
     readTime: "4 min",
+    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&q=80&auto=format&fit=crop",
     content: [
       "O veto presidencial impacta diretamente milhões de brasileiros que esperavam ter acesso facilitado a benefícios como aposentadoria por deficiência e isenções tributárias.",
       "Apesar do veto, ainda é possível buscar reconhecimento individual da deficiência via perícia médica, garantindo direitos previdenciários específicos.",
@@ -71,6 +74,7 @@ const RAW: Omit<Post, "slug">[] = [
     date: "11/03/2026",
     author: "Equipe Gonçalves",
     readTime: "6 min",
+    image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80&auto=format&fit=crop",
     content: [
       "Mesmo com o veto, mães em situação de vulnerabilidade podem buscar o BPC/LOAS e outros amparos assistenciais.",
       "Cada caso deve ser analisado individualmente para identificar o melhor caminho jurídico.",
@@ -84,6 +88,7 @@ const RAW: Omit<Post, "slug">[] = [
     date: "22/02/2026",
     author: "Dr. Renan Gonçalves",
     readTime: "7 min",
+    image: "https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=800&q=80&auto=format&fit=crop",
     content: [
       "A atividade rural pode ser comprovada por documentos como notas fiscais de produtor, declarações sindicais, contratos de parceria e testemunhas.",
       "O segurado especial tem direito à aposentadoria por idade aos 60 anos (homem) ou 55 anos (mulher), com 15 anos de atividade rural comprovada.",
@@ -97,6 +102,7 @@ const RAW: Omit<Post, "slug">[] = [
     date: "06/02/2026",
     author: "Dra. Mariana Gonçalves",
     readTime: "5 min",
+    image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=800&q=80&auto=format&fit=crop",
     content: [
       "Após uma negativa, é possível entrar com recurso administrativo no prazo de 30 dias ou ingressar diretamente com ação judicial.",
       "Reúna laudos médicos atualizados, exames e atestados que comprovem a incapacidade para o trabalho.",
@@ -110,6 +116,7 @@ const RAW: Omit<Post, "slug">[] = [
     date: "19/01/2026",
     author: "Dr. Renan Gonçalves",
     readTime: "8 min",
+    image: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=800&q=80&auto=format&fit=crop",
     content: [
       "A revisão da vida toda permite incluir contribuições anteriores a julho de 1994 no cálculo do benefício, o que pode aumentar significativamente o valor.",
       "É importante avaliar se a revisão realmente é vantajosa antes de protocolar o pedido.",
@@ -123,6 +130,7 @@ const RAW: Omit<Post, "slug">[] = [
     date: "28/12/2025",
     author: "Equipe Gonçalves",
     readTime: "6 min",
+    image: "https://images.unsplash.com/photo-1559525839-d9d1a25f4b53?w=800&q=80&auto=format&fit=crop",
     content: [
       "O BPC é um benefício assistencial pago a idosos com 65 anos ou mais e a pessoas com deficiência de qualquer idade, desde que a renda familiar per capita seja inferior a 1/4 do salário mínimo.",
       "Não exige contribuição prévia ao INSS, mas precisa de inscrição no CadÚnico atualizada.",
@@ -136,6 +144,7 @@ const RAW: Omit<Post, "slug">[] = [
     date: "09/12/2025",
     author: "Dra. Mariana Gonçalves",
     readTime: "5 min",
+    image: "https://images.unsplash.com/photo-1492725764893-90b379c2b6e7?w=800&q=80&auto=format&fit=crop",
     content: [
       "Durante o período de graça (12 a 36 meses após a última contribuição), a segurada mantém o direito ao salário-maternidade.",
       "Trabalhadoras informais também podem se inscrever como contribuintes individuais para garantir o benefício.",
