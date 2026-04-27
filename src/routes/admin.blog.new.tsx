@@ -29,6 +29,7 @@ function AdminNewPost() {
     tag: CATEGORIAS[1],
     author: "Dr. Renan Gonçalves",
     read_time: "5 min",
+    image: "",
     published: false,
     published_at: new Date().toISOString().slice(0, 10),
   });
@@ -133,6 +134,18 @@ export function PostForm({
           />
         </Field>
       </div>
+
+      <Field label="URL da imagem de capa">
+        <input
+          value={form.image as string}
+          onChange={(e) => set("image", e.target.value)}
+          className="input"
+          placeholder="https://images.unsplash.com/..."
+        />
+        {form.image && (
+          <img src={form.image as string} alt="preview" className="mt-2 h-32 w-full rounded-lg object-cover" />
+        )}
+      </Field>
 
       <Field label="Resumo">
         <textarea

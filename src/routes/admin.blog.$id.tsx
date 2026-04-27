@@ -24,6 +24,7 @@ function AdminEditPost() {
     tag: post.tag,
     author: post.author,
     read_time: post.read_time,
+    image: post.image ?? "",
     published: post.published,
     published_at: post.published_at.slice(0, 10),
   });
