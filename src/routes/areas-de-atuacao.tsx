@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowRight, MessageCircle } from "lucide-react";
+import { motion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
@@ -101,14 +102,13 @@ function AreasPage() {
   return (
     <Layout>
       <section className="on-navy relative overflow-hidden bg-[var(--navy)] text-white">
-        <div
-          className="absolute right-[-60px] top-[-80px] font-display text-[420px] leading-none font-bold text-white/[0.04] select-none pointer-events-none"
-          aria-hidden
-        >
-          G
-        </div>
         <div className="relative mx-auto max-w-7xl px-6 pt-20 pb-20 lg:pt-28 lg:pb-24">
-          <div className="max-w-3xl">
+          <motion.div
+            className="max-w-3xl"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
             <Eyebrow>Áreas de atuação</Eyebrow>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
               Perfis e demandas <em className="hl">atendidos pelo escritório</em>.
@@ -118,7 +118,7 @@ function AreasPage() {
               meramente informativa. Cada situação real depende de análise individual da
               documentação e do histórico contributivo.
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -157,9 +157,13 @@ function AreasPage() {
 
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {lista.map((a, i) => (
-            <article
+            <motion.article
               key={i}
               className="flex flex-col rounded-2xl border border-[var(--border)] border-t-[3px] border-t-[var(--gold)] bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-md)]"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.07 }}
             >
               <div className="mb-4 flex flex-wrap gap-1.5">
                 {a.cats.map((t) => (
@@ -186,7 +190,7 @@ function AreasPage() {
                   <dd className="mt-1 text-[var(--text-muted)] leading-relaxed">{a.atuacao}</dd>
                 </div>
               </dl>
-            </article>
+            </motion.article>
           ))}
         </div>
       </section>

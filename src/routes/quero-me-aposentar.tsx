@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, Check, MessageCircle, Phone, Star } from "lucide-react";
+import { motion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
@@ -111,13 +112,12 @@ function QueroMeAposentarPage() {
     <Layout>
       {/* HERO */}
       <section className="on-navy relative overflow-hidden bg-[var(--navy)] text-white">
-        <div
-          className="absolute right-[-60px] top-[-80px] font-display text-[420px] leading-none font-bold text-white/[0.04] select-none pointer-events-none"
-          aria-hidden
+        <motion.div
+          className="relative mx-auto max-w-4xl px-6 pt-20 pb-24 lg:pt-28 lg:pb-32 text-center"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          G
-        </div>
-        <div className="relative mx-auto max-w-4xl px-6 pt-20 pb-24 lg:pt-28 lg:pb-32 text-center">
           <Eyebrow className="mx-auto justify-center">Aposentadoria</Eyebrow>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
             Aposentadoria: <em className="hl">entenda as regras antes de decidir</em>.
@@ -135,7 +135,7 @@ function QueroMeAposentarPage() {
           <p className="mt-5 text-xs text-white/45">
             Conversa inicial sem compromisso · Conteúdo informativo · Provimento nº 205/2021 da OAB
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* IDENTIFICAÇÃO */}
@@ -186,16 +186,20 @@ function QueroMeAposentarPage() {
           </p>
         </div>
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {TIPOS.map((t) => (
-            <div
+          {TIPOS.map((t, i) => (
+            <motion.div
               key={t.title}
               className="rounded-2xl border border-[var(--border)] border-t-[3px] border-t-[var(--gold)] bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-md)]"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.07 }}
             >
               <h3 className="font-display text-lg font-semibold text-[var(--navy)] leading-snug">
                 {t.title}
               </h3>
               <p className="mt-3 text-sm text-[var(--text-muted)] leading-relaxed">{t.desc}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
@@ -217,16 +221,20 @@ function QueroMeAposentarPage() {
             </p>
           </div>
           <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {ALERTAS.map((a) => (
-              <div
+            {ALERTAS.map((a, i) => (
+              <motion.div
                 key={a.title}
                 className="rounded-2xl border border-[var(--border)] bg-white p-7 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-md)]"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
               >
                 <h3 className="font-display text-lg font-semibold text-[var(--navy)] leading-snug">
                   {a.title}
                 </h3>
                 <p className="mt-3 text-sm text-[var(--text-muted)] leading-relaxed">{a.desc}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -266,21 +274,30 @@ function QueroMeAposentarPage() {
       <section className="bg-[var(--surface)] py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] items-center">
-            <div className="relative">
-              <div className="aspect-[4/5] rounded-2xl border border-[var(--border)] bg-gradient-to-br from-[var(--navy-mid)] to-[var(--navy)] grid place-items-center">
-                <div className="text-center">
-                  <div className="mx-auto grid h-24 w-24 place-items-center rounded-full bg-[var(--gold)]/15 font-display text-4xl font-semibold text-[var(--gold-light)]">
-                    R
-                  </div>
-                  <p className="mt-4 font-display text-lg text-white">Dr. Renan Gonçalves</p>
-                  <p className="text-xs text-white/45">{SITE.oab}</p>
-                </div>
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-[var(--border)]">
+                <img
+                  src="/about-renan.webp"
+                  alt="Dr. Renan Gonçalves"
+                  className="h-full w-full object-cover object-top"
+                />
               </div>
               <div className="absolute -bottom-5 -left-5 rounded-xl bg-[var(--gold)] px-5 py-3 text-sm font-medium text-white shadow-lg">
                 Ex-servidor do INSS · Docente
               </div>
-            </div>
-            <div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
               <Eyebrow>Sobre o fundador</Eyebrow>
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
                 Atuação técnica em <em className="hl">previdenciário</em>.
@@ -290,7 +307,7 @@ function QueroMeAposentarPage() {
                 advocacia previdenciária. Também leciona na área, contribuindo para a formação de
                 outros profissionais.
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -304,10 +321,14 @@ function QueroMeAposentarPage() {
           </h2>
         </div>
         <div className="mt-12 grid gap-5 md:grid-cols-3">
-          {DEPOIMENTOS.map((d) => (
-            <figure
+          {DEPOIMENTOS.map((d, i) => (
+            <motion.figure
               key={d.name}
               className="rounded-2xl border border-[var(--border)] bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-md)]"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
             >
               <div className="flex items-center gap-1 mb-3">
                 {Array.from({ length: 5 }).map((_, i) => (
@@ -318,7 +339,7 @@ function QueroMeAposentarPage() {
                 "{d.text}"
               </blockquote>
               <figcaption className="mt-4 text-xs text-[var(--text-muted)]">{d.name}</figcaption>
-            </figure>
+            </motion.figure>
           ))}
         </div>
         <p className="mt-6 text-xs text-[var(--text-light)]">

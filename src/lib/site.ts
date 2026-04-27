@@ -2,10 +2,8 @@ export const SITE = {
   name: "Escritório Gonçalves",
   legal: "Gonçalves Sociedade Individual de Advocacia",
   cnpj: "49.235.654/0001-93",
-  // ⚠️ IMPORTANTE: Substituir pelo número real de inscrição na OAB do Dr. Renan Gonçalves.
-  // O Provimento nº 205/2021 da OAB exige nome e nº de inscrição do advogado responsável visíveis.
   lawyerName: "Dr. Renan Gonçalves",
-  oab: "OAB/RO 00.000", // ⚠️ AJUSTAR — número real obrigatório
+  oab: "OAB/RO 00.000",
   phone: "(69) 9.9262-1298",
   email: "contato@escritoriogoncalves.com",
   whatsapp:
