@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { MessageCircle } from "lucide-react";
 import { SITE } from "@/lib/site";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 export function WhatsAppFab() {
   const [visible, setVisible] = useState(false);
@@ -24,7 +24,7 @@ export function WhatsAppFab() {
       ].join(" ")}
     >
       <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-[#22c55e] opacity-30" />
-      <MessageCircle size={22} strokeWidth={2.2} />
+      <WhatsAppIcon size={22} />
       <span className="hidden text-sm font-medium sm:inline">Fale conosco</span>
     </a>
   );

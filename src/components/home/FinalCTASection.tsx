@@ -1,7 +1,8 @@
-import { ArrowRight, ChevronDown, MessageCircle } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
 import { SITE } from "@/lib/site";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 export function FinalCTASection() {
   return (
@@ -25,7 +26,7 @@ export function FinalCTASection() {
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-              <MessageCircle size={18} /> Falar com a equipe
+              <WhatsAppIcon size={18} /> Falar com a equipe
             </WaveButton>
             <WaveButton variant="outline-light" size="lg" href={`tel:+5569992621298`}>
               {SITE.phone}

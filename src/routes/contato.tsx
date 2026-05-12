@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router'
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -16,6 +16,7 @@ import { WaveButton } from "@/components/site/WaveButton";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { SITE } from "@/lib/site";
 import { supabase, supabaseConfigured } from "@/lib/supabase";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 export const Route = createFileRoute("/contato")({
   head: () => ({
@@ -146,7 +147,7 @@ function ContatoPage() {
                 rel="noopener"
                 className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-white px-5 py-2.5 text-sm font-medium text-[var(--navy)] transition-all hover:border-[#25D366] hover:bg-[#25D366]/5 hover:text-[#128C50]"
               >
-                <MessageCircle size={14} />
+                <WhatsAppIcon size={14} />
                 {a.label}
               </a>
             ))}
@@ -271,7 +272,7 @@ function ContatoPage() {
                 </p>
                 <div className="mt-5">
                   <WaveButton variant="wpp" href={SITE.whatsapp} target="_blank" rel="noopener">
-                    <MessageCircle size={16} /> Abrir WhatsApp <ArrowRight size={14} />
+                    <WhatsAppIcon size={16} /> Abrir WhatsApp <ArrowRight size={14} />
                   </WaveButton>
                 </div>
               </div>

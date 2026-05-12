@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { Menu, X, MessageCircle } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { WaveButton } from "./WaveButton";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 const NAV = [
   { to: "/", label: "Início" },
@@ -47,7 +48,7 @@ export function Header() {
 
         <div className="hidden lg:block">
           <WaveButton variant="wpp" size="sm" href={SITE.whatsapp} target="_blank" rel="noopener">
-            <MessageCircle size={16} /> WhatsApp
+            <WhatsAppIcon size={16} /> WhatsApp
           </WaveButton>
         </div>
 
@@ -75,7 +76,7 @@ export function Header() {
             ))}
             <div className="pt-3">
               <WaveButton variant="wpp" full href={SITE.whatsapp} target="_blank" rel="noopener">
-                <MessageCircle size={16} /> Falar no WhatsApp
+                <WhatsAppIcon size={16} /> Falar no WhatsApp
               </WaveButton>
             </div>
           </nav>

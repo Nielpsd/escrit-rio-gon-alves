@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Clock, MessageCircle, User } from "lucide-react";
+import { ArrowRight, Clock, User } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
@@ -9,6 +9,7 @@ import { SITE } from "@/lib/site";
 import { CATEGORIAS, POSTS as POSTS_FALLBACK, MAIS_RECENTES, type Categoria } from "@/lib/posts";
 import { supabase, supabaseConfigured } from "@/lib/supabase";
 import type { Database } from "@/lib/database.types";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 type PostRow = Database["public"]["Tables"]["posts"]["Row"];
 
@@ -162,7 +163,7 @@ function BlogPage() {
                 </p>
                 <div className="mt-5">
                   <WaveButton variant="wpp" href={SITE.whatsapp} target="_blank" rel="noopener">
-                    <MessageCircle size={16} /> Falar com especialista <ArrowRight size={14} />
+                    <WhatsAppIcon size={16} /> Falar com especialista <ArrowRight size={14} />
                   </WaveButton>
                 </div>
               </div>

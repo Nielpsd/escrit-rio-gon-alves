@@ -1,11 +1,12 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, Check, MessageCircle, Phone, Star, X } from "lucide-react";
+import { createFileRoute } from '@tanstack/react-router'
+import { ArrowRight, Check, Phone, Star, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { SITE } from "@/lib/site";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 const FAQ_APOSENTADORIA = [
   {
@@ -475,7 +476,7 @@ function QueroMeAposentarPage() {
             </p>
             <div className="mt-8 flex justify-center">
               <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-                <MessageCircle size={18} /> Tirar dúvidas pelo WhatsApp <ArrowRight size={16} />
+                <WhatsAppIcon size={18} /> Tirar dúvidas pelo WhatsApp <ArrowRight size={16} />
               </WaveButton>
             </div>
             <p className="mt-5 inline-flex items-center gap-2 text-xs text-white/55">

@@ -1,11 +1,12 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router'
 import { motion } from "framer-motion";
-import { ArrowRight, Heart, Instagram, MessageCircle, Shield, Star, Users, Youtube } from "lucide-react";
+import { ArrowRight, Heart, Instagram, Shield, Star, Users, Youtube } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { SITE } from "@/lib/site";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 const FAQ_EQUIPE = [
   {
@@ -258,7 +259,7 @@ function EquipePage() {
             </p>
             <div className="mt-8 flex justify-center">
               <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-                <MessageCircle size={18} /> Falar com a equipe <ArrowRight size={16} />
+                <WhatsAppIcon size={18} /> Falar com a equipe <ArrowRight size={16} />
               </WaveButton>
             </div>
           </div>

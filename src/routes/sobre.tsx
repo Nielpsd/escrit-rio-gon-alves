@@ -1,12 +1,13 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router'
 import { motion } from "framer-motion";
-import { ArrowRight, Check, MessageCircle, Star } from "lucide-react";
+import { ArrowRight, Check, Star } from "lucide-react";
 
 import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { SITE } from "@/lib/site";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 const FAQ_SOBRE = [
   {
@@ -176,7 +177,7 @@ function SobrePage() {
             </h2>
             <div className="mt-8">
               <WaveButton variant="wpp" href={SITE.whatsapp} target="_blank" rel="noopener">
-                <MessageCircle size={16} /> Falar no WhatsApp <ArrowRight size={14} />
+                <WhatsAppIcon size={16} /> Falar no WhatsApp <ArrowRight size={14} />
               </WaveButton>
             </div>
           </motion.div>
@@ -345,7 +346,7 @@ function SobrePage() {
             </p>
             <div className="mt-8 flex justify-center">
               <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-                <MessageCircle size={18} /> Falar pelo WhatsApp <ArrowRight size={16} />
+                <WhatsAppIcon size={18} /> Falar pelo WhatsApp <ArrowRight size={16} />
               </WaveButton>
             </div>
           </div>

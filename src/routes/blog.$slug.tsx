@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, ArrowRight, Clock, MessageCircle, User } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, User } from "lucide-react";
 import { motion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
@@ -8,6 +8,7 @@ import { SITE } from "@/lib/site";
 import { getPostBySlug, POSTS as POSTS_FALLBACK, type Categoria } from "@/lib/posts";
 import { supabase, supabaseConfigured } from "@/lib/supabase";
 import type { Database } from "@/lib/database.types";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 type PostRow = Database["public"]["Tables"]["posts"]["Row"];
 
@@ -184,7 +185,7 @@ function PostPage() {
             </p>
             <div className="mt-6">
               <WaveButton variant="wpp" href={SITE.whatsapp} target="_blank" rel="noopener">
-                <MessageCircle size={16} /> Falar no WhatsApp <ArrowRight size={14} />
+                <WhatsAppIcon size={16} /> Falar no WhatsApp <ArrowRight size={14} />
               </WaveButton>
             </div>
           </div>

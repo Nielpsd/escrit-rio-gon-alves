@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, X, MessageCircle } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
 import { SITE } from "@/lib/site";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 const FAQ = [
   {
@@ -112,7 +113,7 @@ export function FAQSection() {
                 Não encontrou sua dúvida aqui? Fale com nossa equipe pelo WhatsApp — respondemos rápido.
               </p>
               <WaveButton variant="wpp" href={SITE.whatsapp} target="_blank" rel="noopener" className="w-full justify-center">
-                <MessageCircle size={16} /> Abrir WhatsApp
+                <WhatsAppIcon size={16} /> Abrir WhatsApp
               </WaveButton>
             </div>
           </div>

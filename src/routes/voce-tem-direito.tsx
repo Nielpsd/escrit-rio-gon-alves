@@ -1,11 +1,12 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router'
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, CheckCircle2, MessageCircle, RotateCcw, XCircle } from "lucide-react";
+import { ArrowRight, CheckCircle2, RotateCcw, XCircle } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
 import { SITE } from "@/lib/site";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 export const Route = createFileRoute("/voce-tem-direito")({
   head: () => ({
@@ -258,7 +259,7 @@ function OrientacaoPage() {
 
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
                 <WaveButton variant="wpp" href={result.cta} target="_blank" rel="noopener">
-                  <MessageCircle size={16} /> Falar com especialista
+                  <WhatsAppIcon size={16} /> Falar com especialista
                 </WaveButton>
                 <WaveButton variant="outline" as="button" onClick={reset}>
                   <RotateCcw size={14} /> Refazer
@@ -280,7 +281,7 @@ function OrientacaoPage() {
             </p>
             <div className="mt-6 flex justify-center">
               <WaveButton variant="wpp" href={SITE.whatsapp} target="_blank" rel="noopener">
-                <MessageCircle size={16} /> Falar no WhatsApp <ArrowRight size={14} />
+                <WhatsAppIcon size={16} /> Falar no WhatsApp <ArrowRight size={14} />
               </WaveButton>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Youtube, MessageCircle } from "lucide-react";
+import { Instagram, Youtube } from "lucide-react";
 import { SITE } from "@/lib/site";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 function TikTokIcon({ size = 16 }: { size?: number }) {
   return (
@@ -100,7 +101,7 @@ export function Footer() {
             <div className="flex gap-3 mt-5">
               {[
                 { href: SITE.instagram, icon: <Instagram size={16} />, label: "Instagram" },
-                { href: SITE.whatsapp, icon: <MessageCircle size={16} />, label: "WhatsApp" },
+                { href: SITE.whatsapp, icon: <WhatsAppIcon size={16} />, label: "WhatsApp" },
                 { href: SITE.tiktok, icon: <TikTokIcon />, label: "TikTok" },
                 { href: SITE.youtube, icon: <Youtube size={16} />, label: "YouTube" },
               ].map((s) => (

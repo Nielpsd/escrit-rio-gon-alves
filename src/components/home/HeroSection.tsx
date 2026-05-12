@@ -1,7 +1,8 @@
-import { ArrowRight, Check, MessageCircle } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
 import { SITE } from "@/lib/site";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 export function HeroSection() {
   return (
@@ -40,7 +41,7 @@ export function HeroSection() {
 
           <div className="mt-8 flex flex-wrap gap-4">
             <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-              <MessageCircle size={18} /> Falar com a equipe
+              <WhatsAppIcon size={18} /> Falar com a equipe
             </WaveButton>
             <WaveButton variant="outline-light" size="lg" href="#servicos">
               Ver áreas de atuação <ArrowRight size={16} />
