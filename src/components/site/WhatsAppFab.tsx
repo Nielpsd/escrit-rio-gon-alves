@@ -24,7 +24,7 @@ export function WhatsAppFab() {
       ].join(" ")}
     >
       <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-[#22c55e] opacity-30" />
-      <WhatsAppIcon size={22} />
+      <WhatsAppIcon size={18} />
       <span className="hidden text-sm font-medium sm:inline">Fale conosco</span>
     </a>
   );
