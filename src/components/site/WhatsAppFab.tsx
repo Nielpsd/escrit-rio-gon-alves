@@ -19,7 +19,7 @@ export function WhatsAppFab() {
       rel="noopener"
       aria-label="Falar pelo WhatsApp"
       className={[
-        "fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-[#22c55e] px-4 py-3 text-white shadow-[0_8px_24px_rgba(34,197,94,0.35)] transition-all duration-300 hover:bg-[#16a34a] hover:scale-105 sm:bottom-6 sm:right-6",
+        "fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-[#22c55e] px-5 py-3.5 text-white shadow-[0_8px_24px_rgba(34,197,94,0.35)] transition-all duration-300 hover:bg-[#16a34a] hover:scale-105 sm:bottom-6 sm:right-6",
         visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 pointer-events-none",
       ].join(" ")}
     >
