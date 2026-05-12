@@ -63,6 +63,7 @@ export function Footer() {
                 { to: "/equipe", label: "Nossa Equipe" },
                 { to: "/servicos", label: "Serviços" },
                 { to: "/areas-de-atuacao", label: "Áreas de atuação" },
+                { to: "/voce-tem-direito", label: "Você tem direito?" },
                 { to: "/blog", label: "Blog / Artigos" },
                 { to: "/contato", label: "Contato" },
                 { to: "/politica-de-privacidade", label: "Política de Privacidade" },

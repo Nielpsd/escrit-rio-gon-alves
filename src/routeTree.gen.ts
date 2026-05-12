@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VoceTemDireitoRouteImport } from './routes/voce-tem-direito'
 import { Route as TermosDeUsoRouteImport } from './routes/termos-de-uso'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as ServicosRouteImport } from './routes/servicos'
@@ -21,6 +22,7 @@ import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AreasDeAtuacaoRouteImport } from './routes/areas-de-atuacao'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
@@ -30,6 +32,11 @@ import { Route as AdminBlogIndexRouteImport } from './routes/admin.blog.index'
 import { Route as AdminBlogNewRouteImport } from './routes/admin.blog.new'
 import { Route as AdminBlogIdRouteImport } from './routes/admin.blog.$id'
 
+const VoceTemDireitoRoute = VoceTemDireitoRouteImport.update({
+  id: '/voce-tem-direito',
+  path: '/voce-tem-direito',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermosDeUsoRoute = TermosDeUsoRouteImport.update({
   id: '/termos-de-uso',
   path: '/termos-de-uso',
@@ -90,6 +97,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BlogRoute,
+} as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -144,11 +156,13 @@ export interface FileRoutesByFullPath {
   '/servicos': typeof ServicosRoute
   '/sobre': typeof SobreRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/voce-tem-direito': typeof VoceTemDireitoRoute
   '/admin/content': typeof AdminContentRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/admin/': typeof AdminIndexRoute
+  '/blog/': typeof BlogIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
   '/admin/blog/new': typeof AdminBlogNewRoute
   '/admin/blog/': typeof AdminBlogIndexRoute
@@ -156,7 +170,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/areas-de-atuacao': typeof AreasDeAtuacaoRoute
-  '/blog': typeof BlogRouteWithChildren
   '/contato': typeof ContatoRoute
   '/equipe': typeof EquipeRoute
   '/login': typeof LoginRoute
@@ -165,11 +178,13 @@ export interface FileRoutesByTo {
   '/servicos': typeof ServicosRoute
   '/sobre': typeof SobreRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/voce-tem-direito': typeof VoceTemDireitoRoute
   '/admin/content': typeof AdminContentRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/admin': typeof AdminIndexRoute
+  '/blog': typeof BlogIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
   '/admin/blog/new': typeof AdminBlogNewRoute
   '/admin/blog': typeof AdminBlogIndexRoute
@@ -188,11 +203,13 @@ export interface FileRoutesById {
   '/servicos': typeof ServicosRoute
   '/sobre': typeof SobreRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/voce-tem-direito': typeof VoceTemDireitoRoute
   '/admin/content': typeof AdminContentRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/admin/': typeof AdminIndexRoute
+  '/blog/': typeof BlogIndexRoute
   '/admin/blog/$id': typeof AdminBlogIdRoute
   '/admin/blog/new': typeof AdminBlogNewRoute
   '/admin/blog/': typeof AdminBlogIndexRoute
@@ -212,11 +229,13 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/sobre'
     | '/termos-de-uso'
+    | '/voce-tem-direito'
     | '/admin/content'
     | '/admin/messages'
     | '/admin/settings'
     | '/blog/$slug'
     | '/admin/'
+    | '/blog/'
     | '/admin/blog/$id'
     | '/admin/blog/new'
     | '/admin/blog/'
@@ -224,7 +243,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/areas-de-atuacao'
-    | '/blog'
     | '/contato'
     | '/equipe'
     | '/login'
@@ -233,11 +251,13 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/sobre'
     | '/termos-de-uso'
+    | '/voce-tem-direito'
     | '/admin/content'
     | '/admin/messages'
     | '/admin/settings'
     | '/blog/$slug'
     | '/admin'
+    | '/blog'
     | '/admin/blog/$id'
     | '/admin/blog/new'
     | '/admin/blog'
@@ -255,11 +275,13 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/sobre'
     | '/termos-de-uso'
+    | '/voce-tem-direito'
     | '/admin/content'
     | '/admin/messages'
     | '/admin/settings'
     | '/blog/$slug'
     | '/admin/'
+    | '/blog/'
     | '/admin/blog/$id'
     | '/admin/blog/new'
     | '/admin/blog/'
@@ -278,10 +300,18 @@ export interface RootRouteChildren {
   ServicosRoute: typeof ServicosRoute
   SobreRoute: typeof SobreRoute
   TermosDeUsoRoute: typeof TermosDeUsoRoute
+  VoceTemDireitoRoute: typeof VoceTemDireitoRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/voce-tem-direito': {
+      id: '/voce-tem-direito'
+      path: '/voce-tem-direito'
+      fullPath: '/voce-tem-direito'
+      preLoaderRoute: typeof VoceTemDireitoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/termos-de-uso': {
       id: '/termos-de-uso'
       path: '/termos-de-uso'
@@ -366,6 +396,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof BlogRoute
+    }
     '/admin/': {
       id: '/admin/'
       path: '/'
@@ -449,10 +486,12 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface BlogRouteChildren {
   BlogSlugRoute: typeof BlogSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 const BlogRouteChildren: BlogRouteChildren = {
   BlogSlugRoute: BlogSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
 }
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
@@ -470,6 +509,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicosRoute: ServicosRoute,
   SobreRoute: SobreRoute,
   TermosDeUsoRoute: TermosDeUsoRoute,
+  VoceTemDireitoRoute: VoceTemDireitoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

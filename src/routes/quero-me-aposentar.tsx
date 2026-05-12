@@ -1,10 +1,38 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, Check, MessageCircle, Phone, Star } from "lucide-react";
+import { ArrowRight, Check, MessageCircle, Phone, Star, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
+import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { SITE } from "@/lib/site";
+
+const FAQ_APOSENTADORIA = [
+  {
+    q: "Quanto tempo leva para aprovar uma aposentadoria?",
+    a: "Na via administrativa, o INSS tem prazo de 45 dias para analisar o pedido. Na via judicial, o prazo varia conforme a vara e a complexidade do caso — pode levar de meses a anos.",
+  },
+  {
+    q: "Preciso ir pessoalmente ao INSS para dar entrada?",
+    a: "Não necessariamente. Muitos pedidos podem ser feitos pelo aplicativo Meu INSS. Porém, dar entrada sem orientação técnica aumenta o risco de negativa. A assessoria profissional faz diferença.",
+  },
+  {
+    q: "Posso me aposentar mesmo tendo trabalhado sem carteira assinada?",
+    a: "Depende da situação. Contribuintes individuais, segurados especiais (trabalhadores rurais) e facultativos têm caminhos específicos. A análise do histórico contributivo esclarece o que se aplica.",
+  },
+  {
+    q: "Qual regra de aposentadoria é mais vantajosa para mim?",
+    a: "Não existe uma resposta única — depende da sua idade, tempo de contribuição, salários e atividade exercida. A análise técnica individual é o que permite indicar a regra mais vantajosa.",
+  },
+  {
+    q: "Já me aposentei, mas acho que o valor está errado. O que fazer?",
+    a: "É possível pedir a revisão do benefício. O INSS pode ter desconsiderado contribuições, períodos especiais ou aplicado uma regra menos favorável. Entre em contato para uma análise.",
+  },
+  {
+    q: "Se meu pedido for negado, perco o direito?",
+    a: "Não. A negativa administrativa pode ser contestada com recurso (prazo de 30 dias) ou ação judicial. O prazo para buscar o benefício na Justiça é de 5 anos após a negativa.",
+  },
+];
 
 export const Route = createFileRoute("/quero-me-aposentar")({
   head: () => ({
@@ -77,6 +105,33 @@ const ALERTAS = [
   },
 ];
 
+const ERROS = [
+  {
+    erro: "Protocolar sem verificar o CNIS antes",
+    consequencia: "Contribuições perdidas, períodos especiais não reconhecidos e benefício calculado com valor menor.",
+  },
+  {
+    erro: "Escolher a regra de transição errada",
+    consequencia: "Pode custar centenas de reais por mês pelo resto da vida. Cada regra gera um valor diferente.",
+  },
+  {
+    erro: "Enviar documentos incompletos na perícia médica",
+    consequencia: "Negativa por falta de comprovação — mesmo quando o direito existe. A preparação pré-perícia é decisiva.",
+  },
+  {
+    erro: "Deixar prazo de recurso vencer após negativa",
+    consequencia: "30 dias para recorrer administrativamente. Depois disso, só via judicial — mais demorado e caro.",
+  },
+  {
+    erro: "Usar os documentos errados para comprovar atividade rural",
+    consequencia: "Negativa por falta de prova material. A lei exige tipos específicos de documentos que muitos desconhecem.",
+  },
+  {
+    erro: "Não considerar tempo especial no cálculo",
+    consequencia: "Anos de trabalho insalubre que poderiam reduzir o tempo de contribuição exigido acabam ignorados.",
+  },
+];
+
 const PASSOS = [
   {
     title: "Fale com a gente pelo WhatsApp",
@@ -105,6 +160,18 @@ const DEPOIMENTOS = [
     text: "Excelente atendimento. Equipe técnica e respeitosa.",
     name: "Érika Vieira",
   },
+  {
+    text: "Me senti acolhida desde o primeiro contato. Conseguiram minha aposentadoria quando achei que era impossível.",
+    name: "Rosana Alves",
+  },
+  {
+    text: "Profissionais sérios e comprometidos. Explicaram tudo de forma simples e resolveram meu caso rápido.",
+    name: "José Pereira",
+  },
+  {
+    text: "Tive o pedido negado antes de contratar o escritório. Com eles, consegui reverter e receber os valores atrasados.",
+    name: "Maria Aparecida",
+  },
 ];
 
 function QueroMeAposentarPage() {
@@ -127,12 +194,7 @@ function QueroMeAposentarPage() {
             previstas na legislação previdenciária brasileira e sobre a atuação técnica
             do escritório nessa área.
           </p>
-          <div className="mt-8 flex justify-center">
-            <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-              <MessageCircle size={18} /> Tirar dúvidas pelo WhatsApp <ArrowRight size={16} />
-            </WaveButton>
-          </div>
-          <p className="mt-5 text-xs text-white/45">
+          <p className="mt-4 text-xs text-white/45">
             Conversa inicial sem compromisso · Conteúdo informativo · Provimento nº 205/2021 da OAB
           </p>
         </motion.div>
@@ -204,148 +266,197 @@ function QueroMeAposentarPage() {
         </div>
       </section>
 
-      {/* ALERTAS TÉCNICOS */}
+      {/* ERROS COMUNS */}
       <section className="bg-[var(--surface)] py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6">
           <div className="max-w-3xl">
-            <Eyebrow>Pontos de atenção</Eyebrow>
+            <Eyebrow>Erros comuns</Eyebrow>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-              Parece simples pelo app. <br />
-              Mas <em className="hl">os erros têm custo alto</em>.
+              O que faz muita gente <em className="hl">perder anos de benefício</em>
             </h2>
             <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-              O Meu INSS foi criado para facilitar o pedido — não para garantir aprovação.
-              Responder perguntas de forma incorreta, enviar documentos desnecessários ou
-              deixar de apresentar provas exigidas pode resultar em uma negativa que
-              demora anos para ser revertida.
+              Dar entrada na aposentadoria sem orientação técnica é arriscado. Veja os erros mais
+              comuns — e o que cada um pode custar.
             </p>
           </div>
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {ALERTAS.map((a, i) => (
+          <div className="mt-12 grid gap-4 md:grid-cols-2">
+            {ERROS.map((e, i) => (
               <motion.div
-                key={a.title}
-                className="rounded-2xl border border-[var(--border)] bg-white p-7 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-md)]"
+                key={e.erro}
+                className="rounded-2xl border border-[var(--border)] bg-white p-6 transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)]"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
               >
-                <h3 className="font-display text-lg font-semibold text-[var(--navy)] leading-snug">
-                  {a.title}
-                </h3>
-                <p className="mt-3 text-sm text-[var(--text-muted)] leading-relaxed">{a.desc}</p>
+                <div className="flex items-start gap-3">
+                  <span className="grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-red-50">
+                    <X size={14} className="text-red-500" />
+                  </span>
+                  <div>
+                    <h3 className="font-display text-base font-semibold text-[var(--navy)]">{e.erro}</h3>
+                    <p className="mt-2 text-sm text-[var(--text-muted)] leading-relaxed">{e.consequencia}</p>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* COMO FUNCIONA */}
-      <section className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
-          <div className="lg:sticky lg:top-28 lg:self-start">
-            <Eyebrow>Como atuamos</Eyebrow>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-              Etapas do <em className="hl">atendimento</em>.
-            </h2>
-          </div>
-          <ol className="relative">
-            {PASSOS.map((p, i) => (
-              <li key={p.title} className="relative flex gap-5 pb-10 last:pb-0">
-                {i < PASSOS.length - 1 && (
-                  <span className="absolute left-[19px] top-12 bottom-0 w-px bg-[var(--border)]" />
-                )}
-                <span className="relative z-10 grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[var(--navy)] font-display font-semibold text-[var(--gold-light)]">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div className="pt-1">
-                  <h3 className="font-display text-xl font-semibold text-[var(--navy)]">
-                    {p.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-[var(--text-muted)] leading-relaxed">{p.desc}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* AUTORIDADE */}
-      <section className="bg-[var(--surface)] py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] items-center">
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, x: -24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-[var(--border)]">
-                <img
-                  src="/about-renan.webp"
-                  alt="Dr. Renan Gonçalves"
-                  className="h-full w-full object-cover object-top"
-                />
-              </div>
-              <div className="absolute -bottom-5 -left-5 rounded-xl bg-[var(--gold)] px-5 py-3 text-sm font-medium text-white shadow-lg">
-                Ex-servidor do INSS · Docente
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 24 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <Eyebrow>Sobre o fundador</Eyebrow>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-                Atuação técnica em <em className="hl">previdenciário</em>.
-              </h2>
-              <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-                Dr. Renan Gonçalves atuou como gerente do INSS antes de se dedicar exclusivamente à
-                advocacia previdenciária. Também leciona na área, contribuindo para a formação de
-                outros profissionais.
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* DEPOIMENTOS */}
+      {/* ALERTAS TÉCNICOS */}
       <section className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
         <div className="max-w-3xl">
-          <Eyebrow>Depoimentos</Eyebrow>
+          <Eyebrow>Pontos de atenção</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            O que dizem os <em className="hl">clientes</em>
+            Parece simples pelo app. <br />
+            Mas <em className="hl">os erros têm custo alto</em>.
           </h2>
+          <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
+            O Meu INSS foi criado para facilitar o pedido — não para garantir aprovação.
+            Responder perguntas de forma incorreta, enviar documentos desnecessários ou
+            deixar de apresentar provas exigidas pode resultar em uma negativa que
+            demora anos para ser revertida.
+          </p>
         </div>
         <div className="mt-12 grid gap-5 md:grid-cols-3">
-          {DEPOIMENTOS.map((d, i) => (
-            <motion.figure
-              key={d.name}
-              className="rounded-2xl border border-[var(--border)] bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-md)]"
+          {ALERTAS.map((a, i) => (
+            <motion.div
+              key={a.title}
+              className="rounded-2xl border border-[var(--border)] bg-white p-7 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-md)]"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
             >
-              <div className="flex items-center gap-1 mb-3">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} size={14} className="fill-[var(--gold)] text-[var(--gold)]" />
-                ))}
-              </div>
-              <blockquote className="font-display text-base italic text-[var(--navy)] leading-snug">
-                "{d.text}"
-              </blockquote>
-              <figcaption className="mt-4 text-xs text-[var(--text-muted)]">{d.name}</figcaption>
-            </motion.figure>
+              <h3 className="font-display text-lg font-semibold text-[var(--navy)] leading-snug">
+                {a.title}
+              </h3>
+              <p className="mt-3 text-sm text-[var(--text-muted)] leading-relaxed">{a.desc}</p>
+            </motion.div>
           ))}
         </div>
-        <p className="mt-6 text-xs text-[var(--text-light)]">
-          Manifestações espontâneas. Resultados em casos previdenciários dependem da análise
-          individual.
-        </p>
+      </section>
+
+      {/* COMO FUNCIONA */}
+      <section className="bg-[var(--surface)] py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
+            <div className="lg:sticky lg:top-28 lg:self-start">
+              <Eyebrow>Como atuamos</Eyebrow>
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
+                Etapas do <em className="hl">atendimento</em>.
+              </h2>
+            </div>
+            <ol className="relative">
+              {PASSOS.map((p, i) => (
+                <li key={p.title} className="relative flex gap-5 pb-10 last:pb-0">
+                  {i < PASSOS.length - 1 && (
+                    <span className="absolute left-[19px] top-12 bottom-0 w-px bg-[var(--border)]" />
+                  )}
+                  <span className="relative z-10 grid h-10 w-10 flex-shrink-0 place-items-center rounded-full bg-[var(--navy)] font-display font-semibold text-[var(--gold-light)]">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="pt-1">
+                    <h3 className="font-display text-xl font-semibold text-[var(--navy)]">
+                      {p.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-[var(--text-muted)] leading-relaxed">{p.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      {/* AUTORIDADE */}
+      <section className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] items-center">
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-[var(--border)]">
+              <img
+                src="/about-renan.webp"
+                alt="Dr. Renan Gonçalves"
+                className="h-full w-full object-cover object-top"
+              />
+            </div>
+            <div className="absolute -bottom-5 -left-5 rounded-xl bg-[var(--gold)] px-5 py-3 text-sm font-medium text-white shadow-lg">
+              Ex-servidor do INSS · Docente
+            </div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <Eyebrow>Sobre o fundador</Eyebrow>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
+              Atuação técnica em <em className="hl">previdenciário</em>.
+            </h2>
+            <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
+              Dr. Renan Gonçalves atuou como gerente do INSS antes de se dedicar exclusivamente à
+              advocacia previdenciária. Também leciona na área, contribuindo para a formação de
+              outros profissionais.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* DEPOIMENTOS */}
+      <section className="bg-[var(--surface)] py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="max-w-3xl">
+            <Eyebrow>Depoimentos</Eyebrow>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
+              O que dizem os <em className="hl">clientes</em>
+            </h2>
+          </div>
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {DEPOIMENTOS.map((d, i) => (
+              <motion.figure
+                key={d.name}
+                className="rounded-2xl border border-[var(--border)] bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-md)]"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+              >
+                <div className="flex items-center gap-1 mb-3">
+                  {Array.from({ length: 5 }).map((_, j) => (
+                    <Star key={j} size={14} className="fill-[var(--gold)] text-[var(--gold)]" />
+                  ))}
+                </div>
+                <blockquote className="font-display text-base italic text-[var(--navy)] leading-snug">
+                  "{d.text}"
+                </blockquote>
+                <figcaption className="mt-4 text-xs text-[var(--text-muted)]">{d.name}</figcaption>
+              </motion.figure>
+            ))}
+          </div>
+          <p className="mt-6 text-xs text-[var(--text-light)]">
+            Manifestações espontâneas. Resultados em casos previdenciários dependem da análise
+            individual.
+          </p>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
+        <div className="max-w-3xl mb-10">
+          <Eyebrow>Dúvidas frequentes</Eyebrow>
+          <h2 className="font-display text-3xl md:text-4xl font-semibold text-[var(--navy)]">
+            Perguntas que a gente mais <em className="hl">recebe</em>
+          </h2>
+        </div>
+        <FaqAccordion items={FAQ_APOSENTADORIA} />
       </section>
 
       {/* CTA FINAL */}

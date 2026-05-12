@@ -1,10 +1,35 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, Check, MessageCircle } from "lucide-react";
+import { ArrowRight, Check, MessageCircle, Star } from "lucide-react";
+
 import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
+import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { SITE } from "@/lib/site";
+
+const FAQ_SOBRE = [
+  {
+    q: "O Dr. Renan realmente trabalhou no INSS?",
+    a: "Sim. Antes de fundar o escritório, Dr. Renan atuou como gerente do INSS, onde acompanhou de perto os critérios técnicos que determinam a aprovação ou negativa de cada pedido.",
+  },
+  {
+    q: "O escritório atua apenas em aposentadoria?",
+    a: "Não. Atuamos em todas as áreas do direito previdenciário: aposentadorias, auxílio-doença, BPC/LOAS, pensão por morte, revisão de benefícios e trabalhador rural.",
+  },
+  {
+    q: "O que significa dizer que o escritório tem 'atuação exclusiva'?",
+    a: "Significa que nenhum profissional da equipe divide atenção com outras áreas do direito — trabalhista, criminal, civil. Todo o tempo, estudo e energia estão concentrados no previdenciário.",
+  },
+  {
+    q: "Por que um escritório especializado faz diferença?",
+    a: "Porque o direito previdenciário tem regras próprias, prazos específicos e critérios técnicos que mudam com frequência. Um erro de estratégia no início pode atrasar o benefício em anos.",
+  },
+  {
+    q: "O escritório tem experiência com casos negados ou complicados?",
+    a: "Sim. Parte significativa dos casos que chegam ao escritório já passou por negativa administrativa. A experiência prévia do Dr. Renan dentro do INSS ajuda a entender o que o sistema exige para reverter essa situação.",
+  },
+];
 
 export const Route = createFileRoute("/sobre")({
   head: () => ({
@@ -25,6 +50,13 @@ export const Route = createFileRoute("/sobre")({
   }),
   component: SobrePage,
 });
+
+const STATS = [
+  { value: "143+", label: "Avaliações no Google" },
+  { value: "10+", label: "Profissionais especializados" },
+  { value: "2", label: "Unidades em Rondônia" },
+  { value: "100%", label: "Foco em previdenciário" },
+];
 
 const VALORES = [
   {
@@ -58,42 +90,79 @@ const DIFERENCIAIS = [
   "Atividade docente do fundador na área previdenciária",
 ];
 
+const TIMELINE = [
+  {
+    ano: "Início",
+    titulo: "Saída do INSS",
+    desc: "Após anos como gerente do INSS, Dr. Renan percebe que podia ajudar mais as pessoas do lado de fora do sistema.",
+  },
+  {
+    ano: "Fundação",
+    titulo: "Escritório Gonçalves",
+    desc: "Abertura do escritório em Jaru (RO), com foco exclusivo em direito previdenciário e atendimento humanizado.",
+  },
+  {
+    ano: "Expansão",
+    titulo: "Segunda unidade",
+    desc: "Abertura da unidade em Alta Floresta D'Oeste (RO) para ampliar o atendimento presencial na região.",
+  },
+  {
+    ano: "Hoje",
+    titulo: "Atendimento nacional",
+    desc: "Mais de 10 profissionais, clientes em todo o Brasil e mais de 143 avaliações positivas no Google.",
+  },
+];
+
+const DEPOIMENTOS = [
+  {
+    text: "Atendimento atencioso do início ao fim, com explicações claras sobre cada etapa.",
+    name: "Eleni Rocha",
+  },
+  {
+    text: "Comunicação clara e constante. Equipe sempre disponível para tirar dúvidas.",
+    name: "Leuciane Silva",
+  },
+  {
+    text: "Excelente atendimento. Equipe técnica e respeitosa.",
+    name: "Érika Vieira",
+  },
+];
+
 function SobrePage() {
   return (
     <Layout>
       {/* HERO */}
       <section className="on-navy relative overflow-hidden bg-[var(--navy)] text-white">
-        <div className="relative mx-auto max-w-7xl px-6 pt-20 pb-24 lg:pt-28 lg:pb-32 grid gap-16 lg:grid-cols-[1.2fr_1fr] items-center">
+        <div className="relative mx-auto max-w-4xl px-6 pt-20 pb-20 lg:pt-28 lg:pb-24 text-center">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
-            <Eyebrow>Sobre o escritório</Eyebrow>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white max-w-2xl">
+            <Eyebrow className="mx-auto justify-center">Sobre o escritório</Eyebrow>
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
               Um escritório que <em className="hl">nasceu de dentro do INSS</em>.
             </h1>
-            <p className="mt-6 max-w-xl text-base text-white/65 leading-relaxed">
+            <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
               Dr. Renan Gonçalves não chegou ao direito previdenciário pelos livros. Chegou
               pela prática — como gerente do INSS, onde aprendeu de perto como o sistema
               funciona, quais pedidos são aprovados e por que tantos são negados.
             </p>
-            <div className="mt-8">
-              <WaveButton variant="wpp" size="lg" href={SITE.whatsapp} target="_blank" rel="noopener">
-                <MessageCircle size={18} /> Falar com a equipe
-              </WaveButton>
-            </div>
           </motion.div>
+        </div>
+      </section>
 
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.55, delay: 0.15 }}
-          >
-            <div className="aspect-[4/5] rounded-2xl overflow-hidden">
-              <img src="/about-renan.webp" alt="Dr. Renan Gonçalves" className="w-full h-full object-cover object-top" />
-            </div>
-            <div className="absolute -bottom-5 -left-5 rounded-xl bg-[var(--gold)] px-5 py-3 text-sm font-medium text-[var(--navy)] font-semibold shadow-lg">
-              Fundador & Advogado
-            </div>
-          </motion.div>
+      {/* STATS */}
+      <section className="border-b border-[var(--border)] bg-white">
+        <div className="mx-auto max-w-7xl px-6 py-12 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          {STATS.map((s, i) => (
+            <motion.div
+              key={s.label}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+            >
+              <p className="font-display text-4xl font-bold text-[var(--navy)]">{s.value}</p>
+              <p className="mt-1 text-sm text-[var(--text-muted)]">{s.label}</p>
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -105,6 +174,11 @@ function SobrePage() {
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
               Como tudo <em className="hl">começou</em>
             </h2>
+            <div className="mt-8">
+              <WaveButton variant="wpp" href={SITE.whatsapp} target="_blank" rel="noopener">
+                <MessageCircle size={16} /> Falar no WhatsApp <ArrowRight size={14} />
+              </WaveButton>
+            </div>
           </motion.div>
           <motion.div className="space-y-5 text-base text-[var(--text-muted)] leading-relaxed" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}>
             <p>
@@ -126,52 +200,134 @@ function SobrePage() {
         </div>
       </section>
 
-      {/* MISSÃO E VALORES */}
+      {/* LINHA DO TEMPO */}
       <section className="bg-[var(--surface)] py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-6">
           <div className="max-w-3xl">
-            <Eyebrow>Missão e valores</Eyebrow>
+            <Eyebrow>Trajetória</Eyebrow>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-              O que nos <em className="hl">orienta</em>
+              Uma linha do <em className="hl">tempo de dedicação</em>
             </h2>
           </div>
-          <div className="mt-12 grid gap-5 md:grid-cols-2">
-            {VALORES.map((v) => (
-              <div
-                key={v.title}
-                className="rounded-2xl border border-[var(--border)] border-l-[3px] border-l-[var(--gold)] bg-white p-7 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-md)]"
-              >
-                <h3 className="font-display text-xl font-semibold text-[var(--navy)] leading-snug">
-                  {v.title}
-                </h3>
-                <p className="mt-3 text-sm text-[var(--text-muted)] leading-relaxed">{v.body}</p>
-              </div>
-            ))}
+          <div className="mt-14 relative">
+            <div className="absolute left-[19px] top-0 bottom-0 w-px bg-[var(--border)] md:left-1/2" />
+            <div className="space-y-10">
+              {TIMELINE.map((item, i) => (
+                <motion.div
+                  key={item.titulo}
+                  className={`relative flex gap-6 md:w-1/2 ${i % 2 === 0 ? "md:ml-auto md:pl-10" : "md:pr-10 md:text-right md:flex-row-reverse"}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
+                >
+                  <div className={`relative z-10 flex-shrink-0 grid h-10 w-10 place-items-center rounded-full bg-[var(--navy)] text-[var(--gold-light)] font-display text-xs font-semibold ${i % 2 !== 0 ? "md:order-last" : ""}`}>
+                    {i + 1}
+                  </div>
+                  <div className="rounded-2xl border border-[var(--border)] bg-white p-6 flex-1">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--gold)]">{item.ano}</span>
+                    <h3 className="mt-1 font-display text-lg font-semibold text-[var(--navy)]">{item.titulo}</h3>
+                    <p className="mt-2 text-sm text-[var(--text-muted)] leading-relaxed">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* DIFERENCIAIS */}
+      {/* MISSÃO E VALORES */}
       <section className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
         <div className="max-w-3xl">
-          <Eyebrow>Características</Eyebrow>
+          <Eyebrow>Missão e valores</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
-            Nossa <em className="hl">forma de trabalho</em>
+            O que nos <em className="hl">orienta</em>
           </h2>
         </div>
-        <ul className="mt-12 grid gap-4 md:grid-cols-2">
-          {DIFERENCIAIS.map((d) => (
-            <li
-              key={d}
-              className="flex items-start gap-4 rounded-xl border border-[var(--border)] bg-white p-5 transition-colors hover:border-[var(--navy)]"
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
+          {VALORES.map((v) => (
+            <div
+              key={v.title}
+              className="rounded-2xl border border-[var(--border)] border-l-[3px] border-l-[var(--gold)] bg-white p-7 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-md)]"
             >
-              <span className="mt-0.5 grid h-8 w-8 flex-shrink-0 place-items-center rounded-full bg-[var(--navy-light)]">
-                <Check size={16} className="text-[var(--navy)]" />
-              </span>
-              <span className="text-sm leading-relaxed text-[var(--text)]">{d}</span>
-            </li>
+              <h3 className="font-display text-xl font-semibold text-[var(--navy)] leading-snug">
+                {v.title}
+              </h3>
+              <p className="mt-3 text-sm text-[var(--text-muted)] leading-relaxed">{v.body}</p>
+            </div>
           ))}
-        </ul>
+        </div>
+      </section>
+
+      {/* DIFERENCIAIS */}
+      <section className="bg-[var(--surface)] py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="max-w-3xl">
+            <Eyebrow>Características</Eyebrow>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
+              Nossa <em className="hl">forma de trabalho</em>
+            </h2>
+          </div>
+          <ul className="mt-12 grid gap-4 md:grid-cols-2">
+            {DIFERENCIAIS.map((d) => (
+              <li
+                key={d}
+                className="flex items-start gap-4 rounded-xl border border-[var(--border)] bg-white p-5 transition-colors hover:border-[var(--navy)]"
+              >
+                <span className="mt-0.5 grid h-8 w-8 flex-shrink-0 place-items-center rounded-full bg-[var(--navy-light)]">
+                  <Check size={16} className="text-[var(--navy)]" />
+                </span>
+                <span className="text-sm leading-relaxed text-[var(--text)]">{d}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* DEPOIMENTOS */}
+      <section className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
+        <div className="max-w-3xl">
+          <Eyebrow>Depoimentos</Eyebrow>
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
+            O que dizem os <em className="hl">clientes</em>
+          </h2>
+        </div>
+        <div className="mt-12 grid gap-5 md:grid-cols-3">
+          {DEPOIMENTOS.map((d, i) => (
+            <motion.figure
+              key={d.name}
+              className="rounded-2xl border border-[var(--border)] bg-white p-6 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-md)]"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+            >
+              <div className="flex items-center gap-1 mb-3">
+                {Array.from({ length: 5 }).map((_, j) => (
+                  <Star key={j} size={14} className="fill-[var(--gold)] text-[var(--gold)]" />
+                ))}
+              </div>
+              <blockquote className="font-display text-base italic text-[var(--navy)] leading-snug">
+                "{d.text}"
+              </blockquote>
+              <figcaption className="mt-4 text-xs text-[var(--text-muted)]">{d.name}</figcaption>
+            </motion.figure>
+          ))}
+        </div>
+        <p className="mt-6 text-xs text-[var(--text-light)]">
+          Manifestações espontâneas. Resultados em casos previdenciários dependem de análise individual.
+        </p>
+      </section>
+
+      {/* FAQ */}
+      <section className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
+        <div className="max-w-3xl mb-10">
+          <Eyebrow>Dúvidas frequentes</Eyebrow>
+          <h2 className="font-display text-3xl md:text-4xl font-semibold text-[var(--navy)]">
+            Perguntas que a gente mais <em className="hl">recebe</em>
+          </h2>
+        </div>
+        <FaqAccordion items={FAQ_SOBRE} />
       </section>
 
       {/* CTA FINAL */}

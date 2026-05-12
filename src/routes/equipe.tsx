@@ -1,10 +1,34 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, Instagram, MessageCircle, Youtube } from "lucide-react";
+import { ArrowRight, Heart, Instagram, MessageCircle, Shield, Star, Users, Youtube } from "lucide-react";
 import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
+import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { SITE } from "@/lib/site";
+
+const FAQ_EQUIPE = [
+  {
+    q: "Quem vai me atender diretamente?",
+    a: "Dependendo da sua demanda, você será atendido por um dos profissionais especializados da equipe. O Dr. Renan coordena o trabalho e está presente nas decisões técnicas mais relevantes.",
+  },
+  {
+    q: "A equipe recebe formação específica em previdenciário?",
+    a: "Sim. O Dr. Renan é professor de direito previdenciário e transmite esse nível de exigência técnica para toda a equipe. O padrão que ensinamos para outros advogados é o mesmo que aplicamos internamente.",
+  },
+  {
+    q: "Vocês têm advogados especializados em cada área?",
+    a: "Toda a equipe atua exclusivamente em direito previdenciário. Não dividimos atenção com outras áreas do direito — isso garante um nível técnico mais elevado em cada caso.",
+  },
+  {
+    q: "Como funciona o acompanhamento do processo?",
+    a: "Você é informado sobre cada etapa relevante do seu processo. Nenhuma surpresa, nenhum abandono no meio do caminho — esse é um dos nossos principais compromissos.",
+  },
+  {
+    q: "Posso falar diretamente com o Dr. Renan?",
+    a: "O Dr. Renan está presente nas decisões técnicas e estratégicas de cada caso. O atendimento no dia a dia é feito pela equipe — que mantém o mesmo padrão de cuidado e qualidade.",
+  },
+];
 
 export const Route = createFileRoute("/equipe")({
   head: () => ({
@@ -39,6 +63,29 @@ const EQUIPE = [
   { nome: "Nathália", cargo: "Equipe previdenciária" },
 ];
 
+const CULTURA = [
+  {
+    icon: Star,
+    titulo: "Especialização total",
+    desc: "Ninguém aqui cuida de vários assuntos ao mesmo tempo. Cada pessoa da equipe tem foco exclusivo no previdenciário.",
+  },
+  {
+    icon: Heart,
+    titulo: "Atendimento humano",
+    desc: "Sabemos que quem nos procura muitas vezes está passando por um momento difícil. Ouvimos com atenção antes de qualquer outra coisa.",
+  },
+  {
+    icon: Shield,
+    titulo: "Responsabilidade técnica",
+    desc: "O fundador é professor de advogados previdenciários. O padrão de exigência que aplicamos à equipe é o mesmo que ensinamos para outros.",
+  },
+  {
+    icon: Users,
+    titulo: "Trabalho em equipe",
+    desc: "Cada caso passa por mais de um olhar técnico. Isso garante que nada relevante seja esquecido antes de protocolar qualquer pedido.",
+  },
+];
+
 function EquipePage() {
   return (
     <Layout>
@@ -46,16 +93,16 @@ function EquipePage() {
       <section className="on-navy relative overflow-hidden bg-[var(--navy)] text-white">
         <div className="relative mx-auto max-w-4xl px-6 pt-20 pb-20 lg:pt-28 lg:pb-24 text-center">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
-          <Eyebrow className="mx-auto justify-center">Nossa equipe</Eyebrow>
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
-            Conheça quem vai <br />
-            <em className="hl">cuidar do seu caso</em>.
-          </h1>
-          <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Mais de 10 profissionais dedicados exclusivamente ao direito previdenciário.
-            Aqui ninguém cuida de vários assuntos ao mesmo tempo — cada pessoa da equipe
-            tem foco no que faz.
-          </p>
+            <Eyebrow className="mx-auto justify-center">Nossa equipe</Eyebrow>
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
+              Conheça quem vai <br />
+              <em className="hl">cuidar do seu caso</em>.
+            </h1>
+            <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
+              Mais de 10 profissionais dedicados exclusivamente ao direito previdenciário.
+              Aqui ninguém cuida de vários assuntos ao mesmo tempo — cada pessoa da equipe
+              tem foco no que faz.
+            </p>
           </motion.div>
         </div>
       </section>
@@ -78,7 +125,7 @@ function EquipePage() {
               Dr. Renan <em className="hl">Gonçalves</em>
             </h2>
             <p className="mt-2 text-sm font-medium text-[var(--text-muted)]">
-              Advogado · Fundador · {SITE.oab} · Ex-servidor do INSS
+              Advogado · Fundador · {SITE.oab} · Ex-servidor do INSS · Professor
             </p>
             <div className="mt-5 space-y-4 text-base text-[var(--text-muted)] leading-relaxed">
               <p>
@@ -144,9 +191,57 @@ function EquipePage() {
             ))}
           </div>
           <p className="mt-8 text-center text-xs text-[var(--text-light)]">
-            Cargos e fotos serão atualizados conforme informações enviadas pelo escritório.
+            Fotos da equipe em breve.
           </p>
         </div>
+      </section>
+
+      {/* CULTURA */}
+      <section className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
+        <div className="max-w-3xl">
+          <Eyebrow>Como trabalhamos</Eyebrow>
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
+            O que une a <em className="hl">nossa equipe</em>
+          </h2>
+          <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
+            Mais do que habilidades técnicas, o que define cada pessoa da equipe é o compromisso
+            com quem confia o seu caso a nós.
+          </p>
+        </div>
+        <div className="mt-12 grid gap-5 md:grid-cols-2">
+          {CULTURA.map((c, i) => {
+            const Icon = c.icon;
+            return (
+              <motion.div
+                key={c.titulo}
+                className="flex items-start gap-5 rounded-2xl border border-[var(--border)] bg-white p-7 transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-md)]"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+              >
+                <div className="grid h-11 w-11 flex-shrink-0 place-items-center rounded-xl bg-[var(--navy-light)] text-[var(--navy)]">
+                  <Icon size={20} />
+                </div>
+                <div>
+                  <h3 className="font-display text-lg font-semibold text-[var(--navy)]">{c.titulo}</h3>
+                  <p className="mt-2 text-sm text-[var(--text-muted)] leading-relaxed">{c.desc}</p>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
+        <div className="max-w-3xl mb-10">
+          <Eyebrow>Dúvidas frequentes</Eyebrow>
+          <h2 className="font-display text-3xl md:text-4xl font-semibold text-[var(--navy)]">
+            Perguntas que a gente mais <em className="hl">recebe</em>
+          </h2>
+        </div>
+        <FaqAccordion items={FAQ_EQUIPE} />
       </section>
 
       {/* CTA FINAL */}

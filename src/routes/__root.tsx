@@ -1,6 +1,8 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts, useRouterState } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { WhatsAppFab } from "@/components/site/WhatsAppFab";
+import { CookieBanner } from "@/components/site/CookieBanner";
+import { BackToTop } from "@/components/site/BackToTop";
 
 import appCss from "../styles.css?url";
 
@@ -106,6 +108,8 @@ function RootComponent() {
         </motion.div>
       </AnimatePresence>
       <WhatsAppFab />
+      <BackToTop />
+      <CookieBanner />
     </>
   );
 }
