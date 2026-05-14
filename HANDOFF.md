@@ -1,4 +1,4 @@
-# Handoff: Novas landing pages de conversão — bpc-loas, trabalhador-rural e melhorias de design
+# Handoff: Página /links, equipe real, organização de imagens e próximas landing pages
 
 **Data:** 2026-05-14
 **Status:** Em andamento
@@ -7,7 +7,7 @@
 
 ## 1. Objetivo
 
-Site institucional do Escritório Gonçalves (advocacia previdenciária, Rondônia). As sessões anteriores entregaram homepage, páginas secundárias e `/beneficios-negados`. Esta sessão focou em redesenhar `/bpc-loas`, criar `/trabalhador-rural` e evoluir o design system com novos padrões reutilizáveis.
+Site institucional do Escritório Gonçalves (advocacia previdenciária, Rondônia). Esta sessão criou a página `/links` (linktree), organizou todas as imagens em pastas, atualizou a equipe com fotos e nomes reais, e fez melhorias visuais nas páginas `/trabalhador-rural`, `/bpc-loas`, `/contato` e no rodapé.
 
 ---
 
@@ -51,11 +51,10 @@ Admin:   https://escrit-rio-gon-alves.vercel.app/login
 ### Convenções visuais — não mudar
 - `<Eyebrow>` para labels de seção
 - `<WaveButton variant="wpp">` para CTAs de WhatsApp em fundos claros
-- `<WaveButton variant="white">` para CTAs em fundos coloridos (novo, criado nesta sessão)
-- `on-navy` nas sections com fundo escuro/colorido (navy ou cor temática)
+- `<WaveButton variant="white">` para CTAs em fundos coloridos
+- `on-navy` nas sections com fundo escuro/colorido
 - `<em className="hl">` para highlight dourado no texto
 - Cards brancos: `rounded-2xl border border-[var(--border)] bg-white`
-- Cards CTA coloridos: `relative overflow-hidden` + letra decorativa gigante + `<div className="relative">` no conteúdo
 - Framer Motion em todas as animações — nunca CSS puro
 - Ícone WhatsApp: sempre `<WhatsAppIcon size={16} />` — **nunca `MessageCircle` do lucide**
 - `text-balance` em todos os `h1` e `h2`
@@ -65,40 +64,18 @@ Admin:   https://escrit-rio-gon-alves.vercel.app/login
 - Número: `5569992621298`
 - URL base: `https://api.whatsapp.com/send?phone=5569992621298&text=...`
 
-### Padrão de hero das landing pages (criado nesta sessão)
-- Fundo branco com acento da cor temática da página
+### Padrão de hero das landing pages
+- Fundo branco com acento da cor temática
 - Grid `lg:grid-cols-[1fr_460px]`
-- Onda SVG na base com `fill` na cor temática → transição visual para a seção seguinte
+- Onda SVG na base na cor temática → transição visual para a seção seguinte
 - Primeira seção de conteúdo com fundo na cor temática
-- Badge RO via `ipapi.co` no hero (ver padrão abaixo)
-- SVGs flutuantes decorativos animados (apenas em páginas com público mais amplo/infantil — **não usar em páginas sérias como trabalhador-rural**)
-- Mockup à direita específico para o tema da página (não reutilizar o mesmo entre páginas)
-
-### Padrão de badge RO
-```tsx
-const [isRO, setIsRO] = useState(false);
-useEffect(() => {
-  fetch("https://ipapi.co/json/")
-    .then((r) => r.json())
-    .then((d) => { if (d.region_code === "RO") setIsRO(true); })
-    .catch(() => {});
-}, []);
-// No JSX: AnimatePresence + motion.div com badge azul/verde conforme cor da página
-```
-
-### Padrão de seção de vídeo
-```tsx
-// Sempre antes do Dr. Renan
-// Layout: mx-auto max-w-7xl px-6 py-24 lg:py-32 (sem bg, usa o branco da página)
-// Grid: lg:grid-cols-[1fr_1.5fr]
-// Esquerda: Eyebrow + h2 + p + WaveButton
-// Direita: aspect-video rounded-2xl overflow-hidden border + iframe do YouTube
-```
+- Badge RO via `ipapi.co` no hero
+- SVGs flutuantes decorativos apenas em páginas infantis/amplas (ex: `/bpc-loas`) — **não usar em páginas sérias**
 
 ### WaveButton — variants disponíveis
 - `primary` — navy (padrão)
 - `wpp` — verde WhatsApp (usar em fundos brancos/claros)
-- `white` — branco pill, texto verde-700, hover verde suave (usar em fundos coloridos/verdes)
+- `white` — branco pill, texto verde-700, hover verde suave (usar em fundos coloridos)
 - `gold`, `outline`, `outline-gold`, `outline-light`, `ghost`, `ghost-light`
 
 ---
@@ -110,82 +87,104 @@ useEffect(() => {
 - 6 páginas secundárias: `/sobre`, `/servicos`, `/areas-de-atuacao`, `/equipe`, `/contato`, `/quero-me-aposentar`
 - `/beneficios-negados` — landing page completa com vídeo YouTube (`9458BMstnxQ`)
 - `/voce-tem-direito` — orientação previdenciária em 3 perguntas
-- Componentes globais: `UrgencyBar`, `CookieBanner`, `ReadingProgress`, `BackToTop`, `WhatsAppIcon`, `FaqAccordion`
+- `/bpc-loas` — redesenhada (fundo branco, blue-600, mockup Pedro TEA, vídeo `kQiEiKNlYIo`)
+- `/trabalhador-rural` — criada (green-700, mockup INSS, vídeo `Adq18gXUP6A`)
+- `WaveButton variant="white"` — criado
 
 ### Esta sessão
 
-#### `/bpc-loas` — REDESENHADA E FUNCIONAL
-**Mudanças do design original:**
-- Hero redesenhado: fundo **branco** (era azul), blue-600 como acento
-- Primeira seção de conteúdo recebe `bg-blue-600` (inversão do hero)
-- Onda SVG na base do hero em `rgb(37,99,235)` (blue-600)
-- Mockup hero: card de perfil infantil "Pedro, 7 anos · TEA" + bolha de mensagem Dr. Renan (substituiu cards de jornada genéricos)
-- SVGs flutuantes decorativos em azul na hero e no CTA (mantidos — público inclui pais de crianças)
-- Salário atualizado: R$ 1.620 (salário mínimo 2025)
-- `on-navy` adicionado em todas as seções `bg-blue-600` para o Eyebrow ficar correto
-- `text-balance` em todos os headings
-- CTA final redesenhado: card `bg-blue-600` dentro de `bg-white`, duas colunas com lista "O que você recebe"
-- Seção "Para todas as idades": saiu de `bg-yellow-50` para branco limpo
-- Passo a passo: cards uniformes, todos azul (era multi-color por card)
-- "Por que advogado": vermelho vs azul (era vermelho vs emerald)
-- **Vídeo adicionado:** `kQiEiKNlYIo` — antes do Dr. Renan
+#### Melhorias visuais
+- `/trabalhador-rural` headline: `<br className="hidden lg:block" />` para quebrar "5 anos antes" sem quebrar no mobile
+- `/trabalhador-rural` CTA: SVGs flutuantes removidos (público adulto)
+- `/bpc-loas` seção "Quem tem direito": coluna de pills com `lg:sticky lg:top-28`
+- `/contato`: `pt-16` entre pills e formulário + formulário com `lg:sticky lg:top-28`
 
-**Estrutura de seções:**
-1. Hero (branco + SVGs flutuantes + mockup Pedro)
-2. Quem tem direito (bg-blue-600)
-3. Para todas as idades (branco)
-4. Passo a passo (surface)
-5. Por que advogado (branco)
-6. Pague somente se aprovado (surface, card blue-600)
-7. Cobertura + Unidades (branco)
-8. Vídeo YouTube (sem bg, max-w container)
-9. Dr. Renan (surface)
-10. FAQ (branco)
-11. CTA Final (branco, card blue-600 com lista)
+#### Rodapé
+- BPC/LOAS, Benefício Negado, Trabalhador Rural linkados na coluna Serviços
+- `/quero-me-aposentar` linkado na coluna Institucional
+- Hover dourado (`--gold-light`) em todos os novos links
 
-#### `/trabalhador-rural` — CRIADA E FUNCIONAL
-**Cor temática:** green-700 (`#15803d`) — verde escuro, sóbrio, adequado para público adulto/rural
-**Fonte:** https://escritoriogoncalves.com/trabalhador-rural/ (analisada com WebFetch)
+#### Página `/links` — CRIADA
+- Standalone (sem Navbar/Footer)
+- Faixa vermelha no topo: "Benefício negado pelo INSS? Ainda dá tempo de recorrer"
+- Header: foto perfil + palavras Fé/Esperança/Direito/Justiça + ícones sociais
+- 5 cards usando imagens reais (`public/links/`)
+- Carrossel de bio com 10 fotos (auto-play 3s, desliza 1 foto por vez, 3 visíveis)
+- Seção de avaliações Google
+- Espaçamento `mb-8` após cada botão zap
 
-**Decisões de design específicas:**
-- Sem SVGs flutuantes (público adulto/sério — descartado por não ser infantil)
-- Verde escuro (`green-700`) em vez de `green-600` por pedido do cliente
-- `variant="white"` nos botões em fundos verdes (novo variant criado)
-- Mockup hero: "Ficha INSS · Segurado Especial" com header verde tipo app gov + dados do trabalhador + status badge + card de aprovação verde abaixo
-- Sticky na coluna das pills "Quem se enquadra como segurado especial" (direita) na seção verde
-- Sticky na coluna de texto "Como comprovar" (esquerda) na seção branca
-- Onda SVG: `rgb(21,128,61)` (green-700)
+#### Organização das imagens em pastas
+```
+public/
+  hero-bg.webp          ← usado em HeroSection.tsx (manter na raiz)
+  hero-bg-mobile.webp   ← usado em HeroSection.tsx (manter na raiz)
+  about-renan.webp      ← não mais referenciado no código (pode apagar)
+  about-office.jpg      ← não mais referenciado no código (pode apagar)
+  renan-recorte.webp    ← não mais referenciado no código (pode apagar)
+  renan-sf.png          ← não mais referenciado no código (pode apagar)
+  team/
+    renan.webp          ← cópia de bio/04.webp (não usada — equipe usa bio/05.webp)
+    wesley.webp
+    lucimeiry.webp
+    milena.webp
+    leticia.webp
+    ingrid.webp
+    higor.webp
+    daniel.webp
+    bruna.webp
+    ana-paula.webp
+    analicy.webp
+    aline.webp
+  links/
+    banner-escritorio.webp
+    banner-incapacidade.webp
+    banner-laudo.webp
+    banner-apl.webp
+    banner-marketing.webp
+    zap-escritorio.webp
+    zap-incapacidade.webp
+    zap-laudo.webp
+    zap-apl.webp
+  bio/
+    01.webp ... 10.webp   ← carrossel da /links e seções do site
+```
 
-**Estrutura de seções:**
-1. Hero (branco + mockup ficha INSS)
-2. Quem tem direito (bg-green-700) — coluna direita (pills) sticky
-3. Como comprovar os 15 anos (branco) — coluna esquerda (texto) sticky
-4. Benefícios disponíveis + motivos de negativa (surface)
-5. Passo a passo (branco)
-6. Por que advogado (surface)
-7. Pague somente se aprovado (branco, card green-700, botão white)
-8. Cobertura + Unidades (surface, card green-700, botão white)
-9. Vídeo YouTube (sem bg) — `Adq18gXUP6A`
-10. Dr. Renan (branco, badge green-700)
-11. FAQ (surface) — 8 perguntas específicas do trabalhador rural
-12. CTA Final (branco, card green-700, botão white, lista "O que você precisa saber")
+#### Equipe atualizada
+- `/equipe`: grid 4 colunas, 12 membros com fotos reais e nomes corretos
+- `TeamSection` homepage: nomes dos 3 advogados visíveis abaixo dos cards
+- Equipe de apoio na homepage: fotos reais substituindo iniciais
+- Anderson Rodrigues: **não incluído** (a pedido do cliente)
 
-#### Novo variant `WaveButton variant="white"` — criado nesta sessão
-- Arquivo CSS: `src/styles.css` (logo após `.btn-wpp`)
-- Arquivo TS: `src/components/site/WaveButton.tsx` (adicionado ao union type `Variant`)
-- Fundo branco, texto `green-700`, hover com layers `green-100`/`green-200`
-- **Uso:** em qualquer card/seção com fundo colorido onde o `wpp` (verde) não contrasta
+#### Distribuição de fotos do Dr. Renan e ambiente
+| Local | Foto |
+|---|---|
+| Dr. Renan em `/equipe` e TeamSection home | `/bio/05.webp` |
+| TeamSection — Dr. Wesley | `/team/wesley.webp` |
+| TeamSection — Dra. Lucimeiry | `/team/lucimeiry.webp` |
+| Homepage AuthoritySection (Dr. Renan) | `/bio/01.webp` |
+| Homepage AuthoritySection (escritório) | `/bio/06.webp` |
+| HowItWorks passo 1 | `/bio/04.webp` |
+| HowItWorks passo 2 | `/bio/03.webp` |
+| HowItWorks passo 3 | `/bio/08.webp` |
+| HowItWorks passo 4 | `/bio/07.webp` |
+| HowItWorks passo 5 | `/bio/09.webp` |
+| `/beneficios-negados` Dr. Renan | `/bio/02.webp` |
+| `/bpc-loas` Dr. Renan | `/bio/10.webp` |
+| `/quero-me-aposentar` Dr. Renan | `/bio/08.webp` |
+| `/trabalhador-rural` Dr. Renan | `/bio/09.webp` |
 
 ---
 
 ## 4. Estado atual
 
 ### O que funciona
-- `/bpc-loas` — completa, `tsc --noEmit` limpo
-- `/trabalhador-rural` — completa, `tsc --noEmit` limpo
-- Todas as páginas anteriores intactas
+- Todas as páginas: `tsc --noEmit` limpo
+- `/links` — funcional, banners reais, carrossel, faixa vermelha
+- `/equipe` — fotos e nomes reais, 12 membros
+- `TeamSection` homepage — advogados com nomes, equipe de apoio com fotos
+- Rodapé com todas as páginas linkadas
 - Deploy na Vercel com SSR funcionando
-- `WaveButton variant="white"` funcionando globalmente
+- Imagens organizadas em `team/`, `links/`, `bio/`
 
 ### Pendente de sessões anteriores (ainda não resolvido)
 - **3ª unidade** — cidade e endereço real não fornecidos. Placeholder em:
@@ -194,46 +193,51 @@ useEffect(() => {
   - `src/routes/bpc-loas.tsx` → array inline de unidades
   - `src/routes/trabalhador-rural.tsx` → array inline de unidades
 - **OAB do Dr. Renan** — ainda `"OAB/RO 00.000"` em `src/lib/site.ts`
-- **Fotos da equipe** — avatares de inicial em `src/routes/equipe.tsx`
-- **`.env.local` ausente localmente** — formulário de contato não persiste no banco local
+- **OAB do Dr. Wesley e Dra. Lucimeiry** — números reais não fornecidos (TeamSection mostra `OAB/RO` genérico)
 
-### Novas páginas não linkadas
-`/bpc-loas` e `/trabalhador-rural` existem e funcionam mas **não estão no footer/nav**.
+### Links externos pendentes na `/links`
+Os `href="#"` precisam de URLs reais:
+- `banner-incapacidade` → URL do Guia por Incapacidade
+- `zap-incapacidade` → WhatsApp do Guia
+- `banner-laudo` → URL da Laudo Certa
+- `zap-laudo` → WhatsApp da Laudo Certa
+- `banner-apl` → URL da Comunidade APL
+- `zap-apl` → WhatsApp da APL
+- `banner-marketing` → URL do Gonçalves Marketing
 
 ---
 
 ## 5. Próximos passos
 
-1. **Linkar as novas páginas** no footer (`src/components/site/Footer.tsx`) — coluna "Serviços":
-   - `/beneficios-negados`
-   - `/bpc-loas`
-   - `/trabalhador-rural`
+1. **Completar URLs da `/links`** — cliente deve fornecer links dos produtos externos
 
-2. **Criar próximas landing pages** seguindo o mesmo protocolo:
-   - `/aposentadoria-por-invalidez` — fonte: `escritoriogoncalves.com/aposentadoria-por-invalidez/`
-   - `/auxilio-doenca` — fonte: `escritoriogoncalves.com/auxilio-doenca/`
-   - `/revisao-de-beneficio` — fonte: `escritoriogoncalves.com/revisao-de-beneficio/`
-   - Cada uma com cor temática diferente, mockup específico, vídeo se disponível
+2. **Criar próximas landing pages** seguindo o protocolo abaixo:
+   - `/aposentadoria-por-invalidez` — cor temática sugerida: purple-700
+   - `/auxilio-doenca` — cor temática sugerida: orange-600
+   - `/revisao-de-beneficio` — cor temática sugerida: teal-700
+   - Cada uma com: `WebFetch` em `escritoriogoncalves.com/[slug]/`, cor única, mockup específico, onda SVG, vídeo se disponível
 
-3. **Completar 3ª unidade** — cliente deve fornecer cidade + endereço real. Atualizar 4 arquivos (ver seção 4).
+3. **Completar 3ª unidade** — cliente deve fornecer cidade + endereço (4 arquivos afetados)
 
-4. **Corrigir OAB** — atualizar `oab` em `src/lib/site.ts` com número real.
+4. **Corrigir OABs** — Dr. Renan em `src/lib/site.ts`, Wesley e Lucimeiry em `TeamSection.tsx`
 
-5. **Fotos da equipe** — substituir avatares em `src/routes/equipe.tsx`.
+5. **SEO** — revisar `title` e `description` das landing pages criadas
 
-6. **SEO** — revisar `title` e `description` de `/bpc-loas` e `/trabalhador-rural`.
+6. **Linkar as landing pages na navbar** — atualmente só estão no rodapé
 
 ---
 
 ## 6. Perguntas em aberto
 
-- **Qual é a cidade e endereço da 3ª unidade?** (bloqueia 4 arquivos)
-- **Qual o número real da OAB/RO do Dr. Renan?**
-- **Quando chegam as fotos reais da equipe?**
-- **Quais outras landing pages criar?** (invalidez, auxílio-doença, revisão, pensão por morte?)
-- **Linkar as novas páginas onde exatamente?** Footer? Nav principal? Cards na homepage?
-- **O `variant="white"` deve ser usado em `/beneficios-negados` também?** (O CTA final lá usa navy — não precisa, mas verificar consistência)
-- **Vídeo para `/beneficios-negados`?** Já tem (`9458BMstnxQ`). Para as próximas páginas, o cliente vai fornecer links?
+- **Qual a cidade e endereço da 3ª unidade?** (bloqueia 4 arquivos)
+- **Quais os números reais da OAB** do Dr. Wesley e Dra. Lucimeiry?
+- **URLs dos produtos externos** para a `/links` (Guia, Laudo Certa, APL, Marketing)?
+- **Quais os WhatsApps de cada produto** (Guia, Laudo Certa, APL)?
+- **Quais próximas landing pages criar** e em que ordem?
+- **Adicionar landing pages na navbar principal** ou manter só no rodapé?
+- **Vídeos para as próximas landing pages** — o cliente vai fornecer?
+- **`public/team/renan.webp`** não está sendo usado — pode apagar?
+- **`about-renan.webp`, `about-office.jpg`, `renan-recorte.webp`, `renan-sf.png`** na raiz do `public/` também não são mais referenciados — pode limpar?
 
 ---
 
@@ -241,36 +245,35 @@ useEffect(() => {
 
 ### Arquivos criados/modificados nesta sessão
 ```
-src/routes/bpc-loas.tsx              ← redesenhada
-src/routes/trabalhador-rural.tsx     ← NOVA
-src/components/site/WaveButton.tsx   ← novo variant "white"
-src/styles.css                       ← .btn-white adicionado
+src/routes/links.tsx                        ← NOVA
+src/routes/trabalhador-rural.tsx            ← melhorias (sticky removido CTA, headline br)
+src/routes/bpc-loas.tsx                     ← sticky na coluna de pills
+src/routes/contato.tsx                      ← pt-16 + formulário sticky
+src/routes/equipe.tsx                       ← 12 membros reais com fotos
+src/components/site/Footer.tsx              ← 4 novas páginas linkadas
+src/components/home/TeamSection.tsx         ← nomes, fotos equipe apoio, dados reais
+src/components/home/AuthoritySection.tsx    ← bio/01.webp e bio/06.webp
+src/components/home/HowItWorksSection.tsx   ← bio/03-09.webp
+public/team/                                ← 12 fotos da equipe
+public/links/                               ← 9 imagens da página /links
+public/bio/                                 ← 10 fotos do carrossel
 ```
 
 ### Arquivos intocados (prontos — não mexer sem necessidade)
 ```
-src/routes/beneficios-negados.tsx
 src/routes/index.tsx                 ← homepage aprovada
+src/routes/beneficios-negados.tsx
 src/routes/blog*.tsx
 src/routes/admin*.tsx
 api/server.js
 vercel.json
+src/styles.css
+src/components/site/WaveButton.tsx
 ```
-
-### Protocolo para criar nova landing page
-1. Fazer `WebFetch` na URL correspondente em `escritoriogoncalves.com`
-2. Definir cor temática (cada página tem a sua)
-3. Criar `src/routes/[nome-da-pagina].tsx` seguindo a estrutura de `/trabalhador-rural`
-4. Hero: branco + cor temática como acento + mockup específico ao tema + onda SVG na cor temática
-5. Primeira seção de conteúdo: `bg-[cor-temática]` com `on-navy`
-6. Botões em fundos coloridos: `variant="white"`
-7. Vídeo (se houver): antes do Dr. Renan, layout `[1fr_1.5fr]`
-8. CTA final: `bg-white` com card interno na cor temática
-9. Rodar `tsc --noEmit` e confirmar limpo
 
 ### WPP links por página
 ```
-/bpc-loas:         ...text=Olá!%20Gostaria%20de%20saber%20se%20tenho%20direito%20ao%20BPC%2FLOAS.
+/bpc-loas:          ...text=Olá!%20Gostaria%20de%20saber%20se%20tenho%20direito%20ao%20BPC%2FLOAS.
 /trabalhador-rural: ...text=Olá!%20Sou%20trabalhador%20rural%20e%20gostaria%20de%20saber%20se%20tenho%20direito%20à%20aposentadoria.
 /beneficios-negados: ...text=Olá!%20Meu%20benefício%20foi%20negado%20pelo%20INSS%20e%20gostaria%20de%20ajuda.
 ```
@@ -282,6 +285,17 @@ vercel.json
 /trabalhador-rural:   Adq18gXUP6A
 ```
 
+### Protocolo para criar nova landing page
+1. `WebFetch` em `escritoriogoncalves.com/[slug]/`
+2. Definir cor temática única (cada página tem a sua)
+3. Criar `src/routes/[slug].tsx` seguindo `/trabalhador-rural` como modelo
+4. Hero: branco + cor temática como acento + mockup específico + onda SVG
+5. Primeira seção de conteúdo: `bg-[cor-temática]` com `on-navy`
+6. Botões em fundos coloridos: `variant="white"`
+7. Vídeo (se houver): antes do Dr. Renan, layout `[1fr_1.5fr]`
+8. CTA final: `bg-white` com card interno na cor temática
+9. `tsc --noEmit` limpo antes de commitar
+
 ### Comandos úteis
 ```bash
 # Dev local
@@ -291,6 +305,9 @@ node_modules/.bin/vite dev --port 3000
 # Type check
 node_modules/.bin/tsc --noEmit
 # (ignorar erro do vite.config.ts sobre 'spa' — pré-existente)
+
+# Commit e push
+git add [arquivos] && git commit -m "mensagem" && git push origin main
 ```
 
 ---
@@ -307,32 +324,34 @@ node_modules/.bin/tsc --noEmit
 - Cores: CSS vars (`--navy`, `--gold`) no design system global; cores Tailwind hardcoded apenas nas landing pages temáticas
 - Ícone WhatsApp: `<WhatsAppIcon size={16} />` — nunca `MessageCircle`
 - Botões CTA: `<WaveButton>` — nunca `<button>` ou `<a>` com classes customizadas
-- Em fundos coloridos: `variant="white"` — nunca `variant="wpp"` (verde some no verde)
-- `on-navy` em toda seção com fundo colorido (navy, blue-600, green-700, etc.)
+- Em fundos coloridos: `variant="white"` — nunca `variant="wpp"`
+- `on-navy` em toda seção com fundo colorido
 - `text-balance` em todos os `h1` e `h2`
 - Sticky em colunas longas: `lg:sticky lg:top-28`
 
 **Sobre SVGs flutuantes:**
-- Usar apenas em páginas com público mais amplo ou infantil (ex: `/bpc-loas`)
-- **Não usar** em páginas para público adulto/sério (ex: `/trabalhador-rural`, `/aposentadoria-por-invalidez`)
+- Usar apenas em páginas com público infantil/amplo (ex: `/bpc-loas`)
+- **Não usar** em páginas para público adulto/sério
 
 **Terminologia — regras fixas:**
 - Nunca usar "calculadora" — usar "orientação" ou "verificação"
-- "Benefício negado" para comunicação com o cliente — nunca "recurso negado"
-- "Recurso administrativo" é termo jurídico correto — manter onde precisar
-- 3 escritórios em RO (não "2 unidades")
-- +10 anos de experiência (não +15)
-- Bio do Dr. Renan: "mais de 5 anos como servidor do INSS" (cargo passado específico)
+- "Benefício negado" para comunicação com o cliente
+- "Recurso administrativo" é termo jurídico — manter onde precisar
+- 3 escritórios em RO
+- +10 anos de experiência
+- Bio do Dr. Renan: "mais de 5 anos como servidor do INSS"
 - Salário mínimo atual: **R$ 1.620**
+- Anderson Rodrigues: **não incluir** em nenhuma listagem de equipe
 
 **Armadilhas a evitar:**
 - Não confundir a raiz do repo com o subdiretório (nome duplicado na pasta)
 - Não usar `bun` — usar `node_modules/.bin/vite`
-- Não modificar `src/routes/index.tsx` sem necessidade (homepage aprovada)
+- Não modificar `src/routes/index.tsx` sem necessidade
 - Não alterar `api/server.js` ou `vercel.json`
-- Não duplicar perguntas de FAQ entre páginas
-- Ao usar `Write`, sempre fazer `Read` primeiro no mesmo arquivo (exceto arquivos novos)
+- Ao usar `Write`, sempre fazer `Read` primeiro no mesmo arquivo
 - O erro `'spa' does not exist in type` em `vite.config.ts` é pré-existente — ignorar
-- O `ipapi.co` pode retornar erro silencioso — sempre usar `.catch(() => {})` no fetch
-- Nas landing pages, as unidades estão **repetidas inline** em cada arquivo — quando o cliente fornecer os dados da 3ª unidade, atualizar os 4 arquivos
-- `on-navy` no elemento pai faz o `Eyebrow` herdar cor dourada/branca — se não aplicar, o eyebrow fica laranja (gold) no fundo colorido, difícil de ver
+- O `ipapi.co` pode retornar erro silencioso — sempre usar `.catch(() => {})`
+- `on-navy` no elemento pai faz o `Eyebrow` herdar cor dourada — sem ele o eyebrow fica laranja em fundo colorido
+- Nas landing pages, as unidades estão **repetidas inline** em cada arquivo — ao receber dados da 3ª unidade, atualizar os 4 arquivos simultaneamente
+- Imagens com espaço no nome precisam de aspas no terminal: `"public/Ana Paula.webp"`
+- `public/team/renan.webp` existe mas não é referenciado — não usar; usar `/bio/05.webp` para o Dr. Renan
