@@ -52,7 +52,7 @@ export const Route = createFileRoute("/equipe")({
 });
 
 const EQUIPE = [
-  { nome: "Dr. Renan Gonçalves", cargo: "Fundador · Advogado", foto: "/team/renan.webp" },
+  { nome: "Dr. Renan Gonçalves", cargo: "Fundador · Advogado", foto: "/bio/05.webp" },
   { nome: "Dr. Wesley Rodrigues", cargo: "Advogado · Supervisor", foto: "/team/wesley.webp" },
   { nome: "Dra. Lucimeiry Boni", cargo: "Advogada Previdenciária", foto: "/team/lucimeiry.webp" },
   { nome: "Milena Maeda", cargo: "Equipe previdenciária", foto: "/team/milena.webp" },

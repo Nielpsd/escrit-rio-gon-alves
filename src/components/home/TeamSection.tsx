@@ -22,39 +22,40 @@ const LAWYERS: Lawyer[] = [
     quote:
       "Passei anos dentro do INSS como gerente. Sei exatamente como cada processo é analisado — e uso esse conhecimento a favor dos nossos clientes todos os dias.",
     badge: <Scale className="h-5 w-5 text-[var(--navy)]" />,
-    photo: "/team/renan.webp",
+    photo: "/bio/05.webp",
   },
   {
     id: 2,
-    name: "Letícia Gonçalves",
-    role: "Advogada · OAB/RO",
-    label: "Direito previdenciário",
+    name: "Dr. Wesley Rodrigues",
+    role: "Advogado · OAB/RO",
+    label: "Supervisor",
     quote:
-      "Cada benefício negado tem uma história por trás. Meu trabalho é entender essa história e construir o argumento técnico certo para revertê-la.",
+      "Cada caso tem sua particularidade. Meu papel é garantir que cada processo seja conduzido com a estratégia certa para o melhor resultado possível.",
     badge: <BookOpen className="h-5 w-5 text-[var(--navy)]" />,
-    photo: null,
+    photo: "/team/wesley.webp",
   },
   {
     id: 3,
-    name: "Wesley Oliveira",
-    role: "Advogado · OAB/RO",
-    label: "Litígios no INSS",
+    name: "Dra. Lucimeiry Boni",
+    role: "Advogada · OAB/RO",
+    label: "Direito previdenciário",
     quote:
-      "Especializado em recursos administrativos e ações judiciais previdenciárias. Se o INSS negou, ainda há caminho — e eu conheço cada um deles.",
+      "Atuo exclusivamente em previdenciário porque acredito que cada pessoa merece receber o benefício que é seu por direito. Esse é o nosso compromisso.",
     badge: <FileText className="h-5 w-5 text-[var(--navy)]" />,
-    photo: null,
+    photo: "/team/lucimeiry.webp",
   },
 ];
 
 const SUPPORT = [
-  { name: "Lucimeiry", role: "Assistente jurídica" },
-  { name: "Camila", role: "Atendimento ao cliente" },
-  { name: "Milena", role: "Paralegal" },
-  { name: "Aline", role: "Assistente jurídica" },
-  { name: "Bruna", role: "Atendimento ao cliente" },
-  { name: "Maria", role: "Paralegal" },
-  { name: "Marília", role: "Assistente jurídica" },
-  { name: "Nathália", role: "Atendimento ao cliente" },
+  { name: "Milena Maeda", role: "Equipe previdenciária" },
+  { name: "Letícia Favetta", role: "Equipe previdenciária" },
+  { name: "Ingrid da Silva", role: "Equipe previdenciária" },
+  { name: "Higor Vinicius", role: "Equipe previdenciária" },
+  { name: "Daniel Garcia", role: "Equipe previdenciária" },
+  { name: "Bruna Oliveira", role: "Equipe previdenciária" },
+  { name: "Ana Paula Oliveira", role: "Equipe previdenciária" },
+  { name: "Analicy da Hora", role: "Equipe previdenciária" },
+  { name: "Aline Dias", role: "Equipe previdenciária" },
 ];
 
 function PhotoPlaceholder({ name }: { name: string }) {
