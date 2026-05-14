@@ -55,7 +55,7 @@ export const Route = createFileRoute("/sobre")({
 const STATS = [
   { value: "143+", label: "Avaliações no Google" },
   { value: "10+", label: "Profissionais especializados" },
-  { value: "2", label: "Unidades em Rondônia" },
+  { value: "3", label: "Escritórios em RO" },
   { value: "100%", label: "Foco em previdenciário" },
 ];
 
@@ -84,7 +84,7 @@ const VALORES = [
 
 const DIFERENCIAIS = [
   "Liderança com atuação prévia como gerente do INSS",
-  "Atendimento presencial em Rondônia (Jaru e Alta Floresta D'Oeste)",
+  "3 escritórios presenciais em Rondônia",
   "Atendimento online para qualquer estado do Brasil",
   "Equipe dedicada exclusivamente ao direito previdenciário",
   "Mais de 143 avaliações no Google Meu Negócio",
@@ -108,9 +108,14 @@ const TIMELINE = [
     desc: "Abertura da unidade em Alta Floresta D'Oeste (RO) para ampliar o atendimento presencial na região.",
   },
   {
+    ano: "Expansão",
+    titulo: "Terceiro escritório",
+    desc: "Abertura de mais uma unidade em Rondônia, consolidando a presença do escritório no estado.",
+  },
+  {
     ano: "Hoje",
     titulo: "Atendimento nacional",
-    desc: "Mais de 10 profissionais, clientes em todo o Brasil e mais de 143 avaliações positivas no Google.",
+    desc: "Mais de 10 profissionais, 3 escritórios em RO, clientes em todo o Brasil e mais de 143 avaliações positivas no Google.",
   },
 ];
 

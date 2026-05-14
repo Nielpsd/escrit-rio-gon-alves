@@ -68,7 +68,7 @@ export function AuthoritySection() {
               {...fade(0.4)}
               className="bg-[var(--gold)] rounded-2xl px-7 py-6 flex justify-between items-center"
             >
-              <span className="font-display text-3xl font-bold text-[var(--navy)]">+15 anos</span>
+              <span className="font-display text-3xl font-bold text-[var(--navy)]">+10 anos</span>
               <span className="text-sm font-medium text-[var(--navy)]/70 text-right leading-snug">
                 de experiência<br />previdenciária
               </span>

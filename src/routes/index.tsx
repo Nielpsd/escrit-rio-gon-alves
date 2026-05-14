@@ -18,7 +18,7 @@ export const Route = createFileRoute("/")({
     meta: [
       {
         title:
-          "Escritório Gonçalves — Advocacia Previdenciária | Jaru e Alta Floresta D'Oeste (RO)",
+          "Escritório Gonçalves — Advocacia Previdenciária | 3 Escritórios em Rondônia",
       },
       {
         name: "description",

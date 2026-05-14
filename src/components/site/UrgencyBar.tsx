@@ -21,7 +21,7 @@ export function UrgencyBar() {
   return (
     <div className="relative z-50 bg-amber-500 px-4 py-2 text-center text-sm font-medium text-amber-950">
       <span>
-        Recurso negado? Você tem{" "}
+        Benefício negado? Você tem{" "}
         <strong>30 dias para recorrer</strong>.{" "}
         <a
           href={SITE.whatsapp}

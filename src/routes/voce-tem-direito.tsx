@@ -79,7 +79,7 @@ function calcResult(answers: Answers): Result {
       title: "Você pode recorrer",
       description:
         "Benefício negado não significa fim da linha. Na maioria dos casos existe fundamento para recurso ou nova análise — especialmente dentro de 30 dias da decisão.",
-      cta: `https://api.whatsapp.com/send?phone=5569992621298&text=Ol%C3%A1%2C%20tive%20meu%20benef%C3%ADcio%20negado%20e%20gostaria%20de%20analisar%20um%20recurso.`,
+      cta: `https://api.whatsapp.com/send?phone=5569992621298&text=Ol%C3%A1%2C%20tive%20meu%20benef%C3%ADcio%20negado%20e%20gostaria%20de%20uma%20an%C3%A1lise%20do%20meu%20caso.`,
     };
   }
 

@@ -51,6 +51,12 @@ const UNIDADES = [
     horario: "Seg. a Sex. · 8h às 18h",
     maps: "https://maps.google.com/?q=Alta+Floresta+d%27Oeste,RO",
   },
+  {
+    cidade: "3ª Unidade — RO",
+    endereco: "Atendimento presencial com hora marcada",
+    horario: "Seg. a Sex. · 8h às 18h",
+    maps: "https://maps.google.com/?q=Rondonia,RO",
+  },
 ];
 
 const FAQS = [
@@ -60,7 +66,7 @@ const FAQS = [
   },
   {
     q: "Preciso ir pessoalmente ao escritório?",
-    a: "Não é obrigatório. Atendemos online para todo o Brasil. O atendimento presencial está disponível somente em Jaru e Alta Floresta D'Oeste (RO), com hora marcada.",
+    a: "Não é obrigatório. Atendemos online para todo o Brasil. O atendimento presencial está disponível nos 3 escritórios em Rondônia, com hora marcada.",
   },
   {
     q: "Em quanto tempo recebo uma resposta?",

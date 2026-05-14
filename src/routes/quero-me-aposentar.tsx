@@ -31,7 +31,7 @@ const FAQ_APOSENTADORIA = [
   },
   {
     q: "Se meu pedido for negado, perco o direito?",
-    a: "Não. A negativa administrativa pode ser contestada com recurso (prazo de 30 dias) ou ação judicial. O prazo para buscar o benefício na Justiça é de 5 anos após a negativa.",
+    a: "Não. A negativa do benefício pode ser contestada com recurso administrativo (prazo de 30 dias) ou ação judicial. O prazo para buscar o benefício na Justiça é de 5 anos após a negativa.",
   },
 ];
 
@@ -120,7 +120,7 @@ const ERROS = [
     consequencia: "Negativa por falta de comprovação — mesmo quando o direito existe. A preparação pré-perícia é decisiva.",
   },
   {
-    erro: "Deixar prazo de recurso vencer após negativa",
+    erro: "Deixar o prazo vencer após o benefício ser negado",
     consequencia: "30 dias para recorrer administrativamente. Depois disso, só via judicial — mais demorado e caro.",
   },
   {

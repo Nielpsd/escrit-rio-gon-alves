@@ -3,8 +3,8 @@ import { motion, useInView } from "framer-motion";
 
 const STATS = [
   { value: 143, suffix: "+", label: "avaliações 5 estrelas" },
-  { value: 15, suffix: "+", label: "anos de experiência" },
-  { value: 2, suffix: "", label: "unidades em Rondônia" },
+  { value: 10, suffix: "+", label: "anos de experiência" },
+  { value: 3, suffix: "", label: "escritórios em RO" },
   { value: 100, suffix: "%", label: "foco em previdenciário" },
 ];
 
