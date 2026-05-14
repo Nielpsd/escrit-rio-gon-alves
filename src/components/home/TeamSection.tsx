@@ -47,15 +47,15 @@ const LAWYERS: Lawyer[] = [
 ];
 
 const SUPPORT = [
-  { name: "Milena Maeda", role: "Equipe previdenciária" },
-  { name: "Letícia Favetta", role: "Equipe previdenciária" },
-  { name: "Ingrid da Silva", role: "Equipe previdenciária" },
-  { name: "Higor Vinicius", role: "Equipe previdenciária" },
-  { name: "Daniel Garcia", role: "Equipe previdenciária" },
-  { name: "Bruna Oliveira", role: "Equipe previdenciária" },
-  { name: "Ana Paula Oliveira", role: "Equipe previdenciária" },
-  { name: "Analicy da Hora", role: "Equipe previdenciária" },
-  { name: "Aline Dias", role: "Equipe previdenciária" },
+  { name: "Milena Maeda", role: "Equipe previdenciária", photo: "/team/milena.webp" },
+  { name: "Letícia Favetta", role: "Equipe previdenciária", photo: "/team/leticia.webp" },
+  { name: "Ingrid da Silva", role: "Equipe previdenciária", photo: "/team/ingrid.webp" },
+  { name: "Higor Vinicius", role: "Equipe previdenciária", photo: "/team/higor.webp" },
+  { name: "Daniel Garcia", role: "Equipe previdenciária", photo: "/team/daniel.webp" },
+  { name: "Bruna Oliveira", role: "Equipe previdenciária", photo: "/team/bruna.webp" },
+  { name: "Ana Paula Oliveira", role: "Equipe previdenciária", photo: "/team/ana-paula.webp" },
+  { name: "Analicy da Hora", role: "Equipe previdenciária", photo: "/team/analicy.webp" },
+  { name: "Aline Dias", role: "Equipe previdenciária", photo: "/team/aline.webp" },
 ];
 
 function PhotoPlaceholder({ name }: { name: string }) {
@@ -141,7 +141,8 @@ export function TeamSection() {
                 </motion.div>
 
                 <motion.div layout className="px-1 text-center">
-                  <h3 className="text-sm font-medium text-[var(--navy)]">{member.label}</h3>
+                  <p className="text-sm font-semibold text-[var(--navy)]">{member.name}</p>
+                  <p className="text-xs text-[var(--text-muted)]">{member.label}</p>
                 </motion.div>
               </motion.div>
             );
@@ -156,8 +157,8 @@ export function TeamSection() {
           <div className="flex flex-wrap justify-center gap-6">
             {SUPPORT.map((s) => (
               <div key={s.name} className="flex flex-col items-center gap-2">
-                <div className="h-14 w-14 rounded-full bg-[var(--navy)] grid place-items-center font-display text-xl font-semibold text-[var(--gold-light)]">
-                  {s.name[0]}
+                <div className="h-14 w-14 rounded-full overflow-hidden border-2 border-[var(--border)]">
+                  <img src={s.photo} alt={s.name} className="h-full w-full object-cover object-top" />
                 </div>
                 <span className="text-sm font-medium text-[var(--navy)]">{s.name}</span>
                 <span className="text-xs text-[var(--text-muted)]">{s.role}</span>
