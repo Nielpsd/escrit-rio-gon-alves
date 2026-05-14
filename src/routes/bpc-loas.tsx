@@ -673,7 +673,7 @@ function BpcLoasPage() {
               transition={{ duration: 0.6 }}
             >
               <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-[var(--border)]">
-                <img src="/10-1.webp" alt="Dr. Renan Gonçalves" className="h-full w-full object-cover object-top" />
+                <img src="/bio/10.webp" alt="Dr. Renan Gonçalves" className="h-full w-full object-cover object-top" />
               </div>
               <motion.div
                 className="absolute -bottom-5 -left-5 rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white shadow-lg"

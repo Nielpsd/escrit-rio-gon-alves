@@ -26,43 +26,43 @@ function TikTokIcon({ size = 18 }: { size?: number }) {
 const CARDS = [
   {
     id: "escritorio",
-    banner: "/01.webp",
+    banner: "/links/banner-escritorio.webp",
     bannerAlt: "Escritório Gonçalves — Benefícios do INSS",
     bannerHref: "https://escrit-rio-gon-alves.vercel.app/",
-    zap: "/01 zap.webp",
+    zap: "/links/zap-escritorio.webp",
     zapAlt: "Chamar o Suporte do Escritório",
     zapHref: SITE.whatsapp,
   },
   {
     id: "incapacidade",
-    banner: "/02.webp",
+    banner: "/links/banner-incapacidade.webp",
     bannerAlt: "Guia do Benefício por Incapacidade",
     bannerHref: "#",
-    zap: "/02 zap.webp",
+    zap: "/links/zap-incapacidade.webp",
     zapAlt: "Quero tirar uma dúvida sobre o Guia",
     zapHref: "#",
   },
   {
     id: "laudo",
-    banner: "/03.webp",
+    banner: "/links/banner-laudo.webp",
     bannerAlt: "Laudo Certa — O laudo certo para conquistar o benefício",
     bannerHref: "#",
-    zap: "/03 zap.webp",
+    zap: "/links/zap-laudo.webp",
     zapAlt: "Falar com o suporte da Laudo Certa",
     zapHref: "#",
   },
   {
     id: "apl",
-    banner: "/04.webp",
+    banner: "/links/banner-apl.webp",
     bannerAlt: "Comunidade APL",
     bannerHref: "#",
-    zap: "/04 zap.webp",
+    zap: "/links/zap-apl.webp",
     zapAlt: "Chamar o Suporte da Comunidade APL",
     zapHref: "#",
   },
   {
     id: "marketing",
-    banner: "/05.webp",
+    banner: "/links/banner-marketing.webp",
     bannerAlt: "Gonçalves Marketing",
     bannerHref: "#",
     zap: null,
@@ -72,8 +72,8 @@ const CARDS = [
 ];
 
 const BIO_PHOTOS = [
-  "/01-2.webp", "/02-2.webp", "/03-2.webp", "/04-1.webp", "/05-1.webp",
-  "/06-1.webp", "/07-1.webp", "/08-1.webp", "/09-1.webp", "/10-1.webp",
+  "/bio/01.webp", "/bio/02.webp", "/bio/03.webp", "/bio/04.webp", "/bio/05.webp",
+  "/bio/06.webp", "/bio/07.webp", "/bio/08.webp", "/bio/09.webp", "/bio/10.webp",
 ];
 
 const EXTENDED = [...BIO_PHOTOS, BIO_PHOTOS[0], BIO_PHOTOS[1], BIO_PHOTOS[2]];
@@ -170,7 +170,7 @@ function LinksPage() {
             <span>Fé</span>
             <span>Esperança</span>
             <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-full border-2 border-white/10">
-              <img src="/05-1.webp" alt="Dr. Renan Gonçalves" className="h-full w-full object-cover object-top" />
+              <img src="/bio/05.webp" alt="Dr. Renan Gonçalves" className="h-full w-full object-cover object-top" />
             </div>
             <span>Direito</span>
             <span>Justiça</span>

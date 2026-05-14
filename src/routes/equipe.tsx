@@ -52,16 +52,18 @@ export const Route = createFileRoute("/equipe")({
 });
 
 const EQUIPE = [
-  { nome: "Letícia", cargo: "Equipe previdenciária" },
-  { nome: "Wesley", cargo: "Equipe previdenciária" },
-  { nome: "Lucimeiry", cargo: "Equipe previdenciária" },
-  { nome: "Dra. Camila", cargo: "Advogada previdenciária" },
-  { nome: "Milena", cargo: "Equipe previdenciária" },
-  { nome: "Aline", cargo: "Equipe previdenciária" },
-  { nome: "Bruna", cargo: "Equipe previdenciária" },
-  { nome: "Maria", cargo: "Equipe previdenciária" },
-  { nome: "Marília", cargo: "Equipe previdenciária" },
-  { nome: "Nathália", cargo: "Equipe previdenciária" },
+  { nome: "Dr. Renan Gonçalves", cargo: "Fundador · Advogado", foto: "/team/renan.webp" },
+  { nome: "Dr. Wesley Rodrigues", cargo: "Advogado · Supervisor", foto: "/team/wesley.webp" },
+  { nome: "Dra. Lucimeiry Boni", cargo: "Advogada Previdenciária", foto: "/team/lucimeiry.webp" },
+  { nome: "Milena Maeda", cargo: "Equipe previdenciária", foto: "/team/milena.webp" },
+  { nome: "Letícia Favetta", cargo: "Equipe previdenciária", foto: "/team/leticia.webp" },
+  { nome: "Ingrid da Silva", cargo: "Equipe previdenciária", foto: "/team/ingrid.webp" },
+  { nome: "Higor Vinicius", cargo: "Equipe previdenciária", foto: "/team/higor.webp" },
+  { nome: "Daniel Garcia", cargo: "Equipe previdenciária", foto: "/team/daniel.webp" },
+  { nome: "Bruna Oliveira", cargo: "Equipe previdenciária", foto: "/team/bruna.webp" },
+  { nome: "Ana Paula Oliveira", cargo: "Equipe previdenciária", foto: "/team/ana-paula.webp" },
+  { nome: "Analicy da Hora", cargo: "Equipe previdenciária", foto: "/team/analicy.webp" },
+  { nome: "Aline Dias", cargo: "Equipe previdenciária", foto: "/team/aline.webp" },
 ];
 
 const CULTURA = [
@@ -175,14 +177,14 @@ function EquipePage() {
               com função definida, todas dedicadas exclusivamente ao previdenciário.
             </p>
           </div>
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {EQUIPE.map((m) => (
               <div
                 key={m.nome}
                 className="rounded-2xl border border-[var(--border)] bg-white p-5 text-center transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-md)]"
               >
-                <div className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-[var(--navy-light)] font-display text-2xl font-semibold text-[var(--navy)]">
-                  {m.nome.replace(/^Dra?\.\s*/, "").charAt(0)}
+                <div className="mx-auto h-24 w-24 overflow-hidden rounded-full border-2 border-[var(--border)]">
+                  <img src={m.foto} alt={m.nome} className="h-full w-full object-cover object-top" />
                 </div>
                 <h3 className="mt-4 font-display text-base font-semibold text-[var(--navy)]">
                   {m.nome}
@@ -191,9 +193,6 @@ function EquipePage() {
               </div>
             ))}
           </div>
-          <p className="mt-8 text-center text-xs text-[var(--text-light)]">
-            Fotos da equipe em breve.
-          </p>
         </div>
       </section>
 

@@ -776,7 +776,7 @@ function TrabalhadorRuralPage() {
             >
               <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-[var(--border)]">
                 <img
-                  src="/09-1.webp"
+                  src="/bio/09.webp"
                   alt="Dr. Renan Gonçalves"
                   className="h-full w-full object-cover object-top"
                 />
