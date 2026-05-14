@@ -52,16 +52,16 @@ export const Route = createFileRoute("/equipe")({
 });
 
 const EQUIPE = [
-  { nome: "Dr. Renan Gonçalves", cargo: "Fundador · Advogado", foto: "/bio/05.webp" },
-  { nome: "Dr. Wesley Rodrigues", cargo: "Advogado · Supervisor", foto: "/team/wesley.webp" },
-  { nome: "Dra. Lucimeiry Boni", cargo: "Advogada Previdenciária", foto: "/team/lucimeiry.webp" },
+  { nome: "Dr. Renan Gonçalves", cargo: "Fundador · OAB/RO 10.297", foto: "/bio/05.webp" },
+  { nome: "Dr. Wesley Rodrigues", cargo: "Advogado · OAB/RO 15430", foto: "/team/wesley.webp" },
+  { nome: "Dra. Lucimeiry Boni", cargo: "Advogada · OAB/RO 10.236", foto: "/team/lucimeiry.webp" },
+  { nome: "Dra. Ana Paula Oliveira", cargo: "Advogada · OAB/RO 9447", foto: "/team/ana-paula.webp" },
   { nome: "Milena Maeda", cargo: "Equipe previdenciária", foto: "/team/milena.webp" },
   { nome: "Letícia Favetta", cargo: "Equipe previdenciária", foto: "/team/leticia.webp" },
   { nome: "Ingrid da Silva", cargo: "Equipe previdenciária", foto: "/team/ingrid.webp" },
   { nome: "Higor Vinicius", cargo: "Equipe previdenciária", foto: "/team/higor.webp" },
   { nome: "Daniel Garcia", cargo: "Equipe previdenciária", foto: "/team/daniel.webp" },
   { nome: "Bruna Oliveira", cargo: "Equipe previdenciária", foto: "/team/bruna.webp" },
-  { nome: "Ana Paula Oliveira", cargo: "Equipe previdenciária", foto: "/team/ana-paula.webp" },
   { nome: "Analicy da Hora", cargo: "Equipe previdenciária", foto: "/team/analicy.webp" },
   { nome: "Aline Dias", cargo: "Equipe previdenciária", foto: "/team/aline.webp" },
 ];
@@ -115,7 +115,7 @@ function EquipePage() {
         <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] items-center">
           <motion.div className="relative" initial={{ opacity: 0, scale: 0.96 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.55 }}>
             <div className="aspect-[4/5] rounded-2xl overflow-hidden">
-              <img src="/07-1.webp" alt="Dr. Renan Gonçalves" className="w-full h-full object-cover object-top" />
+              <img src="/bio/05.webp" alt="Dr. Renan Gonçalves" className="w-full h-full object-cover object-top" />
             </div>
             <div className="absolute -bottom-5 -left-5 rounded-xl bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--navy)] shadow-lg">
               Ex-gerente do INSS

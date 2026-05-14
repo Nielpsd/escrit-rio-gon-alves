@@ -7,6 +7,7 @@ import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
 import { SITE } from "@/lib/site";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
+import { CoverageSection } from "@/components/site/CoverageSection";
 
 export const Route = createFileRoute("/voce-tem-direito")({
   head: () => ({
@@ -269,6 +270,8 @@ function OrientacaoPage() {
           )}
         </AnimatePresence>
       </section>
+
+      <CoverageSection />
 
       {/* CTA FINAL */}
       <section className="mx-auto max-w-7xl px-6 pb-24">

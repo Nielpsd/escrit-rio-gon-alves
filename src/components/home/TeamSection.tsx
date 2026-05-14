@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Scale, BookOpen, FileText } from "lucide-react";
+import { Scale, BookOpen, FileText, Gavel } from "lucide-react";
 import { Eyebrow } from "@/components/site/Eyebrow";
 
 interface Lawyer {
@@ -17,7 +17,7 @@ const LAWYERS: Lawyer[] = [
   {
     id: 1,
     name: "Dr. Renan Gonçalves",
-    role: "Advogado · OAB/RO",
+    role: "Advogado · OAB/RO 10.297",
     label: "Sócio fundador",
     quote:
       "Passei anos dentro do INSS como gerente. Sei exatamente como cada processo é analisado — e uso esse conhecimento a favor dos nossos clientes todos os dias.",
@@ -27,7 +27,7 @@ const LAWYERS: Lawyer[] = [
   {
     id: 2,
     name: "Dr. Wesley Rodrigues",
-    role: "Advogado · OAB/RO",
+    role: "Advogado · OAB/RO 15430",
     label: "Supervisor",
     quote:
       "Cada caso tem sua particularidade. Meu papel é garantir que cada processo seja conduzido com a estratégia certa para o melhor resultado possível.",
@@ -37,12 +37,22 @@ const LAWYERS: Lawyer[] = [
   {
     id: 3,
     name: "Dra. Lucimeiry Boni",
-    role: "Advogada · OAB/RO",
+    role: "Advogada · OAB/RO 10.236",
     label: "Direito previdenciário",
     quote:
       "Atuo exclusivamente em previdenciário porque acredito que cada pessoa merece receber o benefício que é seu por direito. Esse é o nosso compromisso.",
     badge: <FileText className="h-5 w-5 text-[var(--navy)]" />,
     photo: "/team/lucimeiry.webp",
+  },
+  {
+    id: 4,
+    name: "Dra. Ana Paula Oliveira",
+    role: "Advogada · OAB/RO 9447",
+    label: "Direito previdenciário",
+    quote:
+      "O direito previdenciário tem o poder de transformar vidas. Cada processo que conduzimos representa uma família que vai ter acesso ao benefício que merece.",
+    badge: <Gavel className="h-5 w-5 text-[var(--navy)]" />,
+    photo: "/team/ana-paula.webp",
   },
 ];
 
@@ -53,7 +63,6 @@ const SUPPORT = [
   { name: "Higor Vinicius", role: "Equipe previdenciária", photo: "/team/higor.webp" },
   { name: "Daniel Garcia", role: "Equipe previdenciária", photo: "/team/daniel.webp" },
   { name: "Bruna Oliveira", role: "Equipe previdenciária", photo: "/team/bruna.webp" },
-  { name: "Ana Paula Oliveira", role: "Equipe previdenciária", photo: "/team/ana-paula.webp" },
   { name: "Analicy da Hora", role: "Equipe previdenciária", photo: "/team/analicy.webp" },
   { name: "Aline Dias", role: "Equipe previdenciária", photo: "/team/aline.webp" },
 ];
@@ -81,7 +90,7 @@ export function TeamSection() {
         </header>
 
         {/* Advogados — cards expansíveis */}
-        <div className="flex flex-col items-center gap-4 lg:flex-row lg:justify-center">
+        <div className="flex flex-col items-center gap-4 lg:flex-row lg:items-start lg:justify-center">
           {LAWYERS.map((member, index) => {
             const isActive = activeIndex === index;
             return (
@@ -91,7 +100,7 @@ export function TeamSection() {
                 onMouseEnter={() => setActiveIndex(index)}
                 className="flex flex-col gap-3"
                 initial={false}
-                animate={{ width: isActive ? "520px" : "220px" }}
+                animate={{ width: isActive ? "500px" : "175px" }}
                 transition={{ type: "spring", stiffness: 120, damping: 24, mass: 1, restDelta: 0.001 }}
                 style={{ minWidth: 0 }}
               >
@@ -103,7 +112,7 @@ export function TeamSection() {
                   <div className="flex h-full w-full flex-col md:flex-row">
                     <motion.div
                       layout
-                      className="relative h-full w-full flex-shrink-0 overflow-hidden rounded-2xl md:w-[196px]"
+                      className={`relative h-full flex-shrink-0 overflow-hidden rounded-2xl ${isActive ? "w-[196px]" : "w-full"}`}
                     >
                       {member.photo ? (
                         <img src={member.photo} alt={member.name} className="h-full w-full object-cover object-top" />
@@ -130,8 +139,8 @@ export function TeamSection() {
                               "{member.quote}"
                             </p>
                             <div className="mt-auto">
-                              <h4 className="text-base font-semibold whitespace-nowrap">{member.name}</h4>
-                              <p className="text-sm text-[var(--gold-light)] whitespace-nowrap">{member.role}</p>
+                              <h4 className="text-base font-semibold">{member.name}</h4>
+                              <p className="text-sm text-[var(--gold-light)]">{member.role}</p>
                             </div>
                           </motion.div>
                         )}

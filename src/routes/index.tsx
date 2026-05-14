@@ -12,6 +12,7 @@ import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 import { FAQSection } from "@/components/home/FAQSection";
 import { BlogPreviewSection } from "@/components/home/BlogPreviewSection";
 import { FinalCTASection } from "@/components/home/FinalCTASection";
+import { CoverageSection } from "@/components/site/CoverageSection";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -53,6 +54,7 @@ function Home() {
       <TestimonialsSection />
       <FAQSection />
       <BlogPreviewSection />
+      <CoverageSection />
       <FinalCTASection />
     </Layout>
   );

@@ -3,7 +3,7 @@ export const SITE = {
   legal: "Gonçalves Sociedade Individual de Advocacia",
   cnpj: "49.235.654/0001-93",
   lawyerName: "Dr. Renan Gonçalves",
-  oab: "OAB/RO 00.000",
+  oab: "OAB/RO 10.297",
   phone: "(69) 9.9262-1298",
   email: "contato@escritoriogoncalves.com",
   whatsapp:
@@ -11,5 +11,5 @@ export const SITE = {
   instagram: "https://www.instagram.com/renan.inss/",
   tiktok: "https://www.tiktok.com/@renan.inss",
   youtube: "https://www.youtube.com/c/DireitoEmMinutos/",
-  cities: "Jaru (RO) · Alta Floresta D'Oeste (RO) · 3ª unidade em RO",
+  cities: "Jaru (RO) · Alta Floresta D'Oeste (RO) · Cacoal (RO)",
 } as const;

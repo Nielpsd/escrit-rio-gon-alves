@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
+  ChevronDown,
   Clock,
   Mail,
   MapPin,
@@ -41,21 +42,21 @@ export const Route = createFileRoute("/contato")({
 const UNIDADES = [
   {
     cidade: "Jaru — RO",
-    endereco: "Sede do escritório · Atendimento presencial com hora marcada",
+    endereco: "Av. Rio Branco, 1939, Centro · Próximo ao INSS · CEP 76890-000",
     horario: "Seg. a Sex. · 8h às 18h",
-    maps: "https://maps.google.com/?q=Jaru,RO",
+    maps: "https://share.google/qVXQppwhXEBJgGzMw",
   },
   {
     cidade: "Alta Floresta D'Oeste — RO",
-    endereco: "Atendimento presencial com hora marcada",
+    endereco: "Av. Carlos Luz, 4700, esq. R. João Café Filho, Bairro Redondo · Próximo ao Colégio Militar · CEP 76954-000",
     horario: "Seg. a Sex. · 8h às 18h",
-    maps: "https://maps.google.com/?q=Alta+Floresta+d%27Oeste,RO",
+    maps: "https://maps.app.goo.gl/REP4wGEcYpNAbLCD8",
   },
   {
-    cidade: "3ª Unidade — RO",
-    endereco: "Atendimento presencial com hora marcada",
+    cidade: "Cacoal — RO",
+    endereco: "R. Gen. Osório, 484, Princesa Isabel · Próximo ao INSS · CEP 76963-862",
     horario: "Seg. a Sex. · 8h às 18h",
-    maps: "https://maps.google.com/?q=Rondonia,RO",
+    maps: "https://share.google/saxYz8ahcwvzpSx6e",
   },
 ];
 
@@ -204,18 +205,21 @@ function ContatoPage() {
                   <label htmlFor="assunto" className="text-xs font-medium text-[var(--text)]">
                     Assunto
                   </label>
-                  <select
-                    id="assunto"
-                    name="assunto"
-                    className="rounded-lg border border-[var(--border)] bg-white px-4 py-3 text-sm outline-none transition-colors focus:border-[var(--navy)]"
-                  >
-                    <option>Aposentadoria</option>
-                    <option>Auxílio-Doença</option>
-                    <option>BPC/LOAS</option>
-                    <option>Pensão por Morte</option>
-                    <option>Revisão de Benefício</option>
-                    <option>Outro</option>
-                  </select>
+                  <div className="relative">
+                    <select
+                      id="assunto"
+                      name="assunto"
+                      className="w-full appearance-none rounded-lg border border-[var(--border)] bg-white px-4 py-3 pr-10 text-sm outline-none transition-colors focus:border-[var(--navy)]"
+                    >
+                      <option>Aposentadoria</option>
+                      <option>Auxílio-Doença</option>
+                      <option>BPC/LOAS</option>
+                      <option>Pensão por Morte</option>
+                      <option>Revisão de Benefício</option>
+                      <option>Outro</option>
+                    </select>
+                    <ChevronDown size={16} className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
+                  </div>
                 </div>
               </div>
 

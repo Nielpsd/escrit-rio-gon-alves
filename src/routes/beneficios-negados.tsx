@@ -776,23 +776,23 @@ function BeneficiosNegadosPage() {
                 {
                   cidade: "Jaru — RO",
                   tipo: "Sede",
-                  endereco: "Atendimento presencial com hora marcada",
+                  endereco: "Av. Rio Branco, 1939, Centro · Próximo ao INSS · CEP 76890-000",
                   horario: "Seg. a Sex. · 8h às 18h",
-                  maps: "https://maps.google.com/?q=Jaru,RO",
+                  maps: "https://share.google/qVXQppwhXEBJgGzMw",
                 },
                 {
                   cidade: "Alta Floresta D'Oeste — RO",
                   tipo: "Unidade",
-                  endereco: "Atendimento presencial com hora marcada",
+                  endereco: "Av. Carlos Luz, 4700, esq. R. João Café Filho, Bairro Redondo · Próximo ao Colégio Militar · CEP 76954-000",
                   horario: "Seg. a Sex. · 8h às 18h",
-                  maps: "https://maps.google.com/?q=Alta+Floresta+d%27Oeste,RO",
+                  maps: "https://maps.app.goo.gl/REP4wGEcYpNAbLCD8",
                 },
                 {
-                  cidade: "3ª Unidade — RO",
+                  cidade: "Cacoal — RO",
                   tipo: "Unidade",
-                  endereco: "Atendimento presencial com hora marcada",
+                  endereco: "R. Gen. Osório, 484, Princesa Isabel · Próximo ao INSS · CEP 76963-862",
                   horario: "Seg. a Sex. · 8h às 18h",
-                  maps: "https://maps.google.com/?q=Rondonia,RO",
+                  maps: "https://share.google/saxYz8ahcwvzpSx6e",
                 },
               ].map((u, i) => (
                 <motion.div

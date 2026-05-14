@@ -14,6 +14,7 @@ import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
+import { CoverageSection } from "@/components/site/CoverageSection";
 import { SITE } from "@/lib/site";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
@@ -285,6 +286,8 @@ function ServicosPage() {
         </div>
         <FaqAccordion items={FAQ_SERVICOS} />
       </section>
+
+      <CoverageSection />
 
       {/* CTA */}
       <section className="mx-auto max-w-7xl px-6 py-20 lg:py-24">

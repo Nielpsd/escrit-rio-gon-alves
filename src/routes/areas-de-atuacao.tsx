@@ -8,6 +8,7 @@ import { WaveButton } from "@/components/site/WaveButton";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { SITE } from "@/lib/site";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
+import { CoverageSection } from "@/components/site/CoverageSection";
 
 const FAQ_AREAS = [
   {
@@ -294,6 +295,8 @@ function AreasPage() {
         </div>
         <FaqAccordion items={FAQ_AREAS} />
       </section>
+
+      <CoverageSection />
 
       <section className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
         <div className="on-navy relative overflow-hidden rounded-2xl bg-[var(--navy)] p-10 lg:p-14 text-center text-white">

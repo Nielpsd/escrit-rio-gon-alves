@@ -4,6 +4,7 @@ import { ArrowRight, Check, Star } from "lucide-react";
 
 import { Layout } from "@/components/site/Layout";
 import { Eyebrow } from "@/components/site/Eyebrow";
+import { CoverageSection } from "@/components/site/CoverageSection";
 import { WaveButton } from "@/components/site/WaveButton";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { SITE } from "@/lib/site";
@@ -110,7 +111,7 @@ const TIMELINE = [
   {
     ano: "Expansão",
     titulo: "Terceiro escritório",
-    desc: "Abertura de mais uma unidade em Rondônia, consolidando a presença do escritório no estado.",
+    desc: "Abertura da unidade em Cacoal (RO), consolidando a presença do escritório no estado.",
   },
   {
     ano: "Hoje",
@@ -335,6 +336,8 @@ function SobrePage() {
         </div>
         <FaqAccordion items={FAQ_SOBRE} />
       </section>
+
+      <CoverageSection />
 
       {/* CTA FINAL */}
       <section className="mx-auto max-w-7xl px-6 py-20 lg:py-24">

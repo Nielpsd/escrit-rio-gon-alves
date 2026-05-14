@@ -6,6 +6,7 @@ import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
 import { FaqAccordion } from "@/components/site/FaqAccordion";
 import { SITE } from "@/lib/site";
+import { CoverageSection } from "@/components/site/CoverageSection";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 const FAQ_APOSENTADORIA = [
@@ -459,6 +460,8 @@ function QueroMeAposentarPage() {
         </div>
         <FaqAccordion items={FAQ_APOSENTADORIA} />
       </section>
+
+      <CoverageSection />
 
       {/* CTA FINAL */}
       <section className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
