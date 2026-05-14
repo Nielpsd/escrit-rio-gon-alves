@@ -18,11 +18,8 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Sobre */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="grid h-10 w-10 place-items-center rounded-md bg-white/10 font-display text-lg font-semibold text-[var(--gold-light)]">
-                G
-              </span>
-              <span className="font-display text-xl font-semibold">Escritório Gonçalves</span>
+            <div className="mb-4">
+              <img src="/logo clara.webp" alt="Escritório Gonçalves" className="h-10 w-auto" />
             </div>
             <p className="text-sm text-white/55 leading-relaxed max-w-xs">
               Escritório especializado em direito previdenciário, com atendimento presencial em
