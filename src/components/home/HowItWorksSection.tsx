@@ -18,7 +18,7 @@ const STEPS: Step[] = [
     title: "Conversa inicial pelo WhatsApp",
     description:
       "Você nos conta sua situação. Nossa equipe ouve o caso e identifica os pontos relevantes para a análise técnica — sem jargão, sem burocracia.",
-    image: "/about-renan.webp",
+    image: "/04-1.webp",
   },
   {
     id: 1,
@@ -26,7 +26,7 @@ const STEPS: Step[] = [
     title: "Montagem do processo do jeito certo",
     description:
       "Orientamos sobre os documentos que fortalecem o pedido e descartamos os que podem atrapalhar. Um processo bem montado no início evita anos de espera depois.",
-    image: "/about-office.jpg",
+    image: "/03-2.webp",
   },
   {
     id: 2,
@@ -34,7 +34,7 @@ const STEPS: Step[] = [
     title: "A gente conduz, você acompanha",
     description:
       "Cuidamos do protocolo, do acompanhamento, das respostas ao INSS e dos recursos. Você não precisa lidar com isso sozinho — só se manter informado.",
-    image: "/renan-sf.png",
+    image: "/08-1.webp",
   },
   {
     id: 3,
@@ -42,7 +42,7 @@ const STEPS: Step[] = [
     title: "Preparação para perícia ou audiência",
     description:
       "Antes de qualquer perícia médica ou audiência, você recebe orientação completa do que vai acontecer e como se posicionar. Nada de surpresas.",
-    image: "/about-renan.webp",
+    image: "/07-1.webp",
   },
   {
     id: 4,
@@ -50,7 +50,7 @@ const STEPS: Step[] = [
     title: "Na Justiça, se for o caso",
     description:
       "Se o pedido administrativo é negado, conduzimos a discussão no Judiciário com fundamentação técnica. Negativa administrativa não encerra o caminho.",
-    image: "/about-office.jpg",
+    image: "/09-1.webp",
   },
 ];
 

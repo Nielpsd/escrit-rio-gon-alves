@@ -47,9 +47,11 @@ export function Footer() {
               <li>Planejamento de Aposentadoria</li>
               <li>Aposentadoria por Invalidez</li>
               <li>Auxílio-Doença</li>
-              <li>BPC/LOAS</li>
+              <li><Link to="/bpc-loas" className="hover:text-[var(--gold-light)] transition-colors">BPC/LOAS</Link></li>
               <li>Pensão por Morte</li>
               <li>Revisão de Benefícios</li>
+              <li><Link to="/beneficios-negados" className="hover:text-[var(--gold-light)] transition-colors">Benefício Negado</Link></li>
+              <li><Link to="/trabalhador-rural" className="hover:text-[var(--gold-light)] transition-colors">Trabalhador Rural</Link></li>
             </ul>
           </div>
 
@@ -65,6 +67,7 @@ export function Footer() {
                 { to: "/servicos", label: "Serviços" },
                 { to: "/areas-de-atuacao", label: "Áreas de atuação" },
                 { to: "/voce-tem-direito", label: "Você tem direito?" },
+                { to: "/quero-me-aposentar", label: "Quero me aposentar" },
                 { to: "/blog", label: "Blog / Artigos" },
                 { to: "/contato", label: "Contato" },
                 { to: "/politica-de-privacidade", label: "Política de Privacidade" },

@@ -56,7 +56,7 @@ export function AuthoritySection() {
             className="h-[340px] rounded-2xl overflow-hidden order-1"
           >
             <img
-              src="/about-renan.webp"
+              src="/01-2.webp"
               alt="Dr. Renan Gonçalves"
               className="w-full h-full object-cover object-top"
             />
@@ -121,7 +121,7 @@ export function AuthoritySection() {
             className="h-[340px] rounded-2xl overflow-hidden order-4"
           >
             <img
-              src="/about-office.jpg"
+              src="/06-1.webp"
               alt="Escritório Gonçalves"
               className="w-full h-full object-cover"
             />

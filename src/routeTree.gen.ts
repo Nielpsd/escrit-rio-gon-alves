@@ -10,15 +10,19 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VoceTemDireitoRouteImport } from './routes/voce-tem-direito'
+import { Route as TrabalhadorRuralRouteImport } from './routes/trabalhador-rural'
 import { Route as TermosDeUsoRouteImport } from './routes/termos-de-uso'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as QueroMeAposentarRouteImport } from './routes/quero-me-aposentar'
 import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as LinksRouteImport } from './routes/links'
 import { Route as EquipeRouteImport } from './routes/equipe'
 import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as BpcLoasRouteImport } from './routes/bpc-loas'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as BeneficiosNegadosRouteImport } from './routes/beneficios-negados'
 import { Route as AreasDeAtuacaoRouteImport } from './routes/areas-de-atuacao'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
@@ -35,6 +39,11 @@ import { Route as AdminBlogIdRouteImport } from './routes/admin.blog.$id'
 const VoceTemDireitoRoute = VoceTemDireitoRouteImport.update({
   id: '/voce-tem-direito',
   path: '/voce-tem-direito',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrabalhadorRuralRoute = TrabalhadorRuralRouteImport.update({
+  id: '/trabalhador-rural',
+  path: '/trabalhador-rural',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermosDeUsoRoute = TermosDeUsoRouteImport.update({
@@ -67,6 +76,11 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LinksRoute = LinksRouteImport.update({
+  id: '/links',
+  path: '/links',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EquipeRoute = EquipeRouteImport.update({
   id: '/equipe',
   path: '/equipe',
@@ -77,9 +91,19 @@ const ContatoRoute = ContatoRouteImport.update({
   path: '/contato',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BpcLoasRoute = BpcLoasRouteImport.update({
+  id: '/bpc-loas',
+  path: '/bpc-loas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogRoute = BlogRouteImport.update({
   id: '/blog',
   path: '/blog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BeneficiosNegadosRoute = BeneficiosNegadosRouteImport.update({
+  id: '/beneficios-negados',
+  path: '/beneficios-negados',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AreasDeAtuacaoRoute = AreasDeAtuacaoRouteImport.update({
@@ -147,15 +171,19 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/areas-de-atuacao': typeof AreasDeAtuacaoRoute
+  '/beneficios-negados': typeof BeneficiosNegadosRoute
   '/blog': typeof BlogRouteWithChildren
+  '/bpc-loas': typeof BpcLoasRoute
   '/contato': typeof ContatoRoute
   '/equipe': typeof EquipeRoute
+  '/links': typeof LinksRoute
   '/login': typeof LoginRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/quero-me-aposentar': typeof QueroMeAposentarRoute
   '/servicos': typeof ServicosRoute
   '/sobre': typeof SobreRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/trabalhador-rural': typeof TrabalhadorRuralRoute
   '/voce-tem-direito': typeof VoceTemDireitoRoute
   '/admin/content': typeof AdminContentRoute
   '/admin/messages': typeof AdminMessagesRoute
@@ -170,14 +198,18 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/areas-de-atuacao': typeof AreasDeAtuacaoRoute
+  '/beneficios-negados': typeof BeneficiosNegadosRoute
+  '/bpc-loas': typeof BpcLoasRoute
   '/contato': typeof ContatoRoute
   '/equipe': typeof EquipeRoute
+  '/links': typeof LinksRoute
   '/login': typeof LoginRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/quero-me-aposentar': typeof QueroMeAposentarRoute
   '/servicos': typeof ServicosRoute
   '/sobre': typeof SobreRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/trabalhador-rural': typeof TrabalhadorRuralRoute
   '/voce-tem-direito': typeof VoceTemDireitoRoute
   '/admin/content': typeof AdminContentRoute
   '/admin/messages': typeof AdminMessagesRoute
@@ -194,15 +226,19 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/areas-de-atuacao': typeof AreasDeAtuacaoRoute
+  '/beneficios-negados': typeof BeneficiosNegadosRoute
   '/blog': typeof BlogRouteWithChildren
+  '/bpc-loas': typeof BpcLoasRoute
   '/contato': typeof ContatoRoute
   '/equipe': typeof EquipeRoute
+  '/links': typeof LinksRoute
   '/login': typeof LoginRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
   '/quero-me-aposentar': typeof QueroMeAposentarRoute
   '/servicos': typeof ServicosRoute
   '/sobre': typeof SobreRoute
   '/termos-de-uso': typeof TermosDeUsoRoute
+  '/trabalhador-rural': typeof TrabalhadorRuralRoute
   '/voce-tem-direito': typeof VoceTemDireitoRoute
   '/admin/content': typeof AdminContentRoute
   '/admin/messages': typeof AdminMessagesRoute
@@ -220,15 +256,19 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/areas-de-atuacao'
+    | '/beneficios-negados'
     | '/blog'
+    | '/bpc-loas'
     | '/contato'
     | '/equipe'
+    | '/links'
     | '/login'
     | '/politica-de-privacidade'
     | '/quero-me-aposentar'
     | '/servicos'
     | '/sobre'
     | '/termos-de-uso'
+    | '/trabalhador-rural'
     | '/voce-tem-direito'
     | '/admin/content'
     | '/admin/messages'
@@ -243,14 +283,18 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/areas-de-atuacao'
+    | '/beneficios-negados'
+    | '/bpc-loas'
     | '/contato'
     | '/equipe'
+    | '/links'
     | '/login'
     | '/politica-de-privacidade'
     | '/quero-me-aposentar'
     | '/servicos'
     | '/sobre'
     | '/termos-de-uso'
+    | '/trabalhador-rural'
     | '/voce-tem-direito'
     | '/admin/content'
     | '/admin/messages'
@@ -266,15 +310,19 @@ export interface FileRouteTypes {
     | '/'
     | '/admin'
     | '/areas-de-atuacao'
+    | '/beneficios-negados'
     | '/blog'
+    | '/bpc-loas'
     | '/contato'
     | '/equipe'
+    | '/links'
     | '/login'
     | '/politica-de-privacidade'
     | '/quero-me-aposentar'
     | '/servicos'
     | '/sobre'
     | '/termos-de-uso'
+    | '/trabalhador-rural'
     | '/voce-tem-direito'
     | '/admin/content'
     | '/admin/messages'
@@ -291,15 +339,19 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRouteWithChildren
   AreasDeAtuacaoRoute: typeof AreasDeAtuacaoRoute
+  BeneficiosNegadosRoute: typeof BeneficiosNegadosRoute
   BlogRoute: typeof BlogRouteWithChildren
+  BpcLoasRoute: typeof BpcLoasRoute
   ContatoRoute: typeof ContatoRoute
   EquipeRoute: typeof EquipeRoute
+  LinksRoute: typeof LinksRoute
   LoginRoute: typeof LoginRoute
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
   QueroMeAposentarRoute: typeof QueroMeAposentarRoute
   ServicosRoute: typeof ServicosRoute
   SobreRoute: typeof SobreRoute
   TermosDeUsoRoute: typeof TermosDeUsoRoute
+  TrabalhadorRuralRoute: typeof TrabalhadorRuralRoute
   VoceTemDireitoRoute: typeof VoceTemDireitoRoute
 }
 
@@ -310,6 +362,13 @@ declare module '@tanstack/react-router' {
       path: '/voce-tem-direito'
       fullPath: '/voce-tem-direito'
       preLoaderRoute: typeof VoceTemDireitoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trabalhador-rural': {
+      id: '/trabalhador-rural'
+      path: '/trabalhador-rural'
+      fullPath: '/trabalhador-rural'
+      preLoaderRoute: typeof TrabalhadorRuralRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/termos-de-uso': {
@@ -354,6 +413,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/links': {
+      id: '/links'
+      path: '/links'
+      fullPath: '/links'
+      preLoaderRoute: typeof LinksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/equipe': {
       id: '/equipe'
       path: '/equipe'
@@ -368,11 +434,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContatoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bpc-loas': {
+      id: '/bpc-loas'
+      path: '/bpc-loas'
+      fullPath: '/bpc-loas'
+      preLoaderRoute: typeof BpcLoasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog': {
       id: '/blog'
       path: '/blog'
       fullPath: '/blog'
       preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/beneficios-negados': {
+      id: '/beneficios-negados'
+      path: '/beneficios-negados'
+      fullPath: '/beneficios-negados'
+      preLoaderRoute: typeof BeneficiosNegadosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/areas-de-atuacao': {
@@ -500,15 +580,19 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRouteWithChildren,
   AreasDeAtuacaoRoute: AreasDeAtuacaoRoute,
+  BeneficiosNegadosRoute: BeneficiosNegadosRoute,
   BlogRoute: BlogRouteWithChildren,
+  BpcLoasRoute: BpcLoasRoute,
   ContatoRoute: ContatoRoute,
   EquipeRoute: EquipeRoute,
+  LinksRoute: LinksRoute,
   LoginRoute: LoginRoute,
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
   QueroMeAposentarRoute: QueroMeAposentarRoute,
   ServicosRoute: ServicosRoute,
   SobreRoute: SobreRoute,
   TermosDeUsoRoute: TermosDeUsoRoute,
+  TrabalhadorRuralRoute: TrabalhadorRuralRoute,
   VoceTemDireitoRoute: VoceTemDireitoRoute,
 }
 export const routeTree = rootRouteImport

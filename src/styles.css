@@ -396,6 +396,24 @@ em.hl {
 .btn-wpp .btn-l1 { background: #16a34a; }
 .btn-wpp .btn-l2 { background: #15803d; }
 
+/* WHITE — para uso em fundos coloridos */
+.btn-white {
+  background: #ffffff;
+  border-color: #ffffff;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.10),
+    0 8px 24px rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
+}
+.btn-white:hover {
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.14),
+    0 16px 40px rgba(0, 0, 0, 0.10);
+}
+.btn-white .btn-inner { color: #15803d; border-radius: 999px; }
+.btn-white .btn-l1 { background: #dcfce7; }
+.btn-white .btn-l2 { background: #bbf7d0; }
+
 /* =====================================================
    Section label line (variação eyebrow com traço)
    ===================================================== */

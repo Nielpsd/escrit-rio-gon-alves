@@ -162,10 +162,10 @@ function ContatoPage() {
       </section>
 
       {/* GRID PRINCIPAL */}
-      <section className="mx-auto max-w-7xl px-6 pb-20 lg:pb-24">
+      <section className="mx-auto max-w-7xl px-6 pt-16 pb-20 lg:pb-24">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] items-start">
           {/* Formulário */}
-          <div className="rounded-2xl border border-[var(--border)] bg-white p-8 lg:p-10">
+          <div className="rounded-2xl border border-[var(--border)] bg-white p-8 lg:p-10 lg:sticky lg:top-28 lg:self-start">
             <Eyebrow>Envie sua mensagem</Eyebrow>
             <h2 className="mt-3 font-display text-2xl font-semibold text-[var(--navy)] leading-snug">
               Conte, sem pressa, o que você está vivendo

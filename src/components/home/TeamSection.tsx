@@ -22,7 +22,7 @@ const LAWYERS: Lawyer[] = [
     quote:
       "Passei anos dentro do INSS como gerente. Sei exatamente como cada processo é analisado — e uso esse conhecimento a favor dos nossos clientes todos os dias.",
     badge: <Scale className="h-5 w-5 text-[var(--navy)]" />,
-    photo: "/about-renan.webp",
+    photo: "/05-1.webp",
   },
   {
     id: 2,

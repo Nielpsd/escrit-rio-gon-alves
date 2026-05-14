@@ -383,7 +383,7 @@ function QueroMeAposentarPage() {
           >
             <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-[var(--border)]">
               <img
-                src="/about-renan.webp"
+                src="/08-1.webp"
                 alt="Dr. Renan Gonçalves"
                 className="h-full w-full object-cover object-top"
               />

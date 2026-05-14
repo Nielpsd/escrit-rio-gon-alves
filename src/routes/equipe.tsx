@@ -113,7 +113,7 @@ function EquipePage() {
         <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] items-center">
           <motion.div className="relative" initial={{ opacity: 0, scale: 0.96 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.55 }}>
             <div className="aspect-[4/5] rounded-2xl overflow-hidden">
-              <img src="/about-renan.webp" alt="Dr. Renan Gonçalves" className="w-full h-full object-cover object-top" />
+              <img src="/07-1.webp" alt="Dr. Renan Gonçalves" className="w-full h-full object-cover object-top" />
             </div>
             <div className="absolute -bottom-5 -left-5 rounded-xl bg-[var(--gold)] px-5 py-3 text-sm font-semibold text-[var(--navy)] shadow-lg">
               Ex-gerente do INSS

@@ -9,7 +9,8 @@ type Variant =
   | "outline-light"
   | "ghost"
   | "ghost-light"
-  | "wpp";
+  | "wpp"
+  | "white";
 type Size = "default" | "sm" | "lg";
 
 type CommonProps = {
