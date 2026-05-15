@@ -1,5 +1,4 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts, useRouterState } from "@tanstack/react-router";
-import { AnimatePresence, motion } from "framer-motion";
 import { WhatsAppFab } from "@/components/site/WhatsAppFab";
 import { CookieBanner } from "@/components/site/CookieBanner";
 import { BackToTop } from "@/components/site/BackToTop";
@@ -67,8 +66,10 @@ export const Route = createRootRoute({
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
-        rel: "stylesheet",
+        rel: "preload",
         href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap",
+        as: "style",
+        onload: "this.onload=null;this.rel='stylesheet'",
       },
       { rel: "stylesheet", href: appCss },
     ],
@@ -96,17 +97,9 @@ function RootComponent() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   return (
     <>
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          key={pathname}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
-        >
-          <Outlet />
-        </motion.div>
-      </AnimatePresence>
+      <div key={pathname} className="page-transition">
+        <Outlet />
+      </div>
       <WhatsAppFab />
       <BackToTop />
       <CookieBanner />

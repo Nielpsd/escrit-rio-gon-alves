@@ -49,21 +49,8 @@ export function useScrollReveal(
 
     elements.forEach((el) => io.observe(el));
 
-    // Re-scan após mudanças de rota / DOM dinâmico
-    const mo = new MutationObserver(() => {
-      const fresh = Array.from(document.querySelectorAll<HTMLElement>(selector));
-      fresh.forEach((el) => {
-        if (!el.classList.contains("reveal-init") && !el.classList.contains("is-visible")) {
-          init(el);
-          io.observe(el);
-        }
-      });
-    });
-    mo.observe(document.body, { childList: true, subtree: true });
-
     return () => {
       io.disconnect();
-      mo.disconnect();
     };
   }, [selector]);
 }
