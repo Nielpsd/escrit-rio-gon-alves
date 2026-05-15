@@ -29,6 +29,12 @@ const FAQSection = lazy(() =>
 
 export const Route = createFileRoute("/")({
   head: () => ({
+    links: [
+      // Preload das imagens do hero com media query — garante que só a imagem
+      // correta seja baixada e que ela inicie o download no scan inicial do HTML
+      { rel: "preload", as: "image", href: "/hero-bg.webp", media: "(min-width: 768px)" },
+      { rel: "preload", as: "image", href: "/hero-bg-mobile.webp", media: "(max-width: 767px)" },
+    ],
     meta: [
       {
         title:

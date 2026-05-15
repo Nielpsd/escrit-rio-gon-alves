@@ -7,18 +7,19 @@ import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 export function HeroSection() {
   return (
     <section className="on-navy relative overflow-hidden bg-[var(--navy)] text-white">
-      {/* Desktop background */}
-      <div
-        className="absolute inset-0 hidden md:block bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/hero-bg.webp')" }}
-        aria-hidden
-      />
-      {/* Mobile background — centralizada, ancorada ao topo */}
-      <div
-        className="absolute inset-0 block md:hidden bg-cover bg-top bg-no-repeat"
-        style={{ backgroundImage: "url('/hero-bg-mobile.webp')" }}
-        aria-hidden
-      />
+      {/* Hero background — <picture> para que o preload scanner do HTML descubra
+          a imagem antes do CSS ser parseado, acelerando o LCP */}
+      <picture className="absolute inset-0 w-full h-full pointer-events-none select-none" aria-hidden>
+        <source srcSet="/hero-bg.webp" media="(min-width: 768px)" />
+        <img
+          src="/hero-bg-mobile.webp"
+          alt=""
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
+          className="absolute inset-0 w-full h-full object-cover object-top md:object-center"
+        />
+      </picture>
 
       <div className="relative mx-auto max-w-7xl px-6 pt-[420px] pb-24 md:pt-20 lg:pt-28 lg:pb-32 flex items-center">
         <div className="max-w-3xl">
