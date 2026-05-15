@@ -1,18 +1,31 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { lazy, Suspense } from "react";
 import { Layout } from "@/components/site/Layout";
 import { HeroSection } from "@/components/home/HeroSection";
 import { MarqueeStrip } from "@/components/home/MarqueeStrip";
-import { StatsSection } from "@/components/home/StatsSection";
 import { DiscoverRightsSection } from "@/components/home/DiscoverRightsSection";
 import { AuthoritySection } from "@/components/home/AuthoritySection";
 import { ServicesSection } from "@/components/home/ServicesSection";
-import { HowItWorksSection } from "@/components/home/HowItWorksSection";
-import { TeamSection } from "@/components/home/TeamSection";
-import { TestimonialsSection } from "@/components/home/TestimonialsSection";
-import { FAQSection } from "@/components/home/FAQSection";
 import { BlogPreviewSection } from "@/components/home/BlogPreviewSection";
 import { FinalCTASection } from "@/components/home/FinalCTASection";
 import { CoverageSection } from "@/components/site/CoverageSection";
+
+// Seções abaixo do fold com framer-motion — carregam lazy para não bloquear LCP
+const StatsSection = lazy(() =>
+  import("@/components/home/StatsSection").then((m) => ({ default: m.StatsSection }))
+);
+const HowItWorksSection = lazy(() =>
+  import("@/components/home/HowItWorksSection").then((m) => ({ default: m.HowItWorksSection }))
+);
+const TeamSection = lazy(() =>
+  import("@/components/home/TeamSection").then((m) => ({ default: m.TeamSection }))
+);
+const TestimonialsSection = lazy(() =>
+  import("@/components/home/TestimonialsSection").then((m) => ({ default: m.TestimonialsSection }))
+);
+const FAQSection = lazy(() =>
+  import("@/components/home/FAQSection").then((m) => ({ default: m.FAQSection }))
+);
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -45,14 +58,24 @@ function Home() {
     <Layout>
       <HeroSection />
       <MarqueeStrip />
-      <StatsSection />
+      <Suspense fallback={null}>
+        <StatsSection />
+      </Suspense>
       <DiscoverRightsSection />
       <AuthoritySection />
       <ServicesSection />
-      <HowItWorksSection />
-      <TeamSection />
-      <TestimonialsSection />
-      <FAQSection />
+      <Suspense fallback={null}>
+        <HowItWorksSection />
+      </Suspense>
+      <Suspense fallback={null}>
+        <TeamSection />
+      </Suspense>
+      <Suspense fallback={null}>
+        <TestimonialsSection />
+      </Suspense>
+      <Suspense fallback={null}>
+        <FAQSection />
+      </Suspense>
       <BlogPreviewSection />
       <CoverageSection />
       <FinalCTASection />

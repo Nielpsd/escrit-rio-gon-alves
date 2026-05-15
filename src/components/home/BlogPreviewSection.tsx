@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
@@ -11,59 +10,36 @@ export function BlogPreviewSection() {
     <section className="bg-white py-24 px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
 
-        {/* Header */}
         <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex items-center justify-center mb-6"
-          >
+          <div data-reveal className="reveal-init flex items-center justify-center mb-6">
             <Eyebrow>Blog</Eyebrow>
-          </motion.div>
+          </div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55 }}
-            className="font-display text-3xl md:text-4xl lg:text-[42px] font-semibold text-[var(--navy)] leading-tight mb-4"
-          >
+          <h2 data-reveal className="reveal-init font-display text-3xl md:text-4xl lg:text-[42px] font-semibold text-[var(--navy)] leading-tight mb-4">
             Entenda seus direitos <em className="hl">antes de precisar deles</em>.
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.55, delay: 0.15 }}
-            className="text-[var(--text-muted)] text-base leading-relaxed max-w-xl mx-auto"
-          >
+          <p data-reveal className="reveal-init text-[var(--text-muted)] text-base leading-relaxed max-w-xl mx-auto">
             Conteúdo simples, direto e técnico sobre benefícios do INSS — sem juridiquês,
             em conformidade com o Provimento nº 205/2021 da OAB.
-          </motion.p>
+          </p>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {posts.map((post, index) => (
-            <motion.a
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 reveal-stagger">
+          {posts.map((post) => (
+            <a
               key={post.slug}
               href={"/blog/" + post.slug}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55, delay: index * 0.1 }}
-              className="flex flex-col group cursor-pointer bg-white border border-[var(--border)] rounded-[20px] p-4 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] transition-all duration-500"
+              data-reveal
+              className="reveal-init flex flex-col group cursor-pointer bg-white border border-[var(--border)] rounded-[20px] p-4 hover:shadow-[0_20px_40px_rgba(0,0,0,0.06)] transition-all duration-500"
             >
-              {/* Thumbnail */}
               <div className="relative aspect-[380/270] overflow-hidden rounded-[14px] mb-4 bg-gradient-to-br from-[var(--navy)] to-[#1a3a6e]">
                 <img
                   src={post.image}
                   alt={post.title}
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
                 />
-                {/* Hover overlay */}
                 <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
                   <div className="bg-[var(--gold)] text-[var(--navy)] px-6 py-2.5 rounded-full font-bold text-sm shadow-xl translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                     Ler artigo
@@ -71,7 +47,6 @@ export function BlogPreviewSection() {
                 </div>
               </div>
 
-              {/* Content */}
               <div className="flex flex-col flex-grow px-2 pb-2">
                 <span className="inline-block rounded-full bg-[var(--gold-pale)] px-3 py-1 text-xs font-medium text-[var(--gold-deep)] mb-3 self-start">
                   {post.tag}
@@ -95,7 +70,7 @@ export function BlogPreviewSection() {
                   <span className="text-xs text-[var(--text-muted)]">{post.date}</span>
                 </div>
               </div>
-            </motion.a>
+            </a>
           ))}
         </div>
 

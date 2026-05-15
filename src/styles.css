@@ -439,6 +439,36 @@ em.hl {
 }
 
 /* =====================================================
+   COOKIE BANNER + BACK TO TOP — CSS-only transitions
+   ===================================================== */
+.cookie-banner {
+  transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+  pointer-events: auto;
+}
+.cookie-banner--hidden {
+  opacity: 0;
+  transform: translateY(80px);
+  pointer-events: none;
+}
+.cookie-banner--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.back-to-top {
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.back-to-top--hidden {
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+.back-to-top--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =====================================================
    ANIMAÇÕES — keyframes e utilitários
    ===================================================== */
 @keyframes page-enter {
