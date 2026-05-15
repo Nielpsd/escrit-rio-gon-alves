@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { ArrowRight, Clock, ExternalLink, Globe, MapPin } from "lucide-react";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
@@ -54,12 +53,9 @@ export function CoverageSection({ wpp = WPP_DEFAULT }: CoverageSectionProps) {
 
         <div className="grid gap-6 lg:grid-cols-[1fr_1.6fr]">
           {/* Online card */}
-          <motion.div
-            className="on-navy relative overflow-hidden rounded-2xl bg-[var(--navy)] p-8 text-white"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+          <div
+            data-reveal
+            className="reveal-init on-navy relative overflow-hidden rounded-2xl bg-[var(--navy)] p-8 text-white"
           >
             <div
               className="absolute -right-10 -bottom-10 font-display text-[220px] leading-none font-bold text-white/[0.04] select-none pointer-events-none"
@@ -98,18 +94,15 @@ export function CoverageSection({ wpp = WPP_DEFAULT }: CoverageSectionProps) {
                 </WaveButton>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Unidades presenciais */}
-          <div className="flex flex-col gap-4">
-            {UNIDADES.map((u, i) => (
-              <motion.div
+          <div className="reveal-stagger flex flex-col gap-4">
+            {UNIDADES.map((u) => (
+              <div
                 key={u.cidade}
-                className="flex items-start gap-5 rounded-2xl border border-[var(--border)] bg-white p-6 transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)]"
-                initial={{ opacity: 0, x: 24 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
+                data-reveal
+                className="reveal-init reveal-right flex items-start gap-5 rounded-2xl border border-[var(--border)] bg-white p-6 transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-md)]"
               >
                 <div className="grid h-11 w-11 flex-shrink-0 place-items-center rounded-xl bg-[var(--navy-light)]">
                   <MapPin size={18} className="text-[var(--navy)]" />
@@ -138,7 +131,7 @@ export function CoverageSection({ wpp = WPP_DEFAULT }: CoverageSectionProps) {
                     </a>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

@@ -7,5 +7,12 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
-  spa: { enabled: true },
+  tanstackStart: {
+    // Pre-render all static public routes at build time → served as CDN edge HTML → FCP <1s
+    prerender: {
+      enabled: true,
+      autoStaticPathsDiscovery: true,
+      failOnError: false,
+    },
+  },
 });

@@ -7,8 +7,6 @@ import { DiscoverRightsSection } from "@/components/home/DiscoverRightsSection";
 import { AuthoritySection } from "@/components/home/AuthoritySection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { BlogPreviewSection } from "@/components/home/BlogPreviewSection";
-import { FinalCTASection } from "@/components/home/FinalCTASection";
-import { CoverageSection } from "@/components/site/CoverageSection";
 
 // Seções abaixo do fold com framer-motion — carregam lazy para não bloquear LCP
 const StatsSection = lazy(() =>
@@ -25,6 +23,12 @@ const TestimonialsSection = lazy(() =>
 );
 const FAQSection = lazy(() =>
   import("@/components/home/FAQSection").then((m) => ({ default: m.FAQSection }))
+);
+const CoverageSection = lazy(() =>
+  import("@/components/site/CoverageSection").then((m) => ({ default: m.CoverageSection }))
+);
+const FinalCTASection = lazy(() =>
+  import("@/components/home/FinalCTASection").then((m) => ({ default: m.FinalCTASection }))
 );
 
 export const Route = createFileRoute("/")({
@@ -83,8 +87,12 @@ function Home() {
         <FAQSection />
       </Suspense>
       <BlogPreviewSection />
-      <CoverageSection />
-      <FinalCTASection />
+      <Suspense fallback={null}>
+        <CoverageSection />
+      </Suspense>
+      <Suspense fallback={null}>
+        <FinalCTASection />
+      </Suspense>
     </Layout>
   );
 }

@@ -77,10 +77,11 @@ function PhotoPlaceholder({ name }: { name: string }) {
 
 export function TeamSection() {
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 1024);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 1024);
+    check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
