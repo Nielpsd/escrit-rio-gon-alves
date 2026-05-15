@@ -80,6 +80,9 @@ function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR">
       <head>
+        {/* Hero preloads first — before HeadContent injects SSR image preloads */}
+        <link rel="preload" as="image" href="/hero-bg.webp" media="(min-width: 768px)" fetchPriority="high" />
+        <link rel="preload" as="image" href="/hero-bg-mobile.webp" media="(max-width: 767px)" fetchPriority="high" />
         <HeadContent />
         {/* Fontes carregadas de forma não-bloqueante via JS — evita render-blocking */}
         <script
