@@ -33,6 +33,7 @@ export function AuthoritySection() {
             <img
               src="/bio/01.webp"
               alt="Dr. Renan Gonçalves"
+              loading="lazy"
               className="w-full h-full object-cover object-top"
             />
           </div>
@@ -77,6 +78,7 @@ export function AuthoritySection() {
             <img
               src="/bio/06.webp"
               alt="Escritório Gonçalves"
+              loading="lazy"
               className="w-full h-full object-cover"
             />
           </div>

@@ -111,7 +111,7 @@ function StepCard({ step, isActive, onClick, onMouseEnter, onMouseLeave }: StepC
               {step.description}
             </p>
             <div className="md:hidden w-full aspect-[16/10] rounded-xl overflow-hidden mb-1">
-              <img src={step.image} alt={step.title} className="w-full h-full object-cover" />
+              <img src={step.image} alt={step.title} loading="lazy" className="w-full h-full object-cover" />
             </div>
           </motion.div>
         )}
@@ -144,6 +144,7 @@ export function HowItWorksSection() {
                   key={currentIndex}
                   src={STEPS[currentIndex].image}
                   alt={STEPS[currentIndex].title}
+                  loading="lazy"
                   initial={{ opacity: 0, scale: 1.04 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 1.04 }}
