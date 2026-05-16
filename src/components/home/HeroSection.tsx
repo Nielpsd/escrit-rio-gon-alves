@@ -17,6 +17,8 @@ export function HeroSection() {
           fetchPriority="high"
           loading="eager"
           decoding="async"
+          width={1920}
+          height={562}
           className="absolute inset-0 w-full h-full object-cover object-top md:object-center"
         />
       </picture>

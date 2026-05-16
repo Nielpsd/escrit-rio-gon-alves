@@ -34,6 +34,8 @@ export function AuthoritySection() {
               src="/bio/01.webp"
               alt="Dr. Renan Gonçalves"
               loading="lazy"
+              width={400}
+              height={340}
               className="w-full h-full object-cover object-top"
             />
           </div>
@@ -79,6 +81,8 @@ export function AuthoritySection() {
               src="/bio/06.webp"
               alt="Escritório Gonçalves"
               loading="lazy"
+              width={400}
+              height={340}
               className="w-full h-full object-cover"
             />
           </div>

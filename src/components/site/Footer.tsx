@@ -19,7 +19,7 @@ export function Footer() {
           {/* Sobre */}
           <div>
             <div className="mb-4">
-              <img src="/logo clara.webp" alt="Escritório Gonçalves" loading="lazy" className="h-10 w-auto" />
+              <img src="/logo clara.webp" alt="Escritório Gonçalves" loading="lazy" width={120} height={40} className="h-10 w-auto" />
             </div>
             <p className="text-sm text-white/55 leading-relaxed max-w-xs">
               Escritório especializado em direito previdenciário, com atendimento presencial em

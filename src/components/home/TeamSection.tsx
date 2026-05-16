@@ -123,7 +123,7 @@ export function TeamSection() {
                     <div className="flex flex-row items-center gap-4">
                       <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-xl">
                         {member.photo ? (
-                          <img src={member.photo} alt={member.name} loading="lazy" className="h-full w-full object-cover object-top" />
+                          <img src={member.photo} alt={member.name} loading="lazy" width={400} height={600} className="h-full w-full object-cover object-top" />
                         ) : (
                           <PhotoPlaceholder name={member.name} />
                         )}
@@ -172,7 +172,7 @@ export function TeamSection() {
                           className={`relative h-full flex-shrink-0 overflow-hidden rounded-2xl ${isActive ? "w-[196px]" : "w-full"}`}
                         >
                           {member.photo ? (
-                            <img src={member.photo} alt={member.name} loading="lazy" className="h-full w-full object-cover object-top" />
+                            <img src={member.photo} alt={member.name} loading="lazy" width={400} height={600} className="h-full w-full object-cover object-top" />
                           ) : (
                             <PhotoPlaceholder name={member.name} />
                           )}
@@ -226,7 +226,7 @@ export function TeamSection() {
             {SUPPORT.map((s) => (
               <div key={s.name} className="flex flex-col items-center gap-2">
                 <div className="h-14 w-14 rounded-full overflow-hidden border-2 border-[var(--border)]">
-                  <img src={s.photo} alt={s.name} loading="lazy" className="h-full w-full object-cover object-top" />
+                  <img src={s.photo} alt={s.name} loading="lazy" width={56} height={56} className="h-full w-full object-cover object-top" />
                 </div>
                 <span className="text-sm font-medium text-[var(--navy)]">{s.name}</span>
                 <span className="text-xs text-[var(--text-muted)]">{s.role}</span>

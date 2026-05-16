@@ -22,7 +22,7 @@ export function Header() {
     <header className="sticky top-0 z-40 w-full border-b border-[var(--border)] bg-[var(--white)]/85 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4">
         <Link to="/" className="flex items-center" onClick={() => setOpen(false)}>
-          <img src="/Logo-Escura.webp" alt="Escritório Gonçalves" className="h-10 w-auto" />
+          <img src="/Logo-Escura.webp" alt="Escritório Gonçalves" width={120} height={40} className="h-10 w-auto" />
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">

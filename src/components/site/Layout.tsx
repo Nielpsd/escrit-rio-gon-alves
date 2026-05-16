@@ -1,8 +1,10 @@
+import { lazy, Suspense } from "react";
 import { Header } from "./Header";
-import { Footer } from "./Footer";
 import { UrgencyBar } from "./UrgencyBar";
 import { ReadingProgress } from "./ReadingProgress";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
+
+const Footer = lazy(() => import("./Footer").then((m) => ({ default: m.Footer })));
 
 export function Layout({ children }: { children: React.ReactNode }) {
   useScrollReveal();
@@ -12,7 +14,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <UrgencyBar />
       <Header />
       <main className="flex-1">{children}</main>
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
     </div>
   );
 }
