@@ -1,0 +1,15 @@
+.tiptap.prose h2 { font-size: 1.4rem; font-weight: 700; color: var(--navy); margin: 1.4rem 0 0.6rem; }
+.tiptap.prose h3 { font-size: 1.15rem; font-weight: 600; color: var(--navy); margin: 1.2rem 0 0.5rem; }
+.tiptap.prose h4 { font-size: 1rem; font-weight: 600; color: var(--navy); margin: 1rem 0 0.4rem; }
+.tiptap.prose p { margin: 0.6rem 0; line-height: 1.75; }
+.tiptap.prose ul { list-style: disc; padding-left: 1.4rem; margin: 0.6rem 0; }
+.tiptap.prose ol { list-style: decimal; padding-left: 1.4rem; margin: 0.6rem 0; }
+.tiptap.prose li { margin: 0.25rem 0; }
+.tiptap.prose blockquote { border-left: 3px solid var(--gold); padding-left: 1rem; color: var(--text-muted); font-style: italic; margin: 1rem 0; }
+.tiptap.prose code { background: var(--navy-light); color: var(--navy); padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.85em; }
+.tiptap.prose pre { background: var(--navy); color: #e2e8f0; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; }
+.tiptap.prose pre code { background: transparent; color: inherit; padding: 0; }
+.tiptap.prose hr { border-color: var(--border); margin: 1.5rem 0; }
+.tiptap.prose strong { font-weight: 700; color: var(--navy); }
+.tiptap.prose a { color: var(--gold); text-decoration: underline; }
+.tiptap p.is-editor-empty:first-child::before { content: attr(data-placeholder); float: left; color: var(--text-light); pointer-events: none; height: 0; }

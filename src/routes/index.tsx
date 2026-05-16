@@ -3,10 +3,18 @@ import { lazy, Suspense } from "react";
 import { Layout } from "@/components/site/Layout";
 import { HeroSection } from "@/components/home/HeroSection";
 import { MarqueeStrip } from "@/components/home/MarqueeStrip";
-import { DiscoverRightsSection } from "@/components/home/DiscoverRightsSection";
-import { AuthoritySection } from "@/components/home/AuthoritySection";
-import { ServicesSection } from "@/components/home/ServicesSection";
-import { BlogPreviewSection } from "@/components/home/BlogPreviewSection";
+const DiscoverRightsSection = lazy(() =>
+  import("@/components/home/DiscoverRightsSection").then((m) => ({ default: m.DiscoverRightsSection }))
+);
+const AuthoritySection = lazy(() =>
+  import("@/components/home/AuthoritySection").then((m) => ({ default: m.AuthoritySection }))
+);
+const ServicesSection = lazy(() =>
+  import("@/components/home/ServicesSection").then((m) => ({ default: m.ServicesSection }))
+);
+const BlogPreviewSection = lazy(() =>
+  import("@/components/home/BlogPreviewSection").then((m) => ({ default: m.BlogPreviewSection }))
+);
 
 // Seções abaixo do fold com framer-motion — carregam lazy para não bloquear LCP
 const StatsSection = lazy(() =>
@@ -65,9 +73,15 @@ function Home() {
       <Suspense fallback={null}>
         <StatsSection />
       </Suspense>
-      <DiscoverRightsSection />
-      <AuthoritySection />
-      <ServicesSection />
+      <Suspense fallback={null}>
+        <DiscoverRightsSection />
+      </Suspense>
+      <Suspense fallback={null}>
+        <AuthoritySection />
+      </Suspense>
+      <Suspense fallback={null}>
+        <ServicesSection />
+      </Suspense>
       <Suspense fallback={null}>
         <HowItWorksSection />
       </Suspense>
@@ -80,7 +94,9 @@ function Home() {
       <Suspense fallback={null}>
         <FAQSection />
       </Suspense>
-      <BlogPreviewSection />
+      <Suspense fallback={null}>
+        <BlogPreviewSection />
+      </Suspense>
       <Suspense fallback={null}>
         <CoverageSection />
       </Suspense>

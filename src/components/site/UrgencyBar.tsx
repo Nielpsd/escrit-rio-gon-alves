@@ -1,22 +1,22 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 import { SITE } from "@/lib/site";
 
 export function UrgencyBar() {
-  const [visible, setVisible] = useState(false);
+  const [state, setState] = useState<"hidden" | "visible" | "dismissed">("hidden");
 
   useEffect(() => {
     if (typeof window === "undefined") return;
     const dismissed = localStorage.getItem("urgency-bar-dismissed");
-    if (!dismissed) setVisible(true);
+    setState(dismissed ? "dismissed" : "visible");
   }, []);
 
   function dismiss() {
-    setVisible(false);
+    setState("dismissed");
     localStorage.setItem("urgency-bar-dismissed", "1");
   }
 
-  if (!visible) return null;
+  if (state !== "visible") return null;
 
   return (
     <div className="relative z-50 bg-amber-500 px-4 py-2 text-center text-sm font-medium text-amber-950">

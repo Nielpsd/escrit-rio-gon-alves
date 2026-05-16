@@ -2,41 +2,6 @@
   display: none !important;
 }
 
-/* Tiptap editor prose styles */
-.tiptap.prose h2 { font-size: 1.4rem; font-weight: 700; color: var(--navy); margin: 1.4rem 0 0.6rem; }
-.tiptap.prose h3 { font-size: 1.15rem; font-weight: 600; color: var(--navy); margin: 1.2rem 0 0.5rem; }
-.tiptap.prose h4 { font-size: 1rem; font-weight: 600; color: var(--navy); margin: 1rem 0 0.4rem; }
-.tiptap.prose p { margin: 0.6rem 0; line-height: 1.75; }
-.tiptap.prose ul { list-style: disc; padding-left: 1.4rem; margin: 0.6rem 0; }
-.tiptap.prose ol { list-style: decimal; padding-left: 1.4rem; margin: 0.6rem 0; }
-.tiptap.prose li { margin: 0.25rem 0; }
-.tiptap.prose blockquote { border-left: 3px solid var(--gold); padding-left: 1rem; color: var(--text-muted); font-style: italic; margin: 1rem 0; }
-.tiptap.prose code { background: var(--navy-light); color: var(--navy); padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.85em; }
-.tiptap.prose pre { background: var(--navy); color: #e2e8f0; padding: 1rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; }
-.tiptap.prose pre code { background: transparent; color: inherit; padding: 0; }
-.tiptap.prose hr { border-color: var(--border); margin: 1.5rem 0; }
-.tiptap.prose strong { font-weight: 700; color: var(--navy); }
-.tiptap.prose a { color: var(--gold); text-decoration: underline; }
-.tiptap p.is-editor-empty:first-child::before { content: attr(data-placeholder); float: left; color: var(--text-light); pointer-events: none; height: 0; }
-
-/* Artigo publicado */
-.article-body { font-size: 1rem; line-height: 1.8; color: var(--text); }
-.article-body h2 { font-size: 1.5rem; font-weight: 700; color: var(--navy); margin: 2rem 0 0.75rem; font-family: var(--font-display, serif); }
-.article-body h3 { font-size: 1.2rem; font-weight: 600; color: var(--navy); margin: 1.6rem 0 0.5rem; font-family: var(--font-display, serif); }
-.article-body h4 { font-size: 1rem; font-weight: 600; color: var(--navy); margin: 1.2rem 0 0.4rem; }
-.article-body p { margin: 0 0 1rem; }
-.article-body ul { list-style: disc; padding-left: 1.5rem; margin: 1rem 0; }
-.article-body ol { list-style: decimal; padding-left: 1.5rem; margin: 1rem 0; }
-.article-body li { margin: 0.35rem 0; }
-.article-body blockquote { border-left: 4px solid var(--gold); padding: 0.5rem 1rem; color: var(--text-muted); font-style: italic; margin: 1.5rem 0; background: var(--gold-pale); border-radius: 0 8px 8px 0; }
-.article-body code { background: var(--navy-light); color: var(--navy); padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.85em; }
-.article-body pre { background: var(--navy); color: #e2e8f0; padding: 1.25rem; border-radius: 10px; overflow-x: auto; margin: 1.5rem 0; font-size: 0.875rem; }
-.article-body pre code { background: transparent; color: inherit; padding: 0; }
-.article-body hr { border-color: var(--border); margin: 2rem 0; }
-.article-body strong { font-weight: 700; color: var(--navy); }
-.article-body a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
-.article-body a:hover { color: var(--gold-sat); }
-
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";

@@ -1,4 +1,6 @@
+import "@/styles-article.css";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { ReadingProgress } from "@/components/site/ReadingProgress";
 import { ArrowLeft, ArrowRight, Clock, User } from "lucide-react";
 import { motion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
@@ -101,6 +103,7 @@ function PostPage() {
 
   return (
     <Layout>
+      <ReadingProgress />
       {/* HERO */}
       <section className="on-navy relative overflow-hidden bg-[var(--navy)] text-white">
         {post.image && (
