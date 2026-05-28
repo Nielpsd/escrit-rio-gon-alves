@@ -132,9 +132,13 @@ function PostPage() {
           </h1>
           <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-white/60">
             <span className="inline-flex items-center gap-1.5">
-              <span className="grid h-6 w-6 place-items-center rounded-full bg-[var(--gold)]/20 font-display text-xs font-semibold text-[var(--gold-light)]">
-                {post.author[0]}
-              </span>
+              {post.author.toLowerCase().includes("renan") ? (
+                <img src="/bio/05.webp" alt={post.author} className="h-6 w-6 rounded-full object-cover object-top" />
+              ) : (
+                <span className="grid h-6 w-6 place-items-center rounded-full bg-[var(--gold)]/20 font-display text-xs font-semibold text-[var(--gold-light)]">
+                  {post.author[0]}
+                </span>
+              )}
               {post.author}
             </span>
             <span>·</span>

@@ -11,14 +11,14 @@ export function AuthoritySection() {
       <div className="max-w-7xl mx-auto flex flex-col items-center">
 
         <h2 data-reveal className="reveal-init max-w-3xl text-center font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.1] text-[var(--navy)]">
-          Quem já trabalhou no INSS sabe{" "}
-          <em className="hl">como o sistema decide</em>.
+          Quem viveu a prática por dentro sabe{" "}
+          <em className="hl">o caminho para o benefício ser aprovado</em>.
         </h2>
 
         <p data-reveal className="reveal-init mt-5 max-w-xl text-center text-base text-[var(--text-muted)] leading-relaxed">
           Dr. Renan Gonçalves passou anos dentro do INSS como gerente. Hoje lidera
-          uma equipe exclusivamente previdenciária — e transforma esse conhecimento
-          interno em fundamentação técnica para cada caso.
+          uma equipe dedicada a benefícios do INSS — e usa esse conhecimento na prática
+          a favor de cada cliente.
         </p>
 
         <div data-reveal className="reveal-init mt-8">
@@ -44,7 +44,7 @@ export function AuthoritySection() {
             <div data-reveal className="reveal-init bg-[var(--gold)] rounded-2xl px-7 py-6 flex justify-between items-center">
               <span className="font-display text-3xl font-bold text-[var(--navy)]">+10 anos</span>
               <span className="text-sm font-medium text-[var(--navy)]/70 text-right leading-snug">
-                de experiência<br />previdenciária
+                de experiência<br />na área
               </span>
             </div>
             <div data-reveal className="reveal-init bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-7 flex-grow">
@@ -52,8 +52,8 @@ export function AuthoritySection() {
                 <span className="text-[var(--gold)] text-xs">●</span> Ex-gerente do INSS
               </h3>
               <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-                Conhecemos o sistema por dentro. Sabemos os critérios de análise e como
-                cada documento é avaliado na concessão de benefícios.
+                Conhecemos os critérios de análise pela prática — e usamos isso
+                a favor do seu caso em cada etapa.
               </p>
             </div>
           </div>
@@ -61,17 +61,17 @@ export function AuthoritySection() {
           <div className="flex flex-col gap-5 order-3">
             <div data-reveal className="reveal-init bg-[var(--surface)] border border-[var(--border)] rounded-2xl p-7 flex-grow">
               <h3 className="font-display text-lg font-semibold text-[var(--navy)] mb-3 flex items-center gap-2">
-                <span className="text-[var(--gold)] text-xs">●</span> Só previdenciário
+                <span className="text-[var(--gold)] text-xs">●</span> Foco em previdenciário
               </h3>
               <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-                O escritório atua exclusivamente em benefícios do INSS. Toda a atenção
-                e o estudo da equipe estão concentrados em uma única especialidade.
+                O escritório tem foco principal em benefícios do INSS, mas também atua
+                em direito trabalhista, pensão, divórcio, dano moral e outras causas da sua família.
               </p>
             </div>
             <div data-reveal className="reveal-init bg-[var(--surface)] border border-[var(--border)] rounded-2xl px-7 py-6 flex justify-between items-center">
               <span className="font-display text-3xl font-bold text-[var(--gold)]">100%</span>
               <span className="text-sm text-[var(--text-muted)] text-right leading-snug">
-                foco em<br />previdenciário
+                dedicação<br />ao seu caso
               </span>
             </div>
           </div>

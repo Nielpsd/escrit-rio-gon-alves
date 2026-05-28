@@ -2,9 +2,13 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
+  Baby,
+  Briefcase,
   CheckCircle2,
   HeartPulse,
   HandCoins,
+  Heart,
+  HelpCircle,
   RefreshCw,
   ShieldCheck,
   Tractor,
@@ -110,6 +114,54 @@ const SERVICOS = [
       "Salário-maternidade rural",
     ],
     perfil: "Para trabalhadores rurais, agricultores familiares e pescadores artesanais",
+  },
+  {
+    icon: Baby,
+    titulo: "Salário-Maternidade",
+    descricao:
+      "Benefício pago à segurada durante o período de afastamento por nascimento, adoção ou natimorto. Muitas mulheres desconhecem que têm direito mesmo estando desempregadas ou trabalhando informalmente.",
+    pontos: [
+      "Seguradas desempregadas e informais",
+      "Casos de natimorto e morte neonatal",
+      "Trabalhadora rural e MEI",
+    ],
+    perfil: "Para gestantes, mães que adotaram ou que tiveram parto sem vínculo formal de emprego",
+  },
+  {
+    icon: Briefcase,
+    titulo: "Direito Trabalhista",
+    descricao:
+      "Atuamos em causas trabalhistas — rescisão indevida, horas extras, assédio, FGTS não depositado, verbas rescisórias e outros direitos garantidos pela CLT.",
+    pontos: [
+      "Rescisão indevida e verbas rescisórias",
+      "Horas extras e FGTS",
+      "Assédio moral e dano moral",
+    ],
+    perfil: "Para trabalhadores com direitos não pagos ou relação de trabalho encerrada irregularmente",
+  },
+  {
+    icon: Heart,
+    titulo: "Direito de Família",
+    descricao:
+      "Atuamos em pensão alimentícia, divórcio, guarda de filhos e demais questões que envolvem a família — com escuta humana e condução técnica.",
+    pontos: [
+      "Pensão alimentícia e revisão de pensão",
+      "Divórcio consensual e litigioso",
+      "Guarda e regulamentação de visitas",
+    ],
+    perfil: "Para quem está passando por separação, questões de guarda ou pensão",
+  },
+  {
+    icon: HelpCircle,
+    titulo: "Outro caso? Fale com a equipe",
+    descricao:
+      "Se a sua situação não está listada acima, conte para a equipe. Analisamos cada caso individualmente e indicamos o melhor caminho para a sua situação.",
+    pontos: [
+      "Dano moral",
+      "Causas cíveis diversas",
+      "Análise gratuita pelo WhatsApp",
+    ],
+    perfil: "Para qualquer situação que precise de orientação jurídica",
   },
 ];
 

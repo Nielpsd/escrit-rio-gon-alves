@@ -3,20 +3,20 @@ import { X } from "lucide-react";
 import { SITE } from "@/lib/site";
 
 export function UrgencyBar() {
-  const [state, setState] = useState<"hidden" | "visible" | "dismissed">("hidden");
+  const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const dismissed = localStorage.getItem("urgency-bar-dismissed");
-    setState(dismissed ? "dismissed" : "visible");
+    if (localStorage.getItem("urgency-bar-dismissed")) {
+      setDismissed(true);
+    }
   }, []);
 
   function dismiss() {
-    setState("dismissed");
+    setDismissed(true);
     localStorage.setItem("urgency-bar-dismissed", "1");
   }
 
-  if (state !== "visible") return null;
+  if (dismissed) return null;
 
   return (
     <div className="relative z-50 bg-amber-500 px-4 py-2 text-center text-sm font-medium text-amber-950">

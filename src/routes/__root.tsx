@@ -1,4 +1,4 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts, useRouterState } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute, HeadContent, Scripts, ScrollRestoration, useRouterState } from "@tanstack/react-router";
 import { WhatsAppFab } from "@/components/site/WhatsAppFab";
 import { CookieBanner } from "@/components/site/CookieBanner";
 import { BackToTop } from "@/components/site/BackToTop";
@@ -93,6 +93,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
+        <ScrollRestoration />
         <Scripts />
       </body>
     </html>

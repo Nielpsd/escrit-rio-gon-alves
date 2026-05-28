@@ -16,20 +16,20 @@ const FAQ_SOBRE = [
     a: "Sim. Antes de fundar o escritório, Dr. Renan atuou como gerente do INSS, onde acompanhou de perto os critérios técnicos que determinam a aprovação ou negativa de cada pedido.",
   },
   {
-    q: "O escritório atua apenas em aposentadoria?",
-    a: "Não. Atuamos em todas as áreas do direito previdenciário: aposentadorias, auxílio-doença, BPC/LOAS, pensão por morte, revisão de benefícios e trabalhador rural.",
+    q: "O escritório atua apenas em benefícios do INSS?",
+    a: "Não. O foco principal é em benefícios do INSS — aposentadorias, auxílio-doença, BPC/LOAS, pensão por morte, revisão de benefícios e trabalhador rural. Mas também atuamos em direito trabalhista, pensão alimentícia, divórcio, dano moral e outras causas da família.",
   },
   {
-    q: "O que significa dizer que o escritório tem 'atuação exclusiva'?",
-    a: "Significa que nenhum profissional da equipe divide atenção com outras áreas do direito — trabalhista, criminal, civil. Todo o tempo, estudo e energia estão concentrados no previdenciário.",
-  },
-  {
-    q: "Por que um escritório especializado faz diferença?",
+    q: "Por que um escritório com foco na área faz diferença?",
     a: "Porque o direito previdenciário tem regras próprias, prazos específicos e critérios técnicos que mudam com frequência. Um erro de estratégia no início pode atrasar o benefício em anos.",
   },
   {
     q: "O escritório tem experiência com casos negados ou complicados?",
     a: "Sim. Parte significativa dos casos que chegam ao escritório já passou por negativa administrativa. A experiência prévia do Dr. Renan dentro do INSS ajuda a entender o que o sistema exige para reverter essa situação.",
+  },
+  {
+    q: "Posso falar diretamente com o Dr. Renan?",
+    a: "Sim. Todos os processos passam pelo Dr. Renan e, sempre que necessário, é possível agendar uma reunião diretamente com ele.",
   },
 ];
 
@@ -54,10 +54,10 @@ export const Route = createFileRoute("/sobre")({
 });
 
 const STATS = [
-  { value: "143+", label: "Avaliações no Google" },
+  { value: "250+", label: "Avaliações no Google" },
   { value: "10+", label: "Profissionais especializados" },
   { value: "3", label: "Escritórios em RO" },
-  { value: "100%", label: "Foco em previdenciário" },
+  { value: "100%", label: "Dedicação ao seu caso" },
 ];
 
 const VALORES = [
@@ -79,7 +79,7 @@ const VALORES = [
   {
     title: "Especialização",
     body:
-      "Atuação exclusiva em direito previdenciário. Toda a atenção, tempo e estudo da equipe estão concentrados em uma única área.",
+      "Foco principal em benefícios do INSS, com toda a atenção e estudo da equipe concentrados onde você mais precisa.",
   },
 ];
 
@@ -87,36 +87,51 @@ const DIFERENCIAIS = [
   "Liderança com atuação prévia como gerente do INSS",
   "3 escritórios presenciais em Rondônia",
   "Atendimento online para qualquer estado do Brasil",
-  "Equipe dedicada exclusivamente ao direito previdenciário",
-  "Mais de 143 avaliações no Google Meu Negócio",
+  "Equipe com foco em benefícios do INSS e demandas da família",
+  "Mais de 250 avaliações no Google Meu Negócio",
   "Atividade docente do fundador na área previdenciária",
 ];
 
 const TIMELINE = [
   {
-    ano: "Início",
+    ano: "2014",
+    titulo: "Início dos estudos",
+    desc: "Dr. Renan começa a estudar Direito, já com interesse especial na área previdenciária.",
+  },
+  {
+    ano: "Concurso",
+    titulo: "Entrada no INSS",
+    desc: "Aprovação no concurso público e início da carreira como servidor do INSS, acompanhando de perto os critérios de análise dos benefícios.",
+  },
+  {
+    ano: "Gerência",
+    titulo: "Gerente do INSS",
+    desc: "Promoção ao cargo de gerente — cargo que permitiu entender a fundo como o sistema decide sobre a aprovação ou negativa de cada pedido.",
+  },
+  {
+    ano: "Virada",
     titulo: "Saída do INSS",
-    desc: "Após anos como gerente do INSS, Dr. Renan percebe que podia ajudar mais as pessoas do lado de fora do sistema.",
+    desc: "Após anos como gerente, Dr. Renan percebe que podia usar esse conhecimento para ajudar as pessoas do lado de fora do sistema.",
   },
   {
     ano: "Fundação",
-    titulo: "Escritório Gonçalves",
-    desc: "Abertura do escritório em Jaru (RO), com foco exclusivo em direito previdenciário e atendimento humanizado.",
+    titulo: "Primeira unidade — Alta Floresta D'Oeste",
+    desc: "Abertura do escritório em Alta Floresta D'Oeste (RO), com foco em benefícios do INSS e atendimento humanizado.",
   },
   {
     ano: "Expansão",
-    titulo: "Segunda unidade",
-    desc: "Abertura da unidade em Alta Floresta D'Oeste (RO) para ampliar o atendimento presencial na região.",
+    titulo: "Unidade Jaru",
+    desc: "Abertura da unidade em Jaru (RO) para ampliar o atendimento presencial na região.",
   },
   {
-    ano: "Expansão",
-    titulo: "Terceiro escritório",
-    desc: "Abertura da unidade em Cacoal (RO), consolidando a presença do escritório no estado.",
+    ano: "Sede",
+    titulo: "Cacoal — sede do escritório",
+    desc: "Abertura da sede em Cacoal (RO), consolidando a presença do escritório no estado.",
   },
   {
     ano: "Hoje",
-    titulo: "Atendimento nacional",
-    desc: "Mais de 10 profissionais, 3 escritórios em RO, clientes em todo o Brasil e mais de 143 avaliações positivas no Google.",
+    titulo: "Unidade online — todo o Brasil",
+    desc: "Mais de 10 profissionais, 3 escritórios em RO, atendimento online para qualquer estado e mais de 250 avaliações positivas no Google.",
   },
 ];
 
@@ -144,11 +159,11 @@ function SobrePage() {
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
             <Eyebrow className="mx-auto justify-center">Sobre o escritório</Eyebrow>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
-              Um escritório que <em className="hl">nasceu de dentro do INSS</em>.
+              Um escritório que <em className="hl">nasceu da prática</em>.
             </h1>
             <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-              Dr. Renan Gonçalves não chegou ao direito previdenciário pelos livros. Chegou
-              pela prática — como gerente do INSS, onde aprendeu de perto como o sistema
+              Dr. Renan Gonçalves não chegou ao direito pelos livros. Chegou
+              pela prática — como gerente do INSS, onde aprendeu de perto como o processo
               funciona, quais pedidos são aprovados e por que tantos são negados.
             </p>
           </motion.div>
@@ -322,7 +337,7 @@ function SobrePage() {
           ))}
         </div>
         <p className="mt-6 text-xs text-[var(--text-light)]">
-          Manifestações espontâneas. Resultados em casos previdenciários dependem de análise individual.
+          Manifestações espontâneas publicadas no Google. Resultados dependem de análise individual de cada caso.
         </p>
       </section>
 

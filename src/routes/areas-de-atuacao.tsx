@@ -61,6 +61,9 @@ const CATEGORIAS = [
   "Pensão por Morte",
   "Trabalhador Rural",
   "Revisão",
+  "Salário-Maternidade",
+  "Trabalhista",
+  "Família",
 ] as const;
 
 type Categoria = (typeof CATEGORIAS)[number];
@@ -180,6 +183,33 @@ const AREAS: {
     resultado: "Pensão por morte proporcional conforme legislação vigente",
     cats: ["Pensão por Morte"],
   },
+  {
+    perfil: "Grávida ou mãe que precisa do salário-maternidade",
+    contexto:
+      "Mulheres seguradas pelo INSS — seja como empregada, autônoma, MEI ou trabalhadora rural — que passaram por gravidez, adoção ou parto de natimorto.",
+    atuacao:
+      "Análise da qualidade de segurada, comprovação do evento e protocolo do benefício com a documentação adequada.",
+    resultado: "Salário-maternidade de 120 dias, inclusive para desempregadas e trabalhadoras informais",
+    cats: ["Salário-Maternidade"],
+  },
+  {
+    perfil: "Trabalhador com direitos não pagos",
+    contexto:
+      "Pessoas que encerraram o vínculo de emprego com verbas rescisórias incorretas, horas extras não pagas, FGTS não depositado ou assédio moral.",
+    atuacao:
+      "Análise da documentação trabalhista, identificação dos direitos violados e condução da ação perante a Justiça do Trabalho.",
+    resultado: "Recebimento das verbas rescisórias devidas, multas e indenizações cabíveis",
+    cats: ["Trabalhista"],
+  },
+  {
+    perfil: "Família em processo de separação ou pensão",
+    contexto:
+      "Cônjuges em processo de divórcio, pais ou mães que precisam definir guarda e pensão alimentícia, ou quem busca revisão de pensão já fixada.",
+    atuacao:
+      "Orientação jurídica, negociação e condução do processo judicial ou extrajudicial com foco na resolução humanizada do conflito.",
+    resultado: "Divórcio formalizado, pensão alimentícia definida e guarda regulamentada",
+    cats: ["Família"],
+  },
 ];
 
 function AreasPage() {
@@ -200,9 +230,9 @@ function AreasPage() {
               Você se encaixa em <em className="hl">algum desses perfis</em>?
             </h1>
             <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-              Reunimos as situações mais comuns atendidas pelo escritório. Se você se
-              identificar com alguma, é provável que exista um caminho legal para o seu caso.
-              A análise individual confirma o que se aplica.
+              Reunimos as situações mais comuns atendidas pelo escritório — de benefícios do INSS
+              a questões trabalhistas e de família. Se você se identificar com alguma, é provável
+              que exista um caminho legal para o seu caso.
             </p>
           </motion.div>
         </div>

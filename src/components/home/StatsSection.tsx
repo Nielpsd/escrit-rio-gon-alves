@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
 const STATS = [
-  { value: 143, suffix: "+", label: "avaliações 5 estrelas" },
+  { value: 250, suffix: "+", label: "avaliações no Google" },
   { value: 10, suffix: "+", label: "anos de experiência" },
   { value: 3, suffix: "", label: "escritórios em RO" },
-  { value: 100, suffix: "%", label: "foco em previdenciário" },
+  { value: 100, suffix: "%", label: "dedicação ao seu caso" },
 ];
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {

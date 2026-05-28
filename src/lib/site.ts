@@ -11,5 +11,5 @@ export const SITE = {
   instagram: "https://www.instagram.com/renan.inss/",
   tiktok: "https://www.tiktok.com/@renan.inss",
   youtube: "https://www.youtube.com/c/DireitoEmMinutos/",
-  cities: "Jaru (RO) · Alta Floresta D'Oeste (RO) · Cacoal (RO)",
+  cities: "Cacoal (RO) · Jaru (RO) · Alta Floresta D'Oeste (RO)",
 } as const;

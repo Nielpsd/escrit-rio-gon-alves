@@ -1,4 +1,4 @@
-import { ArrowRight, XCircle, Clock, FileX } from "lucide-react";
+import { ArrowRight, XCircle, Clock, FileX, Baby } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
@@ -7,6 +7,7 @@ const TRIGGERS = [
   { icon: FileX, text: "Tive meu benefício negado pelo INSS" },
   { icon: Clock, text: "Contribuí por anos e ainda não me aposentei" },
   { icon: XCircle, text: "Estou afastado e não sei o que me cabe" },
+  { icon: Baby, text: "Estou grávida e preciso do salário-maternidade" },
 ];
 
 export function DiscoverRightsSection() {

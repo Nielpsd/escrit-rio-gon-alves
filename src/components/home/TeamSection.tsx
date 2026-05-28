@@ -20,7 +20,7 @@ const LAWYERS: Lawyer[] = [
     role: "Advogado · OAB/RO 10.297",
     label: "Sócio fundador",
     quote:
-      "Passei anos dentro do INSS como gerente. Sei exatamente como cada processo é analisado — e uso esse conhecimento a favor dos nossos clientes todos os dias.",
+      "Passei anos dentro do INSS como gerente. Conheço os critérios de análise pela prática — e uso esse conhecimento a favor dos nossos clientes todos os dias.",
     badge: <Scale className="h-5 w-5 text-[var(--navy)]" />,
     photo: "/bio/05.webp",
   },
@@ -28,7 +28,7 @@ const LAWYERS: Lawyer[] = [
     id: 2,
     name: "Dr. Wesley Rodrigues",
     role: "Advogado · OAB/RO 15430",
-    label: "Supervisor",
+    label: "Advogado",
     quote:
       "Cada caso tem sua particularidade. Meu papel é garantir que cada processo seja conduzido com a estratégia certa para o melhor resultado possível.",
     badge: <BookOpen className="h-5 w-5 text-[var(--navy)]" />,
@@ -38,9 +38,9 @@ const LAWYERS: Lawyer[] = [
     id: 3,
     name: "Dra. Lucimeiry Boni",
     role: "Advogada · OAB/RO 10.236",
-    label: "Direito previdenciário",
+    label: "Advogada",
     quote:
-      "Atuo exclusivamente em previdenciário porque acredito que cada pessoa merece receber o benefício que é seu por direito. Esse é o nosso compromisso.",
+      "Atuo com dedicação total em cada causa que assumo. Acredito que cada pessoa merece receber o que é seu por direito — esse é o nosso compromisso.",
     badge: <FileText className="h-5 w-5 text-[var(--navy)]" />,
     photo: "/team/lucimeiry.webp",
   },
@@ -48,23 +48,23 @@ const LAWYERS: Lawyer[] = [
     id: 4,
     name: "Dra. Ana Paula Oliveira",
     role: "Advogada · OAB/RO 9447",
-    label: "Direito previdenciário",
+    label: "Advogada",
     quote:
-      "O direito previdenciário tem o poder de transformar vidas. Cada processo que conduzimos representa uma família que vai ter acesso ao benefício que merece.",
+      "O direito tem o poder de transformar vidas. Cada processo que conduzimos representa uma família que vai ter acesso ao benefício que merece.",
     badge: <Gavel className="h-5 w-5 text-[var(--navy)]" />,
     photo: "/team/ana-paula.webp",
   },
 ];
 
 const SUPPORT = [
-  { name: "Milena Maeda", role: "Equipe previdenciária", photo: "/team/milena.webp" },
-  { name: "Letícia Favetta", role: "Equipe previdenciária", photo: "/team/leticia.webp" },
-  { name: "Ingrid da Silva", role: "Equipe previdenciária", photo: "/team/ingrid.webp" },
-  { name: "Higor Vinicius", role: "Equipe previdenciária", photo: "/team/higor.webp" },
-  { name: "Daniel Garcia", role: "Equipe previdenciária", photo: "/team/daniel.webp" },
-  { name: "Bruna Oliveira", role: "Equipe previdenciária", photo: "/team/bruna.webp" },
-  { name: "Analicy da Hora", role: "Equipe previdenciária", photo: "/team/analicy.webp" },
-  { name: "Aline Dias", role: "Equipe previdenciária", photo: "/team/aline.webp" },
+  { name: "Milena Maeda", role: "Administrativo", photo: "/team/milena.webp" },
+  { name: "Letícia Favetta", role: "Financeiro", photo: "/team/leticia.webp" },
+  { name: "Ingrid da Silva", role: "Jurídico", photo: "/team/ingrid.webp" },
+  { name: "Higor Vinicius", role: "Jurídico", photo: "/team/higor.webp" },
+  { name: "Daniel Garcia", role: "Administrativo e Financeiro", photo: "/team/daniel.webp" },
+  { name: "Bruna Oliveira", role: "Administrativo e Comercial", photo: "/team/bruna.webp" },
+  { name: "Analicy da Hora", role: "Coordenadora do Jurídico", photo: "/team/analicy.webp" },
+  { name: "Aline Dias", role: "Controladoria", photo: "/team/aline.webp" },
 ];
 
 function PhotoPlaceholder({ name }: { name: string }) {
@@ -93,7 +93,7 @@ export function TeamSection() {
           <Eyebrow>Equipe</Eyebrow>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--navy)]">
             Uma equipe inteira focada em{" "}
-            <em className="hl">previdenciário</em>.
+            <em className="hl">você</em>.
           </h2>
         </header>
 
@@ -217,19 +217,28 @@ export function TeamSection() {
           })}
         </div>
 
-        {/* Equipe de apoio — linha de avatares */}
+        {/* Equipe de apoio — cards no mesmo padrão visual */}
         <div className="mt-16 border-t border-[var(--border)] pt-12">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[var(--gold)] mb-8 text-center">
-            Equipe de apoio
-          </p>
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {SUPPORT.map((s) => (
-              <div key={s.name} className="flex flex-col items-center gap-2">
-                <div className="h-14 w-14 rounded-full overflow-hidden border-2 border-[var(--border)]">
-                  <img src={s.photo} alt={s.name} loading="lazy" width={56} height={56} className="h-full w-full object-cover object-top" />
+              <div
+                key={s.name}
+                className="flex flex-col rounded-2xl border border-[var(--border)] bg-white overflow-hidden transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-md)]"
+              >
+                <div className="aspect-[4/3] overflow-hidden bg-[var(--navy-light)]">
+                  <img
+                    src={s.photo}
+                    alt={s.name}
+                    loading="lazy"
+                    width={400}
+                    height={300}
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
-                <span className="text-sm font-medium text-[var(--navy)]">{s.name}</span>
-                <span className="text-xs text-[var(--text-muted)]">{s.role}</span>
+                <div className="p-4 text-center">
+                  <p className="font-display text-sm font-semibold text-[var(--navy)]">{s.name}</p>
+                  <p className="mt-0.5 text-xs text-[var(--text-muted)]">{s.role}</p>
+                </div>
               </div>
             ))}
           </div>

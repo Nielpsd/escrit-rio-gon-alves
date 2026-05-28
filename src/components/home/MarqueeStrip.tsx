@@ -9,6 +9,10 @@ const ITEMS = [
   "Benefício Negado pelo INSS",
   "Planejamento Previdenciário",
   "Recursos Administrativos",
+  "Salário-Maternidade",
+  "Direito Trabalhista",
+  "Pensão e Família",
+  "Dano Moral",
 ];
 
 const SEPARATOR = (

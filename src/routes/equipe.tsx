@@ -11,15 +11,15 @@ import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 const FAQ_EQUIPE = [
   {
     q: "Quem vai me atender diretamente?",
-    a: "Dependendo da sua demanda, você será atendido por um dos profissionais especializados da equipe. O Dr. Renan coordena o trabalho e está presente nas decisões técnicas mais relevantes.",
+    a: "Você será atendido pela equipe especializada e todos os processos passam pelo Dr. Renan, que coordena e acompanha cada caso pessoalmente.",
   },
   {
-    q: "A equipe recebe formação específica em previdenciário?",
-    a: "Sim. O Dr. Renan é professor de direito previdenciário e transmite esse nível de exigência técnica para toda a equipe. O padrão que ensinamos para outros advogados é o mesmo que aplicamos internamente.",
+    q: "A equipe tem formação técnica na área?",
+    a: "Sim. O Dr. Renan é professor de direito e transmite esse nível de exigência técnica para toda a equipe. O padrão que ensinamos para outros profissionais é o mesmo que aplicamos internamente.",
   },
   {
-    q: "Vocês têm advogados especializados em cada área?",
-    a: "Toda a equipe atua exclusivamente em direito previdenciário. Não dividimos atenção com outras áreas do direito — isso garante um nível técnico mais elevado em cada caso.",
+    q: "O escritório atua apenas em benefícios do INSS?",
+    a: "O foco principal é em benefícios do INSS — aposentadorias, auxílio-doença, BPC/LOAS, pensão por morte e revisões. Mas também atuamos em direito trabalhista, pensão alimentícia, divórcio, dano moral e outras causas da família.",
   },
   {
     q: "Como funciona o acompanhamento do processo?",
@@ -27,7 +27,7 @@ const FAQ_EQUIPE = [
   },
   {
     q: "Posso falar diretamente com o Dr. Renan?",
-    a: "O Dr. Renan está presente nas decisões técnicas e estratégicas de cada caso. O atendimento no dia a dia é feito pela equipe — que mantém o mesmo padrão de cuidado e qualidade.",
+    a: "Sim. Todos os processos passam pelo Dr. Renan e, sempre que necessário, é possível agendar uma reunião diretamente com ele.",
   },
 ];
 
@@ -56,21 +56,21 @@ const EQUIPE = [
   { nome: "Dr. Wesley Rodrigues", cargo: "Advogado · OAB/RO 15430", foto: "/team/wesley.webp" },
   { nome: "Dra. Lucimeiry Boni", cargo: "Advogada · OAB/RO 10.236", foto: "/team/lucimeiry.webp" },
   { nome: "Dra. Ana Paula Oliveira", cargo: "Advogada · OAB/RO 9447", foto: "/team/ana-paula.webp" },
-  { nome: "Milena Maeda", cargo: "Equipe previdenciária", foto: "/team/milena.webp" },
-  { nome: "Letícia Favetta", cargo: "Equipe previdenciária", foto: "/team/leticia.webp" },
-  { nome: "Ingrid da Silva", cargo: "Equipe previdenciária", foto: "/team/ingrid.webp" },
-  { nome: "Higor Vinicius", cargo: "Equipe previdenciária", foto: "/team/higor.webp" },
-  { nome: "Daniel Garcia", cargo: "Equipe previdenciária", foto: "/team/daniel.webp" },
-  { nome: "Bruna Oliveira", cargo: "Equipe previdenciária", foto: "/team/bruna.webp" },
-  { nome: "Analicy da Hora", cargo: "Equipe previdenciária", foto: "/team/analicy.webp" },
-  { nome: "Aline Dias", cargo: "Equipe previdenciária", foto: "/team/aline.webp" },
+  { nome: "Milena Maeda", cargo: "Administrativo", foto: "/team/milena.webp" },
+  { nome: "Letícia Favetta", cargo: "Financeiro", foto: "/team/leticia.webp" },
+  { nome: "Ingrid da Silva", cargo: "Jurídico", foto: "/team/ingrid.webp" },
+  { nome: "Higor Vinicius", cargo: "Jurídico", foto: "/team/higor.webp" },
+  { nome: "Daniel Garcia", cargo: "Administrativo e Financeiro", foto: "/team/daniel.webp" },
+  { nome: "Bruna Oliveira", cargo: "Administrativo e Comercial", foto: "/team/bruna.webp" },
+  { nome: "Analicy da Hora", cargo: "Coordenadora do Jurídico", foto: "/team/analicy.webp" },
+  { nome: "Aline Dias", cargo: "Controladoria", foto: "/team/aline.webp" },
 ];
 
 const CULTURA = [
   {
     icon: Star,
-    titulo: "Especialização total",
-    desc: "Ninguém aqui cuida de vários assuntos ao mesmo tempo. Cada pessoa da equipe tem foco exclusivo no previdenciário.",
+    titulo: "Foco e dedicação",
+    desc: "Ninguém aqui cuida de vários assuntos ao mesmo tempo. Cada pessoa da equipe tem foco definido — seja em previdenciário, trabalhista, jurídico ou administrativo.",
   },
   {
     icon: Heart,
@@ -102,7 +102,7 @@ function EquipePage() {
               <em className="hl">cuidar do seu caso</em>.
             </h1>
             <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
-              Mais de 10 profissionais dedicados exclusivamente ao direito previdenciário.
+              Mais de 10 profissionais comprometidos com o seu caso.
               Aqui ninguém cuida de vários assuntos ao mesmo tempo — cada pessoa da equipe
               tem foco no que faz.
             </p>
@@ -174,7 +174,7 @@ function EquipePage() {
             </h2>
             <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
               Os nomes e rostos que você vai encontrar ao longo do processo. Cada pessoa
-              com função definida, todas dedicadas exclusivamente ao previdenciário.
+              com função definida, todas comprometidas com o seu caso.
             </p>
           </div>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Instagram, Youtube } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
+import { PhoneCopyButton } from "@/components/site/PhoneCopyButton";
 
 function TikTokIcon({ size = 16 }: { size?: number }) {
   return (
@@ -22,7 +23,7 @@ export function Footer() {
               <img src="/logo clara.webp" alt="Escritório Gonçalves" loading="lazy" width={120} height={40} className="h-10 w-auto" />
             </div>
             <p className="text-sm text-white/55 leading-relaxed max-w-xs">
-              Escritório especializado em direito previdenciário, com atendimento presencial em
+              Escritório com foco em benefícios do INSS e demandas da família, com atendimento presencial em
               Rondônia e online para todo o Brasil.
             </p>
             <p className="text-xs text-white/45 mt-4 leading-relaxed">
@@ -88,7 +89,7 @@ export function Footer() {
               Contato
             </h4>
             <ul className="space-y-2 text-sm text-white/55">
-              <li>{SITE.phone}</li>
+              <li><PhoneCopyButton phone={SITE.phone} /></li>
               <li>
                 <a href={`mailto:${SITE.email}`} className="hover:text-[var(--gold-light)]">
                   {SITE.email}

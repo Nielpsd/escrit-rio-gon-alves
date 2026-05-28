@@ -5,8 +5,15 @@ import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 const UNIDADES = [
   {
-    cidade: "Jaru — RO",
+    cidade: "Cacoal — RO",
     tipo: "Sede",
+    endereco: "R. Gen. Osório, 484, Princesa Isabel · Próximo ao INSS · CEP 76963-862",
+    horario: "Seg. a Sex. · 8h às 18h",
+    maps: "https://share.google/saxYz8ahcwvzpSx6e",
+  },
+  {
+    cidade: "Jaru — RO",
+    tipo: "Unidade",
     endereco: "Av. Rio Branco, 1939, Centro · Próximo ao INSS · CEP 76890-000",
     horario: "Seg. a Sex. · 8h às 18h",
     maps: "https://share.google/qVXQppwhXEBJgGzMw",
@@ -17,13 +24,6 @@ const UNIDADES = [
     endereco: "Av. Carlos Luz, 4700, esq. R. João Café Filho, Bairro Redondo · Próximo ao Colégio Militar · CEP 76954-000",
     horario: "Seg. a Sex. · 8h às 18h",
     maps: "https://maps.app.goo.gl/REP4wGEcYpNAbLCD8",
-  },
-  {
-    cidade: "Cacoal — RO",
-    tipo: "Unidade",
-    endereco: "R. Gen. Osório, 484, Princesa Isabel · Próximo ao INSS · CEP 76963-862",
-    horario: "Seg. a Sex. · 8h às 18h",
-    maps: "https://share.google/saxYz8ahcwvzpSx6e",
   },
 ];
 
