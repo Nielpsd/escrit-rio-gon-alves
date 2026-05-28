@@ -21,11 +21,8 @@ export function HeroSection() {
         />
       </picture>
 
-      {/* Spacer que impõe a altura natural da imagem desktop (2560×750) sem cortar */}
-      <div className="hidden md:block w-full" style={{ aspectRatio: "2560/750" }} aria-hidden />
-
-      {/* Conteúdo — absoluto no desktop, relativo no mobile */}
-      <div className="relative md:absolute md:inset-0 mx-auto max-w-7xl px-6 pt-[420px] pb-24 md:pt-0 md:pb-0 md:flex md:items-center">
+      {/* Conteúdo — seção com 750px fixos no desktop, altura automática no mobile */}
+      <div className="relative mx-auto max-w-7xl px-6 pt-[420px] pb-24 md:h-[750px] md:pt-0 md:pb-0 md:flex md:items-center">
         <div className="max-w-3xl">
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
             Conquiste seus benefícios<br />
