@@ -233,7 +233,7 @@ function LinksPage() {
           <p className="mt-3 text-sm leading-relaxed text-white/55">
             Trago uma bagagem prática pois{" "}
             <strong className="text-white">já estive dentro do INSS como gerente</strong> e hoje também ensino
-            advogados como professor. Isso me deu duas coisas que eu não abro mão: visão real do sistema por dentro
+            advogados como professor. Isso me deu duas coisas que eu não abro mão: conhecimento na prática
             e um jeito humano de atender quem chega aqui precisando de ajuda de verdade.
           </p>
         </motion.div>

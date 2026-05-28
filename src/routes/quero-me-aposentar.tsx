@@ -404,9 +404,8 @@ function QueroMeAposentarPage() {
               Atuação técnica em <em className="hl">previdenciário</em>.
             </h2>
             <p className="mt-5 text-base text-[var(--text-muted)] leading-relaxed">
-              Dr. Renan Gonçalves atuou como gerente do INSS antes de se dedicar exclusivamente à
-              advocacia previdenciária. Também leciona na área, contribuindo para a formação de
-              outros profissionais.
+              Dr. Renan Gonçalves atuou como gerente do INSS antes de fundar o escritório.
+              Também leciona na área, contribuindo para a formação de outros profissionais.
             </p>
           </motion.div>
         </div>

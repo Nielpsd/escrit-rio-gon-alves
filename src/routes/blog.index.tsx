@@ -40,7 +40,7 @@ export const Route = createFileRoute("/blog/")({
       {
         property: "og:description",
         content:
-          "Conteúdo educativo sobre aposentadoria e benefícios do INSS, produzido por quem conhece o sistema por dentro.",
+          "Conteúdo educativo sobre aposentadoria e benefícios do INSS, produzido por quem conhece a prática por dentro.",
       },
     ],
   }),
@@ -77,7 +77,7 @@ function BlogPage() {
           </h1>
           <p className="mt-6 text-base text-white/65 leading-relaxed max-w-2xl mx-auto">
             Aqui você encontra tudo sobre aposentadoria, benefícios e INSS — em linguagem simples,
-            produzido por quem conhece o sistema por dentro. Sem juridiquês, sem enrolação.
+            produzido por quem conhece a prática por dentro. Sem juridiquês, sem enrolação.
           </p>
           </motion.div>
         </div>
