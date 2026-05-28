@@ -6,7 +6,7 @@ import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 export function HeroSection() {
   return (
     <section className="on-navy relative overflow-hidden bg-[var(--navy)] text-white">
-      {/* Hero background — substitua /hero-bg.webp e /hero-bg-mobile.webp por imagens de alta resolução */}
+      {/* Imagem de fundo */}
       <picture className="absolute inset-0 w-full h-full pointer-events-none select-none" aria-hidden>
         <source srcSet="/hero-bg.webp" media="(min-width: 768px)" />
         <img
@@ -15,13 +15,17 @@ export function HeroSection() {
           fetchPriority="high"
           loading="eager"
           decoding="async"
-          width={1920}
-          height={562}
-          className="absolute inset-0 w-full h-full object-cover object-top md:object-center"
+          width={2560}
+          height={750}
+          className="absolute inset-0 w-full h-full object-cover object-center"
         />
       </picture>
 
-      <div className="relative mx-auto max-w-7xl px-6 pt-[420px] pb-24 md:pt-20 lg:pt-28 lg:pb-32 flex items-center">
+      {/* Spacer que impõe a altura natural da imagem desktop (2560×750) sem cortar */}
+      <div className="hidden md:block w-full" style={{ aspectRatio: "2560/750" }} aria-hidden />
+
+      {/* Conteúdo — absoluto no desktop, relativo no mobile */}
+      <div className="relative md:absolute md:inset-0 mx-auto max-w-7xl px-6 pt-[420px] pb-24 md:pt-0 md:pb-0 md:flex md:items-center">
         <div className="max-w-3xl">
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] text-white">
             Conquiste seus benefícios<br />
