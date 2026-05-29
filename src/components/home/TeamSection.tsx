@@ -166,9 +166,9 @@ function AccordionRow({
             layout={!isMobile}
             onMouseEnter={!isMobile ? () => setActiveIndex(globalIndex) : undefined}
             onClick={isMobile ? () => setActiveIndex(activeIndex === globalIndex ? -1 : globalIndex) : undefined}
-            className="flex flex-col gap-3 w-full lg:w-auto"
+            className="flex flex-col gap-3 lg:w-auto"
             initial={false}
-            animate={isMobile ? {} : { width: isActive ? "500px" : "175px" }}
+            animate={isMobile ? { width: "100%" } : { width: isActive ? "500px" : "175px" }}
             transition={{ type: "spring", stiffness: 120, damping: 24, mass: 1, restDelta: 0.001 }}
             style={{ minWidth: 0 }}
           >
