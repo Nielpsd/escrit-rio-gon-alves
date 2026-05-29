@@ -222,16 +222,21 @@ function ModulesSection() {
   );
 }
 
-function FaqAccordion() {
-  const [openIdx, setOpenIdx] = useState<number | null>(null);
+function FaqColumn({ items, baseIdx, openIdx, setOpenIdx }: {
+  items: typeof FAQ;
+  baseIdx: number;
+  openIdx: number | null;
+  setOpenIdx: (i: number | null) => void;
+}) {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 w-full">
-      {FAQ.map((item, i) => {
-        const isOpen = openIdx === i;
+    <div className="flex flex-col gap-3">
+      {items.map((item, i) => {
+        const globalIdx = baseIdx + i;
+        const isOpen = openIdx === globalIdx;
         return (
           <button
             key={item.q}
-            onClick={() => setOpenIdx(isOpen ? null : i)}
+            onClick={() => setOpenIdx(isOpen ? null : globalIdx)}
             className="w-full text-left bg-white/[0.04] hover:bg-white/[0.07] rounded-[10px] px-5 py-4 transition-colors"
             style={{ fontFamily: FONT }}
           >
@@ -251,6 +256,18 @@ function FaqAccordion() {
           </button>
         );
       })}
+    </div>
+  );
+}
+
+function FaqAccordion() {
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const col1 = FAQ.filter((_, i) => i < 6);   // perguntas 0-5 → coluna esquerda
+  const col2 = FAQ.filter((_, i) => i >= 6);  // perguntas 6-11 → coluna direita
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 w-full items-start">
+      <FaqColumn items={col1} baseIdx={0} openIdx={openIdx} setOpenIdx={setOpenIdx} />
+      <FaqColumn items={col2} baseIdx={6} openIdx={openIdx} setOpenIdx={setOpenIdx} />
     </div>
   );
 }
@@ -299,7 +316,8 @@ function TestimonialsSection() {
         if (!el) return;
         const rect = el.getBoundingClientRect();
         const vh = window.innerHeight;
-        const entered = Math.max(0, vh - rect.top);
+        // clamp: nunca exceder o tamanho da seção + vh para evitar gap nas bordas
+        const entered = Math.min(Math.max(0, vh - rect.top), el.offsetHeight + vh);
         if (r1.current) r1.current.style.transform = `translate3d(${-entered * S}px,0,0)`;
         if (r2.current) r2.current.style.transform = `translate3d(${-5000 + entered * S}px,0,0)`;
         if (r3.current) r3.current.style.transform = `translate3d(${-2400 - entered * (S * 0.65)}px,0,0)`;
@@ -418,18 +436,21 @@ function GuiaPage() {
           <SectionHeading className="text-center mb-12">
             Com o Guia do benefício por incapacidade, <GradientText>você vai conseguir:</GradientText>
           </SectionHeading>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-0">
-            {FEATURES.map((f, i) => (
-              <div key={f.title} className="flex gap-5 py-7 border-b border-white/[0.08]">
-                <span
-                  className="text-[40px] font-bold leading-none flex-shrink-0 w-11 text-right mt-0.5 bg-gradient-to-b from-[#cf88ff] to-[#c56eff]/20 bg-clip-text text-transparent"
-                  style={{ fontFamily: FONT }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div className="flex flex-col gap-1.5 flex-1">
-                  <CardTitle>{f.title}</CardTitle>
-                  <Body className="text-[#777]">{f.desc}</Body>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {FEATURES.map((f) => (
+              <div
+                key={f.title}
+                className="group flex items-start gap-4 rounded-[14px] border border-white/[0.07] bg-white/[0.03] hover:border-[#cf88ff]/40 hover:bg-white/[0.05] p-5 transition-all duration-200"
+              >
+                {/* checkmark circle */}
+                <div className="grid place-items-center w-9 h-9 rounded-full bg-gradient-to-br from-[#cf88ff] to-[#c56eff] flex-shrink-0 mt-0.5">
+                  <svg width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden>
+                    <path d="M1 5L5 9L13 1" stroke="#131313" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <CardTitle className="group-hover:text-[#cf88ff] transition-colors duration-200">{f.title}</CardTitle>
+                  <Body className="text-[#666]">{f.desc}</Body>
                 </div>
               </div>
             ))}
@@ -481,9 +502,14 @@ function GuiaPage() {
       {/* layout sem max-w na seção para a imagem ter espaço real */}
       <section className="py-14 md:py-16">
         <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-0">
-          {/* imagem sem limite de max-w — ocupa metade do viewport */}
-          <div className="w-full lg:w-1/2 px-6 lg:pl-[max(24px,calc((100vw-1280px)/2+24px))] lg:pr-0">
-            <img src="/guia/ipad-s05.webp" alt="Guia do benefício por incapacidade" loading="lazy" className="w-full h-auto" />
+          {/* overflow-hidden + scale → zoom in no iPad sem mostrar fundo */}
+          <div className="w-full lg:w-1/2 overflow-hidden flex items-center justify-center py-4">
+            <img
+              src="/guia/ipad-s05.webp"
+              alt="Guia do benefício por incapacidade"
+              loading="lazy"
+              className="w-full h-auto scale-[1.45] origin-center"
+            />
           </div>
           <div className="flex flex-col gap-7 items-start w-full lg:w-1/2 px-6 lg:pl-10 lg:pr-[max(24px,calc((100vw-1280px)/2+24px))]">
             <SectionHeading>Para quem é?</SectionHeading>
