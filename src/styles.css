@@ -119,9 +119,11 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
+    overflow-x: hidden;
     background-color: var(--white);
     color: var(--text);
     font-family: var(--font-body);
