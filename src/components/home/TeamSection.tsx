@@ -142,19 +142,30 @@ function PhotoPlaceholder({ name }: { name: string }) {
   );
 }
 
-function AccordionRow({ members, isMobile }: { members: Member[]; isMobile: boolean }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-
+function AccordionRow({
+  members,
+  isMobile,
+  activeIndex,
+  setActiveIndex,
+  offset,
+}: {
+  members: Member[];
+  isMobile: boolean;
+  activeIndex: number;
+  setActiveIndex: (i: number) => void;
+  offset: number;
+}) {
   return (
     <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-center lg:gap-4">
       {members.map((member, index) => {
-        const isActive = activeIndex === index;
+        const globalIndex = offset + index;
+        const isActive = activeIndex === globalIndex;
         return (
           <motion.div
             key={member.id}
             layout
-            onMouseEnter={!isMobile ? () => setActiveIndex(index) : undefined}
-            onClick={isMobile ? () => setActiveIndex(index === activeIndex ? -1 : index) : undefined}
+            onMouseEnter={!isMobile ? () => setActiveIndex(globalIndex) : undefined}
+            onClick={isMobile ? () => setActiveIndex(activeIndex === globalIndex ? -1 : globalIndex) : undefined}
             className="flex flex-col gap-3 w-full lg:w-auto"
             initial={false}
             animate={isMobile ? {} : { width: isActive ? "500px" : "175px" }}
@@ -257,6 +268,7 @@ function AccordionRow({ members, isMobile }: { members: Member[]; isMobile: bool
 
 export function TeamSection() {
   const [isMobile, setIsMobile] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 1024);
@@ -264,6 +276,8 @@ export function TeamSection() {
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
+
+  const rows = [LAWYERS, SUPPORT_ROW1, SUPPORT_ROW2];
 
   return (
     <section className="bg-[var(--surface)] py-24 lg:py-32 px-6 md:px-16 overflow-hidden">
@@ -277,9 +291,16 @@ export function TeamSection() {
         </header>
 
         <div className="flex flex-col gap-12">
-          <AccordionRow members={LAWYERS} isMobile={isMobile} />
-          <AccordionRow members={SUPPORT_ROW1} isMobile={isMobile} />
-          <AccordionRow members={SUPPORT_ROW2} isMobile={isMobile} />
+          {rows.map((row, rowIdx) => (
+            <AccordionRow
+              key={rowIdx}
+              members={row}
+              isMobile={isMobile}
+              activeIndex={activeIndex}
+              setActiveIndex={setActiveIndex}
+              offset={rowIdx * 4}
+            />
+          ))}
         </div>
       </div>
     </section>
