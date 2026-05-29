@@ -222,16 +222,36 @@ function ModulesSection() {
   );
 }
 
-function FaqItem({ q, a }: { q: string; a: string }) {
-  const [open, setOpen] = useState(false);
+function FaqAccordion() {
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
   return (
-    <button onClick={() => setOpen((v) => !v)} className="w-full text-left bg-white/[0.04] hover:bg-white/[0.07] rounded-[10px] px-5 py-4 transition-colors" style={{ fontFamily: FONT }}>
-      <div className="flex items-center justify-between gap-4">
-        <span className="text-[#ced4da] text-[14px] md:text-[15px] leading-snug">{q}</span>
-        <span className={`grid place-items-center w-6 h-6 rounded-[4px] bg-white/[0.06] text-[#f8f9fa] text-xs flex-shrink-0 transition-transform ${open ? "rotate-180" : ""}`}>⌄</span>
-      </div>
-      {open && <p className="mt-3 text-[#a2a2a2] text-[13px] leading-relaxed">{a}</p>}
-    </button>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 w-full">
+      {FAQ.map((item, i) => {
+        const isOpen = openIdx === i;
+        return (
+          <button
+            key={item.q}
+            onClick={() => setOpenIdx(isOpen ? null : i)}
+            className="w-full text-left bg-white/[0.04] hover:bg-white/[0.07] rounded-[10px] px-5 py-4 transition-colors"
+            style={{ fontFamily: FONT }}
+          >
+            <div className="flex items-center justify-between gap-4">
+              <span className="text-[#ced4da] text-[14px] md:text-[15px] leading-snug">{item.q}</span>
+              <span
+                className="grid place-items-center w-6 h-6 rounded-[4px] bg-white/[0.06] text-[#f8f9fa] text-xs flex-shrink-0 transition-transform duration-300"
+                style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+              >⌄</span>
+            </div>
+            <div
+              className="overflow-hidden transition-all duration-300"
+              style={{ maxHeight: isOpen ? "200px" : "0px", opacity: isOpen ? 1 : 0 }}
+            >
+              <p className="mt-3 text-[#a2a2a2] text-[13px] leading-relaxed">{item.a}</p>
+            </div>
+          </button>
+        );
+      })}
+    </div>
   );
 }
 
@@ -263,9 +283,15 @@ function TestimonialsSection() {
 
   useEffect(() => {
     let raf = 0;
-    const S1 = 0.75;  // linha 1: esquerda rápida
-    const S2 = 0.75;  // linha 2: direita rápida
-    const S3 = 0.5;   // linha 3: esquerda mais devagar
+    /* Largura de 1 card: 280px + gap 16px = 296px.
+       5 cópias de 9 cards = 45 × 296 = 13320px por linha.
+       max entered ≈ 2500px → viagem máxima = 2500 × 0.75 = 1875px.
+
+       Linha 1: start=0, move ESQUERDA (-0.75x) → nunca fica vazio (tem 13320px à direita)
+       Linha 2: start=-5000, move DIREITA (+0.75x). Máx: -5000+1875=-3125. Card 0
+                fica em x=-3125 → off screen esquerda. NUNCA cria gap.
+       Linha 3: start=-2400, move ESQUERDA (-0.5x). Máx: -2400-1250=-3650. Ok. */
+    const S = 0.75;
     const onScroll = () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
@@ -274,9 +300,9 @@ function TestimonialsSection() {
         const rect = el.getBoundingClientRect();
         const vh = window.innerHeight;
         const entered = Math.max(0, vh - rect.top);
-        if (r1.current) r1.current.style.transform = `translate3d(${-entered * S1}px,0,0)`;
-        if (r2.current) r2.current.style.transform = `translate3d(${-900 + entered * S2}px,0,0)`;
-        if (r3.current) r3.current.style.transform = `translate3d(${-450 - entered * S3}px,0,0)`;
+        if (r1.current) r1.current.style.transform = `translate3d(${-entered * S}px,0,0)`;
+        if (r2.current) r2.current.style.transform = `translate3d(${-5000 + entered * S}px,0,0)`;
+        if (r3.current) r3.current.style.transform = `translate3d(${-2400 - entered * (S * 0.65)}px,0,0)`;
       });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -284,10 +310,13 @@ function TestimonialsSection() {
     return () => { window.removeEventListener("scroll", onScroll); cancelAnimationFrame(raf); };
   }, []);
 
-  // cada linha começa num índice diferente → conteúdo diferente visível
-  const row1 = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
-  const row2 = [...TESTIMONIALS.slice(3), ...TESTIMONIALS.slice(0, 3), ...TESTIMONIALS.slice(3), ...TESTIMONIALS.slice(0, 3), ...TESTIMONIALS.slice(3)];
-  const row3 = [...TESTIMONIALS.slice(6), ...TESTIMONIALS.slice(0, 6), ...TESTIMONIALS.slice(6), ...TESTIMONIALS.slice(0, 6), ...TESTIMONIALS.slice(6)];
+  // 5 cópias por linha, cada linha com ordenação diferente
+  const base = TESTIMONIALS;
+  const rot3 = [...base.slice(3), ...base.slice(0, 3)]; // começa no índice 3
+  const rot6 = [...base.slice(6), ...base.slice(0, 6)]; // começa no índice 6
+  const row1 = [...base, ...base, ...base, ...base, ...base];
+  const row2 = [...rot3, ...rot3, ...rot3, ...rot3, ...rot3];
+  const row3 = [...rot6, ...rot6, ...rot6, ...rot6, ...rot6];
 
   return (
     <section ref={ref} className="relative py-16 md:py-20" style={{ overflow: "hidden" }}>
@@ -309,10 +338,10 @@ function TestimonialsSection() {
         <div ref={r1} className="flex gap-4 w-max px-4 will-change-transform">
           {row1.map((t, i) => <TestimonialCard key={"a" + i} t={t} />)}
         </div>
-        <div ref={r2} className="flex gap-4 w-max px-4 will-change-transform" style={{ transform: "translate3d(-800px,0,0)" }}>
+        <div ref={r2} className="flex gap-4 w-max px-4 will-change-transform" style={{ transform: "translate3d(-5000px,0,0)" }}>
           {row2.map((t, i) => <TestimonialCard key={"b" + i} t={t} />)}
         </div>
-        <div ref={r3} className="flex gap-4 w-max px-4 will-change-transform" style={{ transform: "translate3d(-400px,0,0)" }}>
+        <div ref={r3} className="flex gap-4 w-max px-4 will-change-transform" style={{ transform: "translate3d(-2400px,0,0)" }}>
           {row3.map((t, i) => <TestimonialCard key={"c" + i} t={t} />)}
         </div>
       </div>
@@ -348,8 +377,7 @@ function GuiaPage() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#131313] via-transparent to-transparent" />
 
         <div className="relative mx-auto max-w-[1280px] px-6 w-full">
-          {/* max-w-[420px] — container de copy mais estreito */}
-          <div className="max-w-[420px] flex flex-col gap-6 md:gap-7">
+          <div className="max-w-[500px] flex flex-col gap-6 md:gap-7">
             <div className="flex flex-col gap-4">
               <Headline>
                 Aprenda a Conseguir seu <GradientText>Benefício por Incapacidade</GradientText>{" "}
@@ -386,16 +414,23 @@ function GuiaPage() {
 
       {/* ── S02 FEATURES ── */}
       <section className="py-14 md:py-16 px-6">
-        <div className="mx-auto max-w-[1280px]">
-          <SectionHeading className="text-center mb-10">
+        <div className="mx-auto max-w-[1100px]">
+          <SectionHeading className="text-center mb-12">
             Com o Guia do benefício por incapacidade, <GradientText>você vai conseguir:</GradientText>
           </SectionHeading>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {FEATURES.map((f) => (
-              <div key={f.title} className="bg-[rgba(26,26,26,0.5)] border border-[#4c4c4c] rounded-[10px] p-6 flex flex-col gap-3">
-                <CardTitle>{f.title}</CardTitle>
-                <div className="h-px w-full bg-[#4c4c4c]" />
-                <Body className="text-[#a2a2a2]">{f.desc}</Body>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-0">
+            {FEATURES.map((f, i) => (
+              <div key={f.title} className="flex gap-5 py-7 border-b border-white/[0.08]">
+                <span
+                  className="text-[40px] font-bold leading-none flex-shrink-0 w-11 text-right mt-0.5 bg-gradient-to-b from-[#cf88ff] to-[#c56eff]/20 bg-clip-text text-transparent"
+                  style={{ fontFamily: FONT }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div className="flex flex-col gap-1.5 flex-1">
+                  <CardTitle>{f.title}</CardTitle>
+                  <Body className="text-[#777]">{f.desc}</Body>
+                </div>
               </div>
             ))}
           </div>
@@ -443,13 +478,14 @@ function GuiaPage() {
       <ModulesSection />
 
       {/* ── S05 PARA QUEM É ── */}
-      <section className="py-14 md:py-16 px-6">
-        <div className="mx-auto max-w-[1280px] flex flex-col lg:flex-row gap-6 lg:gap-8 items-center">
-          {/* 60% da largura para o iPad no desktop */}
-          <div className="w-full lg:w-[60%] flex justify-center">
+      {/* layout sem max-w na seção para a imagem ter espaço real */}
+      <section className="py-14 md:py-16">
+        <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-0">
+          {/* imagem sem limite de max-w — ocupa metade do viewport */}
+          <div className="w-full lg:w-1/2 px-6 lg:pl-[max(24px,calc((100vw-1280px)/2+24px))] lg:pr-0">
             <img src="/guia/ipad-s05.webp" alt="Guia do benefício por incapacidade" loading="lazy" className="w-full h-auto" />
           </div>
-          <div className="flex flex-col gap-7 items-start w-full lg:w-[38%]">
+          <div className="flex flex-col gap-7 items-start w-full lg:w-1/2 px-6 lg:pl-10 lg:pr-[max(24px,calc((100vw-1280px)/2+24px))]">
             <SectionHeading>Para quem é?</SectionHeading>
             <div className="flex flex-col w-full">
               {PARA_QUEM.map((item, i) => (
@@ -466,17 +502,7 @@ function GuiaPage() {
         </div>
       </section>
 
-      {/* ── S06 FAQ ── */}
-      <section className="py-14 md:py-16 px-6">
-        <div className="mx-auto max-w-[1280px] flex flex-col gap-10 items-center">
-          <SectionHeading className="text-center">Perguntas frequentes</SectionHeading>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 w-full">
-            {FAQ.map((item) => <FaqItem key={item.q} q={item.q} a={item.a} />)}
-          </div>
-        </div>
-      </section>
-
-      {/* ── S07 COMPARAÇÃO + PREÇO ── */}
+      {/* ── S07a COMPARAÇÃO ── */}
       <section className="py-14 md:py-16 px-6">
         <div className="mx-auto max-w-[1280px] flex flex-col gap-10">
           <div className="flex flex-col lg:flex-row gap-6 items-start">
@@ -488,7 +514,6 @@ function GuiaPage() {
               <strong className="font-semibold text-white">ou continua travado por erros simples que poderiam ter sido evitados.</strong>
             </Lead>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-[#0f0f0f] border border-[#4c4c4c] rounded-[16px] p-7 flex flex-col gap-4">
               <div className="flex items-center gap-3">
@@ -507,8 +532,12 @@ function GuiaPage() {
               <Body className="text-[#a2a2a2]">Aprender em poucas horas, com quem já trabalhou dentro do INSS, como montar o pedido certo, sem depender de intermediários.</Body>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* preço */}
+      {/* ── S07b PREÇO ── */}
+      <section className="py-14 md:py-16 px-6">
+        <div className="mx-auto max-w-[1280px]">
           <div className="flex flex-col lg:flex-row rounded-[32px] overflow-hidden">
             <div className="flex-1 bg-[#0f0f0f] border border-[#4c4c4c] p-8 lg:p-10 flex flex-col gap-6 lg:rounded-l-[32px] rounded-t-[32px] lg:rounded-tr-none">
               <CardTitle className="!text-[22px] md:!text-[26px] max-w-[320px]">
@@ -533,11 +562,7 @@ function GuiaPage() {
               <p className="text-[#131313] text-[16px] md:text-[18px]" style={{ fontFamily: FONT }}>
                 ou <span className="font-medium text-[18px] md:text-[22px]">R$ 330,00</span> à vista
               </p>
-              <a
-                href={CTA_URL}
-                className="mt-1 w-full max-w-[360px] inline-flex items-center justify-center bg-gradient-to-r from-[#cf88ff] to-[#c56eff] text-[#131313] font-bold uppercase text-[14px] md:text-[15px] rounded-[10px] px-7 py-4 transition-all hover:brightness-110"
-                style={{ fontFamily: FONT }}
-              >
+              <a href={CTA_URL} className="mt-1 w-full max-w-[360px] inline-flex items-center justify-center bg-gradient-to-r from-[#cf88ff] to-[#c56eff] text-[#131313] font-bold uppercase text-[14px] md:text-[15px] rounded-[10px] px-7 py-4 transition-all hover:brightness-110" style={{ fontFamily: FONT }}>
                 Quero meu acesso
               </a>
               <Caption className="text-[#131313]/60 mt-0.5">🔒 Compra segura · Hotmart</Caption>
@@ -549,7 +574,15 @@ function GuiaPage() {
       {/* ── S08 DEPOIMENTOS ── */}
       <TestimonialsSection />
 
-      {/* ── S09 GARANTIA ── */}
+      {/* ── S09 FAQ ── */}
+      <section className="py-14 md:py-16 px-6">
+        <div className="mx-auto max-w-[1280px] flex flex-col gap-10 items-center">
+          <SectionHeading className="text-center">Perguntas frequentes</SectionHeading>
+          <FaqAccordion />
+        </div>
+      </section>
+
+      {/* ── S10 GARANTIA ── */}
       <section className="py-14 md:py-16 px-6">
         <div className="mx-auto max-w-[1280px] flex flex-col md:flex-row gap-8 md:gap-14 items-center justify-center">
           <img src="/guia/garantia.webp" alt="Garantia de 7 dias" loading="lazy" className="w-[220px] md:w-[280px] h-auto flex-shrink-0" />
