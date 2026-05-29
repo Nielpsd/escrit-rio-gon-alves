@@ -289,7 +289,7 @@ export function TeamSection() {
           </h2>
         </header>
 
-        <div className="flex flex-col gap-12">
+        <div className="flex flex-col gap-3 lg:gap-12">
           {rows.map((row, rowIdx) => (
             <AccordionRow
               key={rowIdx}
