@@ -163,7 +163,7 @@ function AccordionRow({
         return (
           <motion.div
             key={member.id}
-            layout
+            layout={!isMobile}
             onMouseEnter={!isMobile ? () => setActiveIndex(globalIndex) : undefined}
             onClick={isMobile ? () => setActiveIndex(activeIndex === globalIndex ? -1 : globalIndex) : undefined}
             className="flex flex-col gap-3 w-full lg:w-auto"
@@ -173,17 +173,16 @@ function AccordionRow({
             style={{ minWidth: 0 }}
           >
             {isMobile ? (
-              <motion.div
-                layout
-                animate={{ backgroundColor: isActive ? "var(--navy)" : "#E8EDF5" }}
-                className="relative w-full overflow-hidden rounded-2xl p-4 cursor-pointer"
+              <div
+                style={{ backgroundColor: isActive ? "var(--navy)" : "#E8EDF5" }}
+                className="relative w-full overflow-hidden rounded-2xl p-4 cursor-pointer transition-colors duration-300"
               >
-                <div className="flex flex-row items-center gap-4">
-                  <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-xl">
+                <div className="flex flex-row items-center gap-3">
+                  <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-xl">
                     <img src={member.photo} alt={member.name} loading="lazy" width={400} height={600} className="h-full w-full object-cover object-top" />
                   </div>
-                  <div className="flex min-w-0 flex-col justify-center">
-                    <p className={`text-sm font-semibold truncate ${isActive ? "text-white" : "text-[var(--navy)]"}`}>{member.name}</p>
+                  <div className="flex min-w-0 flex-1 flex-col justify-center">
+                    <p className={`text-sm font-semibold leading-snug ${isActive ? "text-white" : "text-[var(--navy)]"}`}>{member.name}</p>
                     <p className={`text-xs mt-0.5 ${isActive ? "text-[var(--gold-light)]" : "text-[var(--text-muted)]"}`}>{member.role}</p>
                     <p className={`text-xs mt-0.5 ${isActive ? "text-white/60" : "text-[var(--text-muted)]"}`}>{member.label}</p>
                   </div>
@@ -211,7 +210,7 @@ function AccordionRow({
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </motion.div>
+              </div>
             ) : (
               <>
                 <motion.div
