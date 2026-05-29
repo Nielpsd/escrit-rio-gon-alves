@@ -186,7 +186,7 @@ function AccordionRow({
                     <p className={`text-xs mt-0.5 ${isActive ? "text-[var(--gold-light)]" : "text-[var(--text-muted)]"}`}>{member.role}</p>
                     <p className={`text-xs mt-0.5 ${isActive ? "text-white/60" : "text-[var(--text-muted)]"}`}>{member.label}</p>
                   </div>
-                  <div className={`ml-auto flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border ${isActive ? "border-white/20 bg-white/10" : "border-[var(--border)] bg-white"}`}>
+                  <div className={`ml-auto flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border ${isActive ? "border-white/20 bg-white/10 [&_svg]:text-white" : "border-[var(--border)] bg-white"}`}>
                     {member.badge}
                   </div>
                 </div>
