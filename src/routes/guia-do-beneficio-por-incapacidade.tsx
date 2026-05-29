@@ -108,17 +108,17 @@ const PRICE_ITEMS = [
   "Conhece o que realmente faz o INSS negar ou aprovar",
 ];
 
-/* 9 depoimentos únicos para 3 linhas com boa variação */
+/* 9 depoimentos — cada um com avatar único */
 const TESTIMONIALS = [
   { text: "Nunca imaginei que ia conseguir dar entrada sozinha. Segui o passo a passo e foi aprovado em menos de 20 dias. Economizei mais de R$2.000 que ia gastar com despachante.", name: "Roseli M.", city: "Manaus-AM", avatar: "/guia/avatars/women-1.jpg" },
-  { text: "Já tinha tentado duas vezes antes e sempre errava alguma coisa nos documentos. Com o Guia vi exatamente onde estava errando. Agora tô recebendo meu auxílio.", name: "Francisca L.", city: "Fortaleza-CE", avatar: "/guia/avatars/women-2.jpg" },
+  { text: "Já tinha tentado duas vezes antes e sempre errava nos documentos. Com o Guia vi exatamente onde estava errando. Agora tô recebendo meu auxílio.", name: "Francisca L.", city: "Fortaleza-CE", avatar: "/guia/avatars/women-2.jpg" },
   { text: "Fui muito bem orientado. O Renan explica de um jeito que qualquer pessoa entende. Meu processo foi aprovado direto, sem recurso nenhum.", name: "Carlos R.", city: "Porto Velho-RO", avatar: "/guia/avatars/men-1.jpg" },
   { text: "Tinha medo de mexer no Meu INSS. Com o Guia é como se você tivesse alguém do lado te mostrando cada clique. Consegui fazer tudo pelo celular sem sair de casa.", name: "Marlene S.", city: "Belém-PA", avatar: "/guia/avatars/women-3.jpg" },
-  { text: "Vale cada centavo e mais um pouco. Aprendi o que o INSS realmente analisa na perícia. Fui preparado e saí com o benefício aprovado.", name: "João P.", city: "Cuiabá-MT", avatar: "/guia/avatars/men-2.jpg" },
+  { text: "Vale cada centavo e mais um pouco. Aprendi o que o INSS realmente analisa na perícia. Fui preparado e saí com o benefício aprovado na primeira análise.", name: "João P.", city: "Cuiabá-MT", avatar: "/guia/avatars/men-2.jpg" },
   { text: "Em uma tarde eu já tinha montado meu pedido do jeito certo. Conteúdo direto, sem enrolação. Dois meses depois o dinheiro caiu na conta.", name: "Antônia F.", city: "Teresina-PI", avatar: "/guia/avatars/women-4.jpg" },
-  { text: "Tentei sozinho no INSS três vezes e levei negativa nas três. Com o Guia entendi o que estava faltando. Na quarta tentativa aprovei na primeira análise.", name: "Raimundo A.", city: "São Luís-MA", avatar: "/guia/avatars/men-1.jpg" },
-  { text: "Não tenho estudo mas entendi tudo. Linguagem simples e muito clara. O Dr. Renan realmente sabe o que está ensinando, dá pra sentir a experiência de quem já viveu isso.", name: "Benedita C.", city: "Santarém-PA", avatar: "/guia/avatars/women-2.jpg" },
-  { text: "Minha filha me ajudou a acessar o Guia e eu mesma fiz todo o processo. 63 anos, nunca mexi muito em aplicativo, e consegui. Fico muito grata.", name: "Aparecida R.", city: "Imperatriz-MA", avatar: "/guia/avatars/women-3.jpg" },
+  { text: "Tentei sozinho no INSS três vezes e levei negativa. Com o Guia entendi o que estava faltando. Na quarta tentativa aprovei na primeira análise.", name: "Raimundo A.", city: "São Luís-MA", avatar: "/guia/avatars/men-3.jpg" },
+  { text: "Não tenho estudo mas entendi tudo. Linguagem simples e muito clara. O Dr. Renan sabe o que ensina. Dá pra sentir a experiência de quem viveu isso por dentro.", name: "Benedita C.", city: "Santarém-PA", avatar: "/guia/avatars/women-5.jpg" },
+  { text: "Minha filha me ajudou a acessar o Guia e eu mesma fiz todo o processo. 63 anos, nunca mexi muito em aplicativo, e consegui. Fico muito grata.", name: "Aparecida R.", city: "Imperatriz-MA", avatar: "/guia/avatars/women-6.jpg" },
 ];
 
 /* ── componentes ── */
@@ -263,7 +263,9 @@ function TestimonialsSection() {
 
   useEffect(() => {
     let raf = 0;
-    const SPEED = 0.55; // px horizontal per px vertical scroll (within section)
+    const S1 = 0.75;  // linha 1: esquerda rápida
+    const S2 = 0.75;  // linha 2: direita rápida
+    const S3 = 0.5;   // linha 3: esquerda mais devagar
     const onScroll = () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
@@ -271,11 +273,10 @@ function TestimonialsSection() {
         if (!el) return;
         const rect = el.getBoundingClientRect();
         const vh = window.innerHeight;
-        // entered: 0 when section top hits bottom of screen; grows as user scrolls
         const entered = Math.max(0, vh - rect.top);
-        if (r1.current) r1.current.style.transform = `translate3d(${-entered * SPEED}px,0,0)`;
-        if (r2.current) r2.current.style.transform = `translate3d(${-800 + entered * SPEED}px,0,0)`;
-        if (r3.current) r3.current.style.transform = `translate3d(${-400 - entered * SPEED * 0.7}px,0,0)`;
+        if (r1.current) r1.current.style.transform = `translate3d(${-entered * S1}px,0,0)`;
+        if (r2.current) r2.current.style.transform = `translate3d(${-900 + entered * S2}px,0,0)`;
+        if (r3.current) r3.current.style.transform = `translate3d(${-450 - entered * S3}px,0,0)`;
       });
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -283,10 +284,10 @@ function TestimonialsSection() {
     return () => { window.removeEventListener("scroll", onScroll); cancelAnimationFrame(raf); };
   }, []);
 
-  // 3 rows with different ordering; triple each for infinite feel
-  const row1 = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
-  const row2 = [...TESTIMONIALS.slice(3), ...TESTIMONIALS.slice(0, 3), ...TESTIMONIALS.slice(3), ...TESTIMONIALS.slice(0, 3)];
-  const row3 = [...TESTIMONIALS.slice(6), ...TESTIMONIALS.slice(0, 6), ...TESTIMONIALS.slice(6), ...TESTIMONIALS.slice(0, 6)];
+  // cada linha começa num índice diferente → conteúdo diferente visível
+  const row1 = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
+  const row2 = [...TESTIMONIALS.slice(3), ...TESTIMONIALS.slice(0, 3), ...TESTIMONIALS.slice(3), ...TESTIMONIALS.slice(0, 3), ...TESTIMONIALS.slice(3)];
+  const row3 = [...TESTIMONIALS.slice(6), ...TESTIMONIALS.slice(0, 6), ...TESTIMONIALS.slice(6), ...TESTIMONIALS.slice(0, 6), ...TESTIMONIALS.slice(6)];
 
   return (
     <section ref={ref} className="relative py-16 md:py-20" style={{ overflow: "hidden" }}>
@@ -321,9 +322,23 @@ function TestimonialsSection() {
 
 /* ── página ── */
 function GuiaPage() {
+  useEffect(() => {
+    /* styles.css global define overflow-x:hidden em html+body, o que quebra
+       position:sticky. Enquanto esta página está montada, trocamos para clip
+       (sem scroll container) para o pin de módulos funcionar. */
+    const html = document.documentElement;
+    const body = document.body;
+    const prevHtml = html.style.overflowX;
+    const prevBody = body.style.overflowX;
+    html.style.overflowX = "clip";
+    body.style.overflowX = "clip";
+    return () => {
+      html.style.overflowX = prevHtml;
+      body.style.overflowX = prevBody;
+    };
+  }, []);
+
   return (
-    /* overflow-x-clip em vez de hidden: não cria novo contexto de formatação,
-       permitindo que position:sticky funcione na seção de módulos */
     <div className="bg-[#131313] text-white relative" style={{ fontFamily: FONT, overflowX: "clip" }}>
 
       {/* ── S01 HERO ── */}
@@ -429,12 +444,12 @@ function GuiaPage() {
 
       {/* ── S05 PARA QUEM É ── */}
       <section className="py-14 md:py-16 px-6">
-        <div className="mx-auto max-w-[1280px] flex flex-col lg:flex-row gap-8 lg:gap-10 items-center">
-          {/* imagem maior — flex-[1.3] dá mais espaço ao iPad */}
-          <div className="flex-[1.3] flex justify-center">
-            <img src="/guia/ipad-s05.webp" alt="Guia do benefício por incapacidade" loading="lazy" className="w-full max-w-[720px] h-auto" />
+        <div className="mx-auto max-w-[1280px] flex flex-col lg:flex-row gap-6 lg:gap-8 items-center">
+          {/* 60% da largura para o iPad no desktop */}
+          <div className="w-full lg:w-[60%] flex justify-center">
+            <img src="/guia/ipad-s05.webp" alt="Guia do benefício por incapacidade" loading="lazy" className="w-full h-auto" />
           </div>
-          <div className="flex flex-col gap-7 items-start flex-shrink-0 w-full lg:w-[400px]">
+          <div className="flex flex-col gap-7 items-start w-full lg:w-[38%]">
             <SectionHeading>Para quem é?</SectionHeading>
             <div className="flex flex-col w-full">
               {PARA_QUEM.map((item, i) => (
