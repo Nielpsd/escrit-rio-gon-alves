@@ -1,20 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { X } from "lucide-react";
 import { SITE } from "@/lib/site";
 
 export function UrgencyBar() {
   const [dismissed, setDismissed] = useState(false);
-
-  useEffect(() => {
-    if (localStorage.getItem("urgency-bar-dismissed")) {
-      setDismissed(true);
-    }
-  }, []);
-
-  function dismiss() {
-    setDismissed(true);
-    localStorage.setItem("urgency-bar-dismissed", "1");
-  }
 
   if (dismissed) return null;
 
@@ -33,7 +22,7 @@ export function UrgencyBar() {
         </a>
       </span>
       <button
-        onClick={dismiss}
+        onClick={() => setDismissed(true)}
         aria-label="Fechar aviso"
         className="absolute right-3 top-1/2 -translate-y-1/2 p-1 rounded hover:bg-amber-600/20 transition-colors"
       >
