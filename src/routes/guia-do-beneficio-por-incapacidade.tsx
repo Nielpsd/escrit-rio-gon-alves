@@ -329,41 +329,13 @@ function TCard({ t }: { t: { text: string; name: string; city: string; avatar: s
 }
 
 function TestimonialsSection() {
-  const ref = useRef<HTMLDivElement>(null);
-  const r1 = useRef<HTMLDivElement>(null);
-  const r2 = useRef<HTMLDivElement>(null);
-  const r3 = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let raf = 0;
-    const S = 0.7;
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const el = ref.current;
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        const vh = window.innerHeight;
-        // clamp entered ao tamanho da seção para nunca vazar
-        const entered = Math.min(Math.max(0, vh - rect.top), el.offsetHeight + vh);
-        if (r1.current) r1.current.style.transform = `translate3d(${-entered * S}px,0,0)`;
-        if (r2.current) r2.current.style.transform = `translate3d(${-4800 + entered * S}px,0,0)`;
-        if (r3.current) r3.current.style.transform = `translate3d(${-2400 - entered * (S * 0.65)}px,0,0)`;
-      });
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => { window.removeEventListener("scroll", onScroll); cancelAnimationFrame(raf); };
-  }, []);
-
-  // cada linha tem APENAS seus próprios 6 depoimentos repetidos — zero overlap entre fileiras
-  const mk = (src: typeof T_ROW1, n = 6) => Array.from({ length: n }, () => src).flat();
-  const row1 = mk(T_ROW1);
-  const row2 = mk(T_ROW2);
-  const row3 = mk(T_ROW3);
+  // 2 cópias de cada row para loop seamless (CSS marquee anima -50%)
+  const row1 = [...T_ROW1, ...T_ROW1];
+  const row2 = [...T_ROW2, ...T_ROW2];
+  const row3 = [...T_ROW3, ...T_ROW3];
 
   return (
-    <section ref={ref} className="relative py-24 md:py-32" style={{ overflow: "hidden" }}>
+    <section className="relative py-16 md:py-28" style={{ overflow: "hidden" }}>
       <div className="max-w-[1280px] mx-auto px-6 flex flex-col gap-8 items-center mb-12">
         <div className="flex -space-x-3">
           {[...T_ROW1, ...T_ROW2, ...T_ROW3].slice(0, 6).map((t) => (
@@ -373,20 +345,28 @@ function TestimonialsSection() {
           ))}
         </div>
         <H2 className="text-center max-w-[720px] !font-normal">
-          Quem seguiu o passo a passo já está<br />
+          Quem seguiu<br />
+          o passo a passo já está<br />
           <strong className="font-bold"><Grad>recebendo o benefício</Grad></strong>
         </H2>
       </div>
 
+      {/* CSS marquee puro — GPU-composited, 60fps sem JS */}
       <div className="flex flex-col gap-4">
-        <div ref={r1} className="flex gap-4 w-max px-4 will-change-transform">
-          {row1.map((t, i) => <TCard key={"a" + i} t={t} />)}
+        <div className="overflow-hidden">
+          <div className="flex gap-4 w-max" style={{ animation: "tLeft 38s linear infinite" }}>
+            {row1.map((t, i) => <TCard key={"a" + i} t={t} />)}
+          </div>
         </div>
-        <div ref={r2} className="flex gap-4 w-max px-4 will-change-transform" style={{ transform: "translate3d(-4800px,0,0)" }}>
-          {row2.map((t, i) => <TCard key={"b" + i} t={t} />)}
+        <div className="overflow-hidden">
+          <div className="flex gap-4 w-max" style={{ animation: "tRight 46s linear infinite" }}>
+            {row2.map((t, i) => <TCard key={"b" + i} t={t} />)}
+          </div>
         </div>
-        <div ref={r3} className="flex gap-4 w-max px-4 will-change-transform" style={{ transform: "translate3d(-2400px,0,0)" }}>
-          {row3.map((t, i) => <TCard key={"c" + i} t={t} />)}
+        <div className="overflow-hidden">
+          <div className="flex gap-4 w-max" style={{ animation: "tLeft 32s linear infinite" }}>
+            {row3.map((t, i) => <TCard key={"c" + i} t={t} />)}
+          </div>
         </div>
       </div>
     </section>
@@ -500,10 +480,12 @@ function GuiaPage() {
         .card-glow-pulse  { animation: cardGlow  3s ease-in-out infinite; }
         .badge-glow-pulse { animation: badgeGlow 3s ease-in-out infinite; }
         .check-glow-pulse { animation: checkGlow 2.5s ease-in-out infinite; }
+        @keyframes tLeft  { from { transform: translate3d(0,0,0) }    to { transform: translate3d(-50%,0,0) } }
+        @keyframes tRight { from { transform: translate3d(-50%,0,0) } to { transform: translate3d(0,0,0) } }
       `}</style>
 
       {/* ── HERO ── */}
-      <section className="relative min-h-[500px] md:h-[720px] flex items-center">
+      <section className="relative min-h-[100svh] md:min-h-0 md:h-[720px] flex items-center">
         <picture className="absolute inset-0 w-full h-full pointer-events-none select-none" aria-hidden>
           <source media="(max-width: 767px)" srcSet="/guia/hero-bg-mobile.webp" />
           <img src="/guia/hero-bg.webp" alt="" fetchPriority="high" loading="eager" className="absolute inset-0 w-full h-full object-cover object-[70%_center] md:object-center" />
@@ -514,8 +496,11 @@ function GuiaPage() {
             <div className="flex flex-col gap-4">
               <motion.div {...fadeUp(0)}>
                 <H1>
-                  Aprenda a Conseguir seu <Grad>Benefício por Incapacidade</Grad>{" "}
-                  Sem Ficar Dependente de Intermediários ou Algum Advogado.
+                  Aprenda a<br className="md:hidden" />
+                  {" "}Conseguir seu <Grad>Benefício<br className="md:hidden" />{" "}por Incapacidade</Grad> Sem<br className="md:hidden" />
+                  {" "}Ficar Dependente de<br className="md:hidden" />
+                  {" "}Intermediários ou<br className="md:hidden" />
+                  {" "}Algum Advogado.
                 </H1>
               </motion.div>
               <motion.div {...fadeUp(0.15)}>
@@ -641,7 +626,7 @@ function GuiaPage() {
       {/* ── PARA QUEM É ── */}
       {/* overflow:clip no section evita scrollbar horizontal sem cortar a sombra do iPad */}
       <section className="py-16 md:py-28" style={{ overflow: "clip" }}>
-        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-0">
+        <div className="flex flex-col lg:flex-row items-center gap-14 lg:gap-0">
           <div className="w-full lg:w-1/2 h-[260px] sm:h-[380px] lg:h-[620px]">
             <img
               src="/guia/ipad.webp"
