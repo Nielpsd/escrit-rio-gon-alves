@@ -592,7 +592,7 @@ function GuiaPage() {
             {...slideLeft(0)}
             whileHover={{ scale: 1.02, filter: "drop-shadow(0px 12px 60px rgba(0,0,0,0.7))", transition: { duration: 0.3 } }}
           />
-          <motion.div className="flex flex-col gap-6 max-w-[500px]" {...slideRight(0.1)}>
+          <motion.div className="flex flex-col gap-6 flex-1 min-w-0" {...slideRight(0.1)}>
             <H2>Quem vai te ensinar é quem já esteve <Grad>do outro lado do balcão.</Grad></H2>
             <div className="space-y-3">
               <motion.div {...fadeUp(0.2)}>
