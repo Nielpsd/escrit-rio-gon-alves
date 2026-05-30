@@ -464,7 +464,12 @@ function GuiaPage() {
     const [pH, pB] = [html.style.overflowX, body.style.overflowX];
     html.style.overflowX = "clip";
     body.style.overflowX = "clip";
-    return () => { html.style.overflowX = pH; body.style.overflowX = pB; };
+    body.classList.add("guia-page");
+    return () => {
+      html.style.overflowX = pH;
+      body.style.overflowX = pB;
+      body.classList.remove("guia-page");
+    };
   }, []);
 
   return (
@@ -487,6 +492,18 @@ function GuiaPage() {
         .check-glow-pulse { animation: checkGlow 2.5s ease-in-out infinite; }
         @keyframes tLeft  { from { transform: translate3d(0,0,0) }    to { transform: translate3d(-50%,0,0) } }
         @keyframes tRight { from { transform: translate3d(-50%,0,0) } to { transform: translate3d(0,0,0) } }
+        body.guia-page .back-to-top {
+          background: linear-gradient(135deg, #cf88ff, #c56eff) !important;
+          border-color: transparent !important;
+          color: #131313 !important;
+          box-shadow: 0 0 20px rgba(197,110,255,0.45) !important;
+        }
+        body.guia-page .back-to-top:hover {
+          background: linear-gradient(135deg, #d99fff, #d080ff) !important;
+          border-color: transparent !important;
+          color: #131313 !important;
+          box-shadow: 0 0 30px rgba(197,110,255,0.65) !important;
+        }
       `}</style>
 
       {/* ── HERO ── */}
