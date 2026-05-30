@@ -19,7 +19,11 @@ export const Route = createFileRoute("/guia-do-beneficio-por-incapacidade")({
 
 const CTA_URL = "#comprar";
 const F = "'Space Grotesk', system-ui, sans-serif";
-const SEC = "py-24 md:py-40 px-6"; // espaçamento padrão entre seções
+const SEC = "relative py-24 md:py-40 px-6"; // espaçamento padrão entre seções
+/* ── glow decorativo reutilizável ── */
+const Glow = ({ className = "" }: { className?: string }) => (
+  <div className={`absolute rounded-full pointer-events-none select-none ${className}`} aria-hidden />
+);
 
 /* ── helpers de animação ── */
 const fadeUp = (delay = 0) => ({
@@ -336,6 +340,7 @@ function TestimonialsSection() {
 
   return (
     <section className="relative py-24 md:py-40" style={{ overflow: "hidden" }}>
+      <Glow className="w-[600px] h-[250px] bg-[#cf88ff]/12 blur-[140px] top-0 left-1/2 -translate-x-1/2" />
       <div className="max-w-[1280px] mx-auto px-6 flex flex-col gap-8 items-center mb-12">
         <div className="flex -space-x-3">
           {[...T_ROW1, ...T_ROW2, ...T_ROW3].slice(0, 6).map((t) => (
@@ -491,6 +496,8 @@ function GuiaPage() {
           <img src="/guia/hero-bg.webp" alt="" fetchPriority="high" loading="eager" className="absolute inset-0 w-full h-full object-cover object-top md:object-center" />
         </picture>
 
+        <Glow className="w-[600px] h-[600px] bg-[#cf88ff]/25 blur-[180px] bottom-0 left-0" />
+
         <div className="relative mx-auto max-w-[1280px] px-6 w-full">
           <div className="max-w-[500px] flex flex-col gap-6 md:gap-7">
             <div className="flex flex-col gap-4">
@@ -545,6 +552,7 @@ function GuiaPage() {
 
       {/* ── FEATURES — grid com divisórias ── */}
       <section className={SEC}>
+        <Glow className="w-[700px] h-[300px] bg-[#cf88ff]/12 blur-[140px] -top-10 left-1/2 -translate-x-1/2" />
         <div className="mx-auto max-w-[1100px]">
           <motion.div {...fadeUp(0)}>
             <H2 className="text-center mb-12">
@@ -582,6 +590,7 @@ function GuiaPage() {
 
       {/* ── INSTRUTOR ── */}
       <section className={SEC}>
+        <Glow className="w-[550px] h-[550px] bg-[#cf88ff]/18 blur-[160px] top-1/2 -translate-y-1/2 -left-32" />
         <div className="mx-auto max-w-[1280px] flex flex-col lg:flex-row gap-10 lg:gap-14 items-center">
           <motion.img
             src="/guia/renan03.webp"
@@ -625,7 +634,8 @@ function GuiaPage() {
 
       {/* ── PARA QUEM É ── */}
       {/* overflow:clip no section evita scrollbar horizontal sem cortar a sombra do iPad */}
-      <section className="py-24 md:py-40" style={{ overflow: "clip" }}>
+      <section className="relative py-24 md:py-40" style={{ overflow: "clip" }}>
+        <Glow className="w-[500px] h-[500px] bg-[#cf88ff]/22 blur-[130px] top-1/2 -translate-y-1/2 left-[10%]" />
         <div className="flex flex-col lg:flex-row items-center gap-24 lg:gap-0">
           <div className="w-full lg:w-1/2 h-[260px] sm:h-[380px] lg:h-[620px]">
             <img
@@ -667,6 +677,7 @@ function GuiaPage() {
 
       {/* ── COMPARAÇÃO ── */}
       <section className={SEC}>
+        <Glow className="w-[500px] h-[500px] bg-[#cf88ff]/16 blur-[150px] top-1/2 -translate-y-1/2 right-0" />
         <div className="mx-auto max-w-[1280px] flex flex-col gap-10">
           <div className="flex flex-col lg:flex-row gap-6 items-start">
             <motion.div className="flex-1" {...fadeUp(0)}>
@@ -724,6 +735,7 @@ function GuiaPage() {
 
       {/* ── PREÇO ── */}
       <section className={SEC}>
+        <Glow className="w-[600px] h-[280px] bg-[#cf88ff]/14 blur-[130px] -top-8 left-1/2 -translate-x-1/2" />
         <div className="mx-auto max-w-[1280px]">
           <motion.div
             className="flex flex-col lg:flex-row rounded-[32px] overflow-hidden"
@@ -800,6 +812,7 @@ function GuiaPage() {
 
       {/* ── GARANTIA ── */}
       <section className={SEC}>
+        <Glow className="w-[420px] h-[420px] bg-[#cf88ff]/20 blur-[130px] top-1/2 -translate-y-1/2 left-[15%]" />
         <div className="mx-auto max-w-[1280px] flex flex-col md:flex-row gap-8 md:gap-14 items-center justify-center">
           <motion.div {...slideLeft(0)} whileHover={{ scale: 1.05, transition: { duration: 0.3 } }}>
             <GarantiaBadge />
