@@ -18,6 +18,7 @@ import { Route as QueroMeAposentarRouteImport } from './routes/quero-me-aposenta
 import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LinksRouteImport } from './routes/links'
+import { Route as LaudoCertoRouteImport } from './routes/laudo-certo'
 import { Route as GuiaDoBeneficioPorIncapacidadeRouteImport } from './routes/guia-do-beneficio-por-incapacidade'
 import { Route as EquipeRouteImport } from './routes/equipe'
 import { Route as ContatoRouteImport } from './routes/contato'
@@ -80,6 +81,11 @@ const LoginRoute = LoginRouteImport.update({
 const LinksRoute = LinksRouteImport.update({
   id: '/links',
   path: '/links',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LaudoCertoRoute = LaudoCertoRouteImport.update({
+  id: '/laudo-certo',
+  path: '/laudo-certo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuiaDoBeneficioPorIncapacidadeRoute =
@@ -194,6 +200,7 @@ export interface FileRoutesByFullPath {
   '/contato': typeof ContatoRoute
   '/equipe': typeof EquipeRoute
   '/guia-do-beneficio-por-incapacidade': typeof GuiaDoBeneficioPorIncapacidadeRoute
+  '/laudo-certo': typeof LaudoCertoRoute
   '/links': typeof LinksRoute
   '/login': typeof LoginRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
@@ -221,6 +228,7 @@ export interface FileRoutesByTo {
   '/contato': typeof ContatoRoute
   '/equipe': typeof EquipeRoute
   '/guia-do-beneficio-por-incapacidade': typeof GuiaDoBeneficioPorIncapacidadeRoute
+  '/laudo-certo': typeof LaudoCertoRoute
   '/links': typeof LinksRoute
   '/login': typeof LoginRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
@@ -251,6 +259,7 @@ export interface FileRoutesById {
   '/contato': typeof ContatoRoute
   '/equipe': typeof EquipeRoute
   '/guia-do-beneficio-por-incapacidade': typeof GuiaDoBeneficioPorIncapacidadeRoute
+  '/laudo-certo': typeof LaudoCertoRoute
   '/links': typeof LinksRoute
   '/login': typeof LoginRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
@@ -282,6 +291,7 @@ export interface FileRouteTypes {
     | '/contato'
     | '/equipe'
     | '/guia-do-beneficio-por-incapacidade'
+    | '/laudo-certo'
     | '/links'
     | '/login'
     | '/politica-de-privacidade'
@@ -309,6 +319,7 @@ export interface FileRouteTypes {
     | '/contato'
     | '/equipe'
     | '/guia-do-beneficio-por-incapacidade'
+    | '/laudo-certo'
     | '/links'
     | '/login'
     | '/politica-de-privacidade'
@@ -338,6 +349,7 @@ export interface FileRouteTypes {
     | '/contato'
     | '/equipe'
     | '/guia-do-beneficio-por-incapacidade'
+    | '/laudo-certo'
     | '/links'
     | '/login'
     | '/politica-de-privacidade'
@@ -368,6 +380,7 @@ export interface RootRouteChildren {
   ContatoRoute: typeof ContatoRoute
   EquipeRoute: typeof EquipeRoute
   GuiaDoBeneficioPorIncapacidadeRoute: typeof GuiaDoBeneficioPorIncapacidadeRoute
+  LaudoCertoRoute: typeof LaudoCertoRoute
   LinksRoute: typeof LinksRoute
   LoginRoute: typeof LoginRoute
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
@@ -442,6 +455,13 @@ declare module '@tanstack/react-router' {
       path: '/links'
       fullPath: '/links'
       preLoaderRoute: typeof LinksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/laudo-certo': {
+      id: '/laudo-certo'
+      path: '/laudo-certo'
+      fullPath: '/laudo-certo'
+      preLoaderRoute: typeof LaudoCertoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guia-do-beneficio-por-incapacidade': {
@@ -617,6 +637,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContatoRoute: ContatoRoute,
   EquipeRoute: EquipeRoute,
   GuiaDoBeneficioPorIncapacidadeRoute: GuiaDoBeneficioPorIncapacidadeRoute,
+  LaudoCertoRoute: LaudoCertoRoute,
   LinksRoute: LinksRoute,
   LoginRoute: LoginRoute,
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
