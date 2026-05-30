@@ -39,20 +39,21 @@ const GradText = ({ children, className = "" }: { children: React.ReactNode; cla
   <span className={`bg-gradient-to-r from-[#5389ff] to-[#295ccc] bg-clip-text text-transparent ${className}`}>{children}</span>
 );
 
+/* Curvas assimétricas tipo S — dois pontos de inflexão, mais orgânicas */
 function WaveBottom({ fill = BG }: { fill?: string }) {
   return (
-    <svg viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden
-      className="absolute bottom-0 left-0 w-full h-[64px] z-10 pointer-events-none">
-      <path d="M0,64 L0,32 C360,0 1080,0 1440,32 L1440,64 Z" fill={fill} />
+    <svg viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden
+      className="absolute bottom-0 left-0 w-full h-[72px] z-10 pointer-events-none">
+      <path d="M0,72 L0,38 C200,4 480,62 720,28 C960,-6 1220,52 1440,22 L1440,72 Z" fill={fill} />
     </svg>
   );
 }
 
 function WaveTop({ fill = BG }: { fill?: string }) {
   return (
-    <svg viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden
-      className="absolute top-0 left-0 w-full h-[64px] z-10 pointer-events-none">
-      <path d="M0,0 L0,32 C360,64 1080,64 1440,32 L1440,0 Z" fill={fill} />
+    <svg viewBox="0 0 1440 72" preserveAspectRatio="none" aria-hidden
+      className="absolute top-0 left-0 w-full h-[72px] z-10 pointer-events-none">
+      <path d="M0,0 L0,22 C200,52 480,6 720,40 C960,72 1220,18 1440,50 L1440,0 Z" fill={fill} />
     </svg>
   );
 }
@@ -131,13 +132,17 @@ function LaudoCertoPage() {
 
         <div className="relative mx-auto max-w-[1280px] px-6 w-full flex flex-col items-center text-center gap-7 z-10">
           <motion.h1 {...up(0)}
-            className="text-[38px] md:text-[64px] lg:text-[76px] font-bold leading-[1.1] text-white max-w-[860px]"
+            className="text-[38px] md:text-[64px] lg:text-[76px] font-bold leading-[1.15] text-white max-w-[820px]"
             style={{ fontFamily: F }}>
-            O laudo certo para o seu cliente conquistar o benefício com{" "}
-            <em className="not-italic font-bold italic"
-              style={{ background: "linear-gradient(90deg,#b8d0ff,#dce9ff)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-              segurança
-            </em>
+            O laudo certo para o seu<br className="hidden md:block" />
+            cliente conquistar o benefício com{" "}
+            {/* "segurança" em fundo branco — igual ao Figma */}
+            <span className="relative inline-block">
+              <span className="relative z-10 font-bold italic bg-gradient-to-r from-[#5389ff] to-[#295ccc] bg-clip-text text-transparent px-2">
+                segurança
+              </span>
+              <span className="absolute inset-0 -mx-1 rounded-[8px] bg-white z-0" aria-hidden />
+            </span>
           </motion.h1>
 
           <motion.p {...up(0.1)}
@@ -176,16 +181,17 @@ function LaudoCertoPage() {
       <section id="como" className="relative py-20 md:py-28 px-6" style={{ background: BG }}>
         <div className="mx-auto max-w-[1280px] flex flex-col gap-14 items-center">
           <motion.h2 {...up(0)}
-            className="text-[34px] md:text-[54px] font-light text-center leading-[1.15]"
+            className="text-[34px] md:text-[54px] font-light text-center leading-[1.2]"
             style={{ fontFamily: F, color: DARK }}>
-            Solicitar seu laudo é simples, direto e{" "}
+            Solicitar seu laudo é<br />
+            simples, direto e{" "}
             <strong className="font-bold italic">
               <GradText>100% digital</GradText>
             </strong>
           </motion.h2>
 
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full"
+            className="grid grid-cols-1 md:grid-cols-3 gap-5 w-full"
             variants={stagger} initial="hidden"
             whileInView="show" viewport={{ once: true, margin: "-50px" }}>
             {[
@@ -194,16 +200,19 @@ function LaudoCertoPage() {
               { n: "03", title: "Emissão do laudo sob medida", desc: "Com os termos corretos para o caso, sempre dentro das normas do CFM" },
             ].map((s) => (
               <motion.div key={s.n} variants={item}
-                className="relative border-2 border-[#5389ff]/70 rounded-[22px] pt-14 pb-8 px-6
-                  flex flex-col items-center text-center gap-3 bg-white shadow-sm"
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}>
-                <div className="absolute -top-7 left-1/2 -translate-x-1/2 w-14 h-14 rounded-full
-                  bg-gradient-to-br from-[#5389ff] to-[#295ccc] flex items-center justify-center
-                  shadow-[0_4px_18px_rgba(83,137,255,0.45)]">
-                  <span className="text-white font-bold text-[18px]">{s.n}</span>
+                className="relative flex flex-col items-center text-center bg-white rounded-[24px] overflow-hidden
+                  shadow-[0_4px_28px_rgba(83,137,255,0.12)] border border-[#5389ff]/15"
+                whileHover={{ y: -6, boxShadow: "0 8px 40px rgba(83,137,255,0.22)", transition: { duration: 0.2 } }}>
+                {/* Topo gradiente com número */}
+                <div className="w-full bg-gradient-to-r from-[#5389ff] to-[#295ccc] py-8 flex flex-col items-center gap-2">
+                  <span className="text-white/60 text-[11px] font-bold tracking-[0.2em] uppercase" style={{ fontFamily: F }}>Etapa</span>
+                  <span className="text-white font-bold text-[44px] leading-none" style={{ fontFamily: F }}>{s.n}</span>
                 </div>
-                <p className="font-bold text-[18px] leading-snug" style={{ color: DARK, fontFamily: F }}>{s.title}</p>
-                <p className="font-light text-[15px] leading-relaxed text-[rgba(26,34,56,0.55)]" style={{ fontFamily: F }}>{s.desc}</p>
+                {/* Conteúdo */}
+                <div className="px-7 py-6 flex flex-col gap-2">
+                  <p className="font-bold text-[18px] leading-snug" style={{ color: DARK, fontFamily: F }}>{s.title}</p>
+                  <p className="font-light text-[15px] leading-relaxed text-[rgba(26,34,56,0.5)]" style={{ fontFamily: F }}>{s.desc}</p>
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -230,45 +239,50 @@ function LaudoCertoPage() {
             <strong className="font-bold italic"><GradText>caber na sua tese</GradText></strong>
           </motion.h2>
 
-          {/* Box azul — grid 3×2 */}
+          {/* Box azul — grid 3×2 com cantos bem arredondados */}
           <motion.div {...up(0.1)}
-            className="w-full rounded-[32px] bg-gradient-to-r from-[#5389ff] to-[#295ccc]
-              shadow-[0_8px_40px_rgba(83,137,255,0.3)] overflow-hidden">
-            <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/20">
-              {/* Coluna esquerda — card branco "Você já passou por isso" abrangendo 2 linhas */}
-              <div className="bg-white/95 p-8 flex items-center justify-start md:row-span-2 min-h-[120px]">
-                <p className="font-bold text-[24px] leading-snug" style={{ color: DARK, fontFamily: F }}>
-                  Você já passou<br />por isso:
+            className="w-full rounded-[48px] bg-gradient-to-r from-[#5389ff] to-[#295ccc]
+              shadow-[0_10px_48px_rgba(83,137,255,0.35)] overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-3">
+              {/* [0,0] Card branco "Você já passou por isso" */}
+              <div className="bg-white m-4 md:m-5 rounded-[28px] p-7 flex flex-col justify-center shadow-sm md:row-span-2">
+                <p className="font-bold text-[26px] leading-snug" style={{ color: DARK, fontFamily: F }}>
+                  Você já<br />passou<br />por isso:
                 </p>
               </div>
 
               {/* Linha 1: dores 1 e 2 */}
               {PAINS.slice(0, 2).map((pain) => (
-                <div key={pain}
-                  className="flex gap-3 items-start px-6 py-6 border-b border-white/20">
-                  <div className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <span className="text-white font-bold text-[13px]">✕</span>
+                <div key={pain} className="flex gap-3 items-start px-7 py-5 border-b border-white/15">
+                  <div className="w-6 h-6 rounded-full bg-white/25 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <svg viewBox="0 0 10 10" width="10" height="10" aria-hidden><path d="M2 2L8 8M8 2L2 8" stroke="white" strokeWidth="1.8" strokeLinecap="round"/></svg>
                   </div>
-                  <p className="text-white font-bold text-[16px] leading-snug" style={{ fontFamily: F }}>{pain}</p>
+                  <p className="text-white font-bold text-[15px] leading-snug" style={{ fontFamily: F }}>{pain}</p>
                 </div>
               ))}
 
-              {/* Linha 2: dores 3, 4 e 5 */}
+              {/* Linha 2: dores 3, 4 e 5 — coluna 2 e 3, mas dor 3 vai para col 1 */}
               {PAINS.slice(2).map((pain) => (
-                <div key={pain}
-                  className="flex gap-3 items-start px-6 py-6 border-b md:border-b-0 border-white/20 last:border-0">
-                  <div className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <span className="text-white font-bold text-[13px]">✕</span>
+                <div key={pain} className="flex gap-3 items-start px-7 py-5 border-b border-white/15 last:border-0">
+                  <div className="w-6 h-6 rounded-full bg-white/25 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <svg viewBox="0 0 10 10" width="10" height="10" aria-hidden><path d="M2 2L8 8M8 2L2 8" stroke="white" strokeWidth="1.8" strokeLinecap="round"/></svg>
                   </div>
-                  <p className="text-white font-bold text-[16px] leading-snug" style={{ fontFamily: F }}>{pain}</p>
+                  <p className="text-white font-bold text-[15px] leading-snug" style={{ fontFamily: F }}>{pain}</p>
                 </div>
               ))}
             </div>
           </motion.div>
 
-          <motion.p {...up(0.2)} className="text-[rgba(26,34,56,0.5)] text-[15px] text-center" style={{ fontFamily: F }}>
-            ⚠️ Na Laudo Certo, o laudo não é apenas médico. É jurídico
-          </motion.p>
+          {/* Aviso com ícone SVG azul */}
+          <motion.div {...up(0.2)} className="flex items-center gap-2">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <path d="M12 2L2 20h20L12 2z" stroke="#5389ff" strokeWidth="2" strokeLinejoin="round"/>
+              <path d="M12 9v5M12 16.5v.5" stroke="#5389ff" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+            <p className="text-[#5389ff] font-semibold text-[15px]" style={{ fontFamily: F }}>
+              Na Laudo Certo, o laudo não é apenas médico. É jurídico
+            </p>
+          </motion.div>
         </div>
       </section>
 
@@ -380,16 +394,14 @@ function LaudoCertoPage() {
                 <Btn white sm>Solicitar avaliação para emissão do laudo</Btn>
               </div>
 
-              {/* Mockups */}
+              {/* Mockups — drop-shadow direto nas imagens, sem wrapper com bg */}
               <div className="relative flex-shrink-0 w-full lg:w-[520px] flex items-end justify-center">
                 <img src="/laudo-certo/macbook.webp" alt="Laudo Certo no MacBook" loading="lazy"
-                  className="w-full max-w-[480px] h-auto rounded-lg
-                    shadow-[0_20px_60px_rgba(0,0,0,0.35)] relative z-10" />
-                <div className="absolute left-4 bottom-0 z-20 -rotate-6">
-                  <img src="/laudo-certo/iphone.webp" alt="Laudo Certo no iPhone" loading="lazy"
-                    className="w-[90px] md:w-[110px] h-auto rounded-xl
-                      shadow-[0_16px_36px_rgba(0,0,0,0.45)]" />
-                </div>
+                  className="w-full max-w-[480px] h-auto relative z-10"
+                  style={{ filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.4))" }} />
+                <img src="/laudo-certo/iphone.webp" alt="Laudo Certo no iPhone" loading="lazy"
+                  className="absolute left-4 bottom-0 z-20 w-[90px] md:w-[110px] h-auto -rotate-6"
+                  style={{ filter: "drop-shadow(0 16px 28px rgba(0,0,0,0.5))" }} />
               </div>
             </div>
           </motion.div>
@@ -399,10 +411,14 @@ function LaudoCertoPage() {
       {/* ── S07 QUEM ESTÁ POR TRÁS ── */}
       <section id="quem-somos" className="relative py-16 md:py-24 px-6" style={{ background: BG }}>
         <div className="mx-auto max-w-[1280px] flex flex-col lg:flex-row gap-12 items-center">
-          <motion.div className="flex-shrink-0 w-full lg:w-[420px]" {...up(0)}>
-            <img src="/guia/renan03.webp" alt="Dr. Renan Gonçalves" loading="lazy"
-              className="w-full h-auto rounded-[20px] shadow-[0_10px_50px_rgba(83,137,255,0.18)]" />
-          </motion.div>
+          <motion.img
+            src="/guia/renan03.webp"
+            alt="Dr. Renan Gonçalves"
+            loading="lazy"
+            className="flex-shrink-0 w-full lg:w-[420px] h-auto rounded-[20px]"
+            style={{ filter: "drop-shadow(0 12px 40px rgba(83,137,255,0.22))" }}
+            {...up(0)}
+          />
 
           <motion.div className="flex flex-col gap-6 flex-1 min-w-0" {...up(0.1)}>
             <div style={{ fontFamily: F }}>
