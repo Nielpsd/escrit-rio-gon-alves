@@ -101,14 +101,14 @@ const FEATURES = [
 ];
 
 const MODULES = [
-  { num: "01", title: "Entenda se você tem direito", img: "/guia/mod01.webp" },
-  { num: "02", title: "Carência, qualidade e incapacidade", img: "/guia/mod02.webp" },
-  { num: "03", title: "Documentos e laudos corretos", img: "/guia/mod03.webp" },
-  { num: "04", title: "Como enviar tudo no Meu INSS", img: "/guia/mod04.webp" },
-  { num: "05", title: "O que fazer na perícia médica", img: "/guia/mod05.webp" },
-  { num: "06", title: "Como pedir prorrogação", img: "/guia/mod06.webp" },
-  { num: "07", title: "Tipos de benefício e diferenças", img: "/guia/mod07.webp" },
-  { num: "08", title: "Reabilitação profissional", img: "/guia/mod08.webp" },
+  { num: "01", title: "Entenda se você tem direito", img: "/guia/mod01.webp?v=2" },
+  { num: "02", title: "Carência, qualidade e incapacidade", img: "/guia/mod02.webp?v=2" },
+  { num: "03", title: "Documentos e laudos corretos", img: "/guia/mod03.webp?v=2" },
+  { num: "04", title: "Como enviar tudo no Meu INSS", img: "/guia/mod04.webp?v=2" },
+  { num: "05", title: "O que fazer na perícia médica", img: "/guia/mod05.webp?v=2" },
+  { num: "06", title: "Como pedir prorrogação", img: "/guia/mod06.webp?v=2" },
+  { num: "07", title: "Tipos de benefício e diferenças", img: "/guia/mod07.webp?v=2" },
+  { num: "08", title: "Reabilitação profissional", img: "/guia/mod08.webp?v=2" },
 ];
 
 const PARA_QUEM = [
