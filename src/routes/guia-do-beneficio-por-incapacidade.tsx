@@ -176,7 +176,7 @@ function ModuleCard({ mod }: { mod: (typeof MODULES)[0] }) {
       className="relative h-[400px] w-[270px] flex-shrink-0 rounded-[10px] overflow-hidden bg-[#1a1a1a] cursor-pointer"
       whileHover={{ y: -10, scale: 1.03, transition: { duration: 0.25 } }}
     >
-      <img src={mod.img} alt={mod.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+      <img src={mod.img} alt={mod.title} loading="eager" decoding="async" className="absolute inset-0 w-full h-full object-cover" />
       <div className="absolute inset-0 bg-gradient-to-t from-[#131313] via-[#131313]/40 to-transparent" />
       <div className="absolute bottom-7 left-0 right-0 px-4 flex flex-col gap-2 items-center text-center">
         <span className="bg-gradient-to-r from-[#cf88ff] to-[#c56eff] text-[#131313] font-medium text-[12px] px-4 py-1 rounded-[6px]" style={{ fontFamily: F }}>
