@@ -19,7 +19,7 @@ export const Route = createFileRoute("/guia-do-beneficio-por-incapacidade")({
 
 const CTA_URL = "#comprar";
 const F = "'Space Grotesk', system-ui, sans-serif";
-const SEC = "py-16 md:py-28 px-6"; // espaçamento padrão entre seções
+const SEC = "py-24 md:py-28 px-6"; // espaçamento padrão entre seções
 
 /* ── helpers de animação ── */
 const fadeUp = (delay = 0) => ({
@@ -335,7 +335,7 @@ function TestimonialsSection() {
   const row3 = [...T_ROW3, ...T_ROW3];
 
   return (
-    <section className="relative py-16 md:py-28" style={{ overflow: "hidden" }}>
+    <section className="relative py-24 md:py-28" style={{ overflow: "hidden" }}>
       <div className="max-w-[1280px] mx-auto px-6 flex flex-col gap-8 items-center mb-12">
         <div className="flex -space-x-3">
           {[...T_ROW1, ...T_ROW2, ...T_ROW3].slice(0, 6).map((t) => (
@@ -485,7 +485,7 @@ function GuiaPage() {
       `}</style>
 
       {/* ── HERO ── */}
-      <section className="relative min-h-[140svh] md:min-h-0 md:h-[720px] flex items-center">
+      <section className="relative min-h-[140svh] md:min-h-0 md:h-[720px] flex items-end md:items-center pb-12 md:pb-0">
         <picture className="absolute inset-0 w-full h-full pointer-events-none select-none" aria-hidden>
           <source media="(max-width: 767px)" srcSet="/guia/hero-bg-mobile.webp" />
           <img src="/guia/hero-bg.webp" alt="" fetchPriority="high" loading="eager" className="absolute inset-0 w-full h-full object-cover object-top md:object-center" />
@@ -625,7 +625,7 @@ function GuiaPage() {
 
       {/* ── PARA QUEM É ── */}
       {/* overflow:clip no section evita scrollbar horizontal sem cortar a sombra do iPad */}
-      <section className="py-16 md:py-28" style={{ overflow: "clip" }}>
+      <section className="py-24 md:py-28" style={{ overflow: "clip" }}>
         <div className="flex flex-col lg:flex-row items-center gap-24 lg:gap-0">
           <div className="w-full lg:w-1/2 h-[260px] sm:h-[380px] lg:h-[620px]">
             <img
