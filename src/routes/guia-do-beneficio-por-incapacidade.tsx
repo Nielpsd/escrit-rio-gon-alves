@@ -485,10 +485,10 @@ function GuiaPage() {
       `}</style>
 
       {/* ── HERO ── */}
-      <section className="relative min-h-[100svh] md:min-h-0 md:h-[720px] flex items-center">
+      <section className="relative min-h-[140svh] md:min-h-0 md:h-[720px] flex items-center">
         <picture className="absolute inset-0 w-full h-full pointer-events-none select-none" aria-hidden>
           <source media="(max-width: 767px)" srcSet="/guia/hero-bg-mobile.webp" />
-          <img src="/guia/hero-bg.webp" alt="" fetchPriority="high" loading="eager" className="absolute inset-0 w-full h-full object-cover object-[70%_center] md:object-center" />
+          <img src="/guia/hero-bg.webp" alt="" fetchPriority="high" loading="eager" className="absolute inset-0 w-full h-full object-cover object-top md:object-center" />
         </picture>
 
         <div className="relative mx-auto max-w-[1280px] px-6 w-full">
@@ -626,7 +626,7 @@ function GuiaPage() {
       {/* ── PARA QUEM É ── */}
       {/* overflow:clip no section evita scrollbar horizontal sem cortar a sombra do iPad */}
       <section className="py-16 md:py-28" style={{ overflow: "clip" }}>
-        <div className="flex flex-col lg:flex-row items-center gap-14 lg:gap-0">
+        <div className="flex flex-col lg:flex-row items-center gap-24 lg:gap-0">
           <div className="w-full lg:w-1/2 h-[260px] sm:h-[380px] lg:h-[620px]">
             <img
               src="/guia/ipad.webp"
