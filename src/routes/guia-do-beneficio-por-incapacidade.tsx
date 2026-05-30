@@ -806,7 +806,7 @@ function GuiaPage() {
           </motion.div>
           <motion.div className="flex flex-col gap-5 items-center md:items-start text-center md:text-left" {...slideRight(0.1)}>
             <h2 className="text-[24px] md:text-[28px] font-medium text-white max-w-[340px] leading-[1.25]" style={{ fontFamily: F }}>
-              Garantia de 7 Dias Sem Risco Pra Você
+              Garantia de 7 Dias<br className="md:hidden" /> Sem Risco Pra Você
             </h2>
             <Lead className="text-white/75 max-w-[400px]">Se você não gostar, devolvo 100% do seu dinheiro sem perguntas.</Lead>
             <motion.div className="w-fit" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
