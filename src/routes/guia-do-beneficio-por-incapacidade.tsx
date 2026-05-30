@@ -22,7 +22,7 @@ const F = "'Space Grotesk', system-ui, sans-serif";
 const SEC = "relative py-24 md:py-40 px-6"; // espaçamento padrão entre seções
 /* ── glow decorativo reutilizável ── */
 const Glow = ({ className = "" }: { className?: string }) => (
-  <div className={`absolute rounded-full pointer-events-none select-none ${className}`} aria-hidden />
+  <div className={`absolute rounded-full pointer-events-none select-none z-[1] ${className}`} aria-hidden />
 );
 
 /* ── helpers de animação ── */
@@ -496,8 +496,6 @@ function GuiaPage() {
           <img src="/guia/hero-bg.webp" alt="" fetchPriority="high" loading="eager" className="absolute inset-0 w-full h-full object-cover object-top md:object-center" />
         </picture>
 
-        <Glow className="w-[600px] h-[600px] bg-[#cf88ff]/25 blur-[180px] bottom-0 left-0" />
-
         <div className="relative mx-auto max-w-[1280px] px-6 w-full">
           <div className="max-w-[500px] flex flex-col gap-6 md:gap-7">
             <div className="flex flex-col gap-4">
@@ -552,7 +550,6 @@ function GuiaPage() {
 
       {/* ── FEATURES — grid com divisórias ── */}
       <section className={SEC}>
-        <Glow className="w-[700px] h-[300px] bg-[#cf88ff]/12 blur-[140px] -top-10 left-1/2 -translate-x-1/2" />
         <div className="mx-auto max-w-[1100px]">
           <motion.div {...fadeUp(0)}>
             <H2 className="text-center mb-12">
