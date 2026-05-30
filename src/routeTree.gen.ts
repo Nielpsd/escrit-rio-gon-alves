@@ -18,6 +18,7 @@ import { Route as QueroMeAposentarRouteImport } from './routes/quero-me-aposenta
 import { Route as PoliticaDePrivacidadeRouteImport } from './routes/politica-de-privacidade'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as LinksRouteImport } from './routes/links'
+import { Route as GuiaDoBeneficioPorIncapacidadeRouteImport } from './routes/guia-do-beneficio-por-incapacidade'
 import { Route as EquipeRouteImport } from './routes/equipe'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as BpcLoasRouteImport } from './routes/bpc-loas'
@@ -81,6 +82,12 @@ const LinksRoute = LinksRouteImport.update({
   path: '/links',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuiaDoBeneficioPorIncapacidadeRoute =
+  GuiaDoBeneficioPorIncapacidadeRouteImport.update({
+    id: '/guia-do-beneficio-por-incapacidade',
+    path: '/guia-do-beneficio-por-incapacidade',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const EquipeRoute = EquipeRouteImport.update({
   id: '/equipe',
   path: '/equipe',
@@ -186,6 +193,7 @@ export interface FileRoutesByFullPath {
   '/bpc-loas': typeof BpcLoasRoute
   '/contato': typeof ContatoRoute
   '/equipe': typeof EquipeRoute
+  '/guia-do-beneficio-por-incapacidade': typeof GuiaDoBeneficioPorIncapacidadeRoute
   '/links': typeof LinksRoute
   '/login': typeof LoginRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
@@ -212,6 +220,7 @@ export interface FileRoutesByTo {
   '/bpc-loas': typeof BpcLoasRoute
   '/contato': typeof ContatoRoute
   '/equipe': typeof EquipeRoute
+  '/guia-do-beneficio-por-incapacidade': typeof GuiaDoBeneficioPorIncapacidadeRoute
   '/links': typeof LinksRoute
   '/login': typeof LoginRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
@@ -241,6 +250,7 @@ export interface FileRoutesById {
   '/bpc-loas': typeof BpcLoasRoute
   '/contato': typeof ContatoRoute
   '/equipe': typeof EquipeRoute
+  '/guia-do-beneficio-por-incapacidade': typeof GuiaDoBeneficioPorIncapacidadeRoute
   '/links': typeof LinksRoute
   '/login': typeof LoginRoute
   '/politica-de-privacidade': typeof PoliticaDePrivacidadeRoute
@@ -271,6 +281,7 @@ export interface FileRouteTypes {
     | '/bpc-loas'
     | '/contato'
     | '/equipe'
+    | '/guia-do-beneficio-por-incapacidade'
     | '/links'
     | '/login'
     | '/politica-de-privacidade'
@@ -297,6 +308,7 @@ export interface FileRouteTypes {
     | '/bpc-loas'
     | '/contato'
     | '/equipe'
+    | '/guia-do-beneficio-por-incapacidade'
     | '/links'
     | '/login'
     | '/politica-de-privacidade'
@@ -325,6 +337,7 @@ export interface FileRouteTypes {
     | '/bpc-loas'
     | '/contato'
     | '/equipe'
+    | '/guia-do-beneficio-por-incapacidade'
     | '/links'
     | '/login'
     | '/politica-de-privacidade'
@@ -354,6 +367,7 @@ export interface RootRouteChildren {
   BpcLoasRoute: typeof BpcLoasRoute
   ContatoRoute: typeof ContatoRoute
   EquipeRoute: typeof EquipeRoute
+  GuiaDoBeneficioPorIncapacidadeRoute: typeof GuiaDoBeneficioPorIncapacidadeRoute
   LinksRoute: typeof LinksRoute
   LoginRoute: typeof LoginRoute
   PoliticaDePrivacidadeRoute: typeof PoliticaDePrivacidadeRoute
@@ -428,6 +442,13 @@ declare module '@tanstack/react-router' {
       path: '/links'
       fullPath: '/links'
       preLoaderRoute: typeof LinksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guia-do-beneficio-por-incapacidade': {
+      id: '/guia-do-beneficio-por-incapacidade'
+      path: '/guia-do-beneficio-por-incapacidade'
+      fullPath: '/guia-do-beneficio-por-incapacidade'
+      preLoaderRoute: typeof GuiaDoBeneficioPorIncapacidadeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/equipe': {
@@ -595,6 +616,7 @@ const rootRouteChildren: RootRouteChildren = {
   BpcLoasRoute: BpcLoasRoute,
   ContatoRoute: ContatoRoute,
   EquipeRoute: EquipeRoute,
+  GuiaDoBeneficioPorIncapacidadeRoute: GuiaDoBeneficioPorIncapacidadeRoute,
   LinksRoute: LinksRoute,
   LoginRoute: LoginRoute,
   PoliticaDePrivacidadeRoute: PoliticaDePrivacidadeRoute,
