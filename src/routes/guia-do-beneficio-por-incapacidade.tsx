@@ -340,7 +340,7 @@ function TestimonialsSection() {
 
   return (
     <section className="relative py-24 md:py-40" style={{ overflow: "hidden" }}>
-      <Glow className="w-[600px] h-[250px] bg-[#cf88ff]/12 blur-[140px] top-0 left-1/2 -translate-x-1/2" />
+      <Glow className="w-[600px] h-[250px] bg-[#cf88ff]/12 blur-[140px] top-40 left-1/2 -translate-x-1/2" />
       <div className="max-w-[1280px] mx-auto px-6 flex flex-col gap-8 items-center mb-12">
         <div className="flex -space-x-3">
           {[...T_ROW1, ...T_ROW2, ...T_ROW3].slice(0, 6).map((t) => (
