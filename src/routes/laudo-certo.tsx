@@ -11,6 +11,7 @@ export const Route = createFileRoute("/laudo-certo")({
       { name: "description", content: "Laudos jurídicos prontos para o INSS e Justiça, com linguagem adequada e emissão 100% online via WhatsApp." },
     ],
     links: [
+      { rel: "icon", type: "image/svg+xml", href: "/laudo-certo/icon laudocerto.svg" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400;1,9..40,700&display=swap" },
