@@ -232,7 +232,7 @@ function LaudoCertoPage() {
       `}</style>
 
       {/* ── HEADER ── */}
-      <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-[900px] px-4">
+      <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-full max-w-[900px] px-5 md:px-4">
         <div className="flex items-center justify-between h-[60px] pl-7 pr-4 rounded-full
           border border-white/50 backdrop-blur-xl bg-white/85
           shadow-[0_4px_28px_rgba(83,137,255,0.12)]">
