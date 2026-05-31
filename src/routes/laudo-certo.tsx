@@ -180,7 +180,7 @@ function Btn({ children, outline = false, white = false, href = WA, sm = false, 
     <motion.a href={href} target="_blank" rel="noopener noreferrer"
       whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
       className={cls} style={{ fontFamily: F }}>
-      <span className="relative z-10">{white ? <GradText>{children}</GradText> : children}</span>
+      <span className="relative z-10 text-center w-full">{white ? <GradText>{children}</GradText> : children}</span>
     </motion.a>
   );
 }
@@ -204,6 +204,7 @@ const FAQ_ITEMS = [
 /* ── página ── */
 function LaudoCertoPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     document.body.classList.add("laudo-certo-page");
@@ -223,6 +224,10 @@ function LaudoCertoPage() {
           background: linear-gradient(135deg, #6699ff, #3366dd) !important;
           border-color: transparent !important;
           color: white !important;
+        }
+        @media (min-width: 768px) {
+          .hero-section { background: #F5FDFF !important; }
+          .faq-section  { background: #F5FDFF !important; }
         }
       `}</style>
 
@@ -258,6 +263,17 @@ function LaudoCertoPage() {
             </svg>
           </a>
 
+          {/* Hamburger — mobile only */}
+          <button
+            className="md:hidden flex flex-col gap-[5px] p-2 ml-auto"
+            onClick={() => setMenuOpen(o => !o)}
+            aria-label="Menu"
+          >
+            <span className={`block w-5 h-[2px] rounded-full transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-[7px]' : ''}`} style={{ background: '#1a2238' }} />
+            <span className={`block w-5 h-[2px] rounded-full transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`} style={{ background: '#1a2238' }} />
+            <span className={`block w-5 h-[2px] rounded-full transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} style={{ background: '#1a2238' }} />
+          </button>
+
           {/* Nav */}
           <nav className="hidden md:flex items-center gap-8 text-[14px] font-medium" style={{ color: DARK }}>
             {[
@@ -285,12 +301,31 @@ function LaudoCertoPage() {
             <span className="relative z-10">Falar com especialista</span>
           </a>
         </div>
+
+        {/* Mobile menu dropdown */}
+        {menuOpen && (
+          <div className="md:hidden mt-2 rounded-2xl border border-white/50 backdrop-blur-xl bg-white/90 shadow-[0_4px_28px_rgba(83,137,255,0.12)] px-6 py-4 flex flex-col gap-4">
+            {[
+              { href: "#inicio",     label: "Início" },
+              { href: "#como",       label: "Como Funciona" },
+              { href: "#quem-somos", label: "Quem está por trás" },
+            ].map(({ href, label }) => (
+              <a key={href} href={href}
+                onClick={() => setMenuOpen(false)}
+                className="text-[15px] font-medium py-1 border-b border-[#1a2238]/8 last:border-0"
+                style={{ color: '#1a2238' }}>
+                {label}
+              </a>
+            ))}
+          </div>
+        )}
       </header>
 
       {/* ── HERO ── */}
       <section id="inicio" className="relative min-h-[640px] h-auto md:h-[750px] flex items-center
-        pt-28 pb-16 md:pt-36 md:pb-24" style={{ background: '#F5FDFF' }}>
+        pt-28 pb-16 md:pt-36 md:pb-24 hero-section bg-gradient-to-br from-[#5389ff] to-[#295ccc]">
         <svg aria-hidden viewBox="0 0 2560 900" preserveAspectRatio="xMidYMin meet"
+          className="hidden md:block"
           style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', height: '750px', width: 'auto', pointerEvents: 'none' }}>
           <path d="M2274.09 -1337.14C2295.08 -1325.95 2309.99 -1305.99 2314.79 -1282.7L2558.36 -100.679C2560.07 -92.3936 2558.23 -83.772 2553.29 -76.9069L2534.72 -51.1107C2528.07 -41.8781 2534.67 -28.998 2546.04 -28.998C2553.75 -28.998 2560 -22.749 2560 -15.0405V736.002C2560 780.185 2524.18 816.002 2480 816.002H1951.4C1925.67 816.002 1901.51 828.378 1886.47 849.259L1873.78 866.884C1858.75 887.765 1834.59 900.141 1808.86 900.141H750.14C724.41 900.141 700.25 887.765 685.216 866.884L672.527 849.259C657.493 828.378 633.333 816.002 607.603 816.002H80.0001C35.8174 816.002 0 780.185 0 736.002V-15.3793C0 -22.9008 6.09734 -28.998 13.6188 -28.998C24.7193 -28.998 31.157 -41.5656 24.6711 -50.5741L5.71238 -76.9069C0.769729 -83.772 -1.07141 -92.3936 0.63586 -100.679L244.206 -1282.7C249.006 -1305.99 263.923 -1325.95 284.908 -1337.14L1241.85 -1847.59C1265.38 -1860.14 1293.62 -1860.14 1317.15 -1847.59L2274.09 -1337.14Z" fill="url(#hero-grad)"/>
           <defs>
@@ -303,7 +338,7 @@ function LaudoCertoPage() {
 
         <div className="relative mx-auto max-w-[1280px] px-6 w-full flex flex-col items-center text-center gap-5 md:gap-7 z-10">
           <motion.h1 {...up(0)}
-            className="text-[30px] md:text-[76px] font-bold leading-[1.15] text-white max-w-[1050px] w-full"
+            className="text-[36px] md:text-[76px] font-bold leading-[1.15] text-white max-w-[1050px] w-full"
             style={{ fontFamily: F }}>
             O laudo certo para o seu<br className="hidden md:block" />
             cliente conquistar o benefício<br className="hidden md:block" />
@@ -370,19 +405,19 @@ function LaudoCertoPage() {
                     shadow-[0_4px_28px_rgba(83,137,255,0.12)] hover:shadow-[0_12px_48px_rgba(83,137,255,0.25)] border border-[#5389ff]/15 transition-shadow duration-300"
                   whileHover={{ y: -6, transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] } }}>
                   {/* Topo gradiente */}
-                  <div className="relative w-full bg-gradient-to-br from-[#5389ff] to-[#295ccc] pt-8 pb-10 flex flex-col items-center gap-3 overflow-hidden">
+                  <div className="relative w-full bg-gradient-to-br from-[#5389ff] to-[#295ccc] px-6 py-5 md:pt-8 md:pb-10 md:px-0 flex flex-row md:flex-col items-center gap-4 md:gap-3 overflow-hidden">
                     {/* Glow interno */}
                     <div className="absolute top-[-20px] left-1/2 -translate-x-1/2 w-[180px] h-[120px] rounded-full bg-white/15 blur-[40px] pointer-events-none" />
                     {/* Número grande semitransparente no fundo */}
-                    <span className="absolute bottom-[-16px] right-4 text-[80px] font-bold text-white/10 leading-none select-none pointer-events-none" style={{ fontFamily: F }}>{s.n}</span>
+                    <span className="hidden md:block absolute bottom-[-16px] right-4 text-[50px] md:text-[80px] font-bold text-white/10 leading-none select-none pointer-events-none" style={{ fontFamily: F }}>{s.n}</span>
                     {/* Ícone */}
-                    <motion.div {...floatAnim(idx * 0.5, 8)} className="relative z-10 w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30">
+                    <motion.div {...floatAnim(idx * 0.5, 8)} className="relative z-10 w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30 flex-shrink-0">
                       <s.Icon size={24} className="text-white" strokeWidth={1.8} />
                     </motion.div>
                     {/* Label + número */}
                     <div className="relative z-10 flex flex-col items-center gap-0.5">
                       <span className="text-white/60 text-[11px] font-bold tracking-[0.15em] uppercase" style={{ fontFamily: F }}>Etapa</span>
-                      <span className="text-white font-bold text-[44px] leading-none" style={{ fontFamily: F }}>{s.n}</span>
+                      <span className="text-white font-bold text-[32px] md:text-[44px] leading-none" style={{ fontFamily: F }}>{s.n}</span>
                     </div>
                   </div>
                   {/* Conteúdo */}
@@ -396,12 +431,12 @@ function LaudoCertoPage() {
 
           </div>
 
-          <motion.div {...up(0.15)} className="flex items-start justify-center gap-2">
+          <motion.div {...up(0.15)} className="flex items-center justify-start md:justify-center gap-2">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden className="flex-shrink-0 mt-0.5">
               <path d="M12 2L2 20h20L12 2z" stroke="#e53e3e" strokeWidth="2" strokeLinejoin="round"/>
               <path d="M12 9v5M12 16.5v.5" stroke="#e53e3e" strokeWidth="2" strokeLinecap="round"/>
             </svg>
-            <p className="text-[14px] text-center" style={{ color: DARK, fontFamily: F }}>
+            <p className="text-[14px] text-left md:text-center" style={{ color: DARK, fontFamily: F }}>
             o serviço é exclusivamente para emissão de laudos.{" "}
             Caso não existam documentos médicos mínimos, o laudo pode não ser emitido
             </p>
@@ -765,10 +800,11 @@ function LaudoCertoPage() {
       </section>
 
       {/* ── S09 FAQ + FOOTER ── */}
-      <section className="relative pt-20 md:pt-32 pb-10 px-6 overflow-hidden" style={{ background: '#F5FDFF' }}>
+      <section className="relative pt-20 md:pt-32 pb-10 px-6 overflow-hidden faq-section bg-gradient-to-br from-[#5389ff] to-[#295ccc]">
 
         {/* SVG background */}
         <svg aria-hidden viewBox="0 0 2560 900" preserveAspectRatio="xMidYMin meet"
+          className="hidden md:block"
           style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)', height: '750px', width: 'auto', pointerEvents: 'none', zIndex: 0 }}>
           <path d="M2560 1018C2560 1062.18 2524.18 1098 2480 1098H80C35.8172 1098 0 1062.18 0 1018V80C0 35.8172 35.8172 0 80 0H606.68C632.41 0 656.569 12.3757 671.603 33.2569L686.216 53.5536C701.25 74.4348 725.41 86.8105 751.14 86.8105H1809.86C1835.59 86.8105 1859.75 74.4348 1874.78 53.5536L1889.4 33.2569C1904.43 12.3757 1928.59 0 1954.32 0H2480C2524.18 0 2560 35.8172 2560 80V1018Z" fill="url(#footer-grad)"/>
           <defs>
