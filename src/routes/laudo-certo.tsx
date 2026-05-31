@@ -341,7 +341,7 @@ function LaudoCertoPage() {
             className="text-[42px] md:text-[76px] font-bold leading-[1.15] text-white max-w-[1050px] w-full"
             style={{ fontFamily: F }}>
             O laudo certo para o seu<br className="hidden md:block" />
-            cliente conquistar o benefício<br className="hidden md:block" />
+            {" "}cliente conquistar o benefício<br className="hidden md:block" />
             <span>{" "}com{" "}<CyclingHighlight /></span>
           </motion.h1>
 
