@@ -126,6 +126,8 @@ function BioCarousel() {
             alt="Dr. Renan Gonçalves"
             className="aspect-square flex-shrink-0 rounded-lg object-cover"
             style={{ width: "calc(33.333% - 6px)" }}
+            loading="lazy"
+            decoding="async"
           />
         ))}
       </div>
@@ -179,7 +181,7 @@ function LinksPage() {
             <span>Fé</span>
             <span>Esperança</span>
             <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-full border-2 border-white/10">
-              <img src="/bio/05.webp" alt="Dr. Renan Gonçalves" className="h-full w-full object-cover object-top" />
+              <img src="/bio/05.webp" alt="Dr. Renan Gonçalves" className="h-full w-full object-cover object-top" loading="lazy" decoding="async" />
             </div>
             <span>Direito</span>
             <span>Justiça</span>
@@ -215,11 +217,11 @@ function LinksPage() {
               className="flex flex-col gap-2"
             >
               <a href={card.bannerHref} target="_blank" rel="noopener" className="block overflow-hidden rounded-2xl transition-opacity hover:opacity-90 active:opacity-75">
-                <img src={card.banner} alt={card.bannerAlt} className="w-full" />
+                <img src={card.banner} alt={card.bannerAlt} className="w-full" loading="lazy" decoding="async" />
               </a>
               {card.zap && (
                 <a href={card.zapHref!} target="_blank" rel="noopener" className="block overflow-hidden rounded-2xl transition-opacity hover:opacity-90 active:opacity-75 mb-8">
-                  <img src={card.zap} alt={card.zapAlt!} className="w-full" />
+                  <img src={card.zap} alt={card.zapAlt!} className="w-full" loading="lazy" decoding="async" />
                 </a>
               )}
             </motion.div>

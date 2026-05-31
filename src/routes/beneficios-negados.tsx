@@ -675,6 +675,8 @@ function BeneficiosNegadosPage() {
                   src="/bio/02.webp"
                   alt="Dr. Renan Gonçalves"
                   className="h-full w-full object-cover object-top"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="absolute -bottom-5 -left-5 rounded-xl bg-[var(--gold)] px-5 py-3 text-sm font-medium text-white shadow-lg">

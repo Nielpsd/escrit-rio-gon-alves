@@ -102,7 +102,7 @@ export function FAQSection() {
             <div className="bg-[var(--navy)] rounded-2xl p-8">
               <div className="mb-6 relative w-fit">
                 <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-[var(--gold)]">
-                  <img src="/bio/05.webp" alt="Dr. Renan Gonçalves" className="w-full h-full object-cover object-top" />
+                  <img src="/bio/05.webp" alt="Dr. Renan Gonçalves" className="w-full h-full object-cover object-top" loading="lazy" decoding="async" />
                 </div>
                 <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-[var(--navy)]" />
               </div>

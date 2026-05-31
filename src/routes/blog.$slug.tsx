@@ -135,7 +135,7 @@ function PostPage() {
       <section className="on-navy relative overflow-hidden bg-[var(--navy)] text-white">
         {post.image && (
           <div className="absolute inset-0">
-            <img src={post.image} alt="" className="h-full w-full object-cover opacity-20" aria-hidden />
+            <img src={post.image} alt="" className="h-full w-full object-cover opacity-20" aria-hidden loading="lazy" decoding="async" />
             <div className="absolute inset-0 bg-gradient-to-b from-[var(--navy)]/60 via-[var(--navy)]/80 to-[var(--navy)]" />
           </div>
         )}
@@ -160,7 +160,7 @@ function PostPage() {
           <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-white/60">
             <span className="inline-flex items-center gap-1.5">
               {post.author.toLowerCase().includes("renan") ? (
-                <img src="/bio/05.webp" alt={post.author} className="h-6 w-6 rounded-full object-cover object-top" />
+                <img src="/bio/05.webp" alt={post.author} className="h-6 w-6 rounded-full object-cover object-top" loading="lazy" decoding="async" />
               ) : (
                 <span className="grid h-6 w-6 place-items-center rounded-full bg-[var(--gold)]/20 font-display text-xs font-semibold text-[var(--gold-light)]">
                   {post.author[0]}
@@ -186,6 +186,9 @@ function PostPage() {
               src={post.image}
               alt={post.title}
               className="aspect-[16/7] w-full object-cover"
+              fetchPriority="high"
+              loading="eager"
+              decoding="async"
               onError={(e) => { (e.currentTarget.parentElement as HTMLElement).style.display = "none"; }}
             />
           </div>
@@ -253,6 +256,8 @@ function PostPage() {
                           src={p.image}
                           alt={p.title}
                           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
+                          decoding="async"
                         />
                       </div>
                     ) : (

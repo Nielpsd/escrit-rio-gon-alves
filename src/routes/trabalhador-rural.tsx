@@ -781,6 +781,8 @@ function TrabalhadorRuralPage() {
                   src="/bio/09.webp"
                   alt="Dr. Renan Gonçalves"
                   className="h-full w-full object-cover object-top"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <motion.div

@@ -21,6 +21,7 @@ export const Route = createFileRoute("/guia-do-beneficio-por-incapacidade")({
     ],
     links: [
       { rel: "canonical", href: `${SITE.url}/guia-do-beneficio-por-incapacidade` },
+      { rel: "preload", as: "image", href: "/guia/hero-bg.webp", fetchPriority: "high" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
     ],
