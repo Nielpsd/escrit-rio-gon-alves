@@ -63,6 +63,7 @@ export const Route = createRootRoute({
       { name: "twitter:card", content: "summary" },
     ],
     links: [
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: appCss },
@@ -80,7 +81,6 @@ function RootShell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR">
       <head>
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         {/* Hero preloads first — before HeadContent injects SSR image preloads */}
         <link rel="preload" as="image" href="/hero-bg.webp" media="(min-width: 768px)" fetchPriority="high" />
         <link rel="preload" as="image" href="/hero-bg-mobile.webp" media="(max-width: 767px)" fetchPriority="high" />
