@@ -152,14 +152,14 @@ function CyclingHighlight() {
   return (
     <motion.span layout className="relative inline-flex items-center" ref={scope}
       transition={{ layout: { type: 'spring', duration: 0.5, bounce: 0.15 } }}>
-      <span className="relative z-10 font-bold italic bg-gradient-to-r from-[#5389ff] to-[#295ccc] bg-clip-text text-transparent inline-flex overflow-hidden px-3">
+      <span className="relative z-10 font-bold italic bg-gradient-to-r from-[#5389ff] to-[#295ccc] bg-clip-text text-transparent inline-flex overflow-hidden pl-3 pr-4">
         {word.split('').map((ch, i) => (
           <span key={`${word}-${i}`} className="cletter" style={{ display: 'inline-block', transform: 'translateY(110%)' }}>
             {ch}
           </span>
         ))}
       </span>
-      <motion.span layout className="absolute inset-0 -mx-2 rounded-[8px] bg-white z-0" aria-hidden
+      <motion.span layout className="absolute inset-0 -ml-2 -mr-3 rounded-[8px] bg-white z-0" aria-hidden
         transition={{ layout: { type: 'spring', duration: 0.5, bounce: 0.15 } }} />
     </motion.span>
   )
@@ -361,7 +361,7 @@ function LaudoCertoPage() {
             style={{ fontFamily: F }}>
             O laudo certo para o seu<br className="hidden md:block" />
             {" "}cliente conquistar o benefício<br className="hidden md:block" />
-            <span>{" "}com{" "}<CyclingHighlight /></span>
+            <span>{" "}com<span className="md:mr-2">{" "}</span><CyclingHighlight /></span>
           </motion.h1>
 
           <motion.p {...up(0.1)}
