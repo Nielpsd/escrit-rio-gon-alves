@@ -338,11 +338,11 @@ function LaudoCertoPage() {
 
         <div className="relative mx-auto max-w-[1280px] px-6 w-full flex flex-col items-center text-center gap-5 md:gap-7 z-10">
           <motion.h1 {...up(0)}
-            className="text-[36px] md:text-[76px] font-bold leading-[1.15] text-white max-w-[1050px] w-full"
+            className="text-[42px] md:text-[76px] font-bold leading-[1.15] text-white max-w-[1050px] w-full"
             style={{ fontFamily: F }}>
             O laudo certo para o seu<br className="hidden md:block" />
             cliente conquistar o benefício<br className="hidden md:block" />
-            <span>com{" "}<CyclingHighlight /></span>
+            <span>{" "}com{" "}<CyclingHighlight /></span>
           </motion.h1>
 
           <motion.p {...up(0.1)}
@@ -383,7 +383,7 @@ function LaudoCertoPage() {
           <motion.h2 {...up(0)}
             className="text-[34px] md:text-[54px] font-light text-center leading-[1.2]"
             style={{ fontFamily: F, color: DARK }}>
-            Simples, direto e{" "}
+            Simples, direto e<br className="md:hidden" />{" "}
             <strong className="font-bold italic">
               <GradText>100% digital</GradText>
             </strong>
@@ -405,7 +405,7 @@ function LaudoCertoPage() {
                     shadow-[0_4px_28px_rgba(83,137,255,0.12)] hover:shadow-[0_12px_48px_rgba(83,137,255,0.25)] border border-[#5389ff]/15 transition-shadow duration-300"
                   whileHover={{ y: -6, transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] } }}>
                   {/* Topo gradiente */}
-                  <div className="relative w-full bg-gradient-to-br from-[#5389ff] to-[#295ccc] px-6 py-5 md:pt-8 md:pb-10 md:px-0 flex flex-row md:flex-col items-center gap-4 md:gap-3 overflow-hidden">
+                  <div className="relative w-full bg-gradient-to-br from-[#5389ff] to-[#295ccc] pt-8 pb-10 flex flex-col items-center gap-3 overflow-hidden">
                     {/* Glow interno */}
                     <div className="absolute top-[-20px] left-1/2 -translate-x-1/2 w-[180px] h-[120px] rounded-full bg-white/15 blur-[40px] pointer-events-none" />
                     {/* Número grande semitransparente no fundo */}
@@ -460,17 +460,17 @@ function LaudoCertoPage() {
 
           <motion.div {...up(0.1)}
             className="w-full rounded-[40px] bg-gradient-to-br from-[#5389ff] to-[#295ccc]
-              shadow-[0_10px_48px_rgba(83,137,255,0.35)] overflow-hidden p-5 md:p-8 lg:p-12 flex flex-col gap-6 md:gap-8">
+              shadow-[0_10px_48px_rgba(83,137,255,0.35)] overflow-hidden pt-8 p-5 md:p-8 lg:p-12 flex flex-col gap-6 md:gap-8">
 
             {/* Glow interno pulsante */}
             <motion.div {...glowPulse} className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[200px] rounded-full bg-white blur-[80px] pointer-events-none" />
 
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-end gap-2 md:gap-6">
-              <p className="text-white font-bold text-[20px] md:text-[36px] leading-tight" style={{ fontFamily: F }}>
+              <p className="text-white font-bold text-[20px] md:text-[36px] leading-tight text-center md:text-left" style={{ fontFamily: F }}>
                 Você já passou por isso:
               </p>
-              <p className="text-white/50 text-[15px] font-light pb-1 flex-1 text-right" style={{ fontFamily: F }}>
+              <p className="text-white/50 text-[15px] font-light pb-1 flex-1 text-center md:text-right" style={{ fontFamily: F }}>
                 Problemas que custam casos e clientes
               </p>
             </div>
