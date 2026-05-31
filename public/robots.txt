@@ -5,3 +5,4 @@ Disallow: /login
 Allow: /
 
 Sitemap: https://escrit-rio-gon-alves.vercel.app/sitemap.xml
+Sitemap: https://escrit-rio-gon-alves.vercel.app/sitemap-blog.xml
