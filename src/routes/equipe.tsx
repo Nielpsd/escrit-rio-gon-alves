@@ -40,13 +40,14 @@ export const Route = createFileRoute("/equipe")({
         content:
           "Conheça a equipe do Escritório Gonçalves: profissionais dedicados ao direito previdenciário, sob coordenação do Dr. Renan Gonçalves.",
       },
-      { property: "og:title", content: "Equipe — Escritório Gonçalves" },
-      {
-        property: "og:description",
-        content:
-          "Conteúdo institucional sobre a equipe do escritório. Em conformidade com o Provimento nº 205/2021 da OAB.",
-      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE.url}/equipe` },
+      { property: "og:image", content: `${SITE.url}/hero-bg.webp` },
+      { property: "og:image:alt", content: "Equipe do Escritório Gonçalves" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE.url}/hero-bg.webp` },
     ],
+    links: [{ rel: "canonical", href: `${SITE.url}/equipe` }],
   }),
   component: EquipePage,
 });

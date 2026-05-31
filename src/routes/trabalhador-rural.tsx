@@ -150,12 +150,14 @@ export const Route = createFileRoute("/trabalhador-rural")({
         content:
           "Trabalhador rural pode se aposentar mais cedo: mulheres aos 55 e homens aos 60 anos. Sem contribuição ao INSS. Atendimento online para todo o Brasil.",
       },
-      { property: "og:title", content: "Aposentadoria do Trabalhador Rural — Escritório Gonçalves" },
-      {
-        property: "og:description",
-        content: "Aposentadoria rural com 15 anos de atividade. Você só paga se for aprovado.",
-      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE.url}/trabalhador-rural` },
+      { property: "og:image", content: `${SITE.url}/hero-bg.webp` },
+      { property: "og:image:alt", content: "Aposentadoria do Trabalhador Rural — Escritório Gonçalves" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE.url}/hero-bg.webp` },
     ],
+    links: [{ rel: "canonical", href: `${SITE.url}/trabalhador-rural` }],
   }),
   component: TrabalhadorRuralPage,
 });

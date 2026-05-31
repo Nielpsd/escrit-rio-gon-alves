@@ -31,13 +31,14 @@ export const Route = createFileRoute("/servicos")({
         content:
           "Conteúdo informativo sobre as áreas do direito previdenciário em que o escritório atua: aposentadorias, auxílios, BPC/LOAS, pensão por morte e revisão de benefícios.",
       },
-      { property: "og:title", content: "Serviços — Escritório Gonçalves" },
-      {
-        property: "og:description",
-        content:
-          "Conteúdo informativo sobre direito previdenciário, em conformidade com o Provimento nº 205/2021 da OAB.",
-      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE.url}/servicos` },
+      { property: "og:image", content: `${SITE.url}/hero-bg.webp` },
+      { property: "og:image:alt", content: "Serviços do Escritório Gonçalves" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE.url}/hero-bg.webp` },
     ],
+    links: [{ rel: "canonical", href: `${SITE.url}/servicos` }],
   }),
   component: ServicosPage,
 });

@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SITE } from "@/lib/site";
 import { lazy, Suspense } from "react";
 import { Layout } from "@/components/site/Layout";
 import { HeroSection } from "@/components/home/HeroSection";
@@ -60,6 +61,15 @@ export const Route = createFileRoute("/")({
         content:
           "Conteúdo informativo sobre direito previdenciário. Site em conformidade com o Provimento nº 205/2021 da OAB.",
       },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE.url },
+      { property: "og:image", content: `${SITE.url}/hero-bg.webp` },
+      { property: "og:image:alt", content: "Escritório Gonçalves — Advocacia Previdenciária" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE.url}/hero-bg.webp` },
+    ],
+    links: [
+      { rel: "canonical", href: SITE.url },
     ],
   }),
   component: Home,

@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin
+Disallow: /login
+
+Allow: /
+
+Sitemap: https://escrit-rio-gon-alves.vercel.app/sitemap.xml

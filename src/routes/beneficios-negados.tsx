@@ -111,7 +111,14 @@ export const Route = createFileRoute("/beneficios-negados")({
         content:
           "Saiba como reverter a negativa do INSS com orientação jurídica especializada. Atendimento online em todo o Brasil.",
       },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE.url}/beneficios-negados` },
+      { property: "og:image", content: `${SITE.url}/hero-bg.webp` },
+      { property: "og:image:alt", content: "Benefício Negado pelo INSS — Escritório Gonçalves" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE.url}/hero-bg.webp` },
     ],
+    links: [{ rel: "canonical", href: `${SITE.url}/beneficios-negados` }],
   }),
   component: BeneficiosNegadosPage,
 });

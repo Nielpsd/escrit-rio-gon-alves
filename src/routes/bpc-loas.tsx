@@ -119,12 +119,14 @@ export const Route = createFileRoute("/bpc-loas")({
         content:
           "Descubra se você tem direito ao BPC/LOAS. Benefício de 1 salário mínimo para pessoas com deficiência e idosos. Você só paga se for aprovado.",
       },
-      { property: "og:title", content: "BPC/LOAS — Escritório Gonçalves" },
-      {
-        property: "og:description",
-        content: "BPC/LOAS para pessoas com deficiência e idosos. Atendimento online para todo o Brasil.",
-      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE.url}/bpc-loas` },
+      { property: "og:image", content: `${SITE.url}/hero-bg.webp` },
+      { property: "og:image:alt", content: "BPC/LOAS — Escritório Gonçalves" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE.url}/hero-bg.webp` },
     ],
+    links: [{ rel: "canonical", href: `${SITE.url}/bpc-loas` }],
   }),
   component: BpcLoasPage,
 });

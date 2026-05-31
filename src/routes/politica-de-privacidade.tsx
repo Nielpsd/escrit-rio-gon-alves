@@ -12,13 +12,14 @@ export const Route = createFileRoute("/politica-de-privacidade")({
         content:
           "Saiba como o Escritório Gonçalves coleta, utiliza e protege seus dados pessoais, em conformidade com a LGPD.",
       },
-      { property: "og:title", content: "Política de Privacidade — Escritório Gonçalves" },
-      {
-        property: "og:description",
-        content:
-          "Transparência total sobre o tratamento dos seus dados pessoais. Conheça seus direitos sob a LGPD.",
-      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE.url}/politica-de-privacidade` },
+      { property: "og:image", content: `${SITE.url}/hero-bg.webp` },
+      { property: "og:image:alt", content: "Política de Privacidade — Escritório Gonçalves" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE.url}/hero-bg.webp` },
     ],
+    links: [{ rel: "canonical", href: `${SITE.url}/politica-de-privacidade` }],
   }),
   component: PoliticaPage,
 });

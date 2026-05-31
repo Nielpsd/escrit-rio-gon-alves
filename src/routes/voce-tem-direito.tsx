@@ -18,7 +18,16 @@ export const Route = createFileRoute("/voce-tem-direito")({
         content:
           "Descubra em minutos se você pode ter direito a aposentadoria, auxílio ou revisão de benefício pelo INSS.",
       },
+      { property: "og:title", content: "Você Tem Direito? — Escritório Gonçalves" },
+      { property: "og:description", content: "Descubra em minutos se você pode ter direito a aposentadoria, auxílio ou revisão de benefício pelo INSS." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE.url}/voce-tem-direito` },
+      { property: "og:image", content: `${SITE.url}/hero-bg.webp` },
+      { property: "og:image:alt", content: "Você Tem Direito? — Escritório Gonçalves" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE.url}/hero-bg.webp` },
     ],
+    links: [{ rel: "canonical", href: `${SITE.url}/voce-tem-direito` }],
   }),
   component: OrientacaoPage,
 });

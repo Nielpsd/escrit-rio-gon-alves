@@ -42,7 +42,14 @@ export const Route = createFileRoute("/blog/")({
         content:
           "Conteúdo educativo sobre aposentadoria e benefícios do INSS, produzido por quem conhece a prática por dentro.",
       },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE.url}/blog` },
+      { property: "og:image", content: `${SITE.url}/hero-bg.webp` },
+      { property: "og:image:alt", content: "Blog — Escritório Gonçalves" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE.url}/hero-bg.webp` },
     ],
+    links: [{ rel: "canonical", href: `${SITE.url}/blog` }],
   }),
   component: BlogPage,
 });

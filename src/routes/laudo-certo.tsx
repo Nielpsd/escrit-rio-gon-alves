@@ -9,12 +9,31 @@ export const Route = createFileRoute("/laudo-certo")({
     meta: [
       { title: "Laudo Certo — Laudos médicos jurídicos para o INSS e Justiça" },
       { name: "description", content: "Laudos jurídicos prontos para o INSS e Justiça, com linguagem adequada e emissão 100% online via WhatsApp." },
+      { property: "og:title", content: "Laudo Certo — Laudos médicos jurídicos para o INSS e Justiça" },
+      { property: "og:description", content: "Laudos jurídicos prontos para o INSS e Justiça, com linguagem adequada e emissão 100% online via WhatsApp." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE.url}/laudo-certo` },
+      { property: "og:image", content: `${SITE.url}/laudo-certo/macbook.webp` },
+      { property: "og:image:alt", content: "Laudo Certo — Laudos médicos jurídicos" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE.url}/laudo-certo/macbook.webp` },
+      {
+        'script:ld+json': {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            { "@type": "Question", "name": "Qual a diferença entre esse laudo e um atestado comum?", "acceptedAnswer": { "@type": "Answer", "text": "O laudo da Laudo Certo é produzido com linguagem jurídica, incluindo CID, nexo causal e terminologia adequada para uso processual — o que um atestado simples geralmente não tem." } },
+            { "@type": "Question", "name": "Preciso fazer uma consulta médica?", "acceptedAnswer": { "@type": "Answer", "text": "Não necessariamente. O médico analisa seus documentos e, se necessário, realiza uma videochamada para avaliação complementar." } },
+            { "@type": "Question", "name": "Quais documentos preciso enviar?", "acceptedAnswer": { "@type": "Answer", "text": "Exames laboratoriais, relatórios médicos e quaisquer comprovantes da condição de saúde. A equipe avalia e informa se há algo adicional necessário." } },
+            { "@type": "Question", "name": "Esse laudo serve para qualquer tipo de benefício?", "acceptedAnswer": { "@type": "Answer", "text": "Sim. Os laudos são adaptados para benefícios por incapacidade, auxílio-doença, aposentadoria por invalidez, ações judiciais e concursos públicos." } },
+            { "@type": "Question", "name": "Em quanto tempo o laudo fica pronto?", "acceptedAnswer": { "@type": "Answer", "text": "Geralmente entre 3 a 7 dias úteis após o recebimento e análise dos documentos, dependendo da complexidade do caso." } },
+          ],
+        }
+      },
     ],
     links: [
+      { rel: "canonical", href: `${SITE.url}/laudo-certo` },
       { rel: "icon", type: "image/svg+xml", href: "/laudo-certo/icon-laudocerto.svg" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400;1,9..40,700&display=swap" },
     ],
   }),
   component: LaudoCertoPage,

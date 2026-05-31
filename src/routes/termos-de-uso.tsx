@@ -12,12 +12,14 @@ export const Route = createFileRoute("/termos-de-uso")({
         content:
           "Termos e condições de uso do site do Escritório Gonçalves Sociedade Individual de Advocacia.",
       },
-      { property: "og:title", content: "Termos de Uso — Escritório Gonçalves" },
-      {
-        property: "og:description",
-        content: "Conheça as condições de uso do nosso site e dos canais de atendimento.",
-      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE.url}/termos-de-uso` },
+      { property: "og:image", content: `${SITE.url}/hero-bg.webp` },
+      { property: "og:image:alt", content: "Termos de Uso — Escritório Gonçalves" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE.url}/hero-bg.webp` },
     ],
+    links: [{ rel: "canonical", href: `${SITE.url}/termos-de-uso` }],
   }),
   component: TermosPage,
 });

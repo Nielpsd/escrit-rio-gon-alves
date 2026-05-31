@@ -42,13 +42,14 @@ export const Route = createFileRoute("/sobre")({
         content:
           "Conheça o Escritório Gonçalves: atuação técnica e exclusiva em direito previdenciário, liderada por profissional com experiência prévia no INSS.",
       },
-      { property: "og:title", content: "Sobre — Escritório Gonçalves" },
-      {
-        property: "og:description",
-        content:
-          "História, missão e princípios do Escritório Gonçalves, dedicado integralmente ao direito previdenciário.",
-      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE.url}/sobre` },
+      { property: "og:image", content: `${SITE.url}/hero-bg.webp` },
+      { property: "og:image:alt", content: "Sobre o Escritório Gonçalves" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE.url}/hero-bg.webp` },
     ],
+    links: [{ rel: "canonical", href: `${SITE.url}/sobre` }],
   }),
   component: SobrePage,
 });

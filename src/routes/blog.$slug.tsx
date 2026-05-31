@@ -4,9 +4,9 @@ import { ReadingProgress } from "@/components/site/ReadingProgress";
 import { ArrowLeft, ArrowRight, Clock, User } from "lucide-react";
 import { motion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
+import { SITE } from "@/lib/site";
 import { Eyebrow } from "@/components/site/Eyebrow";
 import { WaveButton } from "@/components/site/WaveButton";
-import { SITE } from "@/lib/site";
 import { getPostBySlug, POSTS as POSTS_FALLBACK, type Categoria } from "@/lib/posts";
 import { supabase, supabaseConfigured } from "@/lib/supabase";
 import type { Database } from "@/lib/database.types";
@@ -65,14 +65,41 @@ export const Route = createFileRoute("/blog/$slug")({
   head: ({ loaderData }) => {
     const post = loaderData?.post;
     if (!post) return { meta: [{ title: "Artigo não encontrado — Escritório Gonçalves" }] };
+    const slug = post.slug ?? "";
     return {
       meta: [
         { title: `${post.title} — Blog Gonçalves` },
         { name: "description", content: post.excerpt },
         { property: "og:title", content: post.title },
         { property: "og:description", content: post.excerpt },
-        ...(post.image ? [{ property: "og:image", content: post.image }] : []),
+        { property: "og:type", content: "article" },
+        { property: "og:url", content: `${SITE.url}/blog/${slug}` },
+        ...(post.image ? [{ property: "og:image", content: post.image }] : [{ property: "og:image", content: `${SITE.url}/hero-bg.webp` }]),
+        { property: "og:image:alt", content: post.title },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:image", content: post.image || `${SITE.url}/hero-bg.webp` },
+        {
+          "script:ld+json": {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": post.title,
+            "description": post.excerpt,
+            "url": `${SITE.url}/blog/${slug}`,
+            "image": post.image || `${SITE.url}/hero-bg.webp`,
+            "author": {
+              "@type": "Person",
+              "name": "Dr. Renan Gonçalves",
+              "url": SITE.url,
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Escritório Gonçalves",
+              "url": SITE.url,
+            },
+          } as Record<string, unknown>,
+        },
       ],
+      links: [{ rel: "canonical", href: `${SITE.url}/blog/${slug}` }],
     };
   },
   notFoundComponent: () => (

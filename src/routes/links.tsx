@@ -10,7 +10,16 @@ export const Route = createFileRoute("/links")({
     meta: [
       { title: "Links — Dr. Renan Gonçalves" },
       { name: "description", content: "Todos os links do Dr. Renan Gonçalves — Escritório Gonçalves, Direito Previdenciário." },
+      { property: "og:title", content: "Links — Dr. Renan Gonçalves" },
+      { property: "og:description", content: "Todos os links do Dr. Renan Gonçalves — Escritório Gonçalves, Direito Previdenciário." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE.url}/links` },
+      { property: "og:image", content: `${SITE.url}/hero-bg.webp` },
+      { property: "og:image:alt", content: "Links — Dr. Renan Gonçalves" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE.url}/hero-bg.webp` },
     ],
+    links: [{ rel: "canonical", href: `${SITE.url}/links` }],
   }),
   component: LinksPage,
 });

@@ -1,17 +1,31 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SITE } from "@/lib/site";
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+
+const SPACE_GROTESK_URL = "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap";
 
 export const Route = createFileRoute("/guia-do-beneficio-por-incapacidade")({
   head: () => ({
     meta: [
       { title: "Guia do Benefício por Incapacidade — Dr. Renan Gonçalves" },
       { name: "description", content: "Aprenda a conseguir seu Benefício por Incapacidade sem precisar de intermediários ou advogado." },
+      { property: "og:title", content: "Guia do Benefício por Incapacidade — Dr. Renan Gonçalves" },
+      { property: "og:description", content: "Aprenda a conseguir seu Benefício por Incapacidade sem precisar de intermediários ou advogado." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE.url}/guia-do-beneficio-por-incapacidade` },
+      { property: "og:image", content: `${SITE.url}/guia/hero-bg.webp` },
+      { property: "og:image:alt", content: "Guia do Benefício por Incapacidade — Dr. Renan Gonçalves" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE.url}/guia/hero-bg.webp` },
     ],
     links: [
+      { rel: "canonical", href: `${SITE.url}/guia-do-beneficio-por-incapacidade` },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" },
+    ],
+    scripts: [
+      { children: `(function(){var l=document.createElement('link');l.rel='stylesheet';l.href='${SPACE_GROTESK_URL}';document.head.appendChild(l);})();` },
     ],
   }),
   component: GuiaPage,

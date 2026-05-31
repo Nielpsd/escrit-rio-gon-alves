@@ -42,13 +42,14 @@ export const Route = createFileRoute("/areas-de-atuacao")({
         content:
           "Conheça os tipos de demanda previdenciária atendidos pelo Escritório Gonçalves: aposentadorias, auxílios, BPC/LOAS, pensões e revisões.",
       },
-      { property: "og:title", content: "Áreas de atuação — Escritório Gonçalves" },
-      {
-        property: "og:description",
-        content:
-          "Atuação especializada em todas as áreas do direito previdenciário, com atendimento presencial em RO e online em todo o Brasil.",
-      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE.url}/areas-de-atuacao` },
+      { property: "og:image", content: `${SITE.url}/hero-bg.webp` },
+      { property: "og:image:alt", content: "Áreas de atuação — Escritório Gonçalves" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE.url}/hero-bg.webp` },
     ],
+    links: [{ rel: "canonical", href: `${SITE.url}/areas-de-atuacao` }],
   }),
   component: AreasPage,
 });

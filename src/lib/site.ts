@@ -1,4 +1,5 @@
 export const SITE = {
+  url: "https://escrit-rio-gon-alves.vercel.app",
   name: "Escritório Gonçalves",
   legal: "Gonçalves Sociedade Individual de Advocacia",
   cnpj: "49.235.654/0001-93",

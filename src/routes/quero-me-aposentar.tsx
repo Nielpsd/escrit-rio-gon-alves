@@ -45,13 +45,14 @@ export const Route = createFileRoute("/quero-me-aposentar")({
         content:
           "Informações sobre os principais tipos de aposentadoria previstos na legislação brasileira e sobre a atuação do escritório nessa área.",
       },
-      { property: "og:title", content: "Aposentadoria — Escritório Gonçalves" },
-      {
-        property: "og:description",
-        content:
-          "Conteúdo informativo sobre aposentadoria previdenciária e atuação especializada do Escritório Gonçalves.",
-      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE.url}/quero-me-aposentar` },
+      { property: "og:image", content: `${SITE.url}/hero-bg.webp` },
+      { property: "og:image:alt", content: "Aposentadoria — Escritório Gonçalves" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE.url}/hero-bg.webp` },
     ],
+    links: [{ rel: "canonical", href: `${SITE.url}/quero-me-aposentar` }],
   }),
   component: QueroMeAposentarPage,
 });

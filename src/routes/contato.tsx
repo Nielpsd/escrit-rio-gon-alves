@@ -28,13 +28,14 @@ export const Route = createFileRoute("/contato")({
         content:
           "Fale com o Escritório Gonçalves. Atendimento presencial em Jaru e Alta Floresta D'Oeste (RO) e online para todo o Brasil.",
       },
-      { property: "og:title", content: "Contato — Escritório Gonçalves" },
-      {
-        property: "og:description",
-        content:
-          "Tire suas dúvidas sobre aposentadoria e benefícios do INSS. Conteúdo informativo, em conformidade com o Provimento nº 205/2021 da OAB.",
-      },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${SITE.url}/contato` },
+      { property: "og:image", content: `${SITE.url}/hero-bg.webp` },
+      { property: "og:image:alt", content: "Escritório Gonçalves — Contato" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE.url}/hero-bg.webp` },
     ],
+    links: [{ rel: "canonical", href: `${SITE.url}/contato` }],
   }),
   component: ContatoPage,
 });

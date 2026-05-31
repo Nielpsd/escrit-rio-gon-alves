@@ -2,6 +2,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts, ScrollRestoration,
 import { WhatsAppFab } from "@/components/site/WhatsAppFab";
 import { CookieBanner } from "@/components/site/CookieBanner";
 import { BackToTop } from "@/components/site/BackToTop";
+import { SITE } from "@/lib/site";
 
 import appCss from "../styles.css?url";
 
@@ -60,7 +61,35 @@ export const Route = createRootRoute({
           "Atuação técnica em aposentadorias, auxílios, BPC/LOAS, pensões e revisões previdenciárias.",
       },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
+      { property: "og:image", content: `${SITE.url}/hero-bg.webp` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:alt", content: "Escritório Gonçalves — Advocacia Previdenciária" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE.url}/hero-bg.webp` },
+      {
+        'script:ld+json': {
+          "@context": "https://schema.org",
+          "@type": "LegalService",
+          "name": SITE.name,
+          "legalName": SITE.legal,
+          "url": SITE.url,
+          "telephone": SITE.phone,
+          "email": SITE.email,
+          "description": "Escritório de advocacia especializado em direito previdenciário. Aposentadorias, auxílios, BPC/LOAS, pensões e revisões. Atendimento presencial em Rondônia e online em todo o Brasil.",
+          "areaServed": "Brasil",
+          "priceRange": "Honorários contingenciais",
+          "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "RO",
+            "addressCountry": "BR",
+          },
+          "sameAs": [
+            SITE.instagram,
+            SITE.tiktok,
+            SITE.youtube,
+          ],
+        }
+      },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
