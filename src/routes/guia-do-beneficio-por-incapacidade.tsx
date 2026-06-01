@@ -32,7 +32,8 @@ export const Route = createFileRoute("/guia-do-beneficio-por-incapacidade")({
   component: GuiaPage,
 });
 
-const CTA_URL = "#comprar";
+const CTA_URL  = "#comprar";
+const BUY_URL  = "https://pay.hotmart.com/H102618864G?bid=1780335970489";
 const F = "'Space Grotesk', system-ui, sans-serif";
 const SEC = "relative py-24 md:py-40 px-6"; // espaçamento padrão entre seções
 /* ── glow decorativo reutilizável ── */
@@ -99,6 +100,18 @@ const Grad = ({ children }: { children: React.ReactNode }) => (
 const CTA = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
   <a
     href={CTA_URL}
+    className={`w-full sm:w-auto inline-flex items-center justify-center bg-gradient-to-r from-[#cf88ff] to-[#c56eff] text-[#131313] font-bold uppercase rounded-[10px] px-12 py-4 sm:py-3.5 text-[14px] transition-all hover:brightness-110 hover:-translate-y-0.5 ${className}`}
+    style={{ fontFamily: F, boxShadow: "0 0 24px rgba(197,110,255,0.3)" }}
+  >
+    {children}
+  </a>
+);
+/* Botão que vai direto ao checkout (seção de preço e garantia) */
+const CTABuy = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
+  <a
+    href={BUY_URL}
+    target="_blank"
+    rel="noopener noreferrer"
     className={`w-full sm:w-auto inline-flex items-center justify-center bg-gradient-to-r from-[#cf88ff] to-[#c56eff] text-[#131313] font-bold uppercase rounded-[10px] px-12 py-4 sm:py-3.5 text-[14px] transition-all hover:brightness-110 hover:-translate-y-0.5 ${className}`}
     style={{ fontFamily: F, boxShadow: "0 0 24px rgba(197,110,255,0.3)" }}
   >
@@ -763,7 +776,7 @@ function GuiaPage() {
       </section>
 
       {/* ── PREÇO ── */}
-      <section className={SEC}>
+      <section id="comprar" className={SEC}>
         <Glow className="w-[600px] h-[280px] bg-[#cf88ff]/14 blur-[130px] -top-8 left-1/2 -translate-x-1/2" />
         <div className="mx-auto max-w-[1280px]">
           <motion.div
@@ -812,7 +825,9 @@ function GuiaPage() {
                 ou <span className="font-medium text-[17px] md:text-[20px]">R$ 330,00</span> à vista
               </p>
               <motion.a
-                href={CTA_URL}
+                href={BUY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-1 w-full max-w-[340px] inline-flex items-center justify-center bg-gradient-to-r from-[#cf88ff] to-[#c56eff] text-[#131313] font-bold uppercase text-[14px] rounded-[10px] px-7 py-4 sm:py-3.5"
                 style={{ fontFamily: F }}
                 whileHover={{ scale: 1.04, transition: { duration: 0.18 } }}
@@ -852,13 +867,13 @@ function GuiaPage() {
             </h2>
             <Lead className="text-white/75 max-w-[400px]">Se você não gostar, devolvo 100% do seu dinheiro sem perguntas.</Lead>
             <motion.div className="w-fit" whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-              <CTA>Quero meu acesso</CTA>
+              <CTABuy>Quero meu acesso</CTABuy>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      <footer id="comprar" className="py-8 px-6 border-t border-white/10">
+      <footer className="py-8 px-6 border-t border-white/10">
         <Tiny className="text-center text-[#8e8e8e]">
           Página de vendas produzida por <strong className="text-white/60 font-semibold">Niel Hart.</strong>
         </Tiny>
