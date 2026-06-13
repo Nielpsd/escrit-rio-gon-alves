@@ -1,0 +1,1720 @@
+/* ============================================================
+   GONÇALVES ADVOGADOS – SISTEMA DE METAS 2026
+   ============================================================ */
+
+// ── CONSTANTES ──────────────────────────────────────────────
+
+const PROTOCOL_DEADLINE = 15; // dias corridos para protocolo ser válido
+
+const BENEFIT_TYPES = {
+  'aposentadoria_rural':        { label: 'Aposentadoria por Idade Rural',             points: 1.00, group: '1 ponto' },
+  'aposentadoria_contribuicao': { label: 'Aposentadoria por Tempo de Contribuição',   points: 1.00, group: '1 ponto' },
+  'aposentadoria_professor':    { label: 'Aposentadoria do Professor',                points: 1.00, group: '1 ponto' },
+  'aposentadoria_especial':     { label: 'Aposentadoria Especial',                    points: 1.00, group: '1 ponto' },
+  'bpc_loas':                   { label: 'BPC/LOAS (Idoso ou PcD)',                   points: 1.00, group: '1 ponto' },
+  'reclamacao_trabalhista':     { label: 'Reclamação Trabalhista',                    points: 1.00, group: '1 ponto' },
+  'aposentadoria_urbana':       { label: 'Aposentadoria por Idade Urbana',            points: 0.75, group: '0,75 ponto' },
+  'pensao_morte':               { label: 'Pensão por Morte',                          points: 0.75, group: '0,75 ponto' },
+  'beneficio_incapacidade':     { label: 'Benefício por Incapacidade',                points: 0.75, group: '0,75 ponto' },
+  'auxilio_acidente':           { label: 'Auxílio-Acidente',                          points: 0.75, group: '0,75 ponto' },
+  'ctc':                        { label: 'CTC – Certidão de Tempo de Contribuição',   points: 0.75, group: '0,75 ponto' },
+  'indenizatoria_complexa':     { label: 'Indenizatória Complexa',                    points: 0.75, group: '0,75 ponto' },
+  'salario_maternidade':        { label: 'Salário-Maternidade',                       points: 0.50, group: '0,5 ponto' },
+  'auxilio_reclusao':           { label: 'Auxílio-Reclusão',                          points: 0.50, group: '0,5 ponto' },
+  'indenizatoria_simples':      { label: 'Indenizatória Simples',                     points: 0.50, group: '0,5 ponto' },
+};
+
+// hasDeadline: true → sujeito ao prazo de 15 dias para ser válido
+const ENTRY_TYPES = [
+  { value: 'montagem_judicial', label: 'Montagem de Processo Judicial',          generatesMoney: false, isProtocol: true,  hasDeadline: true,  desc: 'Protocolo judicial — válido apenas se concluído em até 15 dias da distribuição' },
+  { value: 'montagem_adm',      label: 'Montagem de Processo Administrativo',    generatesMoney: false, isProtocol: true,  hasDeadline: true,  desc: 'Protocolo administrativo — válido apenas se concluído em até 15 dias da distribuição' },
+  { value: 'demanda_aleatoria', label: 'Demanda Aleatória',                      generatesMoney: false, isProtocol: false, hasDeadline: true,  desc: 'Ação excepcional — válida apenas se cumprida em até 15 dias da distribuição' },
+  { value: 'liminar',           label: 'Liminar Importante',                     generatesMoney: true,  isProtocol: false, hasDeadline: false, desc: 'Liminar concedida em até 60 dias → 1 ponto + R$ 100 automático' },
+  { value: 'sentenca',          label: 'Sentença Favorável',                     generatesMoney: true,  isProtocol: false, hasDeadline: false, desc: 'Sentença favorável → pontos + bônus financeiro automático' },
+  { value: 'rpv',               label: 'RPV Rápido',                             generatesMoney: true,  isProtocol: false, hasDeadline: false, desc: 'RPV levantado em até 165 dias da sentença → 1 ponto + R$ 100 automático' },
+  { value: 'concessao_adm',     label: 'Concessão de Processo Administrativo',   generatesMoney: true,  isProtocol: false, hasDeadline: false, desc: 'Benefício concedido no INSS/RPPS → pontos + bônus financeiro automático' },
+  { value: 'acordao',           label: 'Acórdão / Decisão de Recurso',           generatesMoney: true,  isProtocol: false, hasDeadline: false, desc: 'Recurso que efetivamente reverteu decisão → pontos + bônus automático' },
+];
+
+// 'inicial' era o valor antigo — mantido para compatibilidade com dados já salvos
+const LEGACY_TYPE_MAP = { 'inicial': 'montagem_judicial' };
+function resolveType(tipo) { return LEGACY_TYPE_MAP[tipo] || tipo; }
+function getEntryType(tipo) { return ENTRY_TYPES.find(t => t.value === resolveType(tipo)); }
+
+const FAST_LIMITS = { sentenca: 150, rpv: 165, liminar: 60 };
+
+const DATE_HINTS = {
+  montagem_judicial: { ini: 'Data de distribuição/entrada pelo gestor', fim: 'Data de protocolo/conclusão' },
+  montagem_adm:      { ini: 'Data de distribuição/entrada pelo gestor', fim: 'Data de protocolo/conclusão' },
+  demanda_aleatoria: { ini: 'Data de distribuição/entrada pelo gestor', fim: 'Data de conclusão' },
+  liminar:           { ini: 'Data de distribuição pelo gestor',         fim: 'Data de concessão da liminar' },
+  sentenca:          { ini: 'Data de distribuição pelo gestor',         fim: 'Data da sentença' },
+  rpv:               { ini: 'Data do trânsito em julgado',              fim: 'Data do efetivo pagamento' },
+  concessao_adm:     { ini: 'Data de distribuição pelo gestor',         fim: 'Data da concessão' },
+  acordao:           { ini: 'Data da sentença',                         fim: 'Data do acórdão / decisão' },
+};
+
+// ── CONFIGURAÇÃO DO BACKEND ───────────────────────────────────
+//
+// Após fazer o deploy do apps-script.gs, cole a URL aqui:
+// (enquanto não configurar, o sistema usa localStorage normalmente)
+//
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwUGzR7ctgzrLHp6zJltSvdTSjLDRXetTRnbm7WIkhxm4HeIi0eUoNuTggEauNTKgxY/exec';
+
+// ── SENHA DO GESTOR ──────────────────────────────────────────
+// Para alterar sem usar a interface, edite esta constante:
+const DEFAULT_MANAGER_PASSWORD = '10297';
+function getManagerPassword() {
+  return _store.config.manager_pwd || DEFAULT_MANAGER_PASSWORD;
+}
+
+// ── ESTADO EM MEMÓRIA (fonte primária em runtime) ─────────────
+//
+// Todos os cálculos leem daqui (síncrono, como antes).
+// Na inicialização, os dados vêm do Google Sheets (ou localStorage como fallback).
+// Cada gravação atualiza a memória imediatamente + dispara sync assíncrono.
+//
+const DEFAULT_PRIZES = { 1: 500, 2: 150, 3: 100 };
+
+let _store = {
+  colabs:  [],
+  entries: [],
+  prizes:  { ...DEFAULT_PRIZES },
+  config:  {},
+};
+
+// Getters síncronos — compatíveis com todo o código existente
+const getColabs     = () => _store.colabs;
+const getEntries    = () => _store.entries;
+const getRankPrizes = () => _store.prizes;
+
+// Setters — atualizam memória e disparam sync
+function saveColabs(d)     { _store.colabs   = d; _scheduleSyncToSheets(); }
+function saveEntries(d)    { _store.entries  = d; _scheduleSyncToSheets(); }
+function saveRankPrizes(d) { _store.prizes   = d; _scheduleSyncToSheets(); }
+
+// ── SINCRONIZAÇÃO COM GOOGLE SHEETS ──────────────────────────
+
+const _sheetsConfigured = () =>
+  APPS_SCRIPT_URL && !APPS_SCRIPT_URL.includes('COLE_A_URL');
+
+// JSONP: carrega URL como <script> — funciona sem restrições CORS de qualquer origem
+function _jsonpFetch(url) {
+  return new Promise((resolve, reject) => {
+    const cb = `_gas_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
+    const el = document.createElement('script');
+    const timer = setTimeout(() => {
+      cleanup();
+      reject(new Error('Timeout (15s) — verifique se a URL do Apps Script está correta'));
+    }, 15000);
+    function cleanup() {
+      clearTimeout(timer);
+      delete window[cb];
+      if (el.parentNode) el.parentNode.removeChild(el);
+    }
+    window[cb] = (data) => { cleanup(); resolve(data); };
+    el.onerror  = ()     => { cleanup(); reject(new Error('Falha ao carregar script GAS — URL inválida ou sem acesso à internet')); };
+    const sep = url.includes('?') ? '&' : '?';
+    el.src = `${url}${sep}callback=${cb}&t=${Date.now()}`;
+    document.head.appendChild(el);
+  });
+}
+
+async function loadAllDataFromSheets() {
+  if (!_sheetsConfigured()) {
+    _store.colabs  = _lsGet('gp_colaboradores', []);
+    _store.entries = _lsGet('gp_entries',        []);
+    _store.prizes  = _lsGet('gp_ranking_prizes', DEFAULT_PRIZES);
+    _store.config  = { manager_pwd: localStorage.getItem('gp_manager_pwd') || '' };
+    showSyncStatus('offline');
+    return;
+  }
+
+  showSyncStatus('loading');
+  let data;
+
+  // Tenta fetch normal (mais rápido quando CORS funciona)
+  try {
+    const resp = await Promise.race([
+      fetch(`${APPS_SCRIPT_URL}?t=${Date.now()}`),
+      new Promise((_, rej) => setTimeout(() => rej(new Error('timeout fetch')), 8000)),
+    ]);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    data = await resp.json();
+    if (data.error) throw new Error(`GAS: ${data.error}`);
+    console.log('[Sheets] Carregado via fetch normal');
+  } catch (fetchErr) {
+    console.warn('[Sheets] fetch falhou, usando JSONP:', fetchErr.message);
+    // JSONP bypassa CORS completamente — funciona de qualquer origem
+    try {
+      data = await _jsonpFetch(APPS_SCRIPT_URL);
+      if (data.error) throw new Error(`GAS: ${data.error}`);
+      console.log('[Sheets] Carregado via JSONP');
+    } catch (jsonpErr) {
+      console.error('[Sheets] fetch:', fetchErr.message, '| JSONP:', jsonpErr.message);
+      showSyncStatus('error', jsonpErr.message);
+      _store.colabs  = _lsGet('gp_colaboradores', []);
+      _store.entries = _lsGet('gp_entries',        []);
+      _store.prizes  = _lsGet('gp_ranking_prizes', DEFAULT_PRIZES);
+      _store.config  = { manager_pwd: localStorage.getItem('gp_manager_pwd') || '' };
+      return;
+    }
+  }
+
+  _store.colabs  = Array.isArray(data.colabs)  ? data.colabs  : [];
+  _store.entries = Array.isArray(data.entries) ? data.entries.map(normalizeEntry) : [];
+  _store.config  = data.config || {};
+  const rawPrizes = _store.config.prizes;
+  _store.prizes  = rawPrizes ? JSON.parse(rawPrizes) : { ...DEFAULT_PRIZES };
+
+  // Migração única: se Sheets está vazio mas localStorage tem dados
+  if (!_store.colabs.length) {
+    const leg = _lsGet('gp_colaboradores', []);
+    if (leg.length) { _store.colabs = leg; _scheduleSyncToSheets(); }
+  }
+  if (!_store.entries.length) {
+    const leg = _lsGet('gp_entries', []);
+    if (leg.length) { _store.entries = leg.map(normalizeEntry); _scheduleSyncToSheets(); }
+  }
+
+  showSyncStatus('ok');
+}
+
+let _syncTimer = null;
+function _scheduleSyncToSheets() {
+  localStorage.setItem('gp_colaboradores',  JSON.stringify(_store.colabs));
+  localStorage.setItem('gp_entries',        JSON.stringify(_store.entries));
+  localStorage.setItem('gp_ranking_prizes', JSON.stringify(_store.prizes));
+  if (_store.config.manager_pwd)
+    localStorage.setItem('gp_manager_pwd', _store.config.manager_pwd);
+
+  if (!_sheetsConfigured()) return;
+  clearTimeout(_syncTimer);
+  _syncTimer = setTimeout(_syncToSheets, 800);
+}
+
+async function _syncToSheets() {
+  showSyncStatus('syncing');
+  const payload = {
+    colabs:  _store.colabs,
+    entries: _store.entries,
+    config: {
+      prizes:      JSON.stringify(_store.prizes),
+      manager_pwd: getManagerPassword(),
+    },
+  };
+
+  // Grava via GET+JSONP: funciona de qualquer origem, sem CORS, com resposta legível
+  const saveUrl = `${APPS_SCRIPT_URL}?action=save&data=${encodeURIComponent(JSON.stringify(payload))}`;
+  try {
+    const result = await _jsonpFetch(saveUrl);
+    if (result.error) throw new Error(`GAS: ${result.error}`);
+    console.log('[Sheets] Salvo com sucesso via JSONP');
+    showSyncStatus('ok');
+  } catch (err) {
+    console.error('[Sheets] Erro ao salvar:', err.message);
+    showSyncStatus('error', err.message);
+  }
+}
+
+function showSyncStatus(status, detail) {
+  const el = document.getElementById('syncStatus');
+  if (!el) return;
+  const cfg = {
+    loading: ['⏳ Carregando…',               'ss-loading'],
+    syncing: ['↑ Salvando no Sheets…',        'ss-syncing'],
+    ok:      ['✓ Sincronizado com Sheets',    'ss-ok'     ],
+    error:   ['⚠ Falha na sincronização',    'ss-error'  ],
+    offline: ['💾 Modo local (sem Sheets)',   'ss-offline'],
+  };
+  const [text, cls] = cfg[status] || cfg.error;
+  el.textContent = detail ? `${text}: ${detail}` : text;
+  el.title       = detail || '';
+  el.className   = `sync-status ${cls}`;
+  if (status === 'ok') setTimeout(() => el.classList.add('ss-fade'), 5000);
+}
+
+// Helpers localStorage
+function _lsGet(key, fallback) {
+  try { return JSON.parse(localStorage.getItem(key)) || fallback; } catch { return fallback; }
+}
+
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+
+// Avisa quando o sistema for aberto via file:// (sem servidor HTTP)
+function _checkFileProtocol() {
+  if (window.location.protocol !== 'file:') return;
+  const banner = document.getElementById('fileProtocolBanner');
+  if (banner) banner.style.display = 'flex';
+}
+
+// ── VALIDAÇÃO DE LANÇAMENTOS ─────────────────────────────────
+//
+// validationStatus:
+//   'auto_valid'     — dentro do prazo, contabilizado automaticamente
+//   'auto_invalid'   — fora do prazo (>15 dias), NÃO contabilizado
+//   'manual_valid'   — gestor validou manualmente (exceção)
+//   'manual_invalid' — gestor invalidou manualmente
+//   'pending'        — datas ausentes
+
+function computeAutoValidation(tipo, days) {
+  const et = getEntryType(tipo);
+  if (!et?.hasDeadline) return 'auto_valid';
+  if (days === null || days === undefined || days < 0) return 'pending';
+  return days <= PROTOCOL_DEADLINE ? 'auto_valid' : 'auto_invalid';
+}
+
+function isCountable(entry) {
+  const s = entry.validationStatus;
+  if (!s) return true; // compatibilidade com dados anteriores ao sistema de validação
+  return s === 'auto_valid' || s === 'manual_valid';
+}
+
+function validationLabel(entry) {
+  switch (entry.validationStatus) {
+    case 'auto_valid':     return { text: 'Válido',             cls: 'vstatus-valid' };
+    case 'auto_invalid':   return { text: 'Fora do prazo',      cls: 'vstatus-invalid' };
+    case 'manual_valid':   return { text: 'Validado (gestor)',   cls: 'vstatus-manual-valid' };
+    case 'manual_invalid': return { text: 'Invalidado (gestor)', cls: 'vstatus-manual-invalid' };
+    case 'pending':        return { text: 'Pendente',            cls: 'vstatus-pending' };
+    default:               return { text: 'Válido',             cls: 'vstatus-valid' };
+  }
+}
+
+// ── MOTOR DE CÁLCULO ─────────────────────────────────────────
+
+function calcEntry(tipo, basePoints, sentencaResult, isFast, acordaoType) {
+  let pts   = 0;
+  let money = 0;
+  basePoints = parseFloat(basePoints) || 0;
+  const rt = resolveType(tipo);
+
+  switch (rt) {
+    case 'montagem_judicial':
+    case 'montagem_adm':
+    case 'demanda_aleatoria':
+      pts   = basePoints;
+      money = 0;
+      break;
+    case 'concessao_adm':
+      pts   = basePoints;
+      money = pts * 100;
+      break;
+    case 'liminar':
+      pts   = isFast ? 1.0 : 0;
+      money = pts * 100;
+      break;
+    case 'rpv':
+      pts   = isFast ? 1.0 : 0;
+      money = pts * 100;
+      break;
+    case 'sentenca':
+      pts = basePoints;
+      if (sentencaResult === 'total') pts += 0.25;
+      if (isFast) pts += (basePoints === 0.5 ? 0.10 : 0.25);
+      pts   = Math.round(pts * 100) / 100;
+      money = pts * 100;
+      break;
+    case 'acordao':
+      pts   = acordaoType === 'com_oral' ? 2.5 : 1.5;
+      money = pts * 100;
+      break;
+  }
+  return { points: pts, value: Math.round(money * 100) / 100 };
+}
+
+function generatesAutoMoney(tipo) { return getEntryType(tipo)?.generatesMoney ?? false; }
+function isProtocolType(tipo)     { return getEntryType(tipo)?.isProtocol ?? false; }
+
+function daysBetween(d1, d2) {
+  if (!d1 || !d2) return null;
+  return Math.round((new Date(d2) - new Date(d1)) / 86400000);
+}
+function autoFast(tipo, ini, fim) {
+  const days  = daysBetween(ini, fim);
+  const limit = FAST_LIMITS[resolveType(tipo)];
+  if (days === null || !limit) return false;
+  return days <= limit;
+}
+
+// ── STATS / RANKING ──────────────────────────────────────────
+
+function getColabMonthStats(colabId, month) {
+  const all   = getEntries().filter(e => e.colabId === colabId && e.month === month);
+  const valid = all.filter(e => isCountable(e));
+
+  const totalPts    = valid.reduce((s, e) => s + (e.calculatedPoints || 0), 0);
+  const protoPts    = valid.filter(e => isProtocolType(e.tipo)).reduce((s, e) => s + (e.calculatedPoints || 0), 0);
+  const autoBonus   = valid.filter(e => generatesAutoMoney(e.tipo)).reduce((s, e) => s + (e.calculatedValue || 0), 0);
+  const volumeBonus = Math.floor(protoPts / 10) * 500;
+  return { totalPts, protoPts, autoBonus, volumeBonus, entries: all, validEntries: valid };
+}
+
+function buildMonthRanking(month) {
+  const prizes = getRankPrizes();
+  const ranked = getColabs()
+    .filter(c => c.active)
+    .map(c => {
+      const s = getColabMonthStats(c.id, month);
+      return { id: c.id, name: c.name, ...s };
+    })
+    .filter(r => r.validEntries.length > 0)
+    .sort((a, b) => b.totalPts - a.totalPts || b.protoPts - a.protoPts);
+
+  ranked.forEach((r, i) => {
+    r.rankPrize      = prizes[i + 1] || 0;
+    r.totalFinancial = r.autoBonus + r.volumeBonus + r.rankPrize;
+  });
+  return ranked;
+}
+
+// ── ESTADO ───────────────────────────────────────────────────
+
+let currentTab       = 'dashboard';
+let currentMonth     = nowYM();
+let editingId        = null;
+let managerUnlocked  = false; // sessão apenas — bloqueia ao recarregar
+
+function nowYM() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+}
+function fmtMonth(ym) {
+  if (!ym) return '';
+  const [y, m] = ym.split('-');
+  const names = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho',
+                  'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  return `${names[parseInt(m, 10) - 1]} ${y}`;
+}
+// Normaliza qualquer representação de data para "YYYY-MM-DD"
+// (Sheets devolve Date objects que JSON.stringify transforma em ISO com timezone)
+function normalizeYMD(v) {
+  if (!v) return v;
+  const s = String(v).slice(0, 10); // "2026-06-04T04:00:00.000Z" → "2026-06-04"
+  return /^\d{4}-\d{2}-\d{2}$/.test(s) ? s : String(v);
+}
+
+// Normaliza todos os campos de data de um lançamento vindo do Sheets
+function normalizeEntry(e) {
+  if (!e) return e;
+  const ini = normalizeYMD(e.ini);
+  const fim = normalizeYMD(e.fim);
+  return {
+    ...e,
+    ini,
+    fim,
+    // Recalcula month a partir do fim normalizado para garantir filtros corretos
+    month: fim ? fim.slice(0, 7) : (e.month ? String(e.month).slice(0, 7) : e.month),
+  };
+}
+
+function fmtDate(d) {
+  if (!d) return '—';
+  const clean = String(d).slice(0, 10); // remove sufixo ISO se houver
+  const [y, m, day] = clean.split('-');
+  if (!y || !m || !day) return String(d);
+  return `${day}/${m}/${y}`;
+}
+function fmtPts(n) {
+  return (parseFloat(n) || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+function fmtBRL(n) {
+  return (parseFloat(n) || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+}
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── INICIALIZAÇÃO ────────────────────────────────────────────
+
+document.addEventListener('DOMContentLoaded', async () => {
+  _checkFileProtocol();
+
+  const overlay = document.getElementById('mainLoadingOverlay');
+  if (overlay) overlay.style.display = 'flex';
+
+  // Wires de UI antes do carregamento (não dependem de dados)
+  document.getElementById('globalMonth').value = currentMonth;
+  document.getElementById('globalMonth').addEventListener('change', e => {
+    currentMonth = e.target.value;
+    renderTab();
+  });
+  document.querySelectorAll('.nav-btn').forEach(btn =>
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab))
+  );
+  buildEntryTypeOptions();
+  buildBeneficioOptions();
+  wireFormListeners();
+  document.getElementById('entryForm').addEventListener('submit', submitEntry);
+
+  // Carrega dados centralizados (Google Sheets ou localStorage)
+  await loadAllDataFromSheets();
+
+  // Colaboradores padrão se a base estiver vazia
+  if (!getColabs().length) {
+    saveColabs(['Dr. Renan','Dra. Lucimeiry','Dr. Wesley','Dra. Ana Paula',
+                'Aline','Ingrid','Analicy','Millena','Letícia Favetta','Bruna']
+      .map(name => ({ id: uid(), name, active: true })));
+  }
+
+  if (overlay) overlay.style.display = 'none';
+  renderTab();
+});
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.querySelectorAll('.tab-content').forEach(s => s.classList.toggle('active', s.id === `tab-${tab}`));
+  renderTab();
+}
+function renderTab() {
+  switch (currentTab) {
+    case 'dashboard':     renderDashboard();            break;
+    case 'individual':    renderDashboardIndividual();  break;
+    case 'lancar':        renderLancarInit();           break;
+    case 'historico':     renderHistorico();            break;
+    case 'colaboradores': renderColaboradores();        break;
+    case 'relatorios':    renderRelatorios();           break;
+  }
+}
+
+// ── DASHBOARD ────────────────────────────────────────────────
+
+function renderDashboard() {
+  document.getElementById('dashMonthLabel').textContent = fmtMonth(currentMonth);
+
+  const ranked   = buildMonthRanking(currentMonth);
+  const allStats = ranked.reduce((acc, r) => ({
+    totalPts:    acc.totalPts    + r.totalPts,
+    protoPts:    acc.protoPts   + r.protoPts,
+    autoBonus:   acc.autoBonus  + r.autoBonus,
+    volumeBonus: acc.volumeBonus + r.volumeBonus,
+    rankPrizes:  acc.rankPrizes  + r.rankPrize,
+    entries:     acc.entries     + r.validEntries.length,
+  }), { totalPts: 0, protoPts: 0, autoBonus: 0, volumeBonus: 0, rankPrizes: 0, entries: 0 });
+
+  const totalFin = allStats.autoBonus + allStats.volumeBonus + allStats.rankPrizes;
+
+  // ── Área do Gestor (cards gerenciais protegidos por senha) ──
+  const gestorSec = document.getElementById('gestorSection');
+  if (managerUnlocked) {
+    gestorSec.innerHTML = `
+      <div class="gestor-bar gestor-unlocked">
+        <span class="gestor-bar-title">🔓 Área do Gestor</span>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn-secondary btn-sm" onclick="openChangePassword()">🔑 Alterar senha</button>
+          <button class="btn-secondary btn-sm" onclick="lockGestor()">Sair da área restrita</button>
+        </div>
+      </div>`;
+    document.getElementById('kpiGrid').style.display = '';
+    document.getElementById('kpiGrid').innerHTML = `
+      <div class="kpi-card kpi-navy">
+        <div class="kpi-label">Total de Pontos</div>
+        <div class="kpi-value">${fmtPts(allStats.totalPts)}</div>
+        <div class="kpi-sub">${allStats.entries} lançamentos válidos</div>
+      </div>
+      <div class="kpi-card kpi-gold">
+        <div class="kpi-label">Bônus Automático</div>
+        <div class="kpi-value" style="font-size:20px">${fmtBRL(allStats.autoBonus)}</div>
+        <div class="kpi-sub">sentença, liminar, concessão, RPV, acórdão</div>
+      </div>
+      <div class="kpi-card kpi-green">
+        <div class="kpi-label">Bônus de Protocolo</div>
+        <div class="kpi-value" style="font-size:20px">${fmtBRL(allStats.volumeBonus)}</div>
+        <div class="kpi-sub">R$ 500 a cada 10 pts por colaborador</div>
+      </div>
+      <div class="kpi-card kpi-warn">
+        <div class="kpi-label">Total Financeiro</div>
+        <div class="kpi-value" style="font-size:20px">${fmtBRL(totalFin)}</div>
+        <div class="kpi-sub">bônus + volume + ranking</div>
+      </div>`;
+  } else {
+    gestorSec.innerHTML = `
+      <div class="gestor-bar gestor-locked">
+        <span class="gestor-bar-title">🔒 Área do Gestor</span>
+        <span class="gestor-bar-hint">Cards gerenciais protegidos</span>
+        <button class="btn-secondary btn-sm" onclick="openGestorLogin()">Acessar</button>
+      </div>`;
+    document.getElementById('kpiGrid').style.display = 'none';
+    document.getElementById('kpiGrid').innerHTML = '';
+  }
+
+  const rankBadge = i => {
+    const cls = ['rank-1','rank-2','rank-3'][i] || 'rank-n';
+    const lbl = ['🥇','🥈','🥉'][i] || (i + 1);
+    return `<span class="rank-badge ${cls}">${lbl}</span>`;
+  };
+
+  document.getElementById('rankingTable').innerHTML = ranked.length ? `
+    <table class="ranking-table">
+      <thead><tr>
+        <th>#</th><th>Colaborador</th><th>Pontos</th>
+        <th>Bônus Auto</th><th>Proto.</th><th>Vol.</th><th>Ranking</th><th>Total</th>
+      </tr></thead>
+      <tbody>
+        ${ranked.map((r, i) => `
+          <tr>
+            <td>${rankBadge(i)}</td>
+            <td class="font-bold">${escHtml(r.name)}</td>
+            <td class="pts-badge">${fmtPts(r.totalPts)}</td>
+            <td class="val-badge">${r.autoBonus > 0 ? fmtBRL(r.autoBonus) : '<span class="no-money">—</span>'}</td>
+            <td style="font-size:12px">${fmtPts(r.protoPts)} pts</td>
+            <td class="val-badge">${r.volumeBonus > 0 ? fmtBRL(r.volumeBonus) : '—'}</td>
+            <td style="color:var(--gold);font-weight:700">${r.rankPrize > 0 ? fmtBRL(r.rankPrize) : '—'}</td>
+            <td style="font-weight:800;color:var(--navy)">${fmtBRL(r.totalFinancial)}</td>
+          </tr>`).join('')}
+      </tbody>
+    </table>` : `<div class="empty-state"><div class="empty-state-icon">📊</div><p>Nenhum lançamento válido neste mês.</p></div>`;
+
+  const prizes  = getRankPrizes();
+  const leader  = ranked[0];
+  const destaques = [];
+  if (leader)
+    destaques.push({ icon: '🏆', cls: 'hi-gold', title: 'Terror do INSS do Mês',
+      desc: `${leader.name} lidera com ${fmtPts(leader.totalPts)} pts → ${fmtBRL(leader.totalFinancial)}` });
+  const protoColabs = ranked.filter(r => r.protoPts > 0);
+  if (protoColabs.length > 0) {
+    const protoLines = protoColabs.map(r => {
+      const earned = Math.floor(r.protoPts / 10);
+      const cur    = r.protoPts % 10 === 0 ? 0 : r.protoPts % 10;
+      const rem    = 10 - cur;
+      const prog   = earned > 0
+        ? `<span style="color:var(--success);font-weight:600">${earned}× R$ 500 ✓</span>${cur > 0 ? ` + ${fmtPts(cur)}/10 pts` : ''}`
+        : `${fmtPts(r.protoPts)}/10 pts — faltam ${fmtPts(rem)}`;
+      return `<div style="font-size:11px;line-height:1.9"><strong>${escHtml(r.name)}:</strong> ${prog}</div>`;
+    }).join('');
+    destaques.push({ icon: '📋', cls: 'hi-navy', title: 'Protocolo — progresso individual',
+      desc: protoLines });
+  }
+  destaques.push({ icon: '⚙️', cls: 'hi-navy', title: 'Prêmios do Ranking',
+    desc: `1º: ${fmtBRL(prizes[1])} | 2º: ${fmtBRL(prizes[2])} | 3º: ${fmtBRL(prizes[3])}` });
+
+  document.getElementById('highlights').innerHTML = destaques.map(d => `
+    <div class="highlight-item">
+      <div class="highlight-icon ${d.cls}">${d.icon}</div>
+      <div class="highlight-text">
+        <div class="highlight-title">${d.title}</div>
+        <div class="highlight-desc">${d.desc}</div>
+      </div>
+    </div>`).join('');
+
+  const recent = [...getEntries()].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 8);
+  renderEntriesTable('recentEntries', recent, false);
+}
+
+// ── DASHBOARD INDIVIDUAL ─────────────────────────────────────
+
+function renderDashboardIndividual() {
+  document.getElementById('indivMonthLabel').textContent = fmtMonth(currentMonth);
+
+  // Popula o seletor preservando a seleção atual
+  const sel  = document.getElementById('indivColaborador');
+  const prev = sel.value;
+  sel.innerHTML = '<option value="">— Selecione um colaborador —</option>';
+  getColabs().filter(c => c.active).forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c.id; opt.textContent = c.name;
+    if (c.id === prev) opt.selected = true;
+    sel.appendChild(opt);
+  });
+
+  const colabId = sel.value;
+  const content = document.getElementById('indivContent');
+
+  if (!colabId) {
+    content.innerHTML = `
+      <div class="empty-state" style="padding:64px 20px">
+        <div class="empty-state-icon">👤</div>
+        <p>Selecione um colaborador acima para ver o dashboard individual.</p>
+      </div>`;
+    return;
+  }
+
+  const colab    = getColabs().find(c => c.id === colabId);
+  const stats    = getColabMonthStats(colabId, currentMonth);
+  const ranking  = buildMonthRanking(currentMonth);
+  const rankIdx  = ranking.findIndex(r => r.id === colabId);
+  const myData   = ranking[rankIdx];
+  const prizes   = getRankPrizes();
+  const rankPrize = myData?.rankPrize || 0;
+  const totalFin  = myData?.totalFinancial ?? (stats.autoBonus + stats.volumeBonus);
+
+  const protoPts   = stats.protoPts;
+  const protoEarned = Math.floor(protoPts / 10);
+  const protoCur   = protoPts % 10 === 0 && protoPts > 0 ? 0 : protoPts % 10;
+  const protoRem   = 10 - protoCur;
+  const barPct     = Math.min((protoCur / 10) * 100, 100);
+
+  const posNum     = rankIdx + 1;
+  const rankEmojis = ['🥇','🥈','🥉'];
+  const rankEmoji  = rankEmojis[rankIdx] || `${posNum}º`;
+  const rankCls    = ['rank-1','rank-2','rank-3'][rankIdx] || 'rank-n';
+
+  const initials   = colab.name.split(' ').slice(0,2).map(w => w[0]).join('').toUpperCase();
+
+  const myEntries  = getEntries()
+    .filter(e => e.colabId === colabId && e.month === currentMonth)
+    .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+
+  const invalidCount = myEntries.filter(e => !isCountable(e)).length;
+
+  content.innerHTML = `
+    <div class="indiv-profile-bar">
+      <div class="indiv-avatar">${initials}</div>
+      <div class="indiv-profile-text">
+        <div class="indiv-name">${escHtml(colab.name)}</div>
+        <div class="indiv-period">${fmtMonth(currentMonth)}</div>
+      </div>
+      ${rankIdx >= 0
+        ? `<div class="indiv-rank-pill"><span class="rank-badge ${rankCls}">${rankEmoji}</span><span>${posNum}º lugar no ranking</span></div>`
+        : `<div class="indiv-rank-pill indiv-rank-none">Sem lançamentos válidos este mês</div>`}
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card kpi-navy">
+        <div class="kpi-label">Meus Pontos</div>
+        <div class="kpi-value">${fmtPts(stats.totalPts)}</div>
+        <div class="kpi-sub">${stats.validEntries.length} lançamento(s) válido(s)${invalidCount > 0 ? ` · ${invalidCount} não contabilizado(s)` : ''}</div>
+      </div>
+      <div class="kpi-card kpi-gold">
+        <div class="kpi-label">Meu Bônus Automático</div>
+        <div class="kpi-value" style="font-size:20px">${fmtBRL(stats.autoBonus)}</div>
+        <div class="kpi-sub">sentença, liminar, concessão, RPV, acórdão</div>
+      </div>
+      <div class="kpi-card kpi-green">
+        <div class="kpi-label">Meu Protocolo</div>
+        <div class="kpi-value" style="font-size:22px">${fmtPts(protoPts)}<span style="font-size:14px;font-weight:500;color:var(--text-muted)">/10 pts</span></div>
+        <div style="margin:8px 0 4px">
+          <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:${barPct}%"></div></div>
+        </div>
+        <div class="kpi-sub">
+          ${protoEarned > 0
+            ? `<span style="color:var(--success);font-weight:600">${protoEarned}× R$ 500 conquistado(s)</span>${protoCur > 0 ? ` · faltam ${fmtPts(protoRem)} pts` : ''}`
+            : `faltam ${fmtPts(protoRem)} pts para R$ 500`}
+        </div>
+      </div>
+      <div class="kpi-card kpi-warn">
+        <div class="kpi-label">Meu Total Financeiro</div>
+        <div class="kpi-value" style="font-size:20px">${fmtBRL(totalFin)}</div>
+        <div class="kpi-sub">automático${stats.volumeBonus > 0 ? ' + protocolo' : ''}${rankPrize > 0 ? ' + ranking' : ''}</div>
+      </div>
+    </div>
+
+    ${rankIdx >= 0 ? `
+    <div class="card mt-6 indiv-rank-card">
+      <div class="irk-badge">${rankEmoji}</div>
+      <div class="irk-info">
+        <div class="irk-title">${posNum}º lugar no ranking de ${fmtMonth(currentMonth)}</div>
+        <div class="irk-sub">${ranking.length} colaborador(es) no ranking</div>
+      </div>
+      <div class="irk-right">
+        <div class="irk-prize-label">Prêmio do ranking</div>
+        <div class="irk-prize-value ${rankPrize > 0 ? 'irk-prize-yes' : 'irk-prize-no'}">${rankPrize > 0 ? fmtBRL(rankPrize) : '—'}</div>
+        ${posNum > 3 ? `<div style="font-size:10px;color:var(--text-muted);margin-top:2px">prêmio: top 3 apenas</div>` : ''}
+      </div>
+    </div>` : ''}
+
+    <div class="indiv-summary-grid mt-6">
+      <div class="card" style="padding:14px 18px">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);margin-bottom:10px">Detalhamento financeiro</div>
+        <div class="fin-summary">
+          <div class="fin-row"><span class="fin-label">Pontos totais (válidos)</span><span class="fin-value font-bold">${fmtPts(stats.totalPts)}</span></div>
+          <div class="fin-row"><span class="fin-label">Pontos de protocolo válidos</span><span class="fin-value">${fmtPts(protoPts)}</span></div>
+          <div class="fin-row"><span class="fin-label">Bônus automático individual</span><span class="fin-value money">${fmtBRL(stats.autoBonus)}</span></div>
+          <div class="fin-row"><span class="fin-label">Bônus de volume de protocolo</span><span class="fin-value money">${fmtBRL(stats.volumeBonus)}</span></div>
+          <div class="fin-row"><span class="fin-label">Prêmio do ranking</span><span class="fin-value prize">${rankPrize > 0 ? fmtBRL(rankPrize) : '—'}</span></div>
+          <div class="fin-row fin-total"><span class="fin-label">Total financeiro do mês</span><span class="fin-value">${fmtBRL(totalFin)}</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mt-6">
+      <div class="card-header" style="display:flex;align-items:center;justify-content:space-between">
+        <h3>📋 Meus Lançamentos — ${fmtMonth(currentMonth)}</h3>
+        <span style="font-size:12px;color:var(--text-muted)">${myEntries.length} total · ${myEntries.filter(e => isCountable(e)).length} válidos</span>
+      </div>
+      <div id="indivEntriesTable"></div>
+    </div>`;
+
+  renderEntriesTable('indivEntriesTable', myEntries, false);
+}
+
+// ── CONFIG PRÊMIOS DO RANKING ────────────────────────────────
+
+function openRankingConfig() {
+  const p = getRankPrizes();
+  openModal('⚙ Configurar Prêmios do Ranking', `
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">
+      Valores pagos ao 1º, 2º e 3º colocados. Acumulam com bônus automático e de protocolo.
+    </p>
+    <div class="config-grid">
+      <div class="config-prize rank-1">
+        <label>🥇 1º Lugar</label>
+        <input type="number" id="prize1" class="form-control" value="${p[1]}" min="0" step="50">
+      </div>
+      <div class="config-prize rank-2">
+        <label>🥈 2º Lugar</label>
+        <input type="number" id="prize2" class="form-control" value="${p[2]}" min="0" step="50">
+      </div>
+      <div class="config-prize rank-3">
+        <label>🥉 3º Lugar</label>
+        <input type="number" id="prize3" class="form-control" value="${p[3]}" min="0" step="50">
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+      <button class="btn-primary" onclick="saveRankingConfigModal()">Salvar</button>
+    </div>`);
+}
+
+function saveRankingConfigModal() {
+  saveRankPrizes({
+    1: parseFloat(document.getElementById('prize1').value) || 0,
+    2: parseFloat(document.getElementById('prize2').value) || 0,
+    3: parseFloat(document.getElementById('prize3').value) || 0,
+  });
+  closeModal();
+  showToast('Prêmios do ranking atualizados!', 'success');
+  renderDashboard();
+}
+
+// ── GESTOR: LOGIN / LOGOUT / TROCA DE SENHA ──────────────────
+
+function openGestorLogin() {
+  openModal('🔒 Área do Gestor', `
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">
+      Digite a senha para acessar os dados gerenciais.<br>
+      O acesso se encerra ao recarregar a página.
+    </p>
+    <div class="form-group">
+      <label class="form-label required">Senha</label>
+      <input type="password" id="gestorPwd" class="form-control" autofocus
+        onkeydown="if(event.key==='Enter')confirmGestorLogin()">
+    </div>
+    <div id="gestorPwdError" style="color:var(--danger);font-size:12px;margin-top:-8px;display:none">
+      Senha incorreta.
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+      <button class="btn-primary" onclick="confirmGestorLogin()">Entrar</button>
+    </div>`);
+}
+
+function confirmGestorLogin() {
+  const input = document.getElementById('gestorPwd');
+  if (!input) return;
+  if (input.value === getManagerPassword()) {
+    managerUnlocked = true;
+    closeModal();
+    renderDashboard();
+  } else {
+    document.getElementById('gestorPwdError').style.display = '';
+    input.value = '';
+    input.focus();
+  }
+}
+
+function lockGestor() {
+  managerUnlocked = false;
+  renderDashboard();
+}
+
+function openChangePassword() {
+  openModal('🔑 Alterar Senha do Gestor', `
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">
+      Para alterar diretamente no código, edite a constante
+      <code>DEFAULT_MANAGER_PASSWORD</code> no início de script.js.
+    </p>
+    <div class="form-group">
+      <label class="form-label required">Nova senha</label>
+      <input type="password" id="pwdNew" class="form-control" placeholder="Mínimo 4 caracteres" autofocus>
+    </div>
+    <div class="form-group">
+      <label class="form-label required">Confirmar nova senha</label>
+      <input type="password" id="pwdConfirm" class="form-control">
+    </div>
+    <div id="pwdError" style="color:var(--danger);font-size:12px;margin-top:-8px;display:none"></div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+      <button class="btn-primary" onclick="confirmChangePassword()">Salvar senha</button>
+    </div>`);
+}
+
+function confirmChangePassword() {
+  const n   = document.getElementById('pwdNew').value;
+  const c   = document.getElementById('pwdConfirm').value;
+  const err = document.getElementById('pwdError');
+  if (!n || n.length < 4) {
+    err.style.display = ''; err.textContent = 'A senha deve ter pelo menos 4 caracteres.'; return;
+  }
+  if (n !== c) {
+    err.style.display = ''; err.textContent = 'As senhas não coincidem.'; return;
+  }
+  _store.config.manager_pwd = n;
+  _scheduleSyncToSheets();
+  closeModal();
+  showToast('Senha do gestor atualizada!', 'success');
+}
+
+// ── FORM DE LANÇAMENTO ───────────────────────────────────────
+
+function buildEntryTypeOptions() {
+  const sel = document.getElementById('fTipo');
+  ENTRY_TYPES.forEach(t => {
+    const opt = document.createElement('option');
+    opt.value = t.value; opt.textContent = t.label;
+    sel.appendChild(opt);
+  });
+}
+
+function buildBeneficioOptions() {
+  const sel = document.getElementById('fBeneficio');
+  sel.innerHTML = '<option value="">— Selecione o benefício —</option>';
+  const groups = {};
+  Object.entries(BENEFIT_TYPES).forEach(([k, v]) => {
+    if (!groups[v.group]) groups[v.group] = [];
+    groups[v.group].push([k, v]);
+  });
+  Object.entries(groups).forEach(([grp, items]) => {
+    const og = document.createElement('optgroup');
+    og.label = grp;
+    items.forEach(([k, v]) => {
+      const opt = document.createElement('option');
+      opt.value = k; opt.textContent = v.label;
+      og.appendChild(opt);
+    });
+    sel.appendChild(og);
+  });
+}
+
+function wireFormListeners() {
+  ['fTipo','fBeneficio','fPontosManual','fDataInicial','fDataFinal','fFast'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('change', onFormChange);
+  });
+  document.querySelectorAll('input[name="sentencaResult"]').forEach(r => r.addEventListener('change', onFormChange));
+  document.querySelectorAll('input[name="acordaoType"]').forEach(r => r.addEventListener('change', onFormChange));
+}
+
+function onFormChange() {
+  const tipo  = document.getElementById('fTipo').value;
+  const rt    = resolveType(tipo);
+  const hints = DATE_HINTS[rt] || { ini: 'Data inicial', fim: 'Data final' };
+  const et    = getEntryType(tipo);
+
+  document.getElementById('tipoHint').textContent = et ? et.desc : '';
+  document.getElementById('hintDataInicial').textContent = hints.ini;
+  document.getElementById('hintDataFinal').textContent   = hints.fim;
+
+  const showBenef  = ['montagem_judicial','sentenca','montagem_adm','concessao_adm'].includes(rt);
+  const showManual = rt === 'demanda_aleatoria';
+  const showSent   = rt === 'sentenca';
+  const showAcord  = rt === 'acordao';
+  const showFast   = ['liminar','rpv','sentenca'].includes(rt);
+
+  toggle('grpBeneficio',    showBenef);
+  toggle('grpPontosManual', showManual);
+  toggle('grpSentenca',     showSent);
+  toggle('grpAcordao',      showAcord);
+  toggle('grpFast',         showFast);
+
+  if (showFast) {
+    const ini   = document.getElementById('fDataInicial').value;
+    const fim   = document.getElementById('fDataFinal').value;
+    const days  = daysBetween(ini, fim);
+    const limit = FAST_LIMITS[rt];
+    const fast  = autoFast(tipo, ini, fim);
+    document.getElementById('fFast').checked = fast;
+    const labels = {
+      liminar: 'Liminar obtida em até 60 dias → 1 ponto + R$ 100',
+      rpv:     'RPV levantado em até 165 dias → 1 ponto + R$ 100',
+      sentenca:'Sentença em até 150 dias (+0,25/+0,10)',
+    };
+    document.getElementById('fastLabel').textContent = labels[rt] || 'Prazo rápido';
+    if (days !== null && limit) {
+      document.getElementById('fastHint').textContent =
+        fast ? `✓ ${days} dias — dentro do prazo de ${limit} dias` :
+               (days > 0 ? `${days} dias — fora do prazo de ${limit} dias` : '');
+    } else {
+      document.getElementById('fastHint').textContent = limit ? `Prazo limite: ${limit} dias` : '';
+    }
+  }
+
+  updatePreview();
+}
+
+function toggle(id, show) {
+  document.getElementById(id).style.display = show ? '' : 'none';
+}
+
+function updatePreview() {
+  const tipo    = document.getElementById('fTipo').value;
+  const colabId = document.getElementById('fColaborador').value;
+  const panel   = document.getElementById('previewPanel');
+
+  if (!tipo || !colabId) {
+    panel.innerHTML = `<div class="preview-empty"><div class="preview-icon">⭐</div><p>Preencha o formulário ao lado para ver o cálculo automático.</p></div>`;
+    return;
+  }
+
+  const colab      = getColabs().find(c => c.id === colabId);
+  const et         = getEntryType(tipo);
+  const rt         = resolveType(tipo);
+  const hasDeadline = et?.hasDeadline ?? false;
+
+  let basePoints = 0;
+  if (['montagem_judicial','sentenca','montagem_adm','concessao_adm'].includes(rt)) {
+    const bk = document.getElementById('fBeneficio').value;
+    basePoints = bk && BENEFIT_TYPES[bk] ? BENEFIT_TYPES[bk].points : 0;
+  } else if (rt === 'demanda_aleatoria') {
+    basePoints = parseFloat(document.getElementById('fPontosManual').value) || 0;
+  }
+
+  const sentResult  = document.querySelector('input[name="sentencaResult"]:checked')?.value || '';
+  const isFast      = document.getElementById('fFast').checked;
+  const acordaoType = document.querySelector('input[name="acordaoType"]:checked')?.value || '';
+  const ini         = document.getElementById('fDataInicial').value;
+  const fim         = document.getElementById('fDataFinal').value;
+  const days        = daysBetween(ini, fim);
+
+  const { points, value } = calcEntry(tipo, basePoints, sentResult, isFast, acordaoType);
+  const autoStatus  = computeAutoValidation(tipo, days);
+  const willCount   = autoStatus === 'auto_valid';
+  const isProto     = isProtocolType(tipo);
+  const hasMoney    = generatesAutoMoney(tipo);
+
+  const effectivePts   = willCount ? points : 0;
+  const effectiveVal   = willCount ? value  : 0;
+  const effectiveProto = willCount && isProto ? points : 0;
+
+  const protoCurrent = isProto ? getColabMonthStats(colabId, currentMonth).protoPts : 0;
+  const protoNew     = protoCurrent + effectiveProto;
+  const bonusNew     = Math.floor(protoNew / 10) - Math.floor(protoCurrent / 10);
+
+  const rows = [];
+
+  if (hasDeadline) {
+    const inTime = days !== null && days <= PROTOCOL_DEADLINE;
+    rows.push({ label: 'Prazo calculado', raw: true,
+      value: days !== null
+        ? `<strong>${days} dias</strong> (limite: ${PROTOCOL_DEADLINE} dias)`
+        : `<span style="color:var(--text-muted)">Informe as datas</span>` });
+    rows.push({ label: `Dentro do prazo de ${PROTOCOL_DEADLINE} dias`, raw: true,
+      value: days !== null
+        ? (inTime ? `<span style="color:var(--success);font-weight:700">✓ Sim</span>`
+                  : `<span style="color:var(--danger);font-weight:700">✗ Não</span>`)
+        : `<span style="color:var(--text-muted)">—</span>` });
+    rows.push({ label: 'Ponto válido', raw: true,
+      value: days !== null
+        ? (willCount ? `<span style="color:var(--success);font-weight:700">✓ Sim</span>`
+                     : `<span style="color:var(--danger);font-weight:700">✗ Não</span>`)
+        : `<span style="color:var(--text-muted)">—</span>` });
+    rows.push({ label: 'Conta para protocolo', raw: true,
+      value: isProto && willCount
+        ? `<span class="proto-check">✓ Sim</span>`
+        : (isProto ? `<span style="color:var(--danger);font-weight:700">✗ Não (fora do prazo)</span>`
+                   : `<span class="proto-dash">—</span>`) });
+  } else {
+    if (rt === 'sentenca') {
+      rows.push({ label: 'Resultado', value: sentResult === 'total' ? 'Totalmente Procedente' : 'Parcialmente Procedente' });
+      rows.push({ label: 'Prazo rápido', raw: true,
+        value: isFast ? `<span style="color:var(--success);font-weight:600">Sim (+bônus)</span>` : `<span style="color:var(--warning)">Não</span>` });
+    }
+    if (['liminar','rpv'].includes(rt)) {
+      rows.push({ label: 'Dentro do prazo', raw: true,
+        value: isFast ? `<span style="color:var(--success);font-weight:600">Sim</span>` : `<span style="color:var(--warning)">Não (0 pontos)</span>` });
+    }
+    if (rt === 'acordao') {
+      rows.push({ label: 'Recurso', value: acordaoType === 'com_oral' ? 'Com Sustentação Oral' : 'Sem Sustentação Oral' });
+    }
+    if (days !== null) rows.push({ label: 'Prazo', value: `${days} dias` });
+    rows.push({ label: 'Conta para protocolo', raw: true,
+      value: isProto ? `<span class="proto-check">✓ Sim</span>` : `<span class="proto-dash">—</span>` });
+  }
+
+  const alertHtml = (hasDeadline && days !== null && !willCount) ? `
+    <div class="preview-alert">
+      <div class="pa-icon">⚠️</div>
+      <div class="pa-text">Este lançamento ficará registrado, mas <strong>não será contabilizado</strong> porque ultrapassou o prazo de ${PROTOCOL_DEADLINE} dias.<br>O gestor pode validar manualmente no histórico.</div>
+    </div>` : '';
+
+  let bonusHtml = '';
+  if (isProto && willCount && bonusNew > 0) {
+    bonusHtml = `<div class="preview-bonus"><div class="pb-title">🎉 Bônus de Volume Atingido!</div><div class="pb-text">Este lançamento completa ${bonusNew}× meta de 10 pts → +${fmtBRL(bonusNew * 500)}</div></div>`;
+  } else if (isProto && willCount && protoNew < 10) {
+    bonusHtml = `<div class="preview-bonus"><div class="pb-title">📋 Protocolo acumulado</div><div class="pb-text">Após este lançamento: ${fmtPts(protoNew)}/10 pts — faltam ${fmtPts(10 - protoNew)} pts para R$ 500</div></div>`;
+  }
+
+  panel.innerHTML = `
+    <div class="preview-header">
+      <div class="ph-title">Cálculo automático</div>
+      <div class="ph-name">${colab ? escHtml(colab.name) : ''}</div>
+    </div>
+    <div class="preview-points">
+      <div class="pp-main">
+        <div class="pp-pts ${!willCount && hasDeadline ? 'pp-pts-invalid' : ''}">${fmtPts(effectivePts)}</div>
+        <div class="pp-pts-label">${!willCount && hasDeadline ? 'pontos (não contabilizados)' : 'pontos'}</div>
+      </div>
+      <div class="pp-sep"></div>
+      <div class="pp-val">
+        ${hasMoney && willCount
+          ? `<div class="pp-brl">${fmtBRL(effectiveVal)}</div><div class="pp-brl-label">bônus automático</div>`
+          : `<div style="font-size:13px;color:var(--text-muted);text-align:center;padding:8px 0">Sem bônus<br>automático</div>`
+        }
+      </div>
+    </div>
+    <div class="preview-details">
+      ${rows.map(r => `
+        <div class="preview-detail-row">
+          <span class="pd-label">${r.label}</span>
+          <span class="pd-value">${r.raw ? r.value : escHtml(String(r.value))}</span>
+        </div>`).join('')}
+    </div>
+    ${alertHtml}
+    ${bonusHtml}`;
+}
+
+function renderLancarInit() {
+  const sel  = document.getElementById('fColaborador');
+  const prev = sel.value;
+  sel.innerHTML = '<option value="">— Selecione —</option>';
+  getColabs().filter(c => c.active).forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c.id; opt.textContent = c.name;
+    if (c.id === prev) opt.selected = true;
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', updatePreview);
+  document.getElementById('formTitle').textContent = editingId ? 'Editar Lançamento' : 'Lançar Pontos';
+  document.getElementById('submitBtn').textContent = editingId ? 'Salvar Alterações' : 'Lançar Pontos';
+}
+
+function resetForm() {
+  editingId = null;
+  document.getElementById('entryForm').reset();
+  document.getElementById('formTitle').textContent = 'Lançar Pontos';
+  document.getElementById('submitBtn').textContent = 'Lançar Pontos';
+  ['grpBeneficio','grpPontosManual','grpSentenca','grpAcordao','grpFast'].forEach(id => toggle(id, false));
+  document.getElementById('tipoHint').textContent   = '';
+  document.getElementById('previewPanel').innerHTML = `<div class="preview-empty"><div class="preview-icon">⭐</div><p>Preencha o formulário ao lado para ver o cálculo automático.</p></div>`;
+}
+
+function submitEntry(e) {
+  e.preventDefault();
+  const colabId  = document.getElementById('fColaborador').value;
+  const processo = document.getElementById('fProcesso').value.trim();
+  const trello   = document.getElementById('fTrello').value.trim();
+  const tipo     = document.getElementById('fTipo').value;
+  const ini      = document.getElementById('fDataInicial').value;
+  const fim      = document.getElementById('fDataFinal').value;
+  const notes    = document.getElementById('fNotes').value.trim();
+  const rt       = resolveType(tipo);
+
+  if (!colabId || !processo || !tipo || !ini || !fim) {
+    showToast('Preencha todos os campos obrigatórios.', 'error'); return;
+  }
+
+  let beneficioKey = '', basePoints = 0;
+  if (['montagem_judicial','sentenca','montagem_adm','concessao_adm'].includes(rt)) {
+    beneficioKey = document.getElementById('fBeneficio').value;
+    if (!beneficioKey) { showToast('Selecione o tipo de benefício.', 'error'); return; }
+    basePoints = BENEFIT_TYPES[beneficioKey]?.points || 0;
+  } else if (rt === 'demanda_aleatoria') {
+    basePoints = parseFloat(document.getElementById('fPontosManual').value) || 0;
+  }
+
+  const sentResult  = document.querySelector('input[name="sentencaResult"]:checked')?.value || '';
+  const isFast      = document.getElementById('fFast').checked;
+  const acordaoType = document.querySelector('input[name="acordaoType"]:checked')?.value || '';
+
+  if (rt === 'sentenca' && !sentResult)  { showToast('Selecione o resultado da sentença.', 'error'); return; }
+  if (rt === 'acordao'  && !acordaoType) { showToast('Selecione o tipo de recurso.', 'error'); return; }
+
+  const { points, value } = calcEntry(tipo, basePoints, sentResult, isFast, acordaoType);
+  const calculatedDays    = daysBetween(ini, fim);
+  const autoStatus        = computeAutoValidation(tipo, calculatedDays);
+  const month             = fim.slice(0, 7);
+
+  const existingEntry = editingId ? getEntries().find(x => x.id === editingId) : null;
+  const wasManual     = existingEntry?.validationStatus?.startsWith('manual_');
+
+  const entry = {
+    id: editingId || uid(),
+    colabId, processo, trello,
+    tipo: rt, // sempre salva o tipo normalizado
+    beneficioKey, basePoints,
+    sentResult, isFast, acordaoType,
+    ini, fim,
+    days: calculatedDays,
+    calculatedPoints: points,
+    calculatedValue:  value,
+    validationStatus: wasManual ? existingEntry.validationStatus : autoStatus,
+    validationNote:   wasManual ? existingEntry.validationNote   : '',
+    month, notes,
+    createdAt: existingEntry?.createdAt || new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+
+  let entries = getEntries();
+  if (editingId) {
+    entries = entries.map(x => x.id === editingId ? entry : x);
+    showToast('Lançamento atualizado!', 'success');
+  } else {
+    entries.push(entry);
+    if (autoStatus === 'auto_invalid') {
+      showToast(`Registrado — mas fora do prazo de ${PROTOCOL_DEADLINE} dias. Não contabilizado.`, 'warning');
+    } else {
+      const moneyMsg = value > 0 ? ` + ${fmtBRL(value)} bônus automático` : '';
+      showToast(`${fmtPts(points)} pts registrados${moneyMsg}`, 'success');
+    }
+  }
+  saveEntries(entries);
+  editingId = null;
+  resetForm();
+  switchTab('dashboard');
+}
+
+// ── HISTÓRICO ────────────────────────────────────────────────
+
+function renderHistorico() {
+  const selCol  = document.getElementById('histColaborador');
+  const selTipo = document.getElementById('histTipo');
+  const mInput  = document.getElementById('histMonth');
+  if (!mInput.value) mInput.value = currentMonth;
+
+  const prevCol = selCol.value;
+  selCol.innerHTML = '<option value="">Todos</option>';
+  getColabs().forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c.id; opt.textContent = c.name;
+    if (c.id === prevCol) opt.selected = true;
+    selCol.appendChild(opt);
+  });
+  if (selTipo.options.length <= 1) {
+    ENTRY_TYPES.forEach(t => {
+      const opt = document.createElement('option');
+      opt.value = t.value; opt.textContent = t.label;
+      selTipo.appendChild(opt);
+    });
+  }
+
+  let entries = getEntries();
+  if (selCol.value)  entries = entries.filter(e => e.colabId === selCol.value);
+  if (mInput.value)  entries = entries.filter(e => e.month === mInput.value);
+  if (selTipo.value) entries = entries.filter(e => resolveType(e.tipo) === selTipo.value);
+  entries = [...entries].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+
+  renderEntriesTable('entriesTable', entries, true);
+}
+
+function clearHistFilters() {
+  document.getElementById('histColaborador').value = '';
+  document.getElementById('histMonth').value = currentMonth;
+  document.getElementById('histTipo').value = '';
+  renderHistorico();
+}
+
+function renderEntriesTable(containerId, entries, showActions) {
+  const container = document.getElementById(containerId);
+  if (!entries.length) {
+    container.innerHTML = `<div class="empty-state"><div class="empty-state-icon">📋</div><p>Nenhum lançamento encontrado.</p></div>`;
+    return;
+  }
+  const colabMap = Object.fromEntries(getColabs().map(c => [c.id, c.name]));
+
+  container.innerHTML = `
+    <div class="entries-table-wrap">
+      <table class="entries-table">
+        <thead><tr>
+          <th>Colaborador</th><th>Processo</th><th>Tipo</th><th>Benefício</th>
+          <th>Data Final</th><th>Prazo</th>
+          <th>Status</th><th>Contabiliza?</th>
+          <th>Pontos</th><th>Bônus Auto</th><th>Trello</th>
+          ${showActions ? '<th>Ações</th>' : ''}
+        </tr></thead>
+        <tbody>
+          ${entries.map(e => {
+            const rt         = resolveType(e.tipo);
+            const typeName   = getEntryType(e.tipo)?.label || e.tipo;
+            const benefLabel = e.beneficioKey && BENEFIT_TYPES[e.beneficioKey]
+              ? BENEFIT_TYPES[e.beneficioKey].label : '—';
+            const fastTag    = e.isFast ? `<span class="tag tag-green" style="font-size:10px">Rápido</span>` : '';
+            const daysTxt    = e.days !== null && e.days >= 0 ? `${e.days}d` : '—';
+            const vl         = validationLabel(e);
+            const countable  = isCountable(e);
+            const hasMoney   = generatesAutoMoney(e.tipo);
+
+            const trelloCell = e.trello
+              ? `<a class="btn-icon btn-trello" href="${escHtml(e.trello)}" target="_blank" rel="noopener noreferrer" title="Abrir tarefa no Trello">🔗</a>`
+              : '';
+
+            let actionBtns = '';
+            if (showActions) {
+              const s = e.validationStatus;
+              if (s === 'auto_invalid' || s === 'manual_invalid') {
+                actionBtns += `<button class="btn-icon btn-validate" onclick="promptManualValidate('${e.id}')" title="Validar">✅</button>`;
+              }
+              if (!s || s === 'auto_valid' || s === 'manual_valid') {
+                actionBtns += `<button class="btn-icon btn-invalidate" onclick="promptManualInvalidate('${e.id}')" title="Invalidar">⛔</button>`;
+              }
+              actionBtns += `<button class="btn-icon" onclick="editEntry('${e.id}')" title="Editar">✏️</button>`;
+              actionBtns += `<button class="btn-icon danger" onclick="deleteEntry('${e.id}')" title="Excluir">🗑️</button>`;
+            }
+
+            return `
+              <tr class="${!countable ? 'row-invalid' : ''}">
+                <td class="font-bold">${colabMap[e.colabId] || '—'}</td>
+                <td style="font-size:11px;color:var(--text-muted)">${escHtml(e.processo)}</td>
+                <td><span class="tag ${typeTagClass(rt)}">${typeName}</span></td>
+                <td style="font-size:12px">${benefLabel}</td>
+                <td>${fmtDate(e.fim)}</td>
+                <td>${daysTxt} ${fastTag}</td>
+                <td>
+                  <span class="vstatus ${vl.cls}">${vl.text}</span>
+                  ${e.validationNote ? `<div class="vnote" title="${escHtml(e.validationNote)}">📝 ${escHtml(e.validationNote.slice(0,40))}${e.validationNote.length > 40 ? '…' : ''}</div>` : ''}
+                </td>
+                <td>${countable
+                  ? `<span class="countable-yes">✓ Sim</span>`
+                  : `<span class="countable-no">✗ Não</span>`}</td>
+                <td class="${countable ? 'pts-badge' : 'pts-badge-invalid'}">${fmtPts(countable ? (e.calculatedPoints || 0) : 0)}</td>
+                <td>${hasMoney && countable
+                  ? `<span class="val-badge">${fmtBRL(e.calculatedValue || 0)}</span>`
+                  : `<span class="no-money">—</span>`}</td>
+                <td>${trelloCell}</td>
+                ${showActions ? `<td style="white-space:nowrap;min-width:120px">${actionBtns}</td>` : ''}
+              </tr>`;
+          }).join('')}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+function typeTagClass(tipo) {
+  const map = {
+    montagem_judicial: 'tag-navy', montagem_adm: 'tag-navy', inicial: 'tag-navy',
+    concessao_adm: 'tag-green', sentenca: 'tag-gold',
+    rpv: 'tag-green', liminar: 'tag-warn',
+    acordao: 'tag-gold', demanda_aleatoria: 'tag-gray',
+  };
+  return map[resolveType(tipo)] || 'tag-gray';
+}
+
+// ── AÇÕES DO GESTOR: VALIDAR / INVALIDAR ─────────────────────
+
+function promptManualValidate(id) {
+  const entry = getEntries().find(e => e.id === id);
+  if (!entry) return;
+  const colab = getColabs().find(c => c.id === entry.colabId);
+  openModal('✅ Validar Lançamento', `
+    <p style="font-size:13px;margin-bottom:12px">
+      Você está validando manualmente este lançamento. Esta é uma
+      <strong>exceção</strong> e ficará registrada com destaque no histórico.
+    </p>
+    <div style="background:var(--warning-bg);border-radius:8px;padding:12px 14px;font-size:13px;margin-bottom:14px">
+      <strong>${escHtml(colab?.name || '—')}</strong> — ${getEntryType(entry.tipo)?.label || entry.tipo}<br>
+      Processo: ${escHtml(entry.processo)} | ${entry.days !== null ? entry.days + ' dias' : '—'}
+    </div>
+    <div class="form-group">
+      <label class="form-label">Motivo da validação excepcional</label>
+      <textarea id="validateNote" class="form-control" rows="2" placeholder="Ex: Atraso justificado por força maior..."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+      <button class="btn-primary" onclick="confirmManualValidate('${id}')">Confirmar Validação</button>
+    </div>`);
+}
+
+function confirmManualValidate(id) {
+  const note = document.getElementById('validateNote')?.value.trim() || 'Validado manualmente pelo gestor';
+  let entries = getEntries();
+  entries = entries.map(e => e.id === id
+    ? { ...e, validationStatus: 'manual_valid', validationNote: note, updatedAt: new Date().toISOString() }
+    : e);
+  saveEntries(entries);
+  closeModal();
+  showToast('Lançamento validado manualmente!', 'success');
+  renderTab();
+}
+
+function promptManualInvalidate(id) {
+  const entry = getEntries().find(e => e.id === id);
+  if (!entry) return;
+  const colab = getColabs().find(c => c.id === entry.colabId);
+  openModal('⛔ Invalidar Lançamento', `
+    <p style="font-size:13px;margin-bottom:12px">
+      O lançamento será marcado como <strong>inválido</strong> e deixará de contar no ranking e bônus.
+    </p>
+    <div style="background:var(--danger-bg);border-radius:8px;padding:12px 14px;font-size:13px;margin-bottom:14px">
+      <strong>${escHtml(colab?.name || '—')}</strong> — ${getEntryType(entry.tipo)?.label || entry.tipo}<br>
+      Processo: ${escHtml(entry.processo)}
+    </div>
+    <div class="form-group">
+      <label class="form-label">Motivo da invalidação</label>
+      <textarea id="invalidateNote" class="form-control" rows="2" placeholder="Ex: Prazo não cumprido, processo incorreto..."></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+      <button class="btn-danger" onclick="confirmManualInvalidate('${id}')">Confirmar Invalidação</button>
+    </div>`);
+}
+
+function confirmManualInvalidate(id) {
+  const note = document.getElementById('invalidateNote')?.value.trim() || 'Invalidado pelo gestor';
+  let entries = getEntries();
+  entries = entries.map(e => e.id === id
+    ? { ...e, validationStatus: 'manual_invalid', validationNote: note, updatedAt: new Date().toISOString() }
+    : e);
+  saveEntries(entries);
+  closeModal();
+  showToast('Lançamento invalidado.', 'warning');
+  renderTab();
+}
+
+// ── EDITAR / EXCLUIR ─────────────────────────────────────────
+
+function editEntry(id) {
+  const entry = getEntries().find(e => e.id === id);
+  if (!entry) return;
+  editingId = id;
+  switchTab('lancar');
+  setTimeout(() => {
+    renderLancarInit();
+    const rt = resolveType(entry.tipo);
+    document.getElementById('fColaborador').value = entry.colabId;
+    document.getElementById('fProcesso').value    = entry.processo;
+    document.getElementById('fTrello').value      = entry.trello || '';
+    document.getElementById('fTipo').value        = rt;
+    document.getElementById('fNotes').value       = entry.notes || '';
+    onFormChange();
+    if (entry.beneficioKey) document.getElementById('fBeneficio').value = entry.beneficioKey;
+    if (rt === 'demanda_aleatoria') {
+      const sel = document.getElementById('fPontosManual');
+      for (const opt of sel.options) {
+        if (parseFloat(opt.value) === entry.basePoints) { sel.value = opt.value; break; }
+      }
+    }
+    if (entry.sentResult) {
+      const r = document.querySelector(`input[name="sentencaResult"][value="${entry.sentResult}"]`);
+      if (r) r.checked = true;
+    }
+    if (entry.acordaoType) {
+      const r = document.querySelector(`input[name="acordaoType"][value="${entry.acordaoType}"]`);
+      if (r) r.checked = true;
+    }
+    document.getElementById('fFast').checked      = entry.isFast;
+    document.getElementById('fDataInicial').value = entry.ini;
+    document.getElementById('fDataFinal').value   = entry.fim;
+    updatePreview();
+  }, 50);
+}
+
+function deleteEntry(id) {
+  const entry = getEntries().find(e => e.id === id);
+  if (!entry) return;
+  const colab = getColabs().find(c => c.id === entry.colabId);
+  openModal('Confirmar Exclusão', `
+    <p>Deseja excluir este lançamento?</p>
+    <div style="margin:14px 0;padding:12px;background:var(--danger-bg);border-radius:8px;font-size:13px">
+      <strong>${colab?.name || '—'}</strong> — ${getEntryType(entry.tipo)?.label || ''}<br>
+      Processo: ${escHtml(entry.processo)}<br>
+      Pontos: ${fmtPts(entry.calculatedPoints || 0)}
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+      <button class="btn-danger" onclick="confirmDelete('${id}')">Excluir</button>
+    </div>`);
+}
+
+function confirmDelete(id) {
+  saveEntries(getEntries().filter(e => e.id !== id));
+  closeModal();
+  showToast('Lançamento excluído.', 'warning');
+  renderTab();
+}
+
+// ── COLABORADORES ────────────────────────────────────────────
+
+function renderColaboradores() {
+  const colabs    = getColabs();
+  const container = document.getElementById('colaboradoresList');
+  if (!colabs.length) {
+    container.innerHTML = `<div class="empty-state"><div class="empty-state-icon">👥</div><p>Nenhum colaborador cadastrado.</p></div>`;
+    return;
+  }
+  container.innerHTML = `
+    <div class="colabs-grid">
+      ${colabs.map(c => {
+        const initials = c.name.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
+        const totalPts = getEntries().filter(e => e.colabId === c.id && isCountable(e))
+                           .reduce((s,e) => s + (e.calculatedPoints || 0), 0);
+        return `
+          <div class="colab-card">
+            <div class="colab-avatar" style="background:${c.active?'var(--navy)':'#aaa'}">${initials}</div>
+            <div class="colab-info">
+              <div class="colab-name">${escHtml(c.name)}</div>
+              <div class="colab-status ${c.active?'status-active':'status-inactive'}">${c.active?'● Ativo':'○ Inativo'}</div>
+              <div style="font-size:11px;color:var(--text-muted);margin-top:2px">${fmtPts(totalPts)} pts válidos acumulados</div>
+            </div>
+            <div class="colab-actions">
+              <button class="btn-icon" onclick="editColab('${c.id}')" title="Editar">✏️</button>
+              <button class="btn-icon" onclick="toggleColabActive('${c.id}')" title="${c.active?'Desativar':'Ativar'}">${c.active?'🔒':'🔓'}</button>
+            </div>
+          </div>`;
+      }).join('')}
+    </div>`;
+}
+
+function openAddColaborador() {
+  openModal('Novo Colaborador', `
+    <div class="form-group">
+      <label class="form-label required">Nome</label>
+      <input type="text" id="newColabName" class="form-control" placeholder="Nome completo" autofocus>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+      <button class="btn-primary" onclick="saveNewColab()">Adicionar</button>
+    </div>`);
+}
+function saveNewColab() {
+  const name = document.getElementById('newColabName')?.value.trim();
+  if (!name) { showToast('Informe o nome.', 'error'); return; }
+  const colabs = getColabs();
+  colabs.push({ id: uid(), name, active: true });
+  saveColabs(colabs);
+  closeModal();
+  showToast(`${name} adicionado(a)!`, 'success');
+  renderColaboradores();
+}
+function editColab(id) {
+  const c = getColabs().find(c => c.id === id);
+  if (!c) return;
+  openModal('Editar Colaborador', `
+    <div class="form-group">
+      <label class="form-label required">Nome</label>
+      <input type="text" id="editColabName" class="form-control" value="${escHtml(c.name)}" autofocus>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+      <button class="btn-primary" onclick="saveEditColab('${id}')">Salvar</button>
+    </div>`);
+}
+function saveEditColab(id) {
+  const name = document.getElementById('editColabName')?.value.trim();
+  if (!name) { showToast('Informe o nome.', 'error'); return; }
+  saveColabs(getColabs().map(c => c.id === id ? { ...c, name } : c));
+  closeModal();
+  showToast('Nome atualizado!', 'success');
+  renderColaboradores();
+}
+function toggleColabActive(id) {
+  saveColabs(getColabs().map(c => c.id === id ? { ...c, active: !c.active } : c));
+  renderColaboradores();
+}
+
+// ── RELATÓRIOS ────────────────────────────────────────────────
+
+function renderRelatorios() {
+  const selCol = document.getElementById('repColaborador');
+  const prev   = selCol.value;
+  selCol.innerHTML = '<option value="">Todos</option>';
+  getColabs().forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c.id; opt.textContent = c.name;
+    if (c.id === prev) opt.selected = true;
+    selCol.appendChild(opt);
+  });
+  const ini = document.getElementById('repMesInicio');
+  const fim = document.getElementById('repMesFim');
+  if (!ini.value) ini.value = currentMonth;
+  if (!fim.value) fim.value = currentMonth;
+  renderRelatorio();
+}
+
+function renderRelatorio() {
+  const colabF   = document.getElementById('repColaborador').value;
+  const iniM     = document.getElementById('repMesInicio').value;
+  const fimM     = document.getElementById('repMesFim').value;
+  const isSingle = iniM === fimM;
+
+  let entries = getEntries();
+  if (colabF) entries = entries.filter(e => e.colabId === colabF);
+  if (iniM)   entries = entries.filter(e => e.month  >= iniM);
+  if (fimM)   entries = entries.filter(e => e.month  <= fimM);
+
+  if (!entries.length) {
+    document.getElementById('reportContent').innerHTML =
+      `<div class="empty-state"><div class="empty-state-icon">📈</div><p>Nenhum lançamento no período.</p></div>`;
+    return;
+  }
+
+  const colabMap = Object.fromEntries(getColabs().map(c => [c.id, c]));
+  const byColab  = {};
+  entries.forEach(e => {
+    if (!byColab[e.colabId]) byColab[e.colabId] = [];
+    byColab[e.colabId].push(e);
+  });
+
+  let rankMap = {};
+  if (isSingle) {
+    buildMonthRanking(iniM).forEach((r, i) => {
+      rankMap[r.id] = { rankPrize: r.rankPrize, position: i + 1 };
+    });
+  }
+
+  const grandPts  = entries.filter(e => isCountable(e)).reduce((s, e) => s + (e.calculatedPoints || 0), 0);
+  const grandAuto = entries.filter(e => isCountable(e) && generatesAutoMoney(e.tipo)).reduce((s, e) => s + (e.calculatedValue || 0), 0);
+  const grandVol  = Object.keys(byColab).reduce((s, cid) => {
+    const prot = byColab[cid].filter(e => isCountable(e) && isProtocolType(e.tipo)).reduce((ss, e) => ss + (e.calculatedPoints || 0), 0);
+    return s + Math.floor(prot / 10) * 500;
+  }, 0);
+  const grandRank  = Object.values(rankMap).reduce((s, r) => s + (r.rankPrize || 0), 0);
+  const grandTotal = grandAuto + grandVol + grandRank;
+  const invalidCount = entries.filter(e => !isCountable(e)).length;
+
+  const cards = Object.entries(byColab).map(([cid, ces]) => {
+    const colab     = colabMap[cid];
+    const name      = colab?.name || '—';
+    const valid     = ces.filter(e => isCountable(e));
+    const invalid   = ces.filter(e => !isCountable(e));
+    const totalPts  = valid.reduce((s, e) => s + (e.calculatedPoints || 0), 0);
+    const protoPts  = valid.filter(e => isProtocolType(e.tipo)).reduce((s, e) => s + (e.calculatedPoints || 0), 0);
+    const autoBonus = valid.filter(e => generatesAutoMoney(e.tipo)).reduce((s, e) => s + (e.calculatedValue || 0), 0);
+    const volBonus  = Math.floor(protoPts / 10) * 500;
+    const rankInfo  = rankMap[cid];
+    const rankPrize = rankInfo?.rankPrize || 0;
+    const position  = rankInfo?.position;
+    const totalFin  = autoBonus + volBonus + rankPrize;
+    const posLabel  = position === 1 ? '🥇 1º lugar' : position === 2 ? '🥈 2º lugar' : position === 3 ? '🥉 3º lugar' : '';
+
+    const byCat = {};
+    valid.forEach(e => {
+      const lbl = getEntryType(e.tipo)?.label || e.tipo;
+      if (!byCat[lbl]) byCat[lbl] = { pts: 0, count: 0, money: 0 };
+      byCat[lbl].pts   += e.calculatedPoints || 0;
+      byCat[lbl].count += 1;
+      byCat[lbl].money += e.calculatedValue  || 0;
+    });
+
+    return `
+      <div class="report-colab-card">
+        <div class="rcc-header">
+          <div class="rcc-name">${escHtml(name)}</div>
+          ${posLabel ? `<div style="font-size:11px;opacity:.8;margin-top:2px">${posLabel}</div>` : ''}
+        </div>
+        <div class="rcc-body">
+          ${Object.entries(byCat).map(([lbl, d]) => `
+            <div class="rcc-row">
+              <span class="rcc-label">${lbl} (${d.count}×)</span>
+              <span class="rcc-val">${fmtPts(d.pts)} pts${d.money > 0 ? ' · ' + fmtBRL(d.money) : ''}</span>
+            </div>`).join('')}
+          ${invalid.length ? `<div style="font-size:11px;color:var(--danger);margin-top:6px">⚠ ${invalid.length} lançamento(s) não contabilizado(s)</div>` : ''}
+          <div class="fin-summary">
+            <div class="fin-row"><span class="fin-label">Pontos totais</span><span class="fin-value font-bold">${fmtPts(totalPts)}</span></div>
+            <div class="fin-row"><span class="fin-label">Pontos de protocolo</span><span class="fin-value">${fmtPts(protoPts)}</span></div>
+            <div class="fin-row"><span class="fin-label">Bônus automático individual</span><span class="fin-value money">${fmtBRL(autoBonus)}</span></div>
+            <div class="fin-row"><span class="fin-label">Bônus de volume de protocolo</span><span class="fin-value money">${fmtBRL(volBonus)}</span></div>
+            ${isSingle ? `<div class="fin-row"><span class="fin-label">Prêmio ranking ${posLabel}</span><span class="fin-value prize">${rankPrize > 0 ? fmtBRL(rankPrize) : '—'}</span></div>` : ''}
+            <div class="fin-row fin-total"><span class="fin-label">Total financeiro do mês</span><span class="fin-value">${fmtBRL(totalFin)}</span></div>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+
+  document.getElementById('reportContent').innerHTML = `
+    <div class="card" style="padding:14px 20px;margin-bottom:16px;display:flex;gap:24px;flex-wrap:wrap;align-items:flex-end">
+      <div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Pontos válidos</div><div style="font-size:18px;font-weight:800;color:var(--navy)">${fmtPts(grandPts)}</div></div>
+      <div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Bônus automático</div><div style="font-size:18px;font-weight:800;color:var(--success)">${fmtBRL(grandAuto)}</div></div>
+      <div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Bônus de volume</div><div style="font-size:18px;font-weight:800;color:var(--success)">${fmtBRL(grandVol)}</div></div>
+      ${isSingle ? `<div><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Prêmios ranking</div><div style="font-size:18px;font-weight:800;color:var(--gold)">${fmtBRL(grandRank)}</div></div>` : ''}
+      <div style="border-left:2px solid var(--border);padding-left:24px"><div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px">Total financeiro</div><div style="font-size:22px;font-weight:800;color:var(--navy)">${fmtBRL(grandTotal)}</div></div>
+      ${invalidCount > 0 ? `<div style="border-left:2px solid var(--danger);padding-left:24px"><div style="font-size:11px;color:var(--danger);font-weight:600">Não contabilizados</div><div style="font-size:18px;font-weight:800;color:var(--danger)">${invalidCount}</div></div>` : ''}
+    </div>
+    <div class="report-summary">${cards}</div>`;
+}
+
+// ── EXPORTAÇÃO CSV ───────────────────────────────────────────
+
+function exportCSV() {
+  const colabF = document.getElementById('histColaborador').value;
+  const monthF = document.getElementById('histMonth').value;
+  const tipoF  = document.getElementById('histTipo').value;
+  let entries  = getEntries();
+  if (colabF) entries = entries.filter(e => e.colabId === colabF);
+  if (monthF) entries = entries.filter(e => e.month  === monthF);
+  if (tipoF)  entries = entries.filter(e => resolveType(e.tipo) === tipoF);
+  downloadCSV(entries, `historico_${monthF || 'geral'}`);
+}
+
+function exportRelatorioCSV() {
+  const colabF = document.getElementById('repColaborador').value;
+  const iniM   = document.getElementById('repMesInicio').value;
+  const fimM   = document.getElementById('repMesFim').value;
+  let entries  = getEntries();
+  if (colabF) entries = entries.filter(e => e.colabId === colabF);
+  if (iniM)   entries = entries.filter(e => e.month  >= iniM);
+  if (fimM)   entries = entries.filter(e => e.month  <= fimM);
+  downloadCSV(entries, `relatorio_${iniM}_${fimM}`);
+}
+
+function downloadCSV(entries, filename) {
+  if (!entries.length) { showToast('Nenhum dado para exportar.', 'warning'); return; }
+  const colabMap = Object.fromEntries(getColabs().map(c => [c.id, c.name]));
+  const headers  = [
+    'Colaborador','Processo','Mês','Tipo','Benefício','Base Pts',
+    'Resultado Sentença','Rápido','Acórdão',
+    'Data Inicial','Data Final','Dias',
+    'Status','Contabilizado','Motivo',
+    'Pontos','Bônus Auto R$','Conta Protocolo?','Observações'
+  ];
+  const rows = entries.map(e => {
+    const vl = validationLabel(e);
+    return [
+      colabMap[e.colabId] || '',
+      e.processo, e.month,
+      getEntryType(e.tipo)?.label || e.tipo,
+      e.beneficioKey ? (BENEFIT_TYPES[e.beneficioKey]?.label || '') : '',
+      e.basePoints,
+      e.sentResult === 'total' ? 'Total' : (e.sentResult === 'parcial' ? 'Parcial' : ''),
+      e.isFast ? 'Sim' : 'Não',
+      e.acordaoType === 'com_oral' ? 'Com Oral' : (e.acordaoType === 'sem_oral' ? 'Sem Oral' : ''),
+      fmtDate(e.ini), fmtDate(e.fim), e.days ?? '',
+      vl.text,
+      isCountable(e) ? 'Sim' : 'Não',
+      e.validationNote || '',
+      isCountable(e) ? String(e.calculatedPoints || 0).replace('.', ',') : '0',
+      isCountable(e) ? String(e.calculatedValue  || 0).replace('.', ',') : '0',
+      isProtocolType(e.tipo) ? 'Sim' : 'Não',
+      e.notes || '',
+    ];
+  });
+  const csv  = [headers, ...rows].map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(';')).join('\r\n');
+  const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = `${filename}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('CSV exportado!', 'success');
+}
+
+// ── MODAL ─────────────────────────────────────────────────────
+
+function openModal(title, bodyHtml) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalBody').innerHTML    = bodyHtml;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); }
+function closeModalOnOverlay(e) { if (e.target === document.getElementById('modalOverlay')) closeModal(); }
+
+// ── TOAST ─────────────────────────────────────────────────────
+
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className   = 'toast' + (type ? ' ' + type : '');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}

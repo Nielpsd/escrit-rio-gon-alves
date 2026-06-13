@@ -60,7 +60,6 @@ const EQUIPE = [
   { nome: "Milena Maeda", cargo: "Administrativo", foto: "/team/milena.webp" },
   { nome: "Letícia Favetta", cargo: "Financeiro", foto: "/team/leticia.webp" },
   { nome: "Ingrid da Silva", cargo: "Jurídico", foto: "/team/ingrid.webp" },
-  { nome: "Higor Vinicius", cargo: "Jurídico", foto: "/team/higor.webp" },
   { nome: "Daniel Garcia", cargo: "Administrativo e Financeiro", foto: "/team/daniel.webp" },
   { nome: "Bruna Oliveira", cargo: "Administrativo e Comercial", foto: "/team/bruna.webp" },
   { nome: "Analicy da Hora", cargo: "Coordenadora do Jurídico", foto: "/team/analicy.webp" },

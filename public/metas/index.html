@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metas 2026 – Gonçalves Advogados</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-brand">
+        <div class="logo-mark">
+          <svg viewBox="0 0 40 46" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Gonçalves Advogados">
+            <path d="M20 1L38 9.5V25C38 35 20 45 20 45C20 45 2 35 2 25V9.5Z" fill="#F2B950"/>
+            <path d="M13 21v-5h6v9h-5v-2h3v-2h-4zM21.5 16h4.5c1.1 0 2 .9 2 2v4c0 1.1-.9 2-2 2h-2.5v3h-2V16zm2 6h2.5v-4h-2.5v4z" fill="#08235A"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Gonçalves Advogados</span>
+          <span class="brand-sub">Sistema de Metas 2026</span>
+        </div>
+      </div>
+      <div id="syncStatus" class="sync-status ss-loading">⏳ Carregando…</div>
+      <div class="header-month">
+        <label for="globalMonth">Mês de referência</label>
+        <input type="month" id="globalMonth">
+      </div>
+      <a href="/" class="header-back" title="Voltar ao site">&#8592; Site</a>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <button class="nav-btn active" data-tab="dashboard">&#9783; Dashboard Geral</button>
+      <button class="nav-btn" data-tab="individual">&#128100; Individual</button>
+      <button class="nav-btn" data-tab="lancar">&#43; Lançar Pontos</button>
+      <button class="nav-btn" data-tab="historico">&#9776; Histórico</button>
+      <button class="nav-btn" data-tab="colaboradores">&#9786; Colaboradores</button>
+      <button class="nav-btn" data-tab="relatorios">&#9636; Relatórios</button>
+    </div>
+  </nav>
+
+  <!-- Banner: abrindo via file:// sem servidor HTTP -->
+  <div id="fileProtocolBanner" style="display:none">
+    <div class="fpb-inner">
+      <div class="fpb-icon">⚠</div>
+      <div class="fpb-text">
+        <strong>Atenção: você está abrindo o sistema pelo protocolo <code>file://</code></strong><br>
+        Isso impede a sincronização com Google Sheets. Chrome e Edge ficarão com dados diferentes.<br>
+        <span class="fpb-fix">Solução: acesse pelo site oficial do escritório ou, para testes locais, use o <strong>Live Server</strong> do VS Code (botão direito em <code>index.html</code> → <em>"Open with Live Server"</em>).</span>
+      </div>
+      <button class="fpb-close" onclick="document.getElementById('fileProtocolBanner').style.display='none'" title="Fechar">✕</button>
+    </div>
+  </div>
+
+  <main class="main">
+
+    <!-- DASHBOARD -->
+    <section id="tab-dashboard" class="tab-content active">
+      <div class="section-header">
+        <h2>Dashboard — <span id="dashMonthLabel"></span></h2>
+        <button class="btn-secondary" onclick="openRankingConfig()">&#9881; Prêmios do Ranking</button>
+      </div>
+      <div id="gestorSection"></div>
+      <div class="kpi-grid" id="kpiGrid"></div>
+      <div class="two-col mt-6">
+        <div class="card">
+          <div class="card-header"><h3>&#127942; Ranking do Mês</h3></div>
+          <div id="rankingTable"></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h3>&#9889; Destaques &amp; Prêmios</h3></div>
+          <div id="highlights"></div>
+        </div>
+      </div>
+      <div class="card mt-6">
+        <div class="card-header"><h3>&#128204; Últimos Lançamentos</h3></div>
+        <div id="recentEntries"></div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD INDIVIDUAL -->
+    <section id="tab-individual" class="tab-content">
+      <div class="section-header">
+        <h2>Dashboard Individual — <span id="indivMonthLabel"></span></h2>
+      </div>
+      <div class="indiv-selector-bar">
+        <label class="indiv-selector-label">Visualizar colaborador:</label>
+        <select id="indivColaborador" class="form-control indiv-selector-select" onchange="renderDashboardIndividual()">
+          <option value="">— Selecione um colaborador —</option>
+        </select>
+      </div>
+      <div id="indivContent"></div>
+    </section>
+
+    <!-- LANÇAR PONTOS -->
+    <section id="tab-lancar" class="tab-content">
+      <div class="section-header">
+        <h2 id="formTitle">Lançar Pontos</h2>
+      </div>
+      <div class="form-layout">
+        <div class="card form-card">
+          <form id="entryForm" novalidate>
+
+            <div class="form-group">
+              <label class="form-label required">Colaborador</label>
+              <select id="fColaborador" class="form-control" required></select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label required">Número do Processo</label>
+              <input type="text" id="fProcesso" class="form-control"
+                placeholder="0000000-00.0000.0.00.0000" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Link do Trello</label>
+              <input type="text" id="fTrello" class="form-control"
+                placeholder="https://trello.com/c/...">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label required">Tipo</label>
+              <select id="fTipo" class="form-control" required>
+                <option value="">— Selecione o tipo —</option>
+              </select>
+              <small class="form-hint" id="tipoHint"></small>
+            </div>
+
+            <div class="form-group" id="grpBeneficio" style="display:none">
+              <label class="form-label required">Tipo de Benefício / Pontuação</label>
+              <select id="fBeneficio" class="form-control"></select>
+            </div>
+
+            <div class="form-group" id="grpPontosManual" style="display:none">
+              <label class="form-label required">Pontuação (definida pelo gestor)</label>
+              <select id="fPontosManual" class="form-control">
+                <option value="0.25">0,25 ponto</option>
+                <option value="0.5">0,50 ponto</option>
+                <option value="0.75">0,75 ponto</option>
+                <option value="1">1,00 ponto</option>
+                <option value="1.5">1,50 ponto</option>
+                <option value="2">2,00 pontos</option>
+              </select>
+            </div>
+
+            <div class="form-group" id="grpSentenca" style="display:none">
+              <label class="form-label required">Resultado da Sentença</label>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="sentencaResult" value="parcial">
+                  <span>Parcialmente Procedente</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="sentencaResult" value="total">
+                  <span>Totalmente Procedente</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group" id="grpAcordao" style="display:none">
+              <label class="form-label required">Tipo de Recurso</label>
+              <div class="radio-group">
+                <label class="radio-label">
+                  <input type="radio" name="acordaoType" value="sem_oral">
+                  <span>Sem Sustentação Oral &mdash; 1,5 pts / R$ 150</span>
+                </label>
+                <label class="radio-label">
+                  <input type="radio" name="acordaoType" value="com_oral">
+                  <span>Com Sustentação Oral &mdash; 2,5 pts / R$ 250</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group" id="grpFast" style="display:none">
+              <label class="checkbox-label">
+                <input type="checkbox" id="fFast">
+                <span id="fastLabel">Obtida dentro do prazo (rápida)</span>
+              </label>
+              <small class="form-hint" id="fastHint"></small>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label required">Data Inicial</label>
+                <input type="date" id="fDataInicial" class="form-control" required>
+                <small class="form-hint" id="hintDataInicial"></small>
+              </div>
+              <div class="form-group">
+                <label class="form-label required">Data Final</label>
+                <input type="date" id="fDataFinal" class="form-control" required>
+                <small class="form-hint" id="hintDataFinal"></small>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Observações</label>
+              <textarea id="fNotes" class="form-control" rows="2"
+                placeholder="Informações adicionais..."></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn-secondary" onclick="resetForm()">Limpar</button>
+              <button type="submit" class="btn-primary" id="submitBtn">Lançar Pontos</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="preview-panel" id="previewPanel">
+          <div class="preview-empty">
+            <div class="preview-icon">&#9733;</div>
+            <p>Preencha o formulário ao lado para ver o cálculo automático da pontuação.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HISTÓRICO -->
+    <section id="tab-historico" class="tab-content">
+      <div class="section-header">
+        <h2>Histórico de Lançamentos</h2>
+        <button class="btn-primary" onclick="exportCSV()">&#11015; Exportar CSV</button>
+      </div>
+      <div class="card filter-card">
+        <div class="filter-row">
+          <div class="filter-group">
+            <label>Colaborador</label>
+            <select id="histColaborador" class="form-control" onchange="renderHistorico()">
+              <option value="">Todos</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Mês</label>
+            <input type="month" id="histMonth" class="form-control" onchange="renderHistorico()">
+          </div>
+          <div class="filter-group">
+            <label>Tipo</label>
+            <select id="histTipo" class="form-control" onchange="renderHistorico()">
+              <option value="">Todos</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <button class="btn-secondary" onclick="clearHistFilters()">Limpar Filtros</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div id="entriesTable"></div>
+      </div>
+    </section>
+
+    <!-- COLABORADORES -->
+    <section id="tab-colaboradores" class="tab-content">
+      <div class="section-header">
+        <h2>Colaboradores</h2>
+        <button class="btn-primary" onclick="openAddColaborador()">+ Novo Colaborador</button>
+      </div>
+      <div id="colaboradoresList"></div>
+    </section>
+
+    <!-- RELATÓRIOS -->
+    <section id="tab-relatorios" class="tab-content">
+      <div class="section-header">
+        <h2>Relatórios</h2>
+      </div>
+      <div class="card filter-card">
+        <div class="filter-row">
+          <div class="filter-group">
+            <label>Colaborador</label>
+            <select id="repColaborador" class="form-control" onchange="renderRelatorio()">
+              <option value="">Todos</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Mês Inicial</label>
+            <input type="month" id="repMesInicio" class="form-control" onchange="renderRelatorio()">
+          </div>
+          <div class="filter-group">
+            <label>Mês Final</label>
+            <input type="month" id="repMesFim" class="form-control" onchange="renderRelatorio()">
+          </div>
+          <div class="filter-group">
+            <button class="btn-primary" onclick="exportRelatorioCSV()">&#11015; Exportar CSV</button>
+          </div>
+        </div>
+      </div>
+      <div id="reportContent"></div>
+    </section>
+
+  </main>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <h3 id="modalTitle"></h3>
+        <button class="modal-close" onclick="closeModal()">&#10005;</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Loading overlay inicial -->
+  <div id="mainLoadingOverlay" style="display:none;position:fixed;inset:0;background:rgba(8,35,90,.7);z-index:9999;align-items:center;justify-content:center;flex-direction:column;gap:16px;color:#fff">
+    <div style="font-size:40px">⏳</div>
+    <div style="font-size:15px;font-weight:600">Carregando dados…</div>
+    <div style="font-size:12px;opacity:.7">Conectando ao Google Sheets</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

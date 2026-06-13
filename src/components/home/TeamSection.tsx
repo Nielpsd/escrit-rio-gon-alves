@@ -123,15 +123,6 @@ const SUPPORT_ROW2: Member[] = [
     badge: <Search className="h-5 w-5 text-[var(--navy)]" />,
     photo: "/team/ingrid.webp",
   },
-  {
-    id: 12,
-    name: "Higor Vinicius",
-    role: "Jurídico",
-    label: "Jurídico",
-    quote: "Apoiar a equipe jurídica com atenção e precisão é o que garante que cada processo seja conduzido da forma certa.",
-    badge: <Users className="h-5 w-5 text-[var(--navy)]" />,
-    photo: "/team/higor.webp",
-  },
 ];
 
 function PhotoPlaceholder({ name }: { name: string }) {

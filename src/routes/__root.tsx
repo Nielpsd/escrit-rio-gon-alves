@@ -1,5 +1,7 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts, ScrollRestoration, useRouterState } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import { WhatsAppFab } from "@/components/site/WhatsAppFab";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { CookieBanner } from "@/components/site/CookieBanner";
 import { BackToTop } from "@/components/site/BackToTop";
 import { SITE } from "@/lib/site";
@@ -104,7 +106,7 @@ export const Route = createRootRoute({
 });
 
 const FONT_URL =
-  "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=optional";
+  "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap";
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
@@ -130,14 +132,68 @@ function RootShell({ children }: { children: React.ReactNode }) {
   );
 }
 
+function GuiaFab() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 400);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return (
+    <a
+      href="https://api.whatsapp.com/send?phone=5569992621298&text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20o%20Guia%20do%20Benef%C3%ADcio%20por%20Incapacidade."
+      target="_blank"
+      rel="noopener"
+      aria-label="Falar pelo WhatsApp"
+      className={[
+        "fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-[#22c55e] px-5 py-3.5 text-white shadow-[0_8px_24px_rgba(34,197,94,0.35)] transition-all duration-300 hover:bg-[#16a34a] hover:scale-105 sm:bottom-6 sm:right-6",
+        visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 pointer-events-none",
+      ].join(" ")}
+    >
+      <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-[#22c55e] opacity-30" />
+      <WhatsAppIcon size={16} />
+      <span className="hidden text-sm font-medium sm:inline">Fale conosco</span>
+    </a>
+  );
+}
+
+function LaudoFab() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 400);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return (
+    <a
+      href="https://api.whatsapp.com/send?phone=556993627234&text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20laudo%20pelo%20WhatsApp."
+      target="_blank"
+      rel="noopener"
+      aria-label="Falar pelo WhatsApp"
+      className={[
+        "fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-[#22c55e] px-5 py-3.5 text-white shadow-[0_8px_24px_rgba(34,197,94,0.35)] transition-all duration-300 hover:bg-[#16a34a] hover:scale-105 sm:bottom-6 sm:right-6",
+        visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 pointer-events-none",
+      ].join(" ")}
+    >
+      <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-[#22c55e] opacity-30" />
+      <WhatsAppIcon size={16} />
+      <span className="hidden text-sm font-medium sm:inline">Fale conosco</span>
+    </a>
+  );
+}
+
 function RootComponent() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const isGuia = pathname === "/guia-do-beneficio-por-incapacidade";
+  const isLaudo = pathname === "/laudo-certo";
   return (
     <>
       <div key={pathname} className="page-transition">
         <Outlet />
       </div>
-      <WhatsAppFab />
+      {isGuia ? <GuiaFab /> : isLaudo ? <LaudoFab /> : <WhatsAppFab />}
       <BackToTop />
       <CookieBanner />
     </>
