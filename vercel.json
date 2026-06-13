@@ -6,7 +6,7 @@
       "includeFiles": "dist/server/**"
     },
     "api/metas.js": {
-      "includeFiles": "dist/client/metas/**"
+      "includeFiles": "dist/client/metas/index.html"
     }
   },
   "routes": [
