@@ -22,15 +22,11 @@
       "dest": "/$1"
     },
     {
-      "src": "/metas$",
+      "src": "^/metas/?$",
       "dest": "/metas/index.html"
     },
     {
-      "src": "/metas/",
-      "dest": "/metas/index.html"
-    },
-    {
-      "src": "/metas/(.+)",
+      "src": "^/metas/(.+)$",
       "dest": "/metas/$1"
     },
     { "handle": "filesystem" },
