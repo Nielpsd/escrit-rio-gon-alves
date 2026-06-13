@@ -4,12 +4,19 @@
   "functions": {
     "api/server.js": {
       "includeFiles": "dist/server/**"
+    },
+    "api/metas.js": {
+      "includeFiles": "dist/client/metas/**"
     }
   },
   "routes": [
     {
       "src": "/sitemap-blog\\.xml",
       "dest": "/api/sitemap-blog.js"
+    },
+    {
+      "src": "^/metas(/.*)?$",
+      "dest": "/api/metas.js"
     },
     {
       "src": "/assets/(.*)",
@@ -20,14 +27,6 @@
       "src": "/(.+\\.(?:webp|jpg|jpeg|png|gif|svg|ico|woff2?|ttf|otf|eot|mp4|pdf|txt|xml|json))",
       "headers": { "cache-control": "public, max-age=31536000, immutable" },
       "dest": "/$1"
-    },
-    {
-      "src": "^/metas/?$",
-      "dest": "/metas/index.html"
-    },
-    {
-      "src": "^/metas/(.+)$",
-      "dest": "/metas/$1"
     },
     { "handle": "filesystem" },
     {
