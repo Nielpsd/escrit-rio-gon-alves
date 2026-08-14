@@ -37,7 +37,7 @@ const CARDS = [
     id: "escritorio",
     banner: "/links/banner-escritorio.webp",
     bannerAlt: "Escritório Gonçalves — Benefícios do INSS",
-    bannerHref: "https://escrit-rio-gon-alves.vercel.app/",
+    bannerHref: "https://escritoriogoncalves.com",
     zap: "/links/zap-escritorio.webp",
     zapAlt: "Chamar o Suporte do Escritório",
     zapHref: SITE.whatsapp,
@@ -46,34 +46,34 @@ const CARDS = [
     id: "incapacidade",
     banner: "/links/banner-incapacidade.webp",
     bannerAlt: "Guia do Benefício por Incapacidade",
-    bannerHref: "#",
+    bannerHref: "https://escritoriogoncalves.com/guia-do-beneficio-por-incapacidade",
     zap: "/links/zap-incapacidade.webp",
     zapAlt: "Quero tirar uma dúvida sobre o Guia",
-    zapHref: "#",
+    zapHref: "https://api.whatsapp.com/send?phone=5569992621298&text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20o%20Guia%20do%20Benef%C3%ADcio%20por%20Incapacidade.",
   },
   {
     id: "laudo",
     banner: "/links/banner-laudo.webp",
     bannerAlt: "Laudo Certa — O laudo certo para conquistar o benefício",
-    bannerHref: "#",
+    bannerHref: "https://escritoriogoncalves.com/laudo-certo",
     zap: "/links/zap-laudo.webp",
     zapAlt: "Falar com o suporte da Laudo Certa",
-    zapHref: "#",
+    zapHref: "https://api.whatsapp.com/send?phone=556993627234&text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20a%20Laudo%20Certo.",
   },
   {
     id: "apl",
     banner: "/links/banner-apl.webp",
     bannerAlt: "Comunidade APL",
-    bannerHref: "#",
+    bannerHref: "http://www.renaninss.com.br/",
     zap: "/links/zap-apl.webp",
     zapAlt: "Chamar o Suporte da Comunidade APL",
-    zapHref: "#",
+    zapHref: "https://api.whatsapp.com/send?phone=551433332455&text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20a%20Comunidade%20APL.",
   },
   {
     id: "marketing",
     banner: "/links/banner-marketing.webp",
     bannerAlt: "Gonçalves Marketing",
-    bannerHref: "#",
+    bannerHref: "https://goncalvesmarketing.com.br",
     zap: null,
     zapAlt: null,
     zapHref: null,
@@ -158,7 +158,7 @@ function LinksPage() {
     <div className="min-h-screen bg-black text-white">
       {/* Faixa benefício negado */}
       <a
-        href="https://escrit-rio-gon-alves.vercel.app/beneficios-negados"
+        href="https://escritoriogoncalves.com/beneficios-negados"
         target="_blank"
         rel="noopener"
         className="flex items-center justify-center gap-2 bg-red-600 px-4 py-3 text-center text-xs font-semibold text-white transition-opacity hover:opacity-90"

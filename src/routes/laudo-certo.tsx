@@ -42,7 +42,12 @@ export const Route = createFileRoute("/laudo-certo")({
 const F   = "'DM Sans', system-ui, sans-serif";
 const BG  = "#f5fdff";
 const DARK = "#1a2238";
-const WA   = SITE.whatsapp;
+const WA_BASE = "https://api.whatsapp.com/send?phone=556993627234&text=";
+const WA          = WA_BASE + "Ol%C3%A1!%20Gostaria%20de%20solicitar%20um%20laudo%20pelo%20WhatsApp.";
+const WA_ESPECIALISTA = WA_BASE + "Ol%C3%A1!%20Gostaria%20de%20falar%20com%20um%20especialista%20da%20Laudo%20Certo.";
+const WA_ANALISE  = WA_BASE + "Ol%C3%A1!%20Gostaria%20de%20iniciar%20a%20an%C3%A1lise%20do%20meu%20caso%20na%20Laudo%20Certo.";
+const WA_TESE     = WA_BASE + "Ol%C3%A1!%20Preciso%20de%20um%20laudo%20adaptado%20para%20a%20minha%20tese%20jur%C3%ADdica.";
+const WA_SUPORTE  = WA_BASE + "Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20a%20Laudo%20Certo.";
 
 const up = (d = 0) => ({
   initial: { opacity: 0, y: 32 },
@@ -310,7 +315,7 @@ function LaudoCertoPage() {
           </nav>
 
           {/* CTA */}
-          <a href={WA} target="_blank" rel="noopener noreferrer"
+          <a href={WA_ESPECIALISTA} target="_blank" rel="noopener noreferrer"
             className="hidden md:inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full text-white font-bold text-[13px]
               bg-gradient-to-r from-[#5389ff] to-[#295ccc] shadow-[0_2px_16px_rgba(83,137,255,0.45)]
               relative overflow-hidden
@@ -389,7 +394,7 @@ function LaudoCertoPage() {
           </motion.div>
 
           <motion.div {...up(0.25)}>
-            <Btn white extraPx="px-14">Falar com um especialista</Btn>
+            <Btn white extraPx="px-14" href={WA_ESPECIALISTA}>Falar com um especialista</Btn>
           </motion.div>
         </div>
 
@@ -462,7 +467,7 @@ function LaudoCertoPage() {
           </motion.div>
 
           <motion.div {...up(0.2)}>
-            <Btn>Iniciar análise do meu caso</Btn>
+            <Btn href={WA_ANALISE}>Iniciar análise do meu caso</Btn>
           </motion.div>
         </div>
       </section>
@@ -615,7 +620,7 @@ function LaudoCertoPage() {
             <p className="text-[rgba(26,34,56,0.5)] text-[14px]" style={{ fontFamily: F }}>
               Você faz o jurídico. A gente entrega o laudo ideal
             </p>
-            <Btn>Quero laudo adaptado à minha tese</Btn>
+            <Btn href={WA_TESE}>Quero laudo adaptado à minha tese</Btn>
           </motion.div>
         </div>
       </section>
@@ -852,7 +857,7 @@ function LaudoCertoPage() {
               Não encontrou o que precisava? Fale diretamente com nossa equipe pelo WhatsApp.
             </p>
 
-            <a href={WA} target="_blank" rel="noopener noreferrer"
+            <a href={WA_SUPORTE} target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-white rounded-full px-8 py-3.5
                 font-bold text-[15px] w-fit shadow-[0_4px_20px_rgba(0,0,0,0.15)] transition-transform hover:scale-105"
               style={{ fontFamily: F }}>
