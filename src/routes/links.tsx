@@ -73,7 +73,7 @@ const CARDS = [
     id: "marketing",
     banner: "/links/banner-marketing.webp",
     bannerAlt: "Gonçalves Marketing",
-    bannerHref: "https://goncalvesmarketing.com.br",
+    bannerHref: "https://escritoriogoncalves.com/marketing/",
     zap: null,
     zapAlt: null,
     zapHref: null,

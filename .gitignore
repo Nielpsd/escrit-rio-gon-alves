@@ -25,8 +25,17 @@ dist-ssr
 !.vscode/extensions.json
 .idea
 .DS_Store
+._*
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Claude Code local settings
+.claude/
+
+# Deploy artifacts / stray copies (não fazem parte do site)
+*.zip
+/escrit-rio-gon-alves
+/metas
